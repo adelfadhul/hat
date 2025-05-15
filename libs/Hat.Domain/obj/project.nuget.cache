@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "E62Inyonm/Q=",
+  "dgSpecHash": "N665pA+DbSg=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\hat\\libs\\Hat.Domain\\Hat.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

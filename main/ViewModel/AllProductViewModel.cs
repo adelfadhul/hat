@@ -1,5 +1,8 @@
 ﻿using EcommerceMAUI.Model;
 using EcommerceMAUI.Views;
+using Hat.Domain.Models;
+using Hat.Domain.Queries;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -8,6 +11,7 @@ namespace EcommerceMAUI.ViewModel
     public class AllProductViewModel : BaseViewModel
     {
         private ObservableCollection<ProductListModel> _Products = [];
+
         public ObservableCollection<ProductListModel> Products
         {
             get => _Products;
@@ -21,8 +25,11 @@ namespace EcommerceMAUI.ViewModel
             set => SetProperty(ref _IsLoaded, value);
         }
         public ICommand SelectProductCommand { get; }
-        public AllProductViewModel()
+
+        private readonly IMediator _mediator;
+        public AllProductViewModel(IMediator mediator)
         {
+            _mediator = mediator;
             SelectProductCommand = new Command<ProductListModel>(SelectProduct);
             _ = InitializeAsync();
         }
@@ -35,7 +42,19 @@ namespace EcommerceMAUI.ViewModel
         {
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
+            var storedProducts = await _mediator.Send(new ProductsQuery());
             Products.Clear();
+            foreach (var x in storedProducts)
+            {
+                Products.Add(new ProductListModel()
+                {
+                    Name = x.Name,
+                    BrandName = x.BrandName,
+                    Price = x.Price,
+                    ImageUrl = x.ImageUrl,
+
+                });
+            }
             Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
             Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
@@ -50,6 +69,6 @@ namespace EcommerceMAUI.ViewModel
         private async void SelectProduct(ProductListModel product)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
-        }        
+        }
     }
 }
