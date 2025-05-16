@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.AssemblyInfo.cs
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Registeration\obj\Debug\net8.0\Hat.Infrastructure.Registeration.sourcelink.json

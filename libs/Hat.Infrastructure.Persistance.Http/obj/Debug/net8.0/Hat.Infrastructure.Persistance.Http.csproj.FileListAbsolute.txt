@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.AssemblyInfo.cs
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\hat\libs\Hat.Infrastructure.Persistance.Http\obj\Debug\net8.0\Hat.Infrastructure.Persistance.Http.sourcelink.json

@@ -1,10 +1,21 @@
 ﻿using EcommerceMAUI.ViewModel;
+using Hat.Domain.Models;
 
 namespace EcommerceMAUI.Model
 {
-    public class ProductListModel: BaseViewModel
+    public class ProductListModel : BaseViewModel
     {
-       
+        public ProductListModel(ProductModel domainModel)
+        {
+
+            Name = domainModel.Name;
+            ImageUrl = domainModel.ImageUrl;
+            BrandName = domainModel.BrandName;
+            Price = domainModel.Price;
+            Details = domainModel.Details; Qty = domainModel.Qty;
+            IsAvailable = domainModel.IsAvailable;  
+        }
+
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }

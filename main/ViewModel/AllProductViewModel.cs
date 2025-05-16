@@ -2,6 +2,8 @@
 using EcommerceMAUI.Views;
 using Hat.Domain.Models;
 using Hat.Domain.Queries;
+using Hat.Domain.Repositories;
+using Hat.Infrastructure.Persistance.Http.Features;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -26,13 +28,14 @@ namespace EcommerceMAUI.ViewModel
         }
         public ICommand SelectProductCommand { get; }
 
-        private readonly IMediator _mediator;
-        public AllProductViewModel(IMediator mediator)
+        private readonly IProductRepository _productRepository;
+        public AllProductViewModel(IProductRepository productRepository)
         {
-            _mediator = mediator;
+            _productRepository = productRepository; 
             SelectProductCommand = new Command<ProductListModel>(SelectProduct);
             _ = InitializeAsync();
         }
+        public AllProductViewModel() { }
 
         private async Task InitializeAsync()
         {
@@ -42,18 +45,21 @@ namespace EcommerceMAUI.ViewModel
         {
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            var storedProducts = await _mediator.Send(new ProductsQuery());
+            var storedProducts = await _productRepository.GetProducts();  
             Products.Clear();
             foreach (var x in storedProducts)
             {
-                Products.Add(new ProductListModel()
+                Products.Add(new ProductListModel(new ProductModel
                 {
                     Name = x.Name,
+                    IsAvailable
+                     = x.IsAvailable,
                     BrandName = x.BrandName,
-                    Price = x.Price,
                     ImageUrl = x.ImageUrl,
+                    Price = x.Price,
+                }));
 
-                });
+
             }
             Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
