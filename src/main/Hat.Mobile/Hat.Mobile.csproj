@@ -50,6 +50,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Helpers\CreditCardTypeRegexHelper.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\Material-Icon.ttf" />
 	</ItemGroup>
 

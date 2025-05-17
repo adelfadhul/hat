@@ -6,6 +6,17 @@ namespace Hat.Model
 {
     public class CardInfoModel : BaseViewModel
     {
+        public CardInfoModel() { }
+        public CardInfoModel(Domain.Models.CardInfoModel domainModel)
+        {
+            CardNumber = domainModel.CardNumber;
+            NameOnCard = domainModel.NameOnCard;
+            CardValidationCode = domainModel.CardValidationCode;
+            ExpirationDate = domainModel.ExpirationDate;
+            IsSelected = domainModel.IsSelected;
+            CardType= domainModel.CardType;
+            MaskedCardNumber = domainModel.MaskedCardNumber;
+        }
         public string CardNumber { get; set; }
         public string NameOnCard { get; set; }
         public string CardValidationCode { get; set; }
@@ -17,41 +28,7 @@ namespace Hat.Model
             get => _IsSelected;
             set => SetProperty(ref _IsSelected, value);
         }
-        public string CardType
-        {
-            get
-            {
-                var normalizedCardNumber = CardNumber.Replace("-", string.Empty);
-                if (CreditCardTypeRegexHelper.AmericanExpress.IsMatch(normalizedCardNumber))
-                {
-                    return "American Express";
-                }
-                else if (CreditCardTypeRegexHelper.DinersClub.IsMatch(normalizedCardNumber))
-                {
-                    return "Diners Club";
-                }
-                else if (CreditCardTypeRegexHelper.Discover.IsMatch(normalizedCardNumber))
-                {
-                    return "Discover";
-                }
-                else if (CreditCardTypeRegexHelper.JCB.IsMatch(normalizedCardNumber))
-                {
-                    return "JCB";
-                }
-                else if (CreditCardTypeRegexHelper.MasterCard.IsMatch(normalizedCardNumber))
-                {
-                    return "Master Card";
-                }
-                else if (CreditCardTypeRegexHelper.Visa.IsMatch(normalizedCardNumber))
-                {
-                    return "Visa";
-                }
-                else
-                {
-                   return "Unknown";
-                }
-            }
-        }
+        public string CardType { get; init; }
 
         public Color CardColor
         {
@@ -119,20 +96,7 @@ namespace Hat.Model
                 }                
             }
         }
-        public string MaskedCardNumber
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(CardNumber) || CardNumber.Length < 4)
-                {
-                    return "**** **** **** ****";
-                }
-
-                var normalizedCardNumber = CardNumber.Replace("-", string.Empty).Replace(" ", string.Empty);
-                var lastFourDigits = normalizedCardNumber[^4..];
-                return $"**** **** **** {lastFourDigits}";
-            }
-        }
+        public string MaskedCardNumber { get; init; }
 
 
     }
