@@ -1,30 +1,30 @@
 ﻿using Camera.MAUI.ZXingHelper;
-using Hat.Model;
+using Hat.DataViewModels;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class HomePageViewModel : BaseViewModel
     {
-        private ObservableCollection<CategoriesModel> _Categories = [];
-        public ObservableCollection<CategoriesModel> Categories
+        private ObservableCollection<CategoryViewModel> _Categories = [];
+        public ObservableCollection<CategoryViewModel> Categories
         {
             get => _Categories;
             set => SetProperty(ref _Categories, value);
 
         }
 
-        private ObservableCollection<ProductListModel> _BestSellingProducts = [];
-        public ObservableCollection<ProductListModel> BestSellingProducts
+        private ObservableCollection<ProductListViewModel> _BestSellingProducts = [];
+        public ObservableCollection<ProductListViewModel> BestSellingProducts
         {
             get => _BestSellingProducts;
             set => SetProperty(ref _BestSellingProducts, value);
         }
 
-        private ObservableCollection<ProductListModel> _FeaturedBrands = [];
-        public ObservableCollection<ProductListModel> FeaturedBrands
+        private ObservableCollection<ProductListViewModel> _FeaturedBrands = [];
+        public ObservableCollection<ProductListViewModel> FeaturedBrands
         {
             get => _FeaturedBrands;
             set => SetProperty(ref _FeaturedBrands, value);
@@ -43,10 +43,10 @@ namespace Hat.ViewModel
         public ICommand OpenCameraCommand { get; }
         public HomePageViewModel()
         {
-            SelectProductCommand = new Command<ProductListModel>(SelectProduct);
+            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
-            CategoryTapCommand = new Command<CategoriesModel>(SelectCategory);
-            BrandTapCommand = new Command<ProductListModel>(SelectBrand);
+            CategoryTapCommand = new Command<CategoryViewModel>(SelectCategory);
+            BrandTapCommand = new Command<ProductListViewModel>(SelectBrand);
             OpenCameraCommand = new Command(OpenCamera);
             _ = InitializeAsync();
         }
@@ -59,11 +59,11 @@ namespace Hat.ViewModel
             // Delay added to display loading, remove during api call
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            Categories.Add(new CategoriesModel() { CategoryID = 1, CategoryName = "Men", Icon = "\ufb22" });
-            Categories.Add(new CategoriesModel() { CategoryID = 2, CategoryName = "Women", Icon = "\ufb23" });
-            Categories.Add(new CategoriesModel() { CategoryID = 2, CategoryName = "Devices", Icon = "\uf322" });
-            Categories.Add(new CategoriesModel() { CategoryID = 2, CategoryName = "Gadgets", Icon = "\uf2cb" });
-            Categories.Add(new CategoriesModel() { CategoryID = 2, CategoryName = "Games", Icon = "\uf5ba" });
+            Categories.Add(new CategoryViewModel() { CategoryID = 1, CategoryName = "Men", Icon = "\ufb22" });
+            Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Women", Icon = "\ufb23" });
+            Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Devices", Icon = "\uf322" });
+            Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Gadgets", Icon = "\uf2cb" });
+            Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Games", Icon = "\uf5ba" });
 
             BestSellingProducts.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             BestSellingProducts.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
@@ -77,16 +77,16 @@ namespace Hat.ViewModel
             IsLoaded = true;
         }
 
-        private async void SelectBrand(ProductListModel product)
+        private async void SelectBrand(ProductListViewModel product)
         {
             await Application.Current.MainPage.Navigation.PushAsync(new BrandDetailView());
         }
-        private async void SelectProduct(ProductListModel product)
+        private async void SelectProduct(ProductListViewModel product)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
 
-        private async void SelectCategory(CategoriesModel category)
+        private async void SelectCategory(CategoryViewModel category)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(category));
         }
@@ -96,7 +96,7 @@ namespace Hat.ViewModel
         }
         private async void OpenCamera()
         {
-            var response = await App.Current.MainPage.DisplayAlert("Scan QR", "Do you want to open camera?", "Yes", "No");
+            var response = await Application.Current.MainPage.DisplayAlert("Scan QR", "Do you want to open camera?", "Yes", "No");
             if (response)
             {
                 PermissionStatus status = await Permissions.RequestAsync<Permissions.Camera>();
@@ -106,7 +106,7 @@ namespace Hat.ViewModel
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Permission Denied", "Camera access is required but not granted. Please enable camera permissions in your device settings.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Permission Denied", "Camera access is required but not granted. Please enable camera permissions in your device settings.", "OK");
 
                 }
 

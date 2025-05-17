@@ -1,13 +1,13 @@
-﻿using Hat.Helpers;
-using Hat.Model;
+﻿using Hat.DataViewModels;
+using Hat.Helpers;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class AddNewCardViewModel : BaseViewModel
     {
-        private CardInfoModel _Card = new();
-        public CardInfoModel Card
+        private CardInfoViewModel _Card = new();
+        public CardInfoViewModel Card
         {
             get => _Card;
             set => SetProperty(ref _Card, value);

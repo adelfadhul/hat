@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using static Hat.Model.TrackOrderModel;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class OrderDetailsViewModel : BaseViewModel
     {

@@ -1,14 +1,13 @@
-﻿
-using Hat.ViewModel;
+﻿using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
     public class TabPageModel : BaseViewModel
     {
         public TabPageModel(string name, int id, bool isSelected)
         {
-            this.Name = name;
-            this.Id = id;
+            Name = name;
+            Id = id;
             IsSelected = isSelected;
         }
         public string Name { private set; get; }

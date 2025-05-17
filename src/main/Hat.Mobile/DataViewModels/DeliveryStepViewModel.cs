@@ -1,10 +1,9 @@
-﻿
-using Hat.ViewModel;
+﻿using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
 
-    public class DeliveryStepsModel : BaseViewModel
+    public class DeliveryStepViewModel : BaseViewModel
     {
         public int Id { get; set; }
         private string _Name;

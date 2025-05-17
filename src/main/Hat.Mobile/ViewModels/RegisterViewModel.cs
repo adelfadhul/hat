@@ -1,7 +1,7 @@
 ﻿using Hat.Views;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class RegisterViewModel: BaseViewModel
     {
@@ -40,7 +40,7 @@ namespace Hat.ViewModel
 
         private void Login(object obj)
         {
-            App.Current.MainPage = new LoginView();
+            Application.Current.MainPage = new LoginView();
         }
     }
 }

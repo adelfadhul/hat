@@ -1,13 +1,15 @@
-﻿using Hat.Helpers;
+﻿using Hat.Domain.Constants;
+using Hat.Domain.Models;
+using Hat.Helpers;
 using Hat.Helpers.ExtensionMethods;
-using Hat.ViewModel;
+using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
-    public class CardInfoModel : BaseViewModel
+    public class CardInfoViewModel : BaseViewModel
     {
-        public CardInfoModel() { }
-        public CardInfoModel(Domain.Models.CardInfoModel domainModel)
+        public CardInfoViewModel() { }
+        public CardInfoViewModel(CardInfoModel domainModel)
         {
             CardNumber = domainModel.CardNumber;
             NameOnCard = domainModel.NameOnCard;
@@ -60,17 +62,17 @@ namespace Hat.Model
             {
                 switch (CardType)
                 {
-                    case "American Express":
+                    case CardTypes.AmericanExpress:
                         return "\uf1f3";
-                    case "Diners Club":
+                    case CardTypes.DinersClub:
                         return "\uf24c";
-                    case "Discover":
+                    case CardTypes.Discover:
                         return "\uf1f2";
-                    case "JCB":
+                    case CardTypes.JCB:
                         return "\uf24b";
-                    case "Master Card":
+                    case CardTypes.MasterCard:
                         return "\uf1f1";
-                    case "Visa":
+                    case CardTypes.Visa:
                         return "\uf1f0";
                     default:
                         return "\uf09d";
@@ -81,12 +83,12 @@ namespace Hat.Model
         {
             get
             {
-                if (CardType == "American Express" ||
-                    CardType == "Diners Club" ||
-                    CardType == "Discover" ||
-                    CardType == "JCB" ||
-                    CardType == "Master Card" ||
-                    CardType == "Visa")
+                if (CardType == CardTypes.AmericanExpress ||
+                    CardType == CardTypes.DinersClub ||
+                    CardType == CardTypes.Discover ||
+                    CardType == CardTypes.JCB ||
+                    CardType == CardTypes.MasterCard ||
+                    CardType == CardTypes.Visa)
                 {
                     return "FA6Brands";
                 }

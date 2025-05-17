@@ -1,9 +1,8 @@
-﻿
-using Hat.ViewModel;
+﻿using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
-    public class AddressModel: BaseViewModel
+    public class AddressViewModel: BaseViewModel
     {
         public string AddressType { get; set; }
         public string FullAddress { get; set; }

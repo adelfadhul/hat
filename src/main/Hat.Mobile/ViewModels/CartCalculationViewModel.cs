@@ -1,14 +1,14 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class CartCalculationViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -30,10 +30,10 @@ namespace Hat.ViewModel
         public ICommand ApplyVoucherCommand { get; }
         public ICommand BackCommand { get; }
 
-        public CartCalculationViewModel(ObservableCollection<ProductListModel> products)
+        public CartCalculationViewModel(ObservableCollection<ProductListViewModel> products)
         {
             Products = products;
-            SubTotal = Products.Sum(item => (item.Qty * item.Price));
+            SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
             BackCommand = new Command(GoBack);

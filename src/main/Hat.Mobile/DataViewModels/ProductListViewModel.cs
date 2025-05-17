@@ -1,11 +1,11 @@
-﻿using Hat.ViewModel;
-using Hat.Domain.Models;
+﻿using Hat.Domain.Models;
+using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
-    public class ProductListModel : BaseViewModel
+    public class ProductListViewModel : BaseViewModel
     {
-        public ProductListModel(ProductModel domainModel)
+        public ProductListViewModel(ProductModel domainModel)
         {
 
             Name = domainModel.Name;

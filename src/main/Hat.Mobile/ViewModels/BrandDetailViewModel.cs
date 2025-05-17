@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
-using Hat.Model;
 using Hat.Views;
 using Hat.Domain.Repositories;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Hat.DataViewModels;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class BrandDetailViewModel : BaseViewModel
     {
@@ -16,8 +16,8 @@ namespace Hat.ViewModel
             set => SetProperty(ref _TabPages, value);
         }
 
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -36,7 +36,7 @@ namespace Hat.ViewModel
         public BrandDetailViewModel(IProductRepository productRepository)
         {
             _ProductRepository = productRepository;
-            SelectProductCommand = new Command<ProductListModel>(SelectProduct);
+            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             SelectMenuCommand = new Command<TabPageModel>(SelectMenu);
             _ = InitializeAsync();
         }
@@ -45,7 +45,7 @@ namespace Hat.ViewModel
         {
             await PopulateDataAsync();
         }
-        private async void SelectProduct(ProductListModel obj)
+        private async void SelectProduct(ProductListViewModel obj)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
@@ -70,7 +70,7 @@ namespace Hat.ViewModel
             //await Task.Delay(500);
             //TODO: Remove Delay here and call API
             var storedProducts = await _ProductRepository.GetProducts();
-            Products= storedProducts.Select(x=>new ProductListModel(x)).ToObservableCollection();
+            Products= storedProducts.Select(x=>new ProductListViewModel(x)).ToObservableCollection();
             //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
             //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
@@ -80,6 +80,7 @@ namespace Hat.ViewModel
             //Products.Add(new ProductListModel() { Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png" });
             //Products.Add(new ProductListModel() { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" });
 
+           
             TabPages.Add(new TabPageModel("All", 0, true));
             TabPages.Add(new TabPageModel("Smart Bluetooth Speaker", 1, false));
             TabPages.Add(new TabPageModel("Lamp", 2, false));

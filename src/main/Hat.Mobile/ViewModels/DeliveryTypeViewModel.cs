@@ -1,22 +1,22 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class DeliveryTypeViewModel : BaseViewModel
     {
-        private ObservableCollection<DeliveryTypeModel> _DeliveryTypes = [];
-        public ObservableCollection<DeliveryTypeModel> DeliveryTypes
+        private ObservableCollection<DataViewModels.DeliveryTypeDataViewModel> _DeliveryTypes = [];
+        public ObservableCollection<DataViewModels.DeliveryTypeDataViewModel> DeliveryTypes
         {
             get => _DeliveryTypes;
             set => SetProperty(ref _DeliveryTypes, value);
 
         }
 
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -28,14 +28,14 @@ namespace Hat.ViewModel
             get => _IsLoaded;
             set => SetProperty(ref _IsLoaded, value);
         }
-        private DeliveryTypeModel deliveryType;
+        private DataViewModels.DeliveryTypeDataViewModel deliveryType;
 
         public ICommand SelectDeliveryTypeCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        public DeliveryTypeViewModel(ObservableCollection<ProductListModel> products)
+        public DeliveryTypeViewModel(ObservableCollection<ProductListViewModel> products)
         {
-            SelectDeliveryTypeCommand = new Command<DeliveryTypeModel>(SelectDeliveryType);
+            SelectDeliveryTypeCommand = new Command<DataViewModels.DeliveryTypeDataViewModel>(SelectDeliveryType);
             NextCommand = new Command(ConfirmDeliverType);
             BackCommand = new Command(GoBack);
             Products = products;
@@ -51,13 +51,13 @@ namespace Hat.ViewModel
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
             DeliveryTypes.Clear();
-            DeliveryTypes.Add(new DeliveryTypeModel() { Name = "Standard Delivery",Description= "Order will be delivered between 3 - 5 business days",IsSelected = true });
-            DeliveryTypes.Add(new DeliveryTypeModel() { Name = "Next Day Delivery", Description= "Place your order before 6pm and your items will be delivered the next day" });
-            DeliveryTypes.Add(new DeliveryTypeModel() { Name = "Nominated Delivery", Description= "Pick a particular date from the calendar and order will be delivered on selected date" });
+            DeliveryTypes.Add(new DeliveryTypeDataViewModel() { Name = "Standard Delivery", Description = "Order will be delivered between 3 - 5 business days", IsSelected = true });
+            DeliveryTypes.Add(new DeliveryTypeDataViewModel() { Name = "Next Day Delivery", Description= "Place your order before 6pm and your items will be delivered the next day" });
+            DeliveryTypes.Add(new DeliveryTypeViewModel() { Name = "Nominated Delivery", Description= "Pick a particular date from the calendar and order will be delivered on selected date" });
             deliveryType = DeliveryTypes[0];
             IsLoaded = true;
         }
-        private void SelectDeliveryType(DeliveryTypeModel type)
+        private void SelectDeliveryType(DataViewModels.DeliveryTypeDataViewModel type)
         {
             foreach (var delType in DeliveryTypes)
             {

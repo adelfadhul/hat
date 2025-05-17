@@ -2,7 +2,7 @@
 using Hat.Views;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {        
@@ -56,13 +56,13 @@ namespace Hat.ViewModel
             {
                 if (item.TargetType == typeof(LoginView))
                 {
-                    var response = await App.Current.MainPage.DisplayAlert("Logout", "Do you want to logout?", "Yes", "No");
+                    var response = await Application.Current.MainPage.DisplayAlert("Logout", "Do you want to logout?", "Yes", "No");
                     if (response)
-                        App.Current.MainPage = new LoginView();
+                        Application.Current.MainPage = new LoginView();
                 }
                 else
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync(((Page)Activator.CreateInstance(item.TargetType)));
+                    await Application.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
                 }
             }
             

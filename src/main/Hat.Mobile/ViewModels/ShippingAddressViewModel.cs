@@ -1,13 +1,13 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class ShippingAddressViewModel: BaseViewModel
     {
-        private ObservableCollection<AddressModel> _Addressess = [];
-        public ObservableCollection<AddressModel> Addressess
+        private ObservableCollection<AddressViewModel> _Addressess = [];
+        public ObservableCollection<AddressViewModel> Addressess
         {
             get => _Addressess;
             set => SetProperty(ref _Addressess, value);
@@ -23,11 +23,11 @@ namespace Hat.ViewModel
 
         public ShippingAddressViewModel()
         {
-            SelectAddressCommand = new Command<AddressModel>(SelectAddress);
+            SelectAddressCommand = new Command<AddressViewModel>(SelectAddress);
             _ = InitializeAsync();
         }
 
-        private void SelectAddress(AddressModel address)
+        private void SelectAddress(AddressViewModel address)
         {           
             foreach (var add in Addressess)
             {
@@ -52,8 +52,8 @@ namespace Hat.ViewModel
             // Delay added to display loading, remove during api call
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            Addressess.Add(new AddressModel() { AddressType= "Home Address", FullAddress= "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria", IsSelected = true });
-            Addressess.Add(new AddressModel() { AddressType= "Work Address", FullAddress= "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria" });
+            Addressess.Add(new AddressViewModel() { AddressType= "Home Address", FullAddress= "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria", IsSelected = true });
+            Addressess.Add(new AddressViewModel() { AddressType= "Work Address", FullAddress= "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria" });
              IsLoaded = true;
         }
     }

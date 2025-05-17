@@ -10,5 +10,6 @@ namespace Hat.Domain.Repositories
     public interface IProductRepository
     {
         Task<List<ProductModel>> GetProducts();
+        Task GetTabPages();
     }
 }

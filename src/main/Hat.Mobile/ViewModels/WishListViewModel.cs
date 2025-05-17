@@ -1,14 +1,14 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class WishListViewModel: BaseViewModel
     {
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -23,11 +23,11 @@ namespace Hat.ViewModel
         public ICommand SelectProductCommand { get; }
         public WishListViewModel()
         {
-            SelectProductCommand = new Command<ProductListModel>(SelectProduct);
+            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             _ = InitializeAsync();
         }
 
-        private async void SelectProduct(ProductListModel model)
+        private async void SelectProduct(ProductListViewModel model)
         {
             if (model.IsAvailable)
             {

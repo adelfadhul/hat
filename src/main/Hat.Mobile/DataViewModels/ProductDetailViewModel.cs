@@ -1,8 +1,9 @@
-﻿using Hat.ViewModel;
+﻿using Hat.Model;
+using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
-    public class ProductDetail : BaseViewModel
+    public class ProductDetailViewModel : BaseViewModel
     {
         private string _ImageUrl;
         public string ImageUrl

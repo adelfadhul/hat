@@ -1,8 +1,8 @@
-﻿using Hat.ViewModel;
+﻿using Hat.ViewModels;
 
-namespace Hat.Model
+namespace Hat.DataViewModels
 {
-    public class DeliveryTypeModel : BaseViewModel
+    public class DeliveryTypeDataViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

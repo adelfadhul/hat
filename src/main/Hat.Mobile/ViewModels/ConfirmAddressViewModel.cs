@@ -1,28 +1,28 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class ConfirmAddressViewModel : BaseViewModel
     {
-        private DeliveryTypeModel _DeliveryType;
-        public DeliveryTypeModel DeliveryType
+        private DataViewModels.DeliveryTypeDataViewModel _DeliveryType;
+        public DataViewModels.DeliveryTypeDataViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private AddressModel _PrimaryAddress;
-        public AddressModel PrimaryAddress
+        private AddressViewModel _PrimaryAddress;
+        public AddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set => SetProperty(ref _PrimaryAddress, value);
         }
 
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -36,7 +36,7 @@ namespace Hat.ViewModel
         }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        public ConfirmAddressViewModel(ObservableCollection<ProductListModel> products, DeliveryTypeModel deliveryType)
+        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType)
         {
             DeliveryType = deliveryType;
             Products = products;
@@ -53,7 +53,7 @@ namespace Hat.ViewModel
         {
             await Task.Delay(500);
             //TODO: Remove Delay here and call API if needed
-            PrimaryAddress = new AddressModel()
+            PrimaryAddress = new AddressViewModel()
             {
                 StreetOne = "21, Alex Davidson Avenue",
                 StreetTwo = "Opposite Omegatron, Vicent Quarters",

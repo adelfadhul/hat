@@ -2,7 +2,7 @@
 using Hat.Views;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class LoginViewModel: BaseViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using Hat.Helpers;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class VerificationViewModel : BaseViewModel
     {
@@ -21,7 +21,7 @@ namespace Hat.ViewModel
         {
             if (Pin != null && Pin.Length == 6) 
             {
-                App.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell();
                 await ToastHelper.ShowToast("Welcome");
             }           
         }

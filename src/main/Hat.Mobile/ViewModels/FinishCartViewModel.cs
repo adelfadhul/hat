@@ -1,21 +1,21 @@
-﻿using Hat.Helpers;
-using Hat.Model;
+﻿using Hat.DataViewModels;
+using Hat.Helpers;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
     {
-        private DeliveryTypeModel _DeliveryType;
-        public DeliveryTypeModel DeliveryType
+        private DataViewModels.DeliveryTypeDataViewModel _DeliveryType;
+        public DataViewModels.DeliveryTypeDataViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private AddressModel _PrimaryAddress;
-        public AddressModel PrimaryAddress
+        private AddressViewModel _PrimaryAddress;
+        public AddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set
@@ -29,15 +29,15 @@ namespace Hat.ViewModel
             }
         }
 
-        private ObservableCollection<ProductListModel> _Products = [];
-        public ObservableCollection<ProductListModel> Products
+        private ObservableCollection<ProductListViewModel> _Products = [];
+        public ObservableCollection<ProductListViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
         }
 
-        private CardInfoModel _SelectedCard;
-        public CardInfoModel SelectedCard
+        private CardInfoViewModel _SelectedCard;
+        public CardInfoViewModel SelectedCard
         {
             get => _SelectedCard;
             set => SetProperty(ref _SelectedCard, value);
@@ -60,7 +60,7 @@ namespace Hat.ViewModel
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductListModel> products, DeliveryTypeModel deliveryType, AddressModel address, CardInfoModel card)
+        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;

@@ -1,4 +1,4 @@
-﻿using Hat.ViewModel;
+﻿using Hat.ViewModels;
 using static Hat.Model.TrackOrderModel;
 
 namespace Hat.Model

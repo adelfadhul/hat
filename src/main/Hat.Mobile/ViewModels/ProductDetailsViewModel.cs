@@ -1,7 +1,8 @@
-﻿using Hat.Model;
+﻿using Hat.DataViewModels;
+using Hat.Model;
 using System.Windows.Input;
 
-namespace Hat.ViewModel
+namespace Hat.ViewModels
 {
     public class ProductDetailsViewModel : BaseViewModel
     {
@@ -41,8 +42,8 @@ namespace Hat.ViewModel
             }
         }
 
-        private ProductDetail _ProductDetail = new();
-        public ProductDetail ProductDetail
+        private ProductDetailViewModel _ProductDetail = new();
+        public ProductDetailViewModel ProductDetail
         {
             get => _ProductDetail;
             set => SetProperty(ref _ProductDetail, value);
