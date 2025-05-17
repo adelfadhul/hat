@@ -1,8 +1,8 @@
-﻿using EcommerceMAUI.Model;
+﻿using Hat.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class ShippingAddressViewModel: BaseViewModel
     {

@@ -1,8 +1,8 @@
-﻿using EcommerceMAUI.Helpers;
-using EcommerceMAUI.Helpers.ExtensionMethods;
-using EcommerceMAUI.ViewModel;
+﻿using Hat.Helpers;
+using Hat.Helpers.ExtensionMethods;
+using Hat.ViewModel;
 
-namespace EcommerceMAUI.Model
+namespace Hat.Model
 {
     public class CardInfoModel : BaseViewModel
     {

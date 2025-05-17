@@ -1,7 +1,7 @@
-﻿using EcommerceMAUI.ViewModel;
-using static EcommerceMAUI.Model.TrackOrderModel;
+﻿using Hat.ViewModel;
+using static Hat.Model.TrackOrderModel;
 
-namespace EcommerceMAUI.Model
+namespace Hat.Model
 {
     public class TrackOrderModel : List<Track>
     {

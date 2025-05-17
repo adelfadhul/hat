@@ -1,8 +1,8 @@
-using EcommerceMAUI.Helpers.ExtensionMethods;
-using EcommerceMAUI.Helpers;
+using Hat.Helpers.ExtensionMethods;
+using Hat.Helpers;
 using System.Globalization;
 
-namespace EcommerceMAUI.Controls;
+namespace Hat.Controls;
 
 
 public partial class CreditCardView : Frame

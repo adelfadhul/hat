@@ -1,9 +1,9 @@
-﻿using EcommerceMAUI.Helpers;
-using EcommerceMAUI.Model;
+﻿using Hat.Helpers;
+using Hat.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class FinishCartViewModel : BaseViewModel
     {

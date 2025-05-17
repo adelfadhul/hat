@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace EcommerceMAUI;
+namespace Hat;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

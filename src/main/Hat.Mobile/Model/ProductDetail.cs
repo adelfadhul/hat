@@ -1,6 +1,6 @@
-﻿using EcommerceMAUI.ViewModel;
+﻿using Hat.ViewModel;
 
-namespace EcommerceMAUI.Model
+namespace Hat.Model
 {
     public class ProductDetail : BaseViewModel
     {

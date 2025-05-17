@@ -1,4 +1,4 @@
-namespace EcommerceMAUI.Views;
+namespace Hat.Views;
 
 public partial class ScanCameraView : ContentPage
 {

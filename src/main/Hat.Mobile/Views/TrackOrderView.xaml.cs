@@ -1,7 +1,7 @@
-using EcommerceMAUI.ViewModel;
-using static EcommerceMAUI.Model.TrackOrderModel;
+using Hat.ViewModel;
+using static Hat.Model.TrackOrderModel;
 
-namespace EcommerceMAUI.Views;
+namespace Hat.Views;
 
 public partial class TrackOrderView : ContentPage
 {

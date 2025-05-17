@@ -1,8 +1,8 @@
-﻿using EcommerceMAUI.Helpers;
-using EcommerceMAUI.Model;
+﻿using Hat.Helpers;
+using Hat.Model;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class AddNewCardViewModel : BaseViewModel
     {

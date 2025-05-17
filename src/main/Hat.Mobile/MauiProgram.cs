@@ -2,7 +2,7 @@
 using Camera.MAUI;
 using CommunityToolkit.Maui;
 
-namespace EcommerceMAUI;
+namespace Hat;
 
 public static class MauiProgram
 {

@@ -1,7 +1,7 @@
-﻿using EcommerceMAUI.Model;
+﻿using Hat.Model;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class ProductDetailsViewModel : BaseViewModel
     {

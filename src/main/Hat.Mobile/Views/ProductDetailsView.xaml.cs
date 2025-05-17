@@ -1,6 +1,6 @@
-using EcommerceMAUI.ViewModel;
+using Hat.ViewModel;
 
-namespace EcommerceMAUI.Views;
+namespace Hat.Views;
 
 public partial class ProductDetailsView : ContentPage
 {

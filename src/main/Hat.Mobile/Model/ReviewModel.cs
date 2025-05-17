@@ -1,4 +1,4 @@
-﻿namespace EcommerceMAUI.Model
+﻿namespace Hat.Model
 {
     public class ReviewModel
     {

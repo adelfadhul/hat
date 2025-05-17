@@ -1,7 +1,7 @@
-﻿using EcommerceMAUI.Helpers;
+﻿using Hat.Helpers;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class VerificationViewModel : BaseViewModel
     {

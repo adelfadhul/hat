@@ -1,7 +1,7 @@
 ﻿
-using EcommerceMAUI.ViewModel;
+using Hat.ViewModel;
 
-namespace EcommerceMAUI.Model
+namespace Hat.Model
 {
 
     public class DeliveryStepsModel : BaseViewModel

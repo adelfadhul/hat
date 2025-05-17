@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace EcommerceMAUI.Helpers
+namespace Hat.Helpers
 {
     internal class CreditCardTypeRegexHelper
     {

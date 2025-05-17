@@ -1,10 +1,10 @@
-﻿using EcommerceMAUI.Model;
-using EcommerceMAUI.Views;
+﻿using Hat.Model;
+using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using static EcommerceMAUI.Model.TrackOrderModel;
+using static Hat.Model.TrackOrderModel;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class OrderDetailsViewModel : BaseViewModel
     {

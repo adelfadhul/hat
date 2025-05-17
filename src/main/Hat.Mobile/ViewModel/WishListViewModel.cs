@@ -1,9 +1,9 @@
-﻿using EcommerceMAUI.Model;
-using EcommerceMAUI.Views;
+﻿using Hat.Model;
+using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class WishListViewModel: BaseViewModel
     {

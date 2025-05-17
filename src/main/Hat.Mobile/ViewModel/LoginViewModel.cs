@@ -1,8 +1,8 @@
-﻿using EcommerceMAUI.Helpers;
-using EcommerceMAUI.Views;
+﻿using Hat.Helpers;
+using Hat.Views;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class LoginViewModel: BaseViewModel
     {

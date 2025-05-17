@@ -1,7 +1,7 @@
-using EcommerceMAUI.Model;
-using EcommerceMAUI.ViewModel;
+using Hat.Model;
+using Hat.ViewModel;
 
-namespace EcommerceMAUI.Views;
+namespace Hat.Views;
 
 public partial class CategoryDetailView : ContentPage
 {

@@ -1,6 +1,6 @@
-﻿using EcommerceMAUI.Views;
+﻿using Hat.Views;
 
-namespace EcommerceMAUI;
+namespace Hat;
 
 public partial class App : Application
 {

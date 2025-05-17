@@ -1,5 +1,5 @@
-﻿using EcommerceMAUI.Model;
-using EcommerceMAUI.Views;
+﻿using Hat.Model;
+using Hat.Views;
 using Hat.Domain.Models;
 using Hat.Domain.Queries;
 using Hat.Domain.Repositories;
@@ -8,7 +8,7 @@ using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace EcommerceMAUI.ViewModel
+namespace Hat.ViewModel
 {
     public class AllProductViewModel : BaseViewModel
     {
@@ -43,7 +43,7 @@ namespace EcommerceMAUI.ViewModel
         }
         async Task PopulateDataAsync()
         {
-            await Task.Delay(500);
+            //await Task.Delay(500);
             //TODO: Remove Delay here and call API
             var storedProducts = await _productRepository.GetProducts();  
             Products.Clear();

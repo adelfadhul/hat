@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace EcommerceMAUI.Converters
+namespace Hat.Converters
 {
     public class InverseBooleanConverter : IValueConverter
     {

@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace EcommerceMAUI;
+namespace Hat;
 
 public class Program
 {
