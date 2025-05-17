@@ -7,8 +7,8 @@ namespace Hat.ViewModels
 {
     public class ConfirmAddressViewModel : BaseViewModel
     {
-        private DataViewModels.DeliveryTypeDataViewModel _DeliveryType;
-        public DataViewModels.DeliveryTypeDataViewModel DeliveryType
+        private DataViewModels.DeliveryTypeViewModel _DeliveryType;
+        public DataViewModels.DeliveryTypeViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -36,7 +36,7 @@ namespace Hat.ViewModels
         }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType)
+        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType)
         {
             DeliveryType = deliveryType;
             Products = products;

@@ -70,7 +70,7 @@ namespace Hat.ViewModels
             //await Task.Delay(500);
             //TODO: Remove Delay here and call API
             var storedProducts = await _ProductRepository.GetProducts();
-            Products= storedProducts.Select(x=>new ProductListViewModel(x)).ToObservableCollection();
+            Products = storedProducts.Select(x => new ProductListViewModel(x)).ToObservableCollection();
             //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
             //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
@@ -80,11 +80,19 @@ namespace Hat.ViewModels
             //Products.Add(new ProductListModel() { Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png" });
             //Products.Add(new ProductListModel() { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" });
 
-           
+
+            var storedBrands = await _ProductRepository.GetBrands();
             TabPages.Add(new TabPageModel("All", 0, true));
-            TabPages.Add(new TabPageModel("Smart Bluetooth Speaker", 1, false));
-            TabPages.Add(new TabPageModel("Lamp", 2, false));
-            TabPages.Add(new TabPageModel("Airpods", 3, false));
+            var index = 0;
+            foreach(var item in storedBrands)
+            {
+                TabPages.Add(new TabPageModel(item, index, false));
+                index++;
+            }
+            //TabPages.Add(new TabPageModel("All", 0, true));
+            //TabPages.Add(new TabPageModel("Smart Bluetooth Speaker", 1, false));
+            //TabPages.Add(new TabPageModel("Lamp", 2, false));
+            //TabPages.Add(new TabPageModel("Airpods", 3, false));
             IsLoaded = true;
         }
     }

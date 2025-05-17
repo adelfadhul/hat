@@ -2,7 +2,7 @@
 
 namespace Hat.DataViewModels
 {
-    public class DeliveryTypeDataViewModel : BaseViewModel
+    public class DeliveryTypeViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

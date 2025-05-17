@@ -7,8 +7,8 @@ namespace Hat.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
     {
-        private DataViewModels.DeliveryTypeDataViewModel _DeliveryType;
-        public DataViewModels.DeliveryTypeDataViewModel DeliveryType
+        private DataViewModels.DeliveryTypeViewModel _DeliveryType;
+        public DataViewModels.DeliveryTypeViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -60,7 +60,7 @@ namespace Hat.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
+        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;

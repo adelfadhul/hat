@@ -1,6 +1,5 @@
 ﻿using Hat.Domain.Constants;
 using Hat.Domain.Helpers;
-using System.Drawing;
 
 namespace Hat.Domain.Models
 {

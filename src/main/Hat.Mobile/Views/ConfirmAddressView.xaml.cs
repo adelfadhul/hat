@@ -22,7 +22,7 @@ public partial class ConfirmAddressView : ContentPage
 	public ConfirmAddressView(ObservableCollection<ProductListViewModel> products, DeliveryTypeViewModel deliveryType)
 	{
 >>>>>>> After
-	public ConfirmAddressView(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType)
+	public ConfirmAddressView(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType)
 	{
 		InitializeComponent();
         BindingContext = new ConfirmAddressViewModel(products, deliveryType);

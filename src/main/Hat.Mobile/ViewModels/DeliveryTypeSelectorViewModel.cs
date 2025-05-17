@@ -5,10 +5,10 @@ using System.Windows.Input;
 
 namespace Hat.ViewModels
 {
-    public class DeliveryTypeViewModel : BaseViewModel
+    public class DeliveryTypeSelectorViewModel : BaseViewModel
     {
-        private ObservableCollection<DataViewModels.DeliveryTypeDataViewModel> _DeliveryTypes = [];
-        public ObservableCollection<DataViewModels.DeliveryTypeDataViewModel> DeliveryTypes
+        private ObservableCollection<DataViewModels.DeliveryTypeViewModel> _DeliveryTypes = [];
+        public ObservableCollection<DataViewModels.DeliveryTypeViewModel> DeliveryTypes
         {
             get => _DeliveryTypes;
             set => SetProperty(ref _DeliveryTypes, value);
@@ -28,14 +28,14 @@ namespace Hat.ViewModels
             get => _IsLoaded;
             set => SetProperty(ref _IsLoaded, value);
         }
-        private DataViewModels.DeliveryTypeDataViewModel deliveryType;
+        private DataViewModels.DeliveryTypeViewModel deliveryType;
 
         public ICommand SelectDeliveryTypeCommand { get; }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        public DeliveryTypeViewModel(ObservableCollection<ProductListViewModel> products)
+        public DeliveryTypeSelectorViewModel(ObservableCollection<ProductListViewModel> products)
         {
-            SelectDeliveryTypeCommand = new Command<DataViewModels.DeliveryTypeDataViewModel>(SelectDeliveryType);
+            SelectDeliveryTypeCommand = new Command<DataViewModels.DeliveryTypeViewModel>(SelectDeliveryType);
             NextCommand = new Command(ConfirmDeliverType);
             BackCommand = new Command(GoBack);
             Products = products;
@@ -51,13 +51,13 @@ namespace Hat.ViewModels
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
             DeliveryTypes.Clear();
-            DeliveryTypes.Add(new DeliveryTypeDataViewModel() { Name = "Standard Delivery", Description = "Order will be delivered between 3 - 5 business days", IsSelected = true });
-            DeliveryTypes.Add(new DeliveryTypeDataViewModel() { Name = "Next Day Delivery", Description= "Place your order before 6pm and your items will be delivered the next day" });
+            DeliveryTypes.Add(new DeliveryTypeViewModel() { Name = "Standard Delivery", Description = "Order will be delivered between 3 - 5 business days", IsSelected = true });
+            DeliveryTypes.Add(new DeliveryTypeViewModel() { Name = "Next Day Delivery", Description= "Place your order before 6pm and your items will be delivered the next day" });
             DeliveryTypes.Add(new DeliveryTypeViewModel() { Name = "Nominated Delivery", Description= "Pick a particular date from the calendar and order will be delivered on selected date" });
             deliveryType = DeliveryTypes[0];
             IsLoaded = true;
         }
-        private void SelectDeliveryType(DataViewModels.DeliveryTypeDataViewModel type)
+        private void SelectDeliveryType(DataViewModels.DeliveryTypeViewModel type)
         {
             foreach (var delType in DeliveryTypes)
             {

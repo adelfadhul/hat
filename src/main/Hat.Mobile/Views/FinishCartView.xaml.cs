@@ -22,7 +22,7 @@ public partial class FinishCartView : ContentPage
 	public FinishCartView(ObservableCollection<ProductListViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
 	{
 >>>>>>> After
-	public FinishCartView(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeDataViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
+	public FinishCartView(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
 	{
 		InitializeComponent();
 		BindingContext = new FinishCartViewModel(products, deliveryType, address, card);

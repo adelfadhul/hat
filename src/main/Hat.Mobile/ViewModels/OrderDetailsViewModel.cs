@@ -35,7 +35,7 @@ namespace Hat.ViewModels
         }
         private async void TrackCommand(object obj)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new TrackOrderView((Track)obj));
+            await Application.Current.MainPage.Navigation.PushAsync(new TrackOrderView((TrackViewModel)obj));
         }
         private async void GoBack(object obj)
         {
@@ -47,7 +47,7 @@ namespace Hat.ViewModels
             //TODO: Remove Delay here and call API
             TrackData.Add(new TrackOrderModel("Sept 23, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$4500",
@@ -64,7 +64,7 @@ namespace Hat.ViewModels
 
             TrackData.Add(new TrackOrderModel("Sept 23, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$500",
@@ -77,7 +77,7 @@ namespace Hat.ViewModels
                         new ImageList(){ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"}
                     }
                 },
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$700",
@@ -94,7 +94,7 @@ namespace Hat.ViewModels
 
             TrackData.Add(new TrackOrderModel("Sept 22, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$1500",
@@ -110,7 +110,7 @@ namespace Hat.ViewModels
                         new ImageList(){ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"},
                     }
                 },
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$2700",
@@ -132,7 +132,7 @@ namespace Hat.ViewModels
 
             TrackData.Add(new TrackOrderModel("Sept 23, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$4500",
@@ -151,7 +151,7 @@ namespace Hat.ViewModels
 
             TrackData.Add(new TrackOrderModel("Sept 23, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$4500",
@@ -175,7 +175,7 @@ namespace Hat.ViewModels
 
             TrackData.Add(new TrackOrderModel("Sept 23, 2018",
             [
-                new Track
+                new TrackViewModel
                 {
                     OrderId = "OD - 424923192 - N",
                     Price = "$4500",
