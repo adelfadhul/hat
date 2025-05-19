@@ -1,5 +1,4 @@
 using Hat.Domain.Repositories;
-using Hat.Infrastructure.Persistance.Http.Features;
 using Hat.Infrastructure.Persistance.Memory.Features;
 using Hat.Infrastructure.Persistance.SqlServer.Features;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,11 +22,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();
                     // Add other SqlServer repositories here as needed
                     break;
-                case "Http":
-                    services.AddScoped<IProductRepository, HttpProductRepository>();
-
-                    // Add other Http repositories here as needed
-                    break;
+               
                 default:
                     throw new ArgumentException($"Unknown repository type: {type}");
             }

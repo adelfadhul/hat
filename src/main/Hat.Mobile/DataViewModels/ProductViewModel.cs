@@ -3,9 +3,9 @@ using Hat.ViewModels;
 
 namespace Hat.DataViewModels
 {
-    public class ProductListViewModel : BaseViewModel
+    public class ProductViewModel : BaseViewModel
     {
-        public ProductListViewModel(ProductModel domainModel)
+        public ProductViewModel(ProductModel domainModel)
         {
 
             Name = domainModel.Name;

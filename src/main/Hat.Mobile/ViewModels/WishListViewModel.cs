@@ -11,8 +11,8 @@ namespace Hat.ViewModels
 {
     public class WishListViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductListViewModel> _Products = [];
-        public ObservableCollection<ProductListViewModel> Products
+        private ObservableCollection<ProductViewModel> _Products = [];
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -30,11 +30,11 @@ namespace Hat.ViewModels
         public WishListViewModel(IMediator mediator)
         {
             _mediator = mediator;
-            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
+            SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
         }
 
-        private async void SelectProduct(ProductListViewModel model)
+        private async void SelectProduct(ProductViewModel model)
         {
             if (model.IsAvailable)
             {
@@ -53,7 +53,7 @@ namespace Hat.ViewModels
             //TODO: Remove Delay here and call API
             Products.Clear();
             var storedProducts = await _mediator.Send(new ProductsQuery());
-            Products = storedProducts.Select(x => new ProductListViewModel(x)).ToObservableCollection();
+            Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
             //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png",IsAvailable = true});
             //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
             //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });

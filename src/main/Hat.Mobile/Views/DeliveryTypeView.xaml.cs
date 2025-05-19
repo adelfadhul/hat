@@ -1,7 +1,4 @@
 using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Domain.Repositories;
-using MediatR;
 using System.Collections.ObjectModel;
 
 namespace Hat.Views;
@@ -9,9 +6,9 @@ namespace Hat.Views;
 public partial class DeliveryTypeView : ContentPage
 {
 	
-	public DeliveryTypeView(ObservableCollection<ProductListViewModel> products,IMediator mediator)
+	public DeliveryTypeView(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new DeliveryViewModel(products, mediator);
+        BindingContext = vm;
     }
 }

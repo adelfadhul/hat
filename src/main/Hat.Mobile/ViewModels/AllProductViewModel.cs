@@ -1,18 +1,20 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
 using Hat.Domain.Models;
 using Hat.Domain.Queries;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 
 namespace Hat.ViewModels
 {
     public class AllProductViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductListViewModel> _Products = [];
+        private ObservableCollection<ProductViewModel> _Products = [];
 
-        public ObservableCollection<ProductListViewModel> Products
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -27,11 +29,13 @@ namespace Hat.ViewModels
         public ICommand SelectProductCommand { get; }
 
         private readonly IMediator _mediator;
-        public AllProductViewModel(IMediator mediator)
+        private readonly HttpClient _httpClient;
+        public AllProductViewModel(IMediator mediator, HttpClient httpClient)
         {
             _mediator = mediator;
-            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
+            SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
+            _httpClient = httpClient;
         }
         public AllProductViewModel() { }
 
@@ -41,36 +45,15 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            //await Task.Delay(500);
-            //TODO: Remove Delay here and call API
-            var storedProducts = await _mediator.Send(new ProductsQuery());
+            
+            var storedProducts= await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
             Products.Clear();
+            Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();    
             foreach (var x in storedProducts)
-            {
-                Products.Add(new ProductListViewModel(new ProductModel
-                {
-                    Name = x.Name,
-                    IsAvailable
-                     = x.IsAvailable,
-                    BrandName = x.BrandName,
-                    ImageUrl = x.ImageUrl,
-                    Price = x.Price,
-                }));
-
-
-            }
-            //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
-            //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Bang and Olufsen", Price = 90, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
-            //Products.Add(new ProductListModel() { Name = "B&o Desk Lamp", BrandName = "Bang and Olufsen", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image7.png" });
-            //Products.Add(new ProductListModel() { Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png" });
-            //Products.Add(new ProductListModel() { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" });
             IsLoaded = true;
         }
 
-        private async void SelectProduct(ProductListViewModel product)
+        private async void SelectProduct(ProductViewModel product)
         {
             await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }

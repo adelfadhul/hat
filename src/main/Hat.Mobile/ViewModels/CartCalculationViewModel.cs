@@ -8,8 +8,8 @@ namespace Hat.ViewModels
 {
     public class CartCalculationViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductListViewModel> _Products = [];
-        public ObservableCollection<ProductListViewModel> Products
+        private ObservableCollection<ProductViewModel> _Products = [];
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -31,10 +31,10 @@ namespace Hat.ViewModels
         public ICommand ApplyVoucherCommand { get; }
         public ICommand BackCommand { get; }
 
-        private readonly IMediator _mediator;
-        public CartCalculationViewModel(ObservableCollection<ProductListViewModel> products, IMediator mediator)
+        private readonly DeliveryTypeViewModel _deliveryTypeViewModel;
+        public CartCalculationViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryTypeViewModel )
         {
-            _mediator = mediator;
+           _deliveryTypeViewModel = deliveryTypeViewModel;
             Products = products;
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
@@ -46,7 +46,7 @@ namespace Hat.ViewModels
 
         private async void Checkout()
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products, _mediator));
+            await MauiApp.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products, _deliveryTypeViewModel));
         }
         private void ApplyVoucher(string vaucher)
         {

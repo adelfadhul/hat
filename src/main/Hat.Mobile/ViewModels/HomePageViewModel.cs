@@ -1,11 +1,13 @@
 ﻿using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Domain.Queries;
 using Hat.Domain.Repositories;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 
@@ -21,15 +23,15 @@ namespace Hat.ViewModels
 
         }
 
-        private ObservableCollection<ProductListViewModel> _BestSellingProducts = [];
-        public ObservableCollection<ProductListViewModel> BestSellingProducts
+        private ObservableCollection<ProductViewModel> _BestSellingProducts = [];
+        public ObservableCollection<ProductViewModel> BestSellingProducts
         {
             get => _BestSellingProducts;
             set => SetProperty(ref _BestSellingProducts, value);
         }
 
-        private ObservableCollection<ProductListViewModel> _FeaturedBrands = [];
-        public ObservableCollection<ProductListViewModel> FeaturedBrands
+        private ObservableCollection<ProductViewModel> _FeaturedBrands = [];
+        public ObservableCollection<ProductViewModel> FeaturedBrands
         {
             get => _FeaturedBrands;
             set => SetProperty(ref _FeaturedBrands, value);
@@ -47,20 +49,22 @@ namespace Hat.ViewModels
         public ICommand CategoryTapCommand { get; }
         public ICommand OpenCameraCommand { get; }
 
-      
-        private readonly IMediator _mediator;
-        private readonly IProductRepository _productRepository;
-        public HomePageViewModel(IMediator mediator, IProductRepository productRepository)
+
+
+
+        private readonly HttpClient _httpClient;
+        private readonly BrandDetailView _brandDetailView;
+        public HomePageViewModel(HttpClient httpClient, BrandDetailView brandDetailView)
         {
-            _mediator = mediator;
-            _productRepository = productRepository;
-            SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
+            _httpClient = httpClient;
+            _brandDetailView = brandDetailView;
+            SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
             CategoryTapCommand = new Command<CategoryViewModel>(SelectCategory);
-            BrandTapCommand = new Command<ProductListViewModel>(SelectBrand);
+            BrandTapCommand = new Command<ProductViewModel>(SelectBrand);
             OpenCameraCommand = new Command(OpenCamera);
             _ = InitializeAsync();
-
+          
         }
         private async Task InitializeAsync()
         {
@@ -68,47 +72,34 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            // Delay added to display loading, remove during api call
-            //await Task.Delay(500);
-            //TODO: Remove Delay here and call API
-            var test = await _productRepository.GetProducts();
-            var storedCategories = await _mediator.Send(new CategoriesQuery()); 
+
+            var storedCategories
+                = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("api/categories/all");
             Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
-            //Categories.Add(new CategoryViewModel() { CategoryID = 1, CategoryName = "Men", Icon = "\ufb22" });
-            //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Women", Icon = "\ufb23" });
-            //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Devices", Icon = "\uf322" });
-            //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Gadgets", Icon = "\uf2cb" });
-            //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Games", Icon = "\uf5ba" });
 
-            var bestSellingProducts = await _mediator.Send( new BestSellingProductsQuery());
+
+            var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/best-selling");
             BestSellingProducts = BestSellingProducts = bestSellingProducts
-                .Select(x => new ProductListViewModel(x)).ToObservableCollection();
-            //BestSellingProducts.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
-            //BestSellingProducts.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
-            //BestSellingProducts.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
-            //BestSellingProducts.Add(new ProductListModel() { Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png" });
+                .Select(x => new ProductViewModel(x)).ToObservableCollection();
 
-            var storedFeaturedBrandsProducts = await _mediator.Send(new FeaturedProductsQuery());
-            FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductListViewModel(x)).ToObservableCollection();
-            //FeaturedBrands.Add(new ProductListModel() { BrandName = "B&o", Details = "5693 Products", ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png" });
-            //FeaturedBrands.Add(new ProductListModel() { BrandName = "Beats", Details = "1124 Products", ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/beats.png" });
-            //FeaturedBrands.Add(new ProductListModel() { BrandName = "Apple Inc", Details = "5693 Products", ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Apple.png" });
+            var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/featured-brand");
+            FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
 
             IsLoaded = true;
         }
 
-        private async void SelectBrand(ProductListViewModel product)
+        private async void SelectBrand(ProductViewModel product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new BrandDetailView(new BrandDetailViewModel(_mediator)));
+            await MauiApp.Current.MainPage.Navigation.PushAsync(_brandDetailView);
         }
-        private async void SelectProduct(ProductListViewModel product)
+        private async void SelectProduct(ProductViewModel product)
         {
             await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
 
         private async void SelectCategory(CategoryViewModel category)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(new CategoryDetailViewModel(category, _mediator)));
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(new CategoryDetailViewModel(category, _httpClient)));
         }
         private async void SelectRecommend(object product)
         {

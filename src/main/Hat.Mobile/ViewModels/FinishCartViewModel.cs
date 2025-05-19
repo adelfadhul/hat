@@ -8,8 +8,8 @@ namespace Hat.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
     {
-        private DeliveryTypeModel _DeliveryType;
-        public DeliveryTypeModel DeliveryType
+        private DeliveryTypeViewModel _DeliveryType;
+        public DeliveryTypeViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -30,8 +30,8 @@ namespace Hat.ViewModels
             }
         }
 
-        private ObservableCollection<ProductListViewModel> _Products = [];
-        public ObservableCollection<ProductListViewModel> Products
+        private ObservableCollection<ProductViewModel> _Products = [];
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -61,7 +61,7 @@ namespace Hat.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, AddressViewModel address, CardInfoViewModel card)
+        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;

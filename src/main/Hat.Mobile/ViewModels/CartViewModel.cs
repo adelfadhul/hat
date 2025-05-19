@@ -1,17 +1,19 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Domain.Queries;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 
 namespace Hat.ViewModels
 {
     public class CartViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductListViewModel> _Products = [];
-        public ObservableCollection<ProductListViewModel> Products
+        private ObservableCollection<ProductViewModel> _Products = [];
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -36,13 +38,17 @@ namespace Hat.ViewModels
         public ICommand CheckoutCommand { get; }
 
 
-        private readonly IMediator _mediator;
-        public CartViewModel(IMediator mediator)
+        private readonly DeliveryTypeViewModel _deliveryTypeViewModel;
+        private readonly CartCalculationViewModel _cartCalculationViewModel;
+        private readonly HttpClient _httpClient;
+        public CartViewModel(DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, HttpClient httpClient)
         {
-            _mediator = mediator;
-            DeleteCommand = new Command<ProductListViewModel>(DeleteProduct);
-            FavoriteCommand = new Command<ProductListViewModel>(FavoriteProduct);
-            QtyChangeCommand = new Command<ProductListViewModel>(ChangeProductQty);
+           _deliveryTypeViewModel = deliveryTypeViewModel;
+            _httpClient = httpClient;
+            _cartCalculationViewModel = cartCalculationViewModel;
+            DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
+            FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
+            QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
             CheckoutCommand = new Command(Checkout);
             _ = InitializeAsync();
         }      
@@ -53,36 +59,27 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            //await Task.Delay(500);
-            //TODO: Remove Delay here and call API
-            var storedProducts = await _mediator.Send(new ProductsQuery());
-            Products = storedProducts.Select(x=> new ProductListViewModel(x)).ToObservableCollection();
-            //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Qty = 1, Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
-            //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Qty = 1, Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Qty = 1, Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png" });
-            //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Bang and Olufsen", Qty = 1, Price = 90, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
-            //Products.Add(new ProductListModel() { Name = "B&o Desk Lamp", BrandName = "Bang and Olufsen", Qty = 1, Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image7.png" });
-            //Products.Add(new ProductListModel() { Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Qty = 1, Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png" });
-            //Products.Add(new ProductListModel() { Name = "Airpods", BrandName = "B&o Phone Case", Qty = 1, Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" });
+
+            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
+            Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             IsLoaded = true;
         }
-        private async void DeleteProduct(ProductListViewModel product)
+        private async void DeleteProduct(ProductViewModel product)
         {
             
         }
-        private async void FavoriteProduct(ProductListViewModel product)
+        private async void FavoriteProduct(ProductViewModel product)
         {
 
         }
-        private void ChangeProductQty(ProductListViewModel product)
+        private void ChangeProductQty(ProductViewModel product)
         {
             SubTotal = Products.Sum(item => item.Qty * item.Price);
         }
         private async void Checkout()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculation(new CartCalculationViewModel(Products,_mediator)));
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculationView(_cartCalculationViewModel));
         }
     }
 }

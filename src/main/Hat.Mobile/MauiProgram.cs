@@ -54,7 +54,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
         builder.Services.AddTransient<CardView>();
-        builder.Services.AddTransient<CartCalculation>();
+        builder.Services.AddTransient<CartCalculationView>();
         builder.Services.AddTransient<CartView>();
         builder.Services.AddTransient<CategoryDetailView>();
         builder.Services.AddTransient<ConfirmAddressView>();
@@ -72,10 +72,9 @@ public static class MauiProgram
 
         builder.Services.AddHttpClient("Default", client =>
         {
-            client.BaseAddress = new Uri("https://your-api-base-url.com/");
+            client.BaseAddress = new Uri("localhost:7068");
         });
-        // Register infrastructure repositories (choose the type: "Memory", "SqlServer", or "Http")
-        builder.Services.AddHatRepositories("Memory");
+
 
         // Register MediatR handlers from the application assembly
         builder.Services.AddHatApplications("Hat.Application");

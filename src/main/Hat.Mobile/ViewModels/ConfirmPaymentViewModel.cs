@@ -6,15 +6,16 @@ using Hat.Domain.Repositories;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 
 namespace Hat.ViewModels
 {
     public class ConfirmPaymentViewModel : BaseViewModel
     {
-        readonly private DeliveryTypeModel _DeliveryType;
+        readonly private DeliveryTypeViewModel _DeliveryType;
         readonly private AddressViewModel _PrimaryAddress;
-        readonly private ObservableCollection<ProductListViewModel> _Products = [];
+        readonly private ObservableCollection<ProductViewModel> _Products = [];
         private CardInfoViewModel _SelectedCard;
         
         private bool _IsLoaded = false;
@@ -36,7 +37,8 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
 
         private readonly IMediator _mediator;
-        public ConfirmPaymentViewModel(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, AddressViewModel address, IMediator mediator)
+        private readonly HttpClient _httpClient;
+        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address, IMediator mediator, HttpClient httpClient)
         {
             _DeliveryType = deliveryType;
             _Products = products;
@@ -46,6 +48,7 @@ namespace Hat.ViewModels
             BackCommand = new Command(GoBack);
             _ = InitializeAsync();
             _mediator = mediator;
+            _httpClient = httpClient;
         }
 
         private async Task InitializeAsync()
@@ -55,18 +58,10 @@ namespace Hat.ViewModels
 
         async Task PopulateDataAsync()
         {
-            // Delay added to display loading, remove during api call
-            //await Task.Delay(500);
-            //TODO: Remove Delay here and call API
-            var storedCards= await _mediator.Send(new CardsQuery());
+
+            var storedCards= await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("api/cards");  
             Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "371449635398431", CardValidationCode = "123", ExpirationDate = "2024-12-01",IsSelected = true });
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "38520000023237", CardValidationCode = "456", ExpirationDate = "2025-12-01" });
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "6011000990139424", CardValidationCode = "789", ExpirationDate = "2026-12-01" });
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "3566002020360505", CardValidationCode = "321", ExpirationDate = "2027-12-01" });
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "5555555555554444", CardValidationCode = "654", ExpirationDate = "2028-12-01" });
-            //Cards.Add(new CardInfoViewModel() { CardNumber = "4012888888881881", CardValidationCode = "987", ExpirationDate = "2028-12-01" });
-            _SelectedCard = Cards[0];
+              _SelectedCard = Cards[0];
             IsLoaded = true;
         }
         private async void ConfirmPayment()

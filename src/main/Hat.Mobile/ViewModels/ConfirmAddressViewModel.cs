@@ -10,8 +10,8 @@ namespace Hat.ViewModels
 {
     public class ConfirmAddressViewModel : BaseViewModel
     {
-        private DeliveryTypeModel _DeliveryType;
-        public DeliveryTypeModel DeliveryType
+        private DeliveryTypeViewModel _DeliveryType;
+        public DeliveryTypeViewModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -24,8 +24,8 @@ namespace Hat.ViewModels
             set => SetProperty(ref _PrimaryAddress, value);
         }
 
-        private ObservableCollection<ProductListViewModel> _Products = [];
-        public ObservableCollection<ProductListViewModel> Products
+        private ObservableCollection<ProductViewModel> _Products = [];
+        public ObservableCollection<ProductViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -40,10 +40,11 @@ namespace Hat.ViewModels
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
         private readonly IMediator _mediator;
-        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, IMediator mediator)
+        private readonly ConfirmPaymentView _confirmPaymentView;
+        public ConfirmAddressViewModel(ObservableCollection<ProductViewModel> products, ConfirmPaymentView confirmPaymentView)
         {
-            _mediator = mediator;
-            DeliveryType = deliveryType;
+           
+            _confirmPaymentView = confirmPaymentView;
             Products = products;
             NextCommand = new Command(ConfirmAddress);
             BackCommand = new Command(GoBack);
@@ -70,7 +71,7 @@ namespace Hat.ViewModels
 
         private async void ConfirmAddress()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new ConfirmPaymentView(Products, DeliveryType, PrimaryAddress, _mediator));
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(_confirmPaymentView);
         }
 
         private async void GoBack(object obj)
