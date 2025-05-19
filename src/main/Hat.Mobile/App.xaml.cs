@@ -1,8 +1,8 @@
 ﻿using Hat.Views;
 
 namespace Hat;
-
-public partial class App : Application
+using MauiApp = Microsoft.Maui.Controls.Application;
+public partial class App : MauiApp
 {
     public App()
     {

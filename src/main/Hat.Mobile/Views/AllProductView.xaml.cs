@@ -1,4 +1,4 @@
-using Hat.ViewModel;
+using Hat.ViewModels;
 namespace Hat.Views;
 public partial class AllProductView : ContentPage
 {

@@ -1,7 +1,7 @@
 ﻿using Hat.Model;
 using Hat.Views;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
@@ -56,13 +56,13 @@ namespace Hat.ViewModels
             {
                 if (item.TargetType == typeof(LoginView))
                 {
-                    var response = await Application.Current.MainPage.DisplayAlert("Logout", "Do you want to logout?", "Yes", "No");
+                    var response = await MauiApp.Current.MainPage.DisplayAlert("Logout", "Do you want to logout?", "Yes", "No");
                     if (response)
-                        Application.Current.MainPage = new LoginView();
+                        MauiApp.Current.MainPage = new LoginView();
                 }
                 else
                 {
-                    await Application.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
+                    await MauiApp.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
                 }
             }
             

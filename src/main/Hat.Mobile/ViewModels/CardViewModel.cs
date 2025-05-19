@@ -2,7 +2,7 @@
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class CardViewModel : BaseViewModel
@@ -47,7 +47,7 @@ namespace Hat.ViewModels
         }
         private async void AddNewCard()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new AddNewCardView());
+            await MauiApp.Current.MainPage.Navigation.PushAsync(new AddNewCardView(new AddNewCardViewModel()));
         }
 
     }

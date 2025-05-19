@@ -1,10 +1,11 @@
-﻿namespace Hat.Helpers.ExtensionMethods
+﻿using MauiApp = Microsoft.Maui.Controls.Application;
+namespace Hat.Helpers.ExtensionMethods
 {
     internal static class StringExtensions
     {
         public static Color ToColorFromResourceKey(this string resourceKey)
         {
-            return Application.Current.Resources
+            return MauiApp.Current.Resources
                 .MergedDictionaries.First()[resourceKey] as Color;
         }
     }

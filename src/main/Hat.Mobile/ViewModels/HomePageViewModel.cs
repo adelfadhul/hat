@@ -1,10 +1,13 @@
 ﻿using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
+using Hat.Domain.Queries;
 using Hat.Domain.Repositories;
 using Hat.Views;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using MauiApp = Microsoft.Maui.Controls.Application;
 
 namespace Hat.ViewModels
 {
@@ -44,12 +47,12 @@ namespace Hat.ViewModels
         public ICommand CategoryTapCommand { get; }
         public ICommand OpenCameraCommand { get; }
 
-        private readonly ICategoryRepository _categoryRepository;
+      
+        private readonly IMediator _mediator;
         private readonly IProductRepository _productRepository;
-
-        public HomePageViewModel(ICategoryRepository categoryRepository, IProductRepository productRepository)
+        public HomePageViewModel(IMediator mediator, IProductRepository productRepository)
         {
-            _categoryRepository = categoryRepository;
+            _mediator = mediator;
             _productRepository = productRepository;
             SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
@@ -68,7 +71,8 @@ namespace Hat.ViewModels
             // Delay added to display loading, remove during api call
             //await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            var storedCategories = await _categoryRepository.GetCategories();
+            var test = await _productRepository.GetProducts();
+            var storedCategories = await _mediator.Send(new CategoriesQuery()); 
             Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
             //Categories.Add(new CategoryViewModel() { CategoryID = 1, CategoryName = "Men", Icon = "\ufb22" });
             //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Women", Icon = "\ufb23" });
@@ -76,7 +80,7 @@ namespace Hat.ViewModels
             //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Gadgets", Icon = "\uf2cb" });
             //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Games", Icon = "\uf5ba" });
 
-            var bestSellingProducts = await _productRepository.GetBestSettlingProducts();
+            var bestSellingProducts = await _mediator.Send( new BestSettlingProductsQuery());
             BestSellingProducts = BestSellingProducts = bestSellingProducts
                 .Select(x => new ProductListViewModel(x)).ToObservableCollection();
             //BestSellingProducts.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
@@ -84,7 +88,7 @@ namespace Hat.ViewModels
             //BestSellingProducts.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
             //BestSellingProducts.Add(new ProductListModel() { Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png" });
 
-            var storedFeaturedBrandsProducts = await _productRepository.GetFeaturedProducts();
+            var storedFeaturedBrandsProducts = await _mediator.Send(new FeaturedProductsQuery());
             FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductListViewModel(x)).ToObservableCollection();
             //FeaturedBrands.Add(new ProductListModel() { BrandName = "B&o", Details = "5693 Products", ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png" });
             //FeaturedBrands.Add(new ProductListModel() { BrandName = "Beats", Details = "1124 Products", ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/beats.png" });
@@ -95,34 +99,34 @@ namespace Hat.ViewModels
 
         private async void SelectBrand(ProductListViewModel product)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new BrandDetailView());
+            await MauiApp.Current.MainPage.Navigation.PushAsync(new BrandDetailView(new BrandDetailViewModel(_mediator)));
         }
         private async void SelectProduct(ProductListViewModel product)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
 
         private async void SelectCategory(CategoryViewModel category)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(category));
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(new CategoryDetailViewModel(category, _mediator)));
         }
         private async void SelectRecommend(object product)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new AllProductView());
+            await MauiApp.Current.MainPage.Navigation.PushAsync(new AllProductView());
         }
         private async void OpenCamera()
         {
-            var response = await Application.Current.MainPage.DisplayAlert("Scan QR", "Do you want to open camera?", "Yes", "No");
+            var response = await MauiApp.Current.MainPage.DisplayAlert("Scan QR", "Do you want to open camera?", "Yes", "No");
             if (response)
             {
                 PermissionStatus status = await Permissions.RequestAsync<Permissions.Camera>();
                 if (status == PermissionStatus.Granted)
                 {
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new ScanCameraView());
+                    await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ScanCameraView());
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Permission Denied", "Camera access is required but not granted. Please enable camera permissions in your device settings.", "OK");
+                    await MauiApp.Current.MainPage.DisplayAlert("Permission Denied", "Camera access is required but not granted. Please enable camera permissions in your device settings.", "OK");
 
                 }
 

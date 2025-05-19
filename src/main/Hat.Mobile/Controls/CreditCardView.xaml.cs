@@ -1,7 +1,7 @@
 using Hat.Helpers.ExtensionMethods;
-using Hat.Helpers;
 using System.Globalization;
-
+using Hat.Domain.Helpers;
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.Controls;
 
 
@@ -86,7 +86,7 @@ public partial class CreditCardView : Frame
     {
         if (string.IsNullOrEmpty(CardNumber))
         {
-            BackgroundColor = (Color)Application.Current.Resources["Default"];
+            BackgroundColor = (Color)MauiApp.Current.Resources["Default"];
             CreditCardImageLabel.Text = "\uf09d";
             CreditCardImageLabel.FontFamily = "FA6Regular";
         }

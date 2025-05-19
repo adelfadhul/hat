@@ -1,13 +1,14 @@
 using Hat.DataViewModels;
-using Hat.ViewModel;
+using Hat.ViewModels;
+using MediatR;
 
 namespace Hat.Views;
 
 public partial class CategoryDetailView : ContentPage
 {
-    public CategoryDetailView(CategoryViewModel data)
+    public CategoryDetailView(CategoryDetailViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new CategoryDetailViewModel(data);
+        BindingContext = vm;
     }
 }

@@ -1,0 +1,38 @@
+using Hat.Domain.Repositories;
+using Hat.Infrastructure.Persistance.Http.Features;
+using Hat.Infrastructure.Persistance.Memory.Features;
+using Hat.Infrastructure.Persistance.SqlServer.Features;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Hat.Infrastructure.Registeration
+{
+    public static class RepositoryRegistration
+    {
+        public static IServiceCollection AddHatRepositories(this IServiceCollection services, string type)
+        {
+            switch (type)
+            {
+                case "Memory":
+                    services.AddScoped<IProductRepository, MemoryProductRepository>();
+                    services.AddScoped<ICardRepository, MemoryCardRepository>();
+                    services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();
+                    services.AddScoped<ITrackRepository, MemoryTrackRepository>();
+                    services.AddScoped<ICategoryRepository, MemoryCategoryRepository>();
+                    break;
+                case "SqlServer":
+                    services.AddScoped<IProductRepository, SqlServerProductRepository>();
+                    // Add other SqlServer repositories here as needed
+                    break;
+                case "Http":
+                    services.AddScoped<IProductRepository, HttpProductRepository>();
+
+                    // Add other Http repositories here as needed
+                    break;
+                default:
+                    throw new ArgumentException($"Unknown repository type: {type}");
+            }
+
+            return services;
+        }
+    }
+}

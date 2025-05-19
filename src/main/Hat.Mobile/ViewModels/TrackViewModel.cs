@@ -1,9 +1,21 @@
-﻿using static Hat.Model.TrackOrderModel;
+﻿using Hat.Domain.Models;
+using static Hat.Model.TrackOrderModel;
 
 namespace Hat.ViewModels
 {
     public class TrackViewModel : BaseViewModel
     {
+        public TrackViewModel()
+        {
+            
+        }
+        public TrackViewModel(TrackModel domainModel)
+        {
+            OrderId = domainModel.OrderId;
+            Price = domainModel.Price;
+            Status = domainModel.Status;
+            Images = domainModel.ImageUrlList;
+        }
         private string _OrderId;
         public string OrderId
         {
@@ -22,24 +34,12 @@ namespace Hat.ViewModels
             get => _Status;
             set => SetProperty(ref _Status, value);
         }
-        private List<ImageList> _Images = [];
-        public List<ImageList> Images
+        private List<string> _Images = [];
+        public List<string> Images
         {
             get => _Images;
             set => SetProperty(ref _Images, value);
         }
-        public int NumberOfItems { get { return Images.Count(); } }
-        public bool ImageOneVisibility { get { return NumberOfItems >= 1; } }
-        public string ImageOneUrl { get { return Images[0].ImageUrl; } }
-        public bool ImageTwoVisibility { get { return NumberOfItems >= 2; } }
-        public string ImageTwoUrl { get { return Images[1].ImageUrl; } }
-        public bool ImageThreeVisibility { get { return NumberOfItems >= 3; } }
-        public string ImageThreeUrl { get { return Images[2].ImageUrl; } }
-        public bool ImageMoreVisibility { get { return NumberOfItems >= 4; } }
-        public int RemainingImages { get { return NumberOfItems - 3; } }
-        public override string ToString()
-        {
-            return OrderId;
-        }
+       
     }
 }

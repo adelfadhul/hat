@@ -1,8 +1,9 @@
 ﻿using Hat.DataViewModels;
 using Hat.Views;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class CartCalculationViewModel : BaseViewModel
@@ -30,19 +31,22 @@ namespace Hat.ViewModels
         public ICommand ApplyVoucherCommand { get; }
         public ICommand BackCommand { get; }
 
-        public CartCalculationViewModel(ObservableCollection<ProductListViewModel> products)
+        private readonly IMediator _mediator;
+        public CartCalculationViewModel(ObservableCollection<ProductListViewModel> products, IMediator mediator)
         {
+            _mediator = mediator;
             Products = products;
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
             BackCommand = new Command(GoBack);
+           
             IsLoaded = true;
         }
 
         private async void Checkout()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products));
+            await MauiApp.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products, _mediator));
         }
         private void ApplyVoucher(string vaucher)
         {
@@ -51,7 +55,7 @@ namespace Hat.ViewModels
 
         private async void GoBack(object obj)
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await MauiApp.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

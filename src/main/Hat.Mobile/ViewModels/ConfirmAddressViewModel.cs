@@ -1,5 +1,8 @@
 ﻿using Hat.DataViewModels;
+using Hat.Domain.Models;
+using Hat.Domain.Repositories;
 using Hat.Views;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -7,8 +10,8 @@ namespace Hat.ViewModels
 {
     public class ConfirmAddressViewModel : BaseViewModel
     {
-        private DataViewModels.DeliveryTypeViewModel _DeliveryType;
-        public DataViewModels.DeliveryTypeViewModel DeliveryType
+        private DeliveryTypeModel _DeliveryType;
+        public DeliveryTypeModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -36,8 +39,10 @@ namespace Hat.ViewModels
         }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType)
+        private readonly IMediator _mediator;
+        public ConfirmAddressViewModel(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, IMediator mediator)
         {
+            _mediator = mediator;
             DeliveryType = deliveryType;
             Products = products;
             NextCommand = new Command(ConfirmAddress);
@@ -65,12 +70,12 @@ namespace Hat.ViewModels
 
         private async void ConfirmAddress()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new ConfirmPaymentView(Products, DeliveryType, PrimaryAddress));
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new ConfirmPaymentView(Products, DeliveryType, PrimaryAddress, _mediator));
         }
 
         private async void GoBack(object obj)
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

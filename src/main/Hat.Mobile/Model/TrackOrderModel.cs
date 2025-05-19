@@ -3,7 +3,7 @@ using static Hat.Model.TrackOrderModel;
 
 namespace Hat.Model
 {
-    public class TrackOrderModel : List<TrackViewModel>
+    public partial class TrackOrderModel : List<TrackViewModel>
     {
         public string Date { get; private set; }
 
@@ -15,13 +15,6 @@ namespace Hat.Model
         public override string ToString()
         {
             return Date;
-        }
-
-       
-
-        public class ImageList
-        {
-            public string ImageUrl { get; set; }
         }
     }
 }

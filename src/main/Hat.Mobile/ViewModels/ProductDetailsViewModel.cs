@@ -1,7 +1,7 @@
 ﻿using Hat.DataViewModels;
 using Hat.Model;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class ProductDetailsViewModel : BaseViewModel
@@ -103,7 +103,7 @@ namespace Hat.ViewModels
         }
         private async void GoBack(object obj)
         {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
+            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
         }
 
         private void FavItem(Color obj)

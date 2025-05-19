@@ -1,12 +1,14 @@
-using Hat.ViewModel;
+using Hat.ViewModels;
+using MediatR;
 
 namespace Hat.Views;
 
 public partial class CartView : ContentPage
 {
-    public CartView()
+  
+    public CartView(CartViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new CartViewModel();
+        BindingContext = vm;
     }    
 }

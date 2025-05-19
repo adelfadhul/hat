@@ -1,13 +1,13 @@
-using Hat.ViewModel;
+using Hat.ViewModels;
 
 namespace Hat.Views;
 
 public partial class CardView : ContentPage
 {
-    public CardView()
+    public CardView(CardViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new CardViewModel();
+		BindingContext = vm;
 
     }
 }

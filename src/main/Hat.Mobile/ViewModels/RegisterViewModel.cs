@@ -1,6 +1,6 @@
 ﻿using Hat.Views;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class RegisterViewModel: BaseViewModel
@@ -35,12 +35,12 @@ namespace Hat.ViewModels
 
         private async void SignUp(object obj)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new VerificationView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new VerificationView());
         }
 
         private void Login(object obj)
         {
-            Application.Current.MainPage = new LoginView();
+            MauiApp.Current.MainPage = new LoginView();
         }
     }
 }

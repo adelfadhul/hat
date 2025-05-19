@@ -1,14 +1,15 @@
 ﻿using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Helpers;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
     {
-        private DataViewModels.DeliveryTypeViewModel _DeliveryType;
-        public DataViewModels.DeliveryTypeViewModel DeliveryType
+        private DeliveryTypeModel _DeliveryType;
+        public DeliveryTypeModel DeliveryType
         {
             get => _DeliveryType;
             set => SetProperty(ref _DeliveryType, value);
@@ -60,7 +61,7 @@ namespace Hat.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
+        public FinishCartViewModel(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, AddressViewModel address, CardInfoViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;
@@ -73,13 +74,13 @@ namespace Hat.ViewModels
         }
         private async void FinishOrder()
         {            
-            await Application.Current.MainPage.Navigation.PopToRootAsync();
+            await MauiApp.Current.MainPage.Navigation.PopToRootAsync();
             await Shell.Current.GoToAsync("///HomePageView");
             await ToastHelper.ShowToast("Order Complete");
         }
         private async void GoBack(object obj)
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await MauiApp.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Hat.DataViewModels;
 using Hat.Helpers;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class AddNewCardViewModel : BaseViewModel
@@ -72,12 +72,12 @@ namespace Hat.ViewModels
 
         private async void SaveCard()
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await MauiApp.Current.MainPage.Navigation.PopAsync();
             await ToastHelper.ShowToast("Add card added.");
         }
         private async void GoBack()
         {
-            await Application.Current.MainPage.Navigation.PopAsync();
+            await MauiApp.Current.MainPage.Navigation.PopAsync();
         }
 
     }

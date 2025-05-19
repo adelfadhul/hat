@@ -1,12 +1,14 @@
-using Hat.ViewModel;
+using Hat.ViewModels;
+using MediatR;
 
 namespace Hat.Views;
 
 public partial class BrandDetailView : ContentPage
 {
-    public BrandDetailView()
+    
+    public BrandDetailView(BrandDetailViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new BrandDetailViewModel();
+        BindingContext =vm;
     }
 }

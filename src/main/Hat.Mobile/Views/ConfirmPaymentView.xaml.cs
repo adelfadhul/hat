@@ -1,5 +1,8 @@
 using Hat.DataViewModels;
-using Hat.ViewModel;
+using Hat.Domain.Models;
+using Hat.Domain.Repositories;
+using Hat.ViewModels;
+using MediatR;
 using System.Collections.ObjectModel;
 
 namespace Hat.Views;
@@ -7,24 +10,11 @@ namespace Hat.Views;
 public partial class ConfirmPaymentView : ContentPage
 {
 
-<<<<<<< TODO: Unmerged change from project 'Hat.Mobile (net8.0-android)', Before:
-	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, Model.DeliveryTypeViewModel deliveryType, AddressViewModel address)
-	{
-=======
-	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address)
-	{
->>>>>>> After
 
-<<<<<<< TODO: Unmerged change from project 'Hat.Mobile (net8.0-android)', Before:
-	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, ViewModelObjects.DeliveryTypeViewModel deliveryType, AddressViewModel address)
-	{
-=======
-	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address)
-	{
->>>>>>> After
-	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, DataViewModels.DeliveryTypeViewModel deliveryType, AddressViewModel address)
+
+	public ConfirmPaymentView(ObservableCollection<ProductListViewModel> products, DeliveryTypeModel deliveryType, AddressViewModel address, IMediator mediator)
 	{
 		InitializeComponent();
-        BindingContext = new ConfirmPaymentViewModel(products, deliveryType, address);
+        BindingContext = new ConfirmPaymentViewModel(products, deliveryType, address, mediator);
     }
 }

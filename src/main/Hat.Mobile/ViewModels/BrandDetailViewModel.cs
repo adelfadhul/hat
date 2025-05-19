@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.Views;
-using Hat.Domain.Repositories;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Hat.DataViewModels;
-
+using MediatR;
+using Hat.Domain.Queries;
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class BrandDetailViewModel : BaseViewModel
@@ -32,10 +33,10 @@ namespace Hat.ViewModels
         public ICommand SelectProductCommand { get; }
         public ICommand SelectMenuCommand { get; }
 
-        private readonly IProductRepository _ProductRepository;
-        public BrandDetailViewModel(IProductRepository productRepository)
+        private readonly IMediator _mediator;
+        public BrandDetailViewModel(IMediator mediator)
         {
-            _ProductRepository = productRepository;
+            _mediator = mediator;
             SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             SelectMenuCommand = new Command<TabPageModel>(SelectMenu);
             _ = InitializeAsync();
@@ -47,7 +48,7 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductListViewModel obj)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
 
         private void SelectMenu(TabPageModel obj)
@@ -69,7 +70,7 @@ namespace Hat.ViewModels
         {
             //await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            var storedProducts = await _ProductRepository.GetProducts();
+            var storedProducts = await _mediator.Send(new ProductsQuery());
             Products = storedProducts.Select(x => new ProductListViewModel(x)).ToObservableCollection();
             //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
@@ -81,7 +82,7 @@ namespace Hat.ViewModels
             //Products.Add(new ProductListModel() { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" });
 
 
-            var storedBrands = await _ProductRepository.GetBrands();
+            var storedBrands = await _mediator.Send(new BrandsQuery());
             TabPages.Add(new TabPageModel("All", 0, true));
             var index = 0;
             foreach(var item in storedBrands)

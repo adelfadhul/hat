@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
+using Hat.Domain.Queries;
 using Hat.Views;
-using Hat.Domain.Repositories;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Hat.DataViewModels;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class CategoryDetailViewModel : BaseViewModel
@@ -40,11 +41,14 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
         public ICommand SelectProductCommand { get; }
 
-        private readonly IProductRepository _productRepository;
-     
-        public CategoryDetailViewModel(CategoryViewModel data, IProductRepository productRepository)
+        private readonly IMediator _mediator;
+        public CategoryDetailViewModel(IMediator mediator)
         {
-            _productRepository = productRepository;
+            _mediator = mediator;
+        }
+        public CategoryDetailViewModel(CategoryViewModel data,IMediator mediator):this(mediator)
+        {
+           
             BackCommand = new Command(GoBack);
             SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             CategoryModel = new CategoryViewModel();
@@ -61,8 +65,9 @@ namespace Hat.ViewModels
             await Task.Delay(500);
             //TODO: Remove Delay here and call API
             Products.Clear();
-            var storedProducts = await _productRepository.GetProducts();
-            Products= storedProducts.Select(x=> new ProductListViewModel(x)).ToObservableCollection();
+   
+            var storedProducts = await _mediator.Send(new ProductsQuery());
+            Products = storedProducts.Select(x=> new ProductListViewModel(x)).ToObservableCollection();
             //Products.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });
             //Products.Add(new ProductListModel() { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" });
             //Products.Add(new ProductListModel() { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" });
@@ -81,11 +86,11 @@ namespace Hat.ViewModels
 
         private async void GoBack()
         {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
+            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
         }
         private async void SelectProduct(ProductListViewModel product)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
 
     }

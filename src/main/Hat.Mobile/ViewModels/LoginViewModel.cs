@@ -1,7 +1,7 @@
 ﻿using Hat.Helpers;
 using Hat.Views;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class LoginViewModel: BaseViewModel
@@ -51,12 +51,12 @@ namespace Hat.ViewModels
 
         private async void SignUp()
         {
-           await Application.Current.MainPage.Navigation.PushModalAsync(new RegisterView());
+           await MauiApp.Current.MainPage.Navigation.PushModalAsync(new RegisterView());
         }
 
         private async void Login()
         {           
-            Application.Current.MainPage = new AppShell();
+            MauiApp.Current.MainPage = new AppShell();
             await ToastHelper.ShowToast("Welcome");
 
         }

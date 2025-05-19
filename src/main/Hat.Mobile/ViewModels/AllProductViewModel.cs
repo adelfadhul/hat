@@ -1,7 +1,8 @@
 ﻿using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Repositories;
+using Hat.Domain.Queries;
 using Hat.Views;
+using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -25,10 +26,10 @@ namespace Hat.ViewModels
         }
         public ICommand SelectProductCommand { get; }
 
-        private readonly IProductRepository _productRepository;
-        public AllProductViewModel(IProductRepository productRepository)
+        private readonly IMediator _mediator;
+        public AllProductViewModel(IMediator mediator)
         {
-            _productRepository = productRepository; 
+            _mediator = mediator;
             SelectProductCommand = new Command<ProductListViewModel>(SelectProduct);
             _ = InitializeAsync();
         }
@@ -42,7 +43,7 @@ namespace Hat.ViewModels
         {
             //await Task.Delay(500);
             //TODO: Remove Delay here and call API
-            var storedProducts = await _productRepository.GetProducts();  
+            var storedProducts = await _mediator.Send(new ProductsQuery());
             Products.Clear();
             foreach (var x in storedProducts)
             {
@@ -71,7 +72,7 @@ namespace Hat.ViewModels
 
         private async void SelectProduct(ProductListViewModel product)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
         }
     }
 }

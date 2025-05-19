@@ -51,6 +51,7 @@
 
 	<ItemGroup>
 	  <Compile Remove="Helpers\CreditCardTypeRegexHelper.cs" />
+	  <Compile Remove="Model\ImageList.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -173,13 +174,17 @@
 	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
 	  <PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
 	  <PackageReference Include="MediatR" Version="12.5.0" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.5" />
 	  <PackageReference Include="PINView.MAUI" Version="1.0.2" />
 	  <PackageReference Include="Camera.MAUI" Version="1.5.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\libs\Hat.Domain\Hat.Domain.csproj" />
+	  <ProjectReference Include="..\libs\Hat.Application.Registeration\Hat.Application.Registeration.csproj" />
+	  <ProjectReference Include="..\libs\Hat.Application\Hat.Application.csproj" />
 	  <ProjectReference Include="..\libs\Hat.Domain\Hat.Domain.csproj" />
+	  <ProjectReference Include="..\libs\Hat.Infrastructure.Registeration\Hat.Infrastructure.Registeration.csproj" />
 	</ItemGroup>
 	
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionHatHideInfoBar="True" /></VisualStudio></ProjectExtensions>

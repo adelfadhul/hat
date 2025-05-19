@@ -1,11 +1,10 @@
-using Hat.ViewModel;
-using static Hat.Model.TrackOrderModel;
+using Hat.ViewModels;
 
 namespace Hat.Views;
 
 public partial class TrackOrderView : ContentPage
 {
-    public TrackOrderView(Track data)
+    public TrackOrderView(TrackViewModel data)
     {
         InitializeComponent();
         BindingContext = new TrackOrderViewModel(data);

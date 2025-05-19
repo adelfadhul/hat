@@ -1,8 +1,7 @@
 ﻿using Hat.DataViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using static Hat.Model.TrackOrderModel;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class TrackOrderViewModel : BaseViewModel
@@ -14,7 +13,7 @@ namespace Hat.ViewModels
             set => SetProperty(ref _TrackStatus, value);
 
         }  
-        public Track TrackOrderData { get; set; }
+        public TrackViewModel TrackOrderData { get; set; }
         public string PageTitle
         {
             get
@@ -30,7 +29,7 @@ namespace Hat.ViewModels
         }
         public ICommand BackCommand { get; set; }
 
-        public TrackOrderViewModel(Track data, bool emptyGroups = false)
+        public TrackOrderViewModel(TrackViewModel data, bool emptyGroups = false)
         {
             TrackOrderData = data;
             BackCommand = new Command<object>(GoBack);
@@ -55,7 +54,7 @@ namespace Hat.ViewModels
 
         private async void GoBack(object obj)
         {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
+            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
         }
 
     }

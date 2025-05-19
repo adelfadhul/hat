@@ -1,6 +1,6 @@
 ﻿using Hat.Helpers;
 using System.Windows.Input;
-
+using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class VerificationViewModel : BaseViewModel
@@ -21,7 +21,7 @@ namespace Hat.ViewModels
         {
             if (Pin != null && Pin.Length == 6) 
             {
-                Application.Current.MainPage = new AppShell();
+                MauiApp.Current.MainPage = new AppShell();
                 await ToastHelper.ShowToast("Welcome");
             }           
         }
