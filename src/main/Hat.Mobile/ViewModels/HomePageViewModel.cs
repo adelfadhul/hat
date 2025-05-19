@@ -80,7 +80,7 @@ namespace Hat.ViewModels
             //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Gadgets", Icon = "\uf2cb" });
             //Categories.Add(new CategoryViewModel() { CategoryID = 2, CategoryName = "Games", Icon = "\uf5ba" });
 
-            var bestSellingProducts = await _mediator.Send( new BestSettlingProductsQuery());
+            var bestSellingProducts = await _mediator.Send( new BestSellingProductsQuery());
             BestSellingProducts = BestSellingProducts = bestSellingProducts
                 .Select(x => new ProductListViewModel(x)).ToObservableCollection();
             //BestSellingProducts.Add(new ProductListModel() { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" });

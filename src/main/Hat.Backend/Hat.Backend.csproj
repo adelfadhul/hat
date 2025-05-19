@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\libs\Hat.Application\Hat.Application.csproj" />
+    <ProjectReference Include="..\libs\Hat.Application.Registeration\Hat.Application.Registeration.csproj" />
+    <ProjectReference Include="..\libs\Hat.Application\Hat.Application.csproj" />
   </ItemGroup>
 
 </Project>
