@@ -8,13 +8,14 @@ namespace Hat.Backend.Controllers
     [Route("api/products")]    
 public class ProductController : HatController
     {
-        public ProductController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        public ProductController(IMediator mediator, ILogger<ProductController> logger) : base(mediator, logger)
         {
         }
 
-        [HttpGet("all")]
+        [HttpGet("")]
         public async Task<IActionResult> GetProducts()
         {
+            _logger.LogInformation("GetProducts");
             var list = await _mediator.Send(new ProductsQuery());
             return Ok(list);
         }

@@ -24,7 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Comment out or remove the HTTPS redirection middleware to allow HTTP access
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

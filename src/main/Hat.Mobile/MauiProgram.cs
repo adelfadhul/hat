@@ -2,16 +2,45 @@
 using Camera.MAUI;
 using CommunityToolkit.Maui;
 using Hat.Application.Registeration;
-using Hat.Infrastructure.Registeration;
 using Hat.ViewModels;
 using Hat.Views;
-using Microsoft.Extensions.Http;
 
 
 namespace Hat;
 
 public static class MauiProgram
 {
+    public static string getBaseUrl(int port)
+    {
+
+#if DEBUG
+       
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            // Check if running on an emulator
+            if (DeviceInfo.DeviceType == DeviceType.Virtual)
+            {
+                // Android Emulator
+                return $"http://10.0.2.2:{port}/";
+            }
+            else
+            {
+                // Physical Android Device - Get local IP of the machine
+                //string localIp = GetLocalIPAddress();
+                string localIp = "192.168.100.232";
+                return $"http://{localIp}:{port}";
+            }
+        }
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+        {
+            // Windows
+            return $"http://localhost:{port}";
+        }
+        throw new NotSupportedException("Unsupported platform");
+#else
+            builder.Services.AddWatadClient("https://alwatad.azurewebsites.net");
+#endif
+    }
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
@@ -70,10 +99,14 @@ public static class MauiProgram
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<AddNewCardView>();
 
+        var url = getBaseUrl(7068);
         builder.Services.AddHttpClient("Default", client =>
         {
-            client.BaseAddress = new Uri("localhost:7068");
+           
+            client.BaseAddress = new Uri(url);
         });
+        // we use the api client as default HttpClient
+       // builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("Default"));
 
 
         // Register MediatR handlers from the application assembly

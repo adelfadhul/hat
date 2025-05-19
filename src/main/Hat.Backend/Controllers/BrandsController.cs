@@ -8,13 +8,14 @@ namespace Hat.Backend.Controllers
     [Route("api/brands")]
     public class BrandsController : HatController
     {
-        public BrandsController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        public BrandsController(IMediator mediator, ILogger<BrandsController> logger) : base(mediator, logger)
         {
         }
 
-        [HttpGet("all")]
+        [HttpGet("")]
         public async Task<IActionResult> GetBrands()
         {
+            _logger.LogInformation("GetBrands");
             var list = await _mediator.Send(new BrandsQuery());
             return Ok(list);
         }

@@ -6,6 +6,7 @@ using Hat.Domain.Queries;
 using Hat.Domain.Repositories;
 using Hat.Views;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Windows.Input;
@@ -54,9 +55,11 @@ namespace Hat.ViewModels
 
         private readonly HttpClient _httpClient;
         private readonly BrandDetailView _brandDetailView;
-        public HomePageViewModel(HttpClient httpClient, BrandDetailView brandDetailView)
+        private readonly ILogger<HomePageViewModel> _logger;
+        public HomePageViewModel(IHttpClientFactory httpClientFactory, BrandDetailView brandDetailView, ILogger<HomePageViewModel> logger)
         {
-            _httpClient = httpClient;
+            _logger = logger;
+            _httpClient = httpClientFactory.CreateClient("Default");
             _brandDetailView = brandDetailView;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
@@ -64,25 +67,36 @@ namespace Hat.ViewModels
             BrandTapCommand = new Command<ProductViewModel>(SelectBrand);
             OpenCameraCommand = new Command(OpenCamera);
             _ = InitializeAsync();
-          
+
         }
         private async Task InitializeAsync()
         {
             await PopulateDataAsync();
         }
-        async Task PopulateDataAsync()
+        private async Task PopulateDataAsync()
         {
+            try
+            {
+                _logger.LogInformation("Fetching categories");
+                var test= await _httpClient.GetStringAsync("/api/categories");
+                var storedCategories
+                              = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("/api/categories");
+                _logger.LogInformation("Fetched categories");
+                Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
 
-            var storedCategories
-                = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("api/categories/all");
-            Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching categories");
+
+            }
 
 
-            var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/best-selling");
+            var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/best-selling");
             BestSellingProducts = BestSellingProducts = bestSellingProducts
                 .Select(x => new ProductViewModel(x)).ToObservableCollection();
 
-            var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/featured-brand");
+            var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/featured-brand");
             FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
 
             IsLoaded = true;

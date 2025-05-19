@@ -8,13 +8,14 @@ namespace Hat.Backend.Controllers
     [Route("api/delivery-types")]
     public class DeliveryTypesController : HatController
     {
-        public DeliveryTypesController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        public DeliveryTypesController(IMediator mediator, ILogger<DeliveryTypesController> logger) : base(mediator, logger)
         {
         }
 
-        [HttpGet("all")]
+        [HttpGet("")]
         public async Task<IActionResult> GetDeliveryTypes()
         {
+            _logger.LogInformation("GetDeliveryTypes");
             var list = await _mediator.Send(new DeliveryTypesQuery());
             return Ok(list);
         }
