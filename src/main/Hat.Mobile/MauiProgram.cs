@@ -99,7 +99,7 @@ public static class MauiProgram
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<AddNewCardView>();
 
-        var url = getBaseUrl(7068);
+        var url = getBaseUrl(5166);
         builder.Services.AddHttpClient("Default", client =>
         {
            

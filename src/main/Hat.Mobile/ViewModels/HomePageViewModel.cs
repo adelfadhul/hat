@@ -77,8 +77,14 @@ namespace Hat.ViewModels
         {
             try
             {
+                var client = new HttpClient()
+                {
+                    
+                };
+                var test1 = await client.GetAsync("http://10.0.2.2:5166/api/categories");
+                //var test2 = await client.GetStringAsync("api/categories");
+
                 _logger.LogInformation("Fetching categories");
-                var test= await _httpClient.GetStringAsync("/api/categories");
                 var storedCategories
                               = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("/api/categories");
                 _logger.LogInformation("Fetched categories");

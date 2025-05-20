@@ -1,10 +1,12 @@
 using Hat.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hat.Backend.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/categories")]
     public class CategoriesController : HatController
     {
