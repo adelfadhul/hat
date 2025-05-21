@@ -1,4 +1,4 @@
-public class NavigationService : INavigationService
+public class NavigationService 
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -11,5 +11,9 @@ public class NavigationService : INavigationService
     {
         var page = _serviceProvider.GetRequiredService<TView>();
         await Application.Current.MainPage.Navigation.PushModalAsync(page);
+    }
+    public async Task NavigateToProductDetails(Guid productId)
+    {
+        await Shell.Current.GoToAsync($"productdetails?productId={productId.ToString()}");
     }
 }

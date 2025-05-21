@@ -5,17 +5,22 @@ namespace Hat.DataViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
+        public ProductViewModel()
+        {
+        }
         public ProductViewModel(ProductModel domainModel)
         {
-
+            Id = domainModel.Id;
             Name = domainModel.Name;
             ImageUrl = domainModel.ImageUrl;
             BrandName = domainModel.BrandName;
             Price = domainModel.Price;
             Details = domainModel.Details; Qty = domainModel.Qty;
             IsAvailable = domainModel.IsAvailable;  
+
         }
 
+        public Guid Id { get; set; }    
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }

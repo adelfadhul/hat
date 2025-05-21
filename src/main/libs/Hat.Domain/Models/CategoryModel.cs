@@ -4,8 +4,8 @@
     {
 
         #region data
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public string Icon { get; set; }
         #endregion
      

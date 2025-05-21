@@ -51,6 +51,7 @@
 
 	<ItemGroup>
 	  <Compile Remove="Helpers\CreditCardTypeRegexHelper.cs" />
+	  <Compile Remove="INavigationService.cs" />
 	  <Compile Remove="Model\ImageList.cs" />
 	</ItemGroup>
 

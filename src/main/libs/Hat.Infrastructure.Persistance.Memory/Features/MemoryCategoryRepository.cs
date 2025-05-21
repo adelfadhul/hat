@@ -11,11 +11,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             var categories = new List<CategoryModel>
             {
-                new CategoryModel { CategoryID = 1, CategoryName = "Electronics", Icon = "\uf322" },
-                new CategoryModel { CategoryID = 2, CategoryName = "Fashion", Icon = "\uf553" },
-                new CategoryModel { CategoryID = 3, CategoryName = "Home", Icon = "\uf015" },
-                new CategoryModel { CategoryID = 4, CategoryName = "Toys", Icon = "\uf1ae" },
-                new CategoryModel { CategoryID = 5, CategoryName = "Sports", Icon = "\uf44b" }
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Electronics", Icon = "\uf322" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Fashion", Icon = "\uf553" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Home", Icon = "\uf015" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Toys", Icon = "\uf1ae" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Sports", Icon = "\uf44b" }
             };
             return Task.FromResult(categories);
         }
@@ -24,14 +24,14 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             var categories = new List<CategoryModel>
             {
-                new CategoryModel { CategoryID = 1, CategoryName = "Electronics", Icon = "\uf322" },
-                new CategoryModel { CategoryID = 2, CategoryName = "Fashion", Icon = "\uf553" },
-                new CategoryModel { CategoryID = 3, CategoryName = "Home", Icon = "\uf015" },
-                new CategoryModel { CategoryID = 4, CategoryName = "Toys", Icon = "\uf1ae" },
-                new CategoryModel { CategoryID = 5, CategoryName = "Sports", Icon = "\uf44b" }
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Electronics", Icon = "\uf322" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Fashion", Icon = "\uf553" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Home", Icon = "\uf015" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Toys", Icon = "\uf1ae" },
+                new CategoryModel { Id = Guid.NewGuid(), Name = "Sports", Icon = "\uf44b" }
             };
 
-            var category = categories.Find(c => c.CategoryID.ToString() == categoryId);
+            var category = categories.Find(c => c.Id.ToString() == categoryId);
             return Task.FromResult(category);
         }
     }

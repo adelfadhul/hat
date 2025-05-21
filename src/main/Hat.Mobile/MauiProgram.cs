@@ -85,7 +85,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient<CategoryViewModel>();
 
-        builder.Services.AddTransient<INavigationService, NavigationService>();
+        builder.Services.AddTransient<NavigationService>();
 
         // Views
         builder.Services.AddTransient<LoginView>();

@@ -6,17 +6,17 @@ namespace Hat.DataViewModels
     {
         public CategoryViewModel()
         {
-            CategoryID = 0;
+            CategoryID = Guid.Empty;
             CategoryName = string.Empty;
             Icon = string.Empty;
         }
         public CategoryViewModel(CategoryModel domainModel)
         {
-            CategoryID = domainModel.CategoryID;
-            CategoryName = domainModel.CategoryName;
+            CategoryID = domainModel.Id;
+            CategoryName = domainModel.Name;
             Icon = domainModel.Icon;
         }
-        public int CategoryID { get; set; }
+        public Guid CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Icon { get; set; }
 

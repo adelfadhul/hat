@@ -6,6 +6,7 @@ namespace Hat.Domain.Models
     public class CardInfoModel
     {
         #region data
+        public Guid Id { get; set; }
         public string? CardNumber { get; set; }
         public string? NameOnCard { get; set; }
         public string? CardValidationCode { get; set; }

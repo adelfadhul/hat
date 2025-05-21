@@ -56,9 +56,11 @@ namespace Hat.ViewModels
         private readonly AllProductView _allProductView;
         private readonly CategoryDetailViewModel _categoryDetailViewModel;
         private readonly ILogger<HomePageViewModel> _logger;
-        public HomePageViewModel(IHttpClientFactory httpClientFactory, CategoryDetailViewModel categoryDetailViewModel, AllProductView allProductView, BrandDetailView brandDetailView,ProductDetailsView productDetailsView, ILogger<HomePageViewModel> logger)
+        private readonly NavigationService _navigationService;
+        public HomePageViewModel(NavigationService navigationService, IHttpClientFactory httpClientFactory, CategoryDetailViewModel categoryDetailViewModel, AllProductView allProductView, BrandDetailView brandDetailView,ProductDetailsView productDetailsView, ILogger<HomePageViewModel> logger)
         {
             _logger = logger;
+            _navigationService = navigationService;
             _httpClient = httpClientFactory.CreateClient("Default");
             _brandDetailView = brandDetailView;
             _allProductView = allProductView;
@@ -100,7 +102,7 @@ namespace Hat.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error fetching categories");
-
+                await MauiApp.Current.MainPage.DisplayAlert("Error", "An error occurred while fetching data. Please try again later.", "OK");
             }
             IsLoaded = true;
         }
@@ -111,7 +113,8 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+           await _navigationService.NavigateToProductDetails(product.Id);
+           
         }
 
         private async void SelectCategory(CategoryViewModel category)
@@ -120,6 +123,7 @@ namespace Hat.ViewModels
         }
         private async void SelectRecommend(object product)
         {
+          
             await MauiApp.Current.MainPage.Navigation.PushAsync(_allProductView);
         }
         private async void OpenCamera()

@@ -20,12 +20,22 @@ namespace Hat.Infrastructure.Persistance.SqlServer.Features
             throw new NotImplementedException();
         }
 
+        public Task<ProductModel?> GetProductById(Guid productId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<ProductModel>> GetProducts()
         {
             throw new NotImplementedException();
         }
 
         public Task<List<ProductModel>> GetProductsByCategory(string categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
         {
             throw new NotImplementedException();
         }

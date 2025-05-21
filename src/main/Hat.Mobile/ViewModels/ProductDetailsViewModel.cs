@@ -1,9 +1,11 @@
 ﻿using Hat.DataViewModels;
-using Hat.Model;
+using Hat.Domain.Models;
+using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
+    [QueryProperty(nameof(ProductId), "productId")]
     public class ProductDetailsViewModel : BaseViewModel
     {
         double lastScrollIndex;
@@ -42,14 +44,16 @@ namespace Hat.ViewModels
             }
         }
 
-        private ProductDetailViewModel _ProductDetail = new();
-        public ProductDetailViewModel ProductDetail
+        private ProductViewModel _ProductDetail = new();
+        public ProductViewModel ProductDetail
         {
             get => _ProductDetail;
             set => SetProperty(ref _ProductDetail, value);
         }
 
         private bool _IsLoaded;
+
+      
         public bool IsLoaded
         {
             get => _IsLoaded;
@@ -58,9 +62,22 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
         public ICommand FavCommand { get; }
         public ICommand AddToCartCommand { get; }
-
-        public ProductDetailsViewModel()
+        private string productId;
+        public string ProductId
         {
+            get => productId;
+            set
+            {
+                productId = value;
+                // Trigger loading logic
+               _= PopulateDataAsync(productId);//fire and forget
+            }
+        }
+
+        private readonly HttpClient _httpClient;
+        public ProductDetailsViewModel(IHttpClientFactory httpClientFactory)
+        {
+            _httpClient = httpClientFactory.CreateClient("Default");
             BackCommand = new Command<object>(GoBack);
             FavCommand = new Command<Color>(FavItem);
             AddToCartCommand = new Command(AddToCart);
@@ -69,36 +86,17 @@ namespace Hat.ViewModels
 
         private async Task InitializeAsync()
         {
-            await PopulateDataAsync();
+            await PopulateDataAsync(ProductId);
         }
 
-        async Task PopulateDataAsync()
+        async Task PopulateDataAsync(string productId)
         {
-            await Task.Delay(500);
-            //TODO: Remove Delay here and call API
-            ProductDetail.Price = 1500;
-            ProductDetail.Name = "Nike Dri-FIT Long Sleeve";
-            ProductDetail.ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image10.png";
-            ProductDetail.Colors = Color.FromArgb("#33427D");
-            ProductDetail.Details = "Nike Dri-FIT is a polyester fabric designed to help you keep dry so you can more comfortably work harder, longer.";
-
-            List<ReviewModel> reviewData =
-            [
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user1.png", Name = "Samuel Smith", Review = "Wonderful jean, perfect gift for my girl for our anniversary!", Rating = 4 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user1.png", Name = "Samuel Smith", Review = "Wonderful jean, perfect gift for my girl for our anniversary!", Rating = 4 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-                new ReviewModel() { ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/user2.png", Name = "Beth Aida", Review = "I love this, paired it with a nice blouse and all eyes on me.", Rating = 3 },
-            ];
-            ProductDetail.Reviews = reviewData;
+            if(string.IsNullOrEmpty(productId))
+            {
+                return;
+            }
+            var storedProduct= await _httpClient.GetFromJsonAsync<ProductModel>($"/api/products/{productId}");
+            ProductDetail = new ProductViewModel(storedProduct);
             IsLoaded = true;
         }
         private async void GoBack(object obj)

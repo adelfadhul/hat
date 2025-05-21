@@ -33,5 +33,16 @@ public class ProductController : HatController
             var products = await _mediator.Send(new FeaturedProductsQuery());
             return Ok(products);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(Guid id)
+        {
+            _logger.LogInformation("GetProductById: {ProductId}", id);
+            var product = await _mediator.Send(new ProductByIdQuery(id));
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
     }
 }

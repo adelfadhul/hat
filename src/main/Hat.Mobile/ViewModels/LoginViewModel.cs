@@ -26,8 +26,8 @@ namespace Hat.ViewModels
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
 
-       private readonly INavigationService _navigationService;
-        public LoginViewModel(INavigationService navigationService)
+       private readonly NavigationService _navigationService;
+        public LoginViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;
             LoginCommand = new Command(Login);
