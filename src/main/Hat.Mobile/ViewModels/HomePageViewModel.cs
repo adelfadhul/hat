@@ -119,12 +119,13 @@ namespace Hat.ViewModels
 
         private async void SelectCategory(CategoryViewModel category)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(_categoryDetailViewModel));
+           await _navigationService.NavigateToCategoryDetails();
+          //  await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(_categoryDetailViewModel));
         }
         private async void SelectRecommend(object product)
         {
-          
-            await MauiApp.Current.MainPage.Navigation.PushAsync(_allProductView);
+            await _navigationService.NavigateToAllProducts();
+           // await MauiApp.Current.MainPage.Navigation.PushAsync(_allProductView);
         }
         private async void OpenCamera()
         {

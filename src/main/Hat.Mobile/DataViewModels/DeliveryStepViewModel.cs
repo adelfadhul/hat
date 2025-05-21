@@ -1,11 +1,22 @@
-﻿using Hat.ViewModels;
+﻿using Hat.Domain.Models;
+using Hat.ViewModels;
 
 namespace Hat.DataViewModels
 {
 
     public class DeliveryStepViewModel : BaseViewModel
     {
-        public int Id { get; set; }
+        public DeliveryStepViewModel(DeliveryStepModel data)
+        {
+            Id= data.Id;
+            Name = data.Name;
+            Location = data.Location;
+            IsComplete = data.IsComplete;
+            IsLineVisible = data.IsLineVisible;
+            DeliveryStatusDate = data.DeliveryStatusDate;
+
+        }
+        public Guid Id { get; set; }
         private string _Name;
         public string Name
         {
@@ -42,10 +53,6 @@ namespace Hat.DataViewModels
 
         }
 
-        public Color StatusColor
-        {
-            get { return IsComplete ? Color.FromArgb("#00C569") : Color.FromArgb("#C8C8C8"); }
-        }
 
         private bool _IsLineVisible = true;
         public bool IsLineVisible
@@ -53,5 +60,9 @@ namespace Hat.DataViewModels
             get => _IsLineVisible;
             set => SetProperty(ref _IsLineVisible, value);
         }
+
+
+        public Color StatusColor
+        => IsComplete ? Color.FromArgb("#00C569") : Color.FromArgb("#C8C8C8");
     }
 }

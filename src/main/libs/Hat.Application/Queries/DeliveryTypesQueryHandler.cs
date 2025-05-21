@@ -2,9 +2,6 @@ using Hat.Domain.Models;
 using Hat.Domain.Queries;
 using Hat.Domain.Repositories;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Hat.Application.Queries
 {

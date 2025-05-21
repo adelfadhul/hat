@@ -29,17 +29,18 @@
                             VerticalTextAlignment="Center" />
 
                         <StackLayout
-                            Margin="0,16"
+                            Margin="0"
                             HorizontalOptions="FillAndExpand"
-                            Orientation="Horizontal">
+                            Orientation="Vertical">
                             <Border
                                 Margin="6,0"
-                                Padding="0"
+                                Padding="2"
                                 Background="transparent"
                                 HorizontalOptions="FillAndExpand"
-                                StrokeShape="RoundRectangle 20"
+                                StrokeShape="RoundRectangle 0"
                                 StrokeThickness="1">
                                 <StackLayout
+                                    
                                     HorizontalOptions="FillAndExpand"
                                     Orientation="Horizontal"
                                     VerticalOptions="CenterAndExpand">
@@ -50,23 +51,38 @@
                                         Text="Size"
                                         TextColor="Black"
                                         VerticalTextAlignment="Center" />
-                                    <Label
-                                        Margin="24,15"
-                                        FontSize="14"
-                                        HorizontalOptions="StartAndExpand"
-                                        Text="XL"
-                                        TextColor="Black"
-                                        VerticalTextAlignment="Center" />
-
+                                    <CollectionView
+                                        Margin="0,0,0,0"
+                                        ItemsSource="{Binding ProductDetail.Sizes}"
+                                        ItemsLayout="HorizontalList"
+                                        HeightRequest="40"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding SelectedSize}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border
+                                                    Margin="4,8"
+                                                    Padding="10,3"
+                                                    HeightRequest="26"
+                                                    StrokeShape="RoundRectangle 0"
+                                                    StrokeThickness="1">
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectSizeCommand, Source={x:Reference Name=ProductDetailsView}}" CommandParameter="{Binding .}" />
+                                                    </Border.GestureRecognizers>
+                                                    <Label Text="{Binding .}"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
                                 </StackLayout>
                             </Border>
 
                             <Border
-                                Margin="6,0"
+                                Margin="6,6"
                                 Padding="0"
                                 Background="transparent"
                                 HorizontalOptions="FillAndExpand"
-                                StrokeShape="RoundRectangle 20"
+                                StrokeShape="RoundRectangle 0"
                                 StrokeThickness="1">
                                 <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                                     <Label

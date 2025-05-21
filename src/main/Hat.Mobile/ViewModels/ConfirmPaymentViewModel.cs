@@ -17,7 +17,7 @@ namespace Hat.ViewModels
         readonly private AddressViewModel _PrimaryAddress;
         readonly private ObservableCollection<ProductViewModel> _Products = [];
         private CardInfoViewModel _SelectedCard;
-        
+
         private bool _IsLoaded = false;
         public bool IsLoaded
         {
@@ -38,10 +38,12 @@ namespace Hat.ViewModels
 
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
-        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address, IMediator mediator, HttpClient httpClient)
+        private readonly NavigationService _navigationService;
+        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DeliveryTypeViewModel deliveryType, AddressViewModel address, IMediator mediator, HttpClient httpClient)
         {
             _DeliveryType = deliveryType;
             _Products = products;
+            _navigationService = navigationService;
             _PrimaryAddress = address;
             NextCommand = new Command(ConfirmPayment);
             SelectPaymentCommand = new Command<CardInfoViewModel>(SelectPayment);
@@ -59,14 +61,15 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
 
-            var storedCards= await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("api/cards");  
+            var storedCards = await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("api/cards");
             Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
-              _SelectedCard = Cards[0];
+            _SelectedCard = Cards[0];
             IsLoaded = true;
         }
         private async void ConfirmPayment()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new FinishCartView(_Products, _DeliveryType, _PrimaryAddress, _SelectedCard));
+            await _navigationService.NavigateToConfirmPyment();
+            //await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new FinishCartView(_Products, _DeliveryType, _PrimaryAddress, _SelectedCard));
         }
         private void SelectPayment(CardInfoViewModel selectedCard)
         {
@@ -85,6 +88,7 @@ namespace Hat.ViewModels
         }
         private async void GoBack(object obj)
         {
+            await _navigationService.GoBack();
             await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PopAsync();
         }
     }

@@ -1,5 +1,6 @@
 ﻿namespace Hat.Domain.Models
 {
+
     public class TrackModel
     {
        

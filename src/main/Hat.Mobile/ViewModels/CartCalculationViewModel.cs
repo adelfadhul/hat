@@ -32,10 +32,12 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
 
         private readonly DeliveryTypeViewModel _deliveryTypeViewModel;
-        public CartCalculationViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryTypeViewModel )
+        private readonly NavigationService _navigationService;
+        public CartCalculationViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryTypeViewModel,NavigationService navigationService )
         {
            _deliveryTypeViewModel = deliveryTypeViewModel;
             Products = products;
+            _navigationService = navigationService;
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
@@ -46,7 +48,8 @@ namespace Hat.ViewModels
 
         private async void Checkout()
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products, _deliveryTypeViewModel));
+            await _navigationService.NavigateToDeliveryType();
+          //  await MauiApp.Current.MainPage.Navigation.PushAsync(new DeliveryTypeView(Products, _deliveryTypeViewModel));
         }
         private void ApplyVoucher(string vaucher)
         {

@@ -38,14 +38,14 @@ namespace Hat.ViewModels
         public ICommand CheckoutCommand { get; }
 
 
-        private readonly DeliveryTypeViewModel _deliveryTypeViewModel;
-        private readonly CartCalculationViewModel _cartCalculationViewModel;
+
         private readonly HttpClient _httpClient;
-        public CartViewModel(DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, HttpClient httpClient)
+        private readonly NavigationService _navigationService;
+        public CartViewModel(NavigationService navigationService, DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, HttpClient httpClient)
         {
-           _deliveryTypeViewModel = deliveryTypeViewModel;
+          
+            _navigationService = navigationService;
             _httpClient = httpClient;
-            _cartCalculationViewModel = cartCalculationViewModel;
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
             FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
             QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
@@ -79,7 +79,8 @@ namespace Hat.ViewModels
         }
         private async void Checkout()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculationView(_cartCalculationViewModel));
+            await _navigationService.NavigateToCardCalculation();
+           // await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculationView(_cartCalculationViewModel));
         }
     }
 }

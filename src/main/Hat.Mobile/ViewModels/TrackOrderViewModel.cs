@@ -1,5 +1,8 @@
 ﻿using Hat.DataViewModels;
+using Hat.Domain.Models;
+using Hat.Model;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
@@ -28,10 +31,14 @@ namespace Hat.ViewModels
             set => SetProperty(ref _IsLoaded, value);
         }
         public ICommand BackCommand { get; set; }
+        public NavigationService _navigationService { get; set; }
 
-        public TrackOrderViewModel(TrackViewModel data, bool emptyGroups = false)
+        private readonly HttpClient _httpClient;
+        public TrackOrderViewModel(NavigationService navigationService, IHttpClientFactory httpClientFactory, TrackViewModel data, bool emptyGroups = false)
         {
+            _httpClient = httpClientFactory.CreateClient("Default");
             TrackOrderData = data;
+            _navigationService = navigationService;
             BackCommand = new Command<object>(GoBack);
             _ = InitializeAsync();
         }
@@ -42,19 +49,13 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            await Task.Delay(500);
-            //TODO: Remove Delay here and call API if needed
-            TrackStatus.Add(new DeliveryStepViewModel() { Id = 1, DeliveryStatusDate = DateTime.Now.AddDays(-4), IsComplete = true, Name = "Order Placed", Location = "Lagos State, Nigeria" });
-            TrackStatus.Add(new DeliveryStepViewModel() { Id = 2, DeliveryStatusDate = DateTime.Now.AddDays(-3), IsComplete = true, Name = "Order Confirmed", Location = "Lagos State, Nigeria" });
-            TrackStatus.Add(new DeliveryStepViewModel() { Id = 3, DeliveryStatusDate = DateTime.Now.AddDays(-2), IsComplete = true, Name = "Order Dispatched", Location = "Lagos State, Nigeria" });
-            TrackStatus.Add(new DeliveryStepViewModel() { Id = 4, DeliveryStatusDate = DateTime.Now.AddDays(-1), IsComplete = false, Name = "Out for Delivery", Location = "Lagos State, Nigeria" });
-            TrackStatus.Add(new DeliveryStepViewModel() { Id = 5, DeliveryStatusDate = DateTime.Now, IsComplete = false, Name = "Order Delivered", Location = "Lagos State, Nigeria" , IsLineVisible  = false});
+            var storedDeliverySteps= await _httpClient.GetFromJsonAsync<List<DeliveryStepModel>>("/api/deliverysteps");    
             IsLoaded = true;
         }
 
         private async void GoBack(object obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
+            await _navigationService.GoBack();
         }
 
     }

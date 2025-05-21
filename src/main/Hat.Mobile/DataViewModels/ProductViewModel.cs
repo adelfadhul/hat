@@ -16,11 +16,11 @@ namespace Hat.DataViewModels
             BrandName = domainModel.BrandName;
             Price = domainModel.Price;
             Details = domainModel.Details; Qty = domainModel.Qty;
-            IsAvailable = domainModel.IsAvailable;  
-
+            IsAvailable = domainModel.IsAvailable;
+            Sizes = domainModel.Sizes;
         }
 
-        public Guid Id { get; set; }    
+        public Guid Id { get; set; }
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
@@ -28,8 +28,22 @@ namespace Hat.DataViewModels
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
 
+        private List<string> _sizes = new();
+        public List<string> Sizes
+        {
+            get => _sizes;
+            set
+            {
+                if (_sizes != value)
+                {
+                    _sizes = value;
+                    OnPropertyChanged(nameof(Sizes));
+                }
+            }
+        }
 
         private bool _IsAvailable;
+
         public bool IsAvailable
         {
             get => _IsAvailable;
@@ -66,6 +80,7 @@ namespace Hat.DataViewModels
                 return "Out of Stock";
             }
         }
+
 
     }
 }

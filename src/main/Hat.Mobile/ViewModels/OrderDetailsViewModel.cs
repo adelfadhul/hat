@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Domain.Repositories;
 using Hat.Model;
 using Hat.Views;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
@@ -26,13 +29,16 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
         public ICommand SelectOrderCommand { get; }
 
-        private readonly ITrackRepository _trackRepository;
-        public OrderDetailsViewModel(bool emptyGroups = false, ITrackRepository trackRepository = null)
+        private readonly HttpClient _httpClient;
+        private readonly NavigationService _navigationService;
+        public OrderDetailsViewModel(bool emptyGroups,NavigationService navigationService, IHttpClientFactory httpClientFactory)
         {
             BackCommand = new Command<object>(GoBack);
+            _navigationService = navigationService;
+            _httpClient = httpClientFactory.CreateClient("Default");
             SelectOrderCommand = new Command<object>(TrackCommand);
             _ = InitializeAsync();
-            _trackRepository = trackRepository;
+           
         }
         private async Task InitializeAsync()
         {
@@ -40,15 +46,16 @@ namespace Hat.ViewModels
         }
         private async void TrackCommand(object obj)
         {
-           // await MauiApp.Current.MainPage.Navigation.PushAsync(new TrackOrderView((TrackViewModel)obj));
+            await _navigationService.NavigateToTrackOrder();
+            // await MauiApp.Current.MainPage.Navigation.PushAsync(new TrackOrderView((TrackViewModel)obj));
         }
         private async void GoBack(object obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
+           await _navigationService.GoBack();
         }
-        async Task PopulateDataAsync()
+        private async Task PopulateDataAsync()
         {
-            var storedTracks= await _trackRepository.GetTracks();
+            var storedTracks= await _httpClient.GetFromJsonAsync<List<TrackModel>>("/api/trakorders");
             var tracks= storedTracks.Select(x=> new TrackViewModel(x)).ToList();
             TrackData = storedTracks.Select(x => new TrackOrderModel("Sept 23", tracks)).ToObservableCollection();
             IsLoaded = true;

@@ -39,11 +39,12 @@ namespace Hat.ViewModels
         }
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
-        private readonly IMediator _mediator;
+
         private readonly ConfirmPaymentView _confirmPaymentView;
-        public ConfirmAddressViewModel(ObservableCollection<ProductViewModel> products, ConfirmPaymentView confirmPaymentView)
+        private readonly NavigationService _navigationService;
+        public ConfirmAddressViewModel(ObservableCollection<ProductViewModel> products,NavigationService navigationService, ConfirmPaymentView confirmPaymentView)
         {
-           
+            _navigationService = navigationService;
             _confirmPaymentView = confirmPaymentView;
             Products = products;
             NextCommand = new Command(ConfirmAddress);
@@ -71,12 +72,14 @@ namespace Hat.ViewModels
 
         private async void ConfirmAddress()
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(_confirmPaymentView);
+            await _navigationService.NavigateToConfirmPyment();
+           // await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(_confirmPaymentView);
         }
 
         private async void GoBack(object obj)
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PopAsync();
+            await _navigationService.GoBack();  
+            // await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

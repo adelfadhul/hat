@@ -17,6 +17,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();
                     services.AddScoped<ITrackRepository, MemoryTrackRepository>();
                     services.AddScoped<ICategoryRepository, MemoryCategoryRepository>();
+                    services.AddScoped<IDeliveryStepRepository, MemoryDeliveryStepRepository>();
                     break;
                 case "SqlServer":
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

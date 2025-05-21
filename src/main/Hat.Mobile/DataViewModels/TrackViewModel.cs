@@ -1,7 +1,8 @@
 ﻿using Hat.Domain.Models;
+using Hat.ViewModels;
 using static Hat.Model.TrackOrderModel;
 
-namespace Hat.ViewModels
+namespace Hat.DataViewModels
 {
     public class TrackViewModel : BaseViewModel
     {

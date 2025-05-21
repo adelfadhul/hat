@@ -38,14 +38,16 @@ namespace Hat.ViewModels
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
         private readonly ProductDetailsView _productDetailsView;
-        public BrandDetailViewModel(IMediator mediator, HttpClient httpClient, ProductDetailsView productDetailsView)
+        private readonly NavigationService _navigationService;
+        public BrandDetailViewModel(NavigationService navigationService, IMediator mediator, IHttpClientFactory httpClientFactory, ProductDetailsView productDetailsView)
         {
             _mediator = mediator;
+            _httpClient = httpClientFactory.CreateClient("Default");
+            _navigationService = navigationService;
+            _productDetailsView = productDetailsView;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             SelectMenuCommand = new Command<TabPageModel>(SelectMenu);
             _ = InitializeAsync();
-            _httpClient = httpClient;
-            _productDetailsView = productDetailsView;
         }
 
         private async Task InitializeAsync()
@@ -54,7 +56,8 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+           await _navigationService.NavigateToProductDetails(obj.Id);
+           // await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
         private void SelectMenu(TabPageModel obj)
@@ -74,7 +77,7 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
+            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
 
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
            

@@ -56,10 +56,7 @@ namespace Hat.ViewModels
         private async void SignUp()
         {
            await _navigationService.NavigateToRegister();
-            // var registerView = new RegisterView();
-            // await MauiApp.Current.MainPage.Navigation.PushModalAsync(registerView);
-
-            // await MauiApp.Current.MainPage.Navigation.PushModalAsync(registerView);
+           
         }
 
         private async void Login()

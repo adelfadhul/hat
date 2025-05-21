@@ -75,13 +75,15 @@ namespace Hat.ViewModels
         }
 
         private readonly HttpClient _httpClient;
-        public ProductDetailsViewModel(IHttpClientFactory httpClientFactory)
+        private readonly NavigationService _navigationService;
+        public ProductDetailsViewModel(IHttpClientFactory httpClientFactory, NavigationService navigationService)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
             BackCommand = new Command<object>(GoBack);
             FavCommand = new Command<Color>(FavItem);
             AddToCartCommand = new Command(AddToCart);
             _ = InitializeAsync();
+            _navigationService = navigationService;
         }
 
         private async Task InitializeAsync()
@@ -101,7 +103,7 @@ namespace Hat.ViewModels
         }
         private async void GoBack(object obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
+           await _navigationService.GoBack();
         }
 
         private void FavItem(Color obj)

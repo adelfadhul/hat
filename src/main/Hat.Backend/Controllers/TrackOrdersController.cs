@@ -1,15 +1,14 @@
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Hat.Backend.Controllers
 {
     [ApiController]
-    [Route("api/tracks")]
-    public class TracksController : HatController
+    [Route("api/trackorders")]
+    public class TrackOrdersController : HatController
     {
-        public TracksController(IMediator mediator, ILogger<TracksController> logger) : base(mediator, logger)
+        public TrackOrdersController(IMediator mediator, ILogger<TrackOrdersController> logger) : base(mediator, logger)
         {
         }
 

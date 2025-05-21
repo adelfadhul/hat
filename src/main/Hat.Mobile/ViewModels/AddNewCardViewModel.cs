@@ -74,7 +74,8 @@ namespace Hat.ViewModels
 
         private async void SaveCard()
         {
-            await MauiApp.Current.MainPage.Navigation.PopAsync();
+           // await MauiApp.Current.MainPage.Navigation.PopAsync();
+            await _navigationService.GoBack();
             await ToastHelper.ShowToast("Add card added.");
         }
         private async void GoBack()

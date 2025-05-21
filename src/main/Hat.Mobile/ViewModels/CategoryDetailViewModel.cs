@@ -44,9 +44,10 @@ namespace Hat.ViewModels
       
         private readonly HttpClient _httpClient;
         private readonly ProductDetailsView _productDetailsView;
-        public CategoryDetailViewModel(CategoryViewModel data,  HttpClient httpClient, ProductDetailsView productDetailsView) 
+        private readonly NavigationService _navigationService;
+        public CategoryDetailViewModel(NavigationService navigationService, CategoryViewModel data,  HttpClient httpClient, ProductDetailsView productDetailsView) 
         {
-        
+            _navigationService = navigationService;
             _httpClient = httpClient;
             BackCommand = new Command(GoBack);
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
@@ -72,11 +73,13 @@ namespace Hat.ViewModels
 
         private async void GoBack()
         {
-            await MauiApp.Current.MainPage.Navigation.PopModalAsync();
+            await _navigationService.GoBack();
+           // await MauiApp.Current.MainPage.Navigation.PopModalAsync();
         }
         private async void SelectProduct(ProductViewModel product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+            await _navigationService.NavigateToProductDetails(product.Id);
+           // await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
     }
