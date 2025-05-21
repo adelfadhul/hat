@@ -62,7 +62,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Details = "Luggage with built-in GPS and charging ports.",
                     Qty = 3,
                     IsAvailable = false,
-                    ColorText = "#808080",
+                    ColorText = "#808080,#FFFFFF",
                     SizesText = "Medium,Large",
                     Reviews = new List<ReviewModel>()
                 }

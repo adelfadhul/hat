@@ -26,11 +26,13 @@ namespace Hat.ViewModels
         public ICommand AddNewCommand { get; }
 
         private readonly HttpClient _httpClient;
-        public CardViewModel(HttpClient httpClient)
+        private readonly NavigationService _navigationService;
+        public CardViewModel(HttpClient httpClient, NavigationService navigationService)
         {
             AddNewCommand = new Command(AddNewCard);
             _ = InitializeAsync();
             _httpClient = httpClient;
+            _navigationService = navigationService;
         }
 
         private async Task InitializeAsync()
@@ -46,7 +48,8 @@ namespace Hat.ViewModels
         }
         private async void AddNewCard()
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new AddNewCardView(new AddNewCardViewModel()));
+            await _navigationService.NavigateToAddNewCard();
+          //  await MauiApp.Current.MainPage.Navigation.PushAsync(new AddNewCardView(new AddNewCardViewModel()));
         }
 
     }

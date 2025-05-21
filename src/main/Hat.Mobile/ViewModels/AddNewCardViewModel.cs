@@ -7,6 +7,7 @@ namespace Hat.ViewModels
     public class AddNewCardViewModel : BaseViewModel
     {
         private CardInfoViewModel _Card = new();
+
         public CardInfoViewModel Card
         {
             get => _Card;
@@ -63,11 +64,12 @@ namespace Hat.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand BackCommand { get; }
-
-        public AddNewCardViewModel()
+        private NavigationService _navigationService;
+        public AddNewCardViewModel(NavigationService navigationService)
         {
             SaveCommand = new Command(SaveCard);
             BackCommand = new Command(GoBack);
+            _navigationService = navigationService;
         }
 
         private async void SaveCard()
@@ -77,7 +79,8 @@ namespace Hat.ViewModels
         }
         private async void GoBack()
         {
-            await MauiApp.Current.MainPage.Navigation.PopAsync();
+          //  await MauiApp.Current.MainPage.Navigation.PopAsync();
+            await _navigationService.GoBack();
         }
 
     }

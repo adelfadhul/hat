@@ -30,9 +30,11 @@ namespace Hat.ViewModels
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
         private readonly ProductDetailsView _productDetailsView;
-        public AllProductViewModel(IMediator mediator, HttpClient httpClient, ProductDetailsView productDetailsView )
+        private readonly NavigationService _navigationService;
+        public AllProductViewModel(NavigationService navigationService, IMediator mediator, HttpClient httpClient, ProductDetailsView productDetailsView )
         {
             _mediator = mediator;
+            _navigationService = navigationService;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
             _httpClient = httpClient;
@@ -46,17 +48,15 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            
             var storedProducts= await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
-            Products.Clear();
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();    
-            foreach (var x in storedProducts)
             IsLoaded = true;
         }
 
         private async void SelectProduct(ProductViewModel product)
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+            //await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+            await _navigationService.NavigateToProductDetails(product.Id);
         }
     }
 }
