@@ -25,10 +25,12 @@ namespace Hat.ViewModels
         }
 
         public ICommand SelectMenuCommand { get; }
-        public ProfileViewModel()
+        private readonly LoginView _loginView;
+        public ProfileViewModel(LoginView loginView)
         {
             SelectMenuCommand = new Command<MenuItems>(SelectMenu);
             _ = InitializeAsync();
+            _loginView = loginView;
         }
         private async Task InitializeAsync()
         {
@@ -58,7 +60,7 @@ namespace Hat.ViewModels
                 {
                     var response = await MauiApp.Current.MainPage.DisplayAlert("Logout", "Do you want to logout?", "Yes", "No");
                     if (response)
-                        MauiApp.Current.MainPage = new LoginView();
+                        MauiApp.Current.MainPage = _loginView;
                 }
                 else
                 {

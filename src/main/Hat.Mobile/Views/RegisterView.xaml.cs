@@ -4,9 +4,9 @@ namespace Hat.Views;
 
 public partial class RegisterView : ContentPage
 {
-	public RegisterView()
+	public RegisterView(RegisterViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new RegisterViewModel();
+		BindingContext = vm;
     }
 }

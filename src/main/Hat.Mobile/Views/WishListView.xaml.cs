@@ -4,10 +4,10 @@ namespace Hat.Views;
 
 public partial class WishListView : ContentPage
 {   
-    public WishListView(IMediator mediator)
+    public WishListView(WishListViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new WishListViewModel(mediator);
+		BindingContext = vm;
 
     }
 }

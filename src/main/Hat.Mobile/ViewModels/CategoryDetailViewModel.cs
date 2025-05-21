@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Queries;
 using Hat.Views;
-using MediatR;
 using System.Collections.ObjectModel;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
@@ -46,14 +43,14 @@ namespace Hat.ViewModels
 
       
         private readonly HttpClient _httpClient;
-       
-        public CategoryDetailViewModel(CategoryViewModel data,  HttpClient httpClient) 
+        private readonly ProductDetailsView _productDetailsView;
+        public CategoryDetailViewModel(CategoryViewModel data,  HttpClient httpClient, ProductDetailsView productDetailsView) 
         {
         
             _httpClient = httpClient;
             BackCommand = new Command(GoBack);
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
-            CategoryModel = new CategoryViewModel();
+            _productDetailsView = productDetailsView;
             CategoryModel = data;
             _ = InitializeAsync();
         }
@@ -79,7 +76,7 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
     }

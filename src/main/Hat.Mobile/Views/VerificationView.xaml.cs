@@ -4,9 +4,9 @@ namespace Hat.Views;
 
 public partial class VerificationView : ContentPage
 {
-	public VerificationView()
+	public VerificationView(VerificationViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new VerificationViewModel();
+		BindingContext = vm;
     }   
 }

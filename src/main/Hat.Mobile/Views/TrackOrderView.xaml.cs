@@ -4,9 +4,9 @@ namespace Hat.Views;
 
 public partial class TrackOrderView : ContentPage
 {
-    public TrackOrderView(TrackViewModel data)
+    public TrackOrderView(TrackOrderViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new TrackOrderViewModel(data);
+        BindingContext = vm;
     }
 }

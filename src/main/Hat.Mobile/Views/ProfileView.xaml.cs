@@ -4,9 +4,9 @@ namespace Hat.Views;
 
 public partial class ProfileView : ContentPage
 {
-    public ProfileView()
+    public ProfileView(ProfileViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new ProfileViewModel();
+        BindingContext = vm;
     }
 }

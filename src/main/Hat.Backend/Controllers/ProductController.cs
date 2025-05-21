@@ -20,14 +20,14 @@ public class ProductController : HatController
             return Ok(list);
         }
 
-        [HttpGet("products/best-selling")]
+        [HttpGet("best-selling")]
         public async Task<IActionResult> GetBestSellingProducts()
         {
             var products = await _mediator.Send(new BestSellingProductsQuery());
             return Ok(products);
         }
 
-        [HttpGet("products/featured-brand")]
+        [HttpGet("featured-brand")]
         public async Task<IActionResult> GetFeaturedProducts()
         {
             var products = await _mediator.Send(new FeaturedProductsQuery());

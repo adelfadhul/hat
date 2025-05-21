@@ -2,9 +2,9 @@ using Hat.ViewModels;
 namespace Hat.Views;
 public partial class AllProductView : ContentPage
 {
-    public AllProductView()
+    public AllProductView(AllProductViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new AllProductViewModel();
+        BindingContext = vm;
     }
 }

@@ -2,6 +2,7 @@
 using Camera.MAUI;
 using CommunityToolkit.Maui;
 using Hat.Application.Registeration;
+using Hat.DataViewModels;
 using Hat.ViewModels;
 using Hat.Views;
 
@@ -10,6 +11,7 @@ namespace Hat;
 
 public static class MauiProgram
 {
+   
     public static string getBaseUrl(int port)
     {
 
@@ -58,6 +60,9 @@ public static class MauiProgram
             });
 
         // ViewModels
+        builder.Services.AddTransient<ShippingAddressView>();
+        builder.Services.AddTransient<AddNewCardView>();
+        builder.Services.AddTransient<AddNewCardViewModel>();
         builder.Services.AddTransient<HomePageViewModel>(); 
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
@@ -78,8 +83,15 @@ public static class MauiProgram
         builder.Services.AddTransient<VerificationViewModel>();
         builder.Services.AddTransient<WishListViewModel>();
 
+        builder.Services.AddTransient<CategoryViewModel>();
+
+        builder.Services.AddTransient<INavigationService, NavigationService>();
+
         // Views
+        builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<HomePageView>();
+        builder.Services.AddTransient<RegisterView>();
+        builder.Services.AddTransient<ProfileView>();
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
         builder.Services.AddTransient<CardView>();
@@ -90,7 +102,6 @@ public static class MauiProgram
         builder.Services.AddTransient<ConfirmPaymentView>();
         builder.Services.AddTransient<DeliveryTypeView>();
         builder.Services.AddTransient<FinishCartView>();
-        builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<OrderDetailsView>();
         builder.Services.AddTransient<ProductDetailsView>();
         builder.Services.AddTransient<ShippingAddressView>();

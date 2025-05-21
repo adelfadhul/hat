@@ -4,9 +4,9 @@ namespace Hat.Views;
 
 public partial class OrderDetailsView : ContentPage
 {
-    public OrderDetailsView()
+    public OrderDetailsView(OrderDetailsViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new OrderDetailsViewModel();
+        BindingContext = vm;
     }
 }

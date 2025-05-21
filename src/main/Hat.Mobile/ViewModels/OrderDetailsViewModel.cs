@@ -39,7 +39,7 @@ namespace Hat.ViewModels
         }
         private async void TrackCommand(object obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new TrackOrderView((TrackViewModel)obj));
+           // await MauiApp.Current.MainPage.Navigation.PushAsync(new TrackOrderView((TrackViewModel)obj));
         }
         private async void GoBack(object obj)
         {

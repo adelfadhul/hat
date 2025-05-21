@@ -4,7 +4,7 @@ using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
-    public class LoginViewModel: BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         private string _Email;
         public string Email
@@ -25,37 +25,42 @@ namespace Hat.ViewModels
         public ICommand LoginGoogleCommand { get; }
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
-        public LoginViewModel()
+
+       private readonly INavigationService _navigationService;
+        public LoginViewModel(INavigationService navigationService)
         {
+            _navigationService = navigationService;
             LoginCommand = new Command(Login);
             LoginFacebookCommand = new Command(LoginWithFacebook);
             LoginGoogleCommand = new Command(LoginWithGoogle);
             RegisterCommand = new Command(SignUp);
             ForgotPasswordCommand = new Command(ForgotPassword);
+          
         }
 
         private void LoginWithGoogle()
         {
-           
+
         }
 
         private void LoginWithFacebook()
         {
-           
+
         }
 
         private void ForgotPassword()
         {
-           
+
         }
 
         private async void SignUp()
         {
-           await MauiApp.Current.MainPage.Navigation.PushModalAsync(new RegisterView());
+           await _navigationService.PushModalAsync<RegisterView>();
+           // await MauiApp.Current.MainPage.Navigation.PushModalAsync(registerView);
         }
 
         private async void Login()
-        {           
+        {
             MauiApp.Current.MainPage = new AppShell();
             await ToastHelper.ShowToast("Welcome");
 

@@ -37,13 +37,15 @@ namespace Hat.ViewModels
 
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
-        public BrandDetailViewModel(IMediator mediator, HttpClient httpClient)
+        private readonly ProductDetailsView _productDetailsView;
+        public BrandDetailViewModel(IMediator mediator, HttpClient httpClient, ProductDetailsView productDetailsView)
         {
             _mediator = mediator;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             SelectMenuCommand = new Command<TabPageModel>(SelectMenu);
             _ = InitializeAsync();
             _httpClient = httpClient;
+            _productDetailsView = productDetailsView;
         }
 
         private async Task InitializeAsync()
@@ -52,7 +54,7 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel obj)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
         private void SelectMenu(TabPageModel obj)

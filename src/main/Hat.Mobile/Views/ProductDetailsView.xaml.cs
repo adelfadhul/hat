@@ -4,10 +4,10 @@ namespace Hat.Views;
 
 public partial class ProductDetailsView : ContentPage
 {
-    public ProductDetailsView()
+    public ProductDetailsView(ProductDetailsViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new ProductDetailsViewModel();
+        BindingContext = vm;
     }
 
 }

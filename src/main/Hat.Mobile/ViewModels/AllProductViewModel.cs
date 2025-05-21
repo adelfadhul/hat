@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Queries;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
@@ -30,12 +29,14 @@ namespace Hat.ViewModels
 
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
-        public AllProductViewModel(IMediator mediator, HttpClient httpClient)
+        private readonly ProductDetailsView _productDetailsView;
+        public AllProductViewModel(IMediator mediator, HttpClient httpClient, ProductDetailsView productDetailsView )
         {
             _mediator = mediator;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
             _httpClient = httpClient;
+            _productDetailsView = productDetailsView;
         }
         public AllProductViewModel() { }
 
@@ -55,7 +56,7 @@ namespace Hat.ViewModels
 
         private async void SelectProduct(ProductViewModel product)
         {
-            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
     }
 }

@@ -2,10 +2,7 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Queries;
-using Hat.Domain.Repositories;
 using Hat.Views;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -55,12 +52,18 @@ namespace Hat.ViewModels
 
         private readonly HttpClient _httpClient;
         private readonly BrandDetailView _brandDetailView;
+        private readonly ProductDetailsView _productDetailsView;
+        private readonly AllProductView _allProductView;
+        private readonly CategoryDetailViewModel _categoryDetailViewModel;
         private readonly ILogger<HomePageViewModel> _logger;
-        public HomePageViewModel(IHttpClientFactory httpClientFactory, BrandDetailView brandDetailView, ILogger<HomePageViewModel> logger)
+        public HomePageViewModel(IHttpClientFactory httpClientFactory, CategoryDetailViewModel categoryDetailViewModel, AllProductView allProductView, BrandDetailView brandDetailView,ProductDetailsView productDetailsView, ILogger<HomePageViewModel> logger)
         {
             _logger = logger;
             _httpClient = httpClientFactory.CreateClient("Default");
             _brandDetailView = brandDetailView;
+            _allProductView = allProductView;
+            _productDetailsView = productDetailsView;
+            _categoryDetailViewModel = categoryDetailViewModel;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
             CategoryTapCommand = new Command<CategoryViewModel>(SelectCategory);
@@ -77,18 +80,21 @@ namespace Hat.ViewModels
         {
             try
             {
-                var client = new HttpClient()
-                {
-                    
-                };
-                var test1 = await client.GetAsync("http://10.0.2.2:5166/api/categories");
-                //var test2 = await client.GetStringAsync("api/categories");
-
+               
                 _logger.LogInformation("Fetching categories");
                 var storedCategories
                               = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("/api/categories");
                 _logger.LogInformation("Fetched categories");
                 Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
+
+
+
+                var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/best-selling");
+                BestSellingProducts = BestSellingProducts = bestSellingProducts
+                    .Select(x => new ProductViewModel(x)).ToObservableCollection();
+
+                var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/featured-brand");
+                FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
 
             }
             catch (Exception ex)
@@ -96,15 +102,6 @@ namespace Hat.ViewModels
                 _logger.LogError(ex, "Error fetching categories");
 
             }
-
-
-            var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/best-selling");
-            BestSellingProducts = BestSellingProducts = bestSellingProducts
-                .Select(x => new ProductViewModel(x)).ToObservableCollection();
-
-            var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/featured-brand");
-            FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
-
             IsLoaded = true;
         }
 
@@ -114,16 +111,16 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new ProductDetailsView());
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
         private async void SelectCategory(CategoryViewModel category)
         {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(new CategoryDetailViewModel(category, _httpClient)));
+            await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(_categoryDetailViewModel));
         }
         private async void SelectRecommend(object product)
         {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(new AllProductView());
+            await MauiApp.Current.MainPage.Navigation.PushAsync(_allProductView);
         }
         private async void OpenCamera()
         {

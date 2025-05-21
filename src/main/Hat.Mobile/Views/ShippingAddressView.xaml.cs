@@ -4,10 +4,10 @@ namespace Hat.Views;
 
 public partial class ShippingAddressView : ContentPage
 {
-	public ShippingAddressView()
+	public ShippingAddressView(ShippingAddressViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new ShippingAddressViewModel();
+		BindingContext = vm;
 
     }
 }
