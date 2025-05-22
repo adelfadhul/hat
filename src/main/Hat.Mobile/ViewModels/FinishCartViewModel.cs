@@ -15,8 +15,8 @@ namespace Hat.ViewModels
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private AddressViewModel _PrimaryAddress;
-        public AddressViewModel PrimaryAddress
+        private DataViewModels.ShippingAddressViewModel _PrimaryAddress;
+        public DataViewModels.ShippingAddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set
@@ -61,7 +61,7 @@ namespace Hat.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, AddressViewModel address, CardInfoViewModel card)
+        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, ShippingAddressViewModel address, CardInfoViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;

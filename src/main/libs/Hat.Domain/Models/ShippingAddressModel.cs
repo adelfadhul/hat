@@ -1,21 +1,15 @@
-﻿using Hat.ViewModels;
-
-namespace Hat.DataViewModels
+﻿namespace Hat.Domain.Models
 {
-    public class AddressViewModel: BaseViewModel
+    public class ShippingAddressModel
     {
+
+        #region data
         public string AddressType { get; set; }
         public string FullAddress { get; set; }
         public string StreetOne { get; set; }
         public string StreetTwo { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-
-        private bool _IsSelected = false;
-        public bool IsSelected
-        {
-            get => _IsSelected;
-            set => SetProperty(ref _IsSelected, value);
-        }
+        #endregion
     }
 }

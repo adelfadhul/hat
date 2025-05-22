@@ -1,6 +1,6 @@
 using Hat.Domain.Models;
 using Hat.Domain.Queries;
-using Hat.Domain.Repositories;
+using Hat.Domain.Store;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;

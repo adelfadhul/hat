@@ -1,5 +1,5 @@
 using Hat.Domain.Models;
-using Hat.Domain.Repositories;
+using Hat.Domain.Store;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,4 +1,5 @@
-﻿using Hat.Model;
+﻿using Hat.Mobile.Model;
+using Hat.Model;
 using Hat.Views;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
@@ -26,11 +27,14 @@ namespace Hat.ViewModels
 
         public ICommand SelectMenuCommand { get; }
         private readonly LoginView _loginView;
-        public ProfileViewModel(LoginView loginView)
+        private readonly NavigationService _navigationService;
+        public ProfileViewModel(LoginView loginView, NavigationService navigationService)
         {
             SelectMenuCommand = new Command<MenuItems>(SelectMenu);
-            _ = InitializeAsync();
             _loginView = loginView;
+            _navigationService = navigationService;
+            _ = InitializeAsync();
+
         }
         private async Task InitializeAsync()
         {
@@ -42,11 +46,11 @@ namespace Hat.ViewModels
             //TODO: Remove Delay here and call API if needed
             MenuItems.Clear();
             //MenuItems.Add(new MenuItems() { Title = "Edit Profile", Body = "\uf3eb" });
-            MenuItems.Add(new MenuItems() { Title = "Shipping Address", Body = "\uf34e", TargetType = typeof(ShippingAddressView) });
+            MenuItems.Add(new MenuItems() { Title = "Shipping Address", Body = "\uf34e", TargetType = typeof(ShippingAddressSelectorView) });
             MenuItems.Add(new MenuItems() { Title = "Wishlist", Body = "\uf2d5", TargetType = typeof(WishListView) });
             MenuItems.Add(new MenuItems() { Title = "Order History", Body = "\uf150", TargetType = typeof(OrderDetailsView) });
             MenuItems.Add(new MenuItems() { Title = "Track Order", Body = "\uf787", TargetType = typeof(OrderDetailsView) });
-            MenuItems.Add(new MenuItems() { Title = "Cards", Body = "\uf19b", TargetType = typeof(CardView) });
+            MenuItems.Add(new MenuItems() { Title = "Cards", Body = "\uf19b", TargetType = typeof(CardInfoManagerView) });
             //MenuItems.Add(new MenuItems() { Title = "Notifications", Body = "\uf09c"});
             MenuItems.Add(new MenuItems() { Title = "Logout", Body = "\uf343", TargetType = typeof(LoginView) });
             IsLoaded = true;
@@ -64,7 +68,25 @@ namespace Hat.ViewModels
                 }
                 else
                 {
-                    await MauiApp.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
+                    //  await MauiApp.Current.MainPage.Navigation.PushAsync((Page)Activator.CreateInstance(item.TargetType));
+                    switch (item.TargetType)
+                    {
+                        case Type type when type == typeof(ShippingAddressSelectorView):
+                            await _navigationService.NavigateToShippingAddress();
+                            break;
+                        case Type type when type == typeof(WishListView):
+                            await _navigationService.NavigateToWhishList();
+                            break;
+                        case Type type when type == typeof(OrderDetailsView):
+                            await _navigationService.NavigateToOrderDetails();
+                            break;
+                        case Type type when type == typeof(CardInfoManagerView):
+                            await _navigationService.NavigateToCard();
+                            break;
+                        default:
+                            break;
+                    }
+                
                 }
             }
             

@@ -1,4 +1,4 @@
-using Hat.Domain.Repositories;
+using Hat.Domain.Store;
 using Hat.Infrastructure.Persistance.Memory.Features;
 using Hat.Infrastructure.Persistance.SqlServer.Features;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +18,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<ITrackRepository, MemoryTrackRepository>();
                     services.AddScoped<ICategoryRepository, MemoryCategoryRepository>();
                     services.AddScoped<IDeliveryStepRepository, MemoryDeliveryStepRepository>();
+                    services.AddScoped<IShippingAddressRepository, MemoryShippingAddressRepository>();
                     break;
                 case "SqlServer":
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

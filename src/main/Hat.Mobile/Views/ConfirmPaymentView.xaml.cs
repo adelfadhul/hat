@@ -8,7 +8,7 @@ public partial class ConfirmPaymentView : ContentPage
 
 
 
-	public ConfirmPaymentView(AddressViewModel address, ConfirmPaymentViewModel vm)
+	public ConfirmPaymentView(DataViewModels.ShippingAddressViewModel address, ConfirmPaymentViewModel vm)
 
     {
 		InitializeComponent();

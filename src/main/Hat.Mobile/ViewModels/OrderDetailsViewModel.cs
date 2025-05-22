@@ -1,13 +1,10 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Repositories;
 using Hat.Model;
-using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
   
@@ -31,7 +28,7 @@ namespace Hat.ViewModels
 
         private readonly HttpClient _httpClient;
         private readonly NavigationService _navigationService;
-        public OrderDetailsViewModel(bool emptyGroups,NavigationService navigationService, IHttpClientFactory httpClientFactory)
+        public OrderDetailsViewModel(NavigationService navigationService, IHttpClientFactory httpClientFactory)
         {
             BackCommand = new Command<object>(GoBack);
             _navigationService = navigationService;
@@ -55,7 +52,7 @@ namespace Hat.ViewModels
         }
         private async Task PopulateDataAsync()
         {
-            var storedTracks= await _httpClient.GetFromJsonAsync<List<TrackModel>>("/api/trakorders");
+            var storedTracks= await _httpClient.GetFromJsonAsync<List<TrackModel>>("/api/trackorders");
             var tracks= storedTracks.Select(x=> new TrackViewModel(x)).ToList();
             TrackData = storedTracks.Select(x => new TrackOrderModel("Sept 23", tracks)).ToObservableCollection();
             IsLoaded = true;

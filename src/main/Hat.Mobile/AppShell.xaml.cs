@@ -8,30 +8,29 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        Routing.RegisterRoute("deliverytype", typeof(DeliveryTypeView));
-        Routing.RegisterRoute("productdetails", typeof(ProductDetailsView));
-        Routing.RegisterRoute("categorydetails", typeof(CategoryDetailView));
-        Routing.RegisterRoute("branddetails", typeof(BrandDetailView));
-        Routing.RegisterRoute("cart", typeof(CartView));
-        Routing.RegisterRoute("shippingaddress", typeof(ShippingAddressView));
-        Routing.RegisterRoute("addnewcard", typeof(AddNewCardView));
-        Routing.RegisterRoute("confirmaddress", typeof(ConfirmAddressView));
+        Routing.RegisterRoute(nameof(DeliveryTypeView), typeof(DeliveryTypeView));
+        Routing.RegisterRoute(nameof(ProductDetailsView), typeof(ProductDetailsView));
+        Routing.RegisterRoute(nameof(CategoryDetailView), typeof(CategoryDetailView));
+        Routing.RegisterRoute(nameof(BrandDetailView), typeof(BrandDetailView));
+        Routing.RegisterRoute(nameof(CartView), typeof(CartView));
+        Routing.RegisterRoute(nameof(ShippingAddressSelectorView), typeof(ShippingAddressSelectorView));
+        Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
+        Routing.RegisterRoute(nameof(ConfirmAddressView), typeof(ConfirmAddressView));
         // Register route for confirm payment navigation
-        Routing.RegisterRoute("confirmpayment", typeof(ConfirmPaymentView));
-        Routing.RegisterRoute("finishcart", typeof(FinishCartView));
-        Routing.RegisterRoute("trackorder", typeof(TrackOrderView));
-        Routing.RegisterRoute("orderdetails", typeof(OrderDetailsView));
-        Routing.RegisterRoute("wishList", typeof(WishListView));
-        Routing.RegisterRoute("allproducts", typeof(AllProductView));
-        Routing.RegisterRoute("cartcalculation", typeof(CartCalculationView));
-        Routing.RegisterRoute("verification", typeof(VerificationView));
-        Routing.RegisterRoute("login", typeof(LoginView));
-        Routing.RegisterRoute("register", typeof(RegisterView));
-        Routing.RegisterRoute("profile", typeof(ProfileView));
-        //Routing.RegisterRoute("camera", typeof(CameraView));
-        Routing.RegisterRoute("addnewcard", typeof(AddNewCardView));
-        Routing.RegisterRoute("card", typeof(CardView));
-        Routing.RegisterRoute("home", typeof(HomePageView));
-
+        Routing.RegisterRoute(nameof(ConfirmPaymentView), typeof(ConfirmPaymentView));
+        Routing.RegisterRoute(nameof(FinishCartView), typeof(FinishCartView));
+        Routing.RegisterRoute(nameof(TrackOrderView), typeof(TrackOrderView));
+        Routing.RegisterRoute(nameof(OrderDetailsView), typeof(OrderDetailsView));
+        Routing.RegisterRoute(nameof(WishListView), typeof(WishListView));
+        Routing.RegisterRoute(nameof(AllProductView), typeof(AllProductView));
+        Routing.RegisterRoute(nameof(CartCalculationView), typeof(CartCalculationView));
+        Routing.RegisterRoute(nameof(VerificationView), typeof(VerificationView));
+        Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
+        Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));
+        Routing.RegisterRoute(nameof(ProfileView), typeof(ProfileView));
+        //Routing.RegisterRoute(nameof(CameraView), typeof(CameraView));
+        Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
+        Routing.RegisterRoute(nameof(CardInfoManagerView), typeof(CardInfoManagerView));
+        Routing.RegisterRoute(nameof(HomePageView), typeof(HomePageView));
     }
 }

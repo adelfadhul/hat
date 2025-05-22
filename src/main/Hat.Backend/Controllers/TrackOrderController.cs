@@ -6,9 +6,9 @@ namespace Hat.Backend.Controllers
 {
     [ApiController]
     [Route("api/trackorders")]
-    public class TrackOrdersController : HatController
+    public class TrackOrderController : HatController
     {
-        public TrackOrdersController(IMediator mediator, ILogger<TrackOrdersController> logger) : base(mediator, logger)
+        public TrackOrderController(IMediator mediator, ILogger<TrackOrderController> logger) : base(mediator, logger)
         {
         }
 

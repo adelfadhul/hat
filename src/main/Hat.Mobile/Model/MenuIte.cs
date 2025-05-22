@@ -1,4 +1,4 @@
-﻿namespace Hat.Model
+﻿namespace Hat.Mobile.Model
 {
     public class MenuItems
     {

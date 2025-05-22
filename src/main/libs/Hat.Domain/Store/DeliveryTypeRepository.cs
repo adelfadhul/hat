@@ -1,6 +1,6 @@
 ﻿using Hat.Domain.Models;
 
-namespace Hat.Domain.Repositories
+namespace Hat.Domain.Store
 {
     public interface IDeliveryTypeRepository
     {

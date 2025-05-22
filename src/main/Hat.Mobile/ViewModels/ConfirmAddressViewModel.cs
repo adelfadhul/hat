@@ -1,8 +1,5 @@
 ﻿using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Domain.Repositories;
 using Hat.Views;
-using MediatR;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -17,8 +14,8 @@ namespace Hat.ViewModels
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private AddressViewModel _PrimaryAddress;
-        public AddressViewModel PrimaryAddress
+        private DataViewModels.ShippingAddressViewModel _PrimaryAddress;
+        public DataViewModels.ShippingAddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set => SetProperty(ref _PrimaryAddress, value);
@@ -60,7 +57,7 @@ namespace Hat.ViewModels
         {
             await Task.Delay(500);
             //TODO: Remove Delay here and call API if needed
-            PrimaryAddress = new AddressViewModel()
+            PrimaryAddress = new DataViewModels.ShippingAddressViewModel()
             {
                 StreetOne = "21, Alex Davidson Avenue",
                 StreetTwo = "Opposite Omegatron, Vicent Quarters",

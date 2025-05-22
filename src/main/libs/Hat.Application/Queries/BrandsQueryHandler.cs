@@ -1,5 +1,5 @@
 using Hat.Domain.Queries;
-using Hat.Domain.Repositories;
+using Hat.Domain.Store;
 using MediatR;
 
 namespace Hat.Application.Queries

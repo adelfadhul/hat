@@ -6,9 +6,9 @@ namespace Hat.Backend.Controllers
 {
     [ApiController]
     [Route("api/delivery-steps")]
-    public class DeliveryStepsController : HatController
+    public class DeliveryStepController : HatController
     {
-        public DeliveryStepsController(IMediator mediator, ILogger<DeliveryStepsController> logger) : base(mediator, logger)
+        public DeliveryStepController(IMediator mediator, ILogger<DeliveryStepController> logger) : base(mediator, logger)
         {
         }
 

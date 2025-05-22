@@ -6,9 +6,9 @@ namespace Hat.Backend.Controllers
 {
     [ApiController]
     [Route("api/delivery-types")]
-    public class DeliveryTypesController : HatController
+    public class DeliveryTypeController : HatController
     {
-        public DeliveryTypesController(IMediator mediator, ILogger<DeliveryTypesController> logger) : base(mediator, logger)
+        public DeliveryTypeController(IMediator mediator, ILogger<DeliveryTypeController> logger) : base(mediator, logger)
         {
         }
 

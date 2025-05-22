@@ -1,6 +1,5 @@
 ﻿using Hat.Domain.Constants;
 using Hat.Domain.Models;
-using Hat.Helpers;
 using Hat.Helpers.ExtensionMethods;
 using Hat.ViewModels;
 

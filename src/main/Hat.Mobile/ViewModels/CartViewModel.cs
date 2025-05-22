@@ -79,7 +79,7 @@ namespace Hat.ViewModels
         }
         private async void Checkout()
         {
-            await _navigationService.NavigateToCardCalculation();
+            await _navigationService.NavigateToCartCalculation();
            // await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculationView(_cartCalculationViewModel));
         }
     }

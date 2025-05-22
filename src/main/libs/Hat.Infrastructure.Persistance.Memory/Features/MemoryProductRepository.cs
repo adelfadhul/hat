@@ -1,5 +1,5 @@
 ﻿using Hat.Domain.Models;
-using Hat.Domain.Repositories;
+using Hat.Domain.Store;
 using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features

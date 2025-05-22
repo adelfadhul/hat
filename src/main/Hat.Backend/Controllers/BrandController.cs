@@ -6,9 +6,9 @@ namespace Hat.Backend.Controllers
 {
     [ApiController]
     [Route("api/brands")]
-    public class BrandsController : HatController
+    public class BrandController : HatController
     {
-        public BrandsController(IMediator mediator, ILogger<BrandsController> logger) : base(mediator, logger)
+        public BrandController(IMediator mediator, ILogger<BrandController> logger) : base(mediator, logger)
         {
         }
 

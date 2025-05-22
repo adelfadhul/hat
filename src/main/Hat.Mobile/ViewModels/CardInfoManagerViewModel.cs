@@ -1,4 +1,5 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
 using Hat.Domain.Models;
 using Hat.Views;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
-    public class CardViewModel : BaseViewModel
+    public class CardInfoManagerViewModel : BaseViewModel
     {
         private ObservableCollection<CardInfoViewModel> _Cards = [];
         public ObservableCollection<CardInfoViewModel> Cards
@@ -27,12 +28,13 @@ namespace Hat.ViewModels
 
         private readonly HttpClient _httpClient;
         private readonly NavigationService _navigationService;
-        public CardViewModel(HttpClient httpClient, NavigationService navigationService)
+        public CardInfoManagerViewModel(IHttpClientFactory httpClientFactory, NavigationService navigationService)
         {
             AddNewCommand = new Command(AddNewCard);
-            _ = InitializeAsync();
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Default");
             _navigationService = navigationService;
+            _ = InitializeAsync();
+          
         }
 
         private async Task InitializeAsync()
@@ -42,8 +44,8 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
            
-            var storedCards= await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("api/cards");
-            Cards = [.. storedCards.Select(x => new CardInfoViewModel(x))];
+            var storedCards= await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("/api/card-infos");
+            Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }
         private async void AddNewCard()

@@ -60,13 +60,13 @@ public static class MauiProgram
             });
 
         // ViewModels
-        builder.Services.AddTransient<ShippingAddressView>();
+        builder.Services.AddTransient<ShippingAddressSelectorView>();
         builder.Services.AddTransient<AddNewCardView>();
         builder.Services.AddTransient<AddNewCardViewModel>();
         builder.Services.AddTransient<HomePageViewModel>(); 
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
-        builder.Services.AddTransient<CardViewModel>();
+        builder.Services.AddTransient<ViewModels.CardInfoManagerViewModel>();
         builder.Services.AddTransient<CartCalculationViewModel>();
         builder.Services.AddTransient<CartViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
@@ -82,6 +82,7 @@ public static class MauiProgram
         builder.Services.AddTransient<TrackOrderViewModel>();
         builder.Services.AddTransient<VerificationViewModel>();
         builder.Services.AddTransient<WishListViewModel>();
+        builder.Services.AddTransient<ShippingAddressSelectorViewModel>();
 
         builder.Services.AddTransient<CategoryViewModel>();
 
@@ -94,7 +95,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfileView>();
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
-        builder.Services.AddTransient<CardView>();
+        builder.Services.AddTransient<CardInfoManagerView>();
         builder.Services.AddTransient<CartCalculationView>();
         builder.Services.AddTransient<CartView>();
         builder.Services.AddTransient<CategoryDetailView>();
@@ -104,11 +105,12 @@ public static class MauiProgram
         builder.Services.AddTransient<FinishCartView>();
         builder.Services.AddTransient<OrderDetailsView>();
         builder.Services.AddTransient<ProductDetailsView>();
-        builder.Services.AddTransient<ShippingAddressView>();
+        builder.Services.AddTransient<ShippingAddressSelectorView>();
         builder.Services.AddTransient<TrackOrderView>();
         builder.Services.AddTransient<VerificationView>();
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<AddNewCardView>();
+        builder.Services.AddTransient<ShippingAddressSelectorView>();
 
         var url = getBaseUrl(5166);
         builder.Services.AddHttpClient("Default", client =>

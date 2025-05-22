@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Queries;
-using Hat.Domain.Repositories;
-using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -14,7 +11,7 @@ namespace Hat.ViewModels
     public class ConfirmPaymentViewModel : BaseViewModel
     {
         readonly private DeliveryTypeViewModel _DeliveryType;
-        readonly private AddressViewModel _PrimaryAddress;
+        readonly private ShippingAddressViewModel _PrimaryAddress;
         readonly private ObservableCollection<ProductViewModel> _Products = [];
         private CardInfoViewModel _SelectedCard;
 
@@ -39,7 +36,7 @@ namespace Hat.ViewModels
         private readonly IMediator _mediator;
         private readonly HttpClient _httpClient;
         private readonly NavigationService _navigationService;
-        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DeliveryTypeViewModel deliveryType, AddressViewModel address, IMediator mediator, HttpClient httpClient)
+        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DeliveryTypeViewModel deliveryType, DataViewModels.ShippingAddressViewModel address, IMediator mediator, HttpClient httpClient)
         {
             _DeliveryType = deliveryType;
             _Products = products;
