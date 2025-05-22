@@ -1,10 +1,21 @@
-﻿using System.ComponentModel;
+﻿using Hat.Services;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Hat.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        protected NavigationService _navigationService;
+        protected DataService _dataService;
+        public BaseViewModel(NavigationService navigationService, DataService dataService) {
+            _navigationService = navigationService;
+            _dataService = dataService;
+        }
+        public BaseViewModel()
+        {
+
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

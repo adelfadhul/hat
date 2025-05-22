@@ -1,5 +1,5 @@
 ﻿using Hat.Helpers;
-using Hat.Views;
+using Hat.Services;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
@@ -26,10 +26,10 @@ namespace Hat.ViewModels
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
 
-       private readonly NavigationService _navigationService;
-        public LoginViewModel(NavigationService navigationService)
+     
+        public LoginViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
-            _navigationService = navigationService;
+            
             LoginCommand = new Command(Login);
             LoginFacebookCommand = new Command(LoginWithFacebook);
             LoginGoogleCommand = new Command(LoginWithGoogle);
@@ -54,10 +54,9 @@ namespace Hat.ViewModels
         }
 
         private async void SignUp()
-        {
-           await _navigationService.NavigateToRegister();
+        =>  await _navigationService.NavigateToRegister();
            
-        }
+        
 
         private async void Login()
         {

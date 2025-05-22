@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Services;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -10,11 +11,8 @@ namespace Hat.ViewModels
 {
     public class ConfirmPaymentViewModel : BaseViewModel
     {
-        readonly private DeliveryTypeViewModel _DeliveryType;
-        readonly private ShippingAddressViewModel _PrimaryAddress;
-        readonly private ObservableCollection<ProductViewModel> _Products = [];
-        private CardInfoViewModel _SelectedCard;
-
+       readonly private ObservableCollection<ProductViewModel> _Products = [];
+       
         private bool _IsLoaded = false;
         public bool IsLoaded
         {
@@ -29,25 +27,19 @@ namespace Hat.ViewModels
             set => SetProperty(ref _Cards, value);
 
         }
+       
         public ICommand NextCommand { get; }
         public ICommand SelectPaymentCommand { get; }
         public ICommand BackCommand { get; }
 
-        private readonly IMediator _mediator;
-        private readonly HttpClient _httpClient;
-        private readonly NavigationService _navigationService;
-        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DeliveryTypeViewModel deliveryType, DataViewModels.ShippingAddressViewModel address, IMediator mediator, HttpClient httpClient)
+        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
-            _DeliveryType = deliveryType;
-            _Products = products;
-            _navigationService = navigationService;
-            _PrimaryAddress = address;
+         
             NextCommand = new Command(ConfirmPayment);
             SelectPaymentCommand = new Command<CardInfoViewModel>(SelectPayment);
             BackCommand = new Command(GoBack);
             _ = InitializeAsync();
-            _mediator = mediator;
-            _httpClient = httpClient;
+           
         }
 
         private async Task InitializeAsync()
@@ -57,10 +49,8 @@ namespace Hat.ViewModels
 
         async Task PopulateDataAsync()
         {
-
-            var storedCards = await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("api/cards");
+            var storedCards = await _dataService.GetCardInfos();
             Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
-            _SelectedCard = Cards[0];
             IsLoaded = true;
         }
         private async void ConfirmPayment()
@@ -75,7 +65,6 @@ namespace Hat.ViewModels
                 if (card.CardNumber == selectedCard.CardNumber)
                 {
                     card.IsSelected = true;
-                    _SelectedCard = selectedCard;
                 }
                 else
                 {

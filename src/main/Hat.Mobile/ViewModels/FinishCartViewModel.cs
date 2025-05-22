@@ -15,8 +15,8 @@ namespace Hat.ViewModels
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private DataViewModels.ShippingAddressViewModel _PrimaryAddress;
-        public DataViewModels.ShippingAddressViewModel PrimaryAddress
+        private ShippingAddressViewModel _PrimaryAddress;
+        public ShippingAddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set
@@ -45,12 +45,7 @@ namespace Hat.ViewModels
         }
 
         public string FullAddress
-        {
-            get
-            {
-                return $"{PrimaryAddress.StreetOne}, {PrimaryAddress.StreetTwo}, {PrimaryAddress.City}, {PrimaryAddress.State}";
-            }
-        }
+        => $"{PrimaryAddress.StreetOne}, {PrimaryAddress.StreetTwo}, {PrimaryAddress.City}, {PrimaryAddress.State}";
 
         private bool _IsLoaded = false;
         public bool IsLoaded
@@ -74,13 +69,12 @@ namespace Hat.ViewModels
         }
         private async void FinishOrder()
         {            
-            await MauiApp.Current.MainPage.Navigation.PopToRootAsync();
-            await Shell.Current.GoToAsync("///HomePageView");
+            //await MauiApp.Current.MainPage.Navigation.PopToRootAsync();
+            //await Shell.Current.GoToAsync("///HomePageView");
+            await _navigationService.NavigateToHome();
             await ToastHelper.ShowToast("Order Complete");
         }
         private async void GoBack(object obj)
-        {
-            await MauiApp.Current.MainPage.Navigation.PopAsync();
-        }
+        => await _navigationService.GoBack();
     }
 }

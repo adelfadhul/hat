@@ -1,5 +1,6 @@
 ﻿using Hat.DataViewModels;
 using Hat.Helpers;
+using Hat.Services;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
@@ -64,12 +65,13 @@ namespace Hat.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand BackCommand { get; }
-        private NavigationService _navigationService;
-        public AddNewCardViewModel(NavigationService navigationService)
+      
+        public AddNewCardViewModel(DataService dataService, NavigationService navigationService):base(navigationService, dataService)
         {
             SaveCommand = new Command(SaveCard);
             BackCommand = new Command(GoBack);
             _navigationService = navigationService;
+            _dataService = dataService;
         }
 
         private async void SaveCard()

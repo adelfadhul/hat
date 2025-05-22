@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -27,14 +26,11 @@ namespace Hat.ViewModels
         }
         public ICommand SelectProductCommand { get; }
 
-        private readonly IMediator _mediator;
-        private readonly HttpClient _httpClient;
-        private readonly NavigationService _navigationService;
+   
+
+        
         public AllProductViewModel(NavigationService navigationService, IMediator mediator, IHttpClientFactory httpClientFactory )
         {
-            _httpClient = httpClientFactory.CreateClient("Default");
-            _mediator = mediator;
-            _navigationService = navigationService;
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
            
@@ -47,7 +43,7 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            var storedProducts= await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
+            var storedProducts= await _dataService.GetProducts();
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();    
             IsLoaded = true;
         }

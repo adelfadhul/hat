@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Services;
 using Hat.Views;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -50,22 +51,13 @@ namespace Hat.ViewModels
 
 
 
-        private readonly HttpClient _httpClient;
+
         private readonly BrandDetailView _brandDetailView;
-        private readonly ProductDetailsView _productDetailsView;
-        private readonly AllProductView _allProductView;
-        private readonly CategoryDetailViewModel _categoryDetailViewModel;
         private readonly ILogger<HomePageViewModel> _logger;
-        private readonly NavigationService _navigationService;
-        public HomePageViewModel(NavigationService navigationService, IHttpClientFactory httpClientFactory, CategoryDetailViewModel categoryDetailViewModel, AllProductView allProductView, BrandDetailView brandDetailView,ProductDetailsView productDetailsView, ILogger<HomePageViewModel> logger)
+        public HomePageViewModel(NavigationService navigationService, DataService dataService, ILogger<HomePageViewModel> logger)
         {
             _logger = logger;
-            _navigationService = navigationService;
-            _httpClient = httpClientFactory.CreateClient("Default");
-            _brandDetailView = brandDetailView;
-            _allProductView = allProductView;
-            _productDetailsView = productDetailsView;
-            _categoryDetailViewModel = categoryDetailViewModel;
+
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             RecommendedTapCommand = new Command<object>(SelectRecommend);
             CategoryTapCommand = new Command<CategoryViewModel>(SelectCategory);
@@ -82,20 +74,20 @@ namespace Hat.ViewModels
         {
             try
             {
-               
+
                 _logger.LogInformation("Fetching categories");
-                var storedCategories
-                              = await _httpClient.GetFromJsonAsync<List<CategoryModel>>("/api/categories");
+                var storedCategories = await _dataService.GetCategories();
+
                 _logger.LogInformation("Fetched categories");
                 Categories = storedCategories.Select(x => new CategoryViewModel(x)).ToObservableCollection();
 
 
 
-                var bestSellingProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/best-selling");
+                var bestSellingProducts = await _dataService.GetBestSellingProducts();
                 BestSellingProducts = BestSellingProducts = bestSellingProducts
                     .Select(x => new ProductViewModel(x)).ToObservableCollection();
 
-                var storedFeaturedBrandsProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/featured-brand");
+                var storedFeaturedBrandsProducts = await _dataService.GetFeaturedProducts();
                 FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
 
             }
@@ -108,25 +100,16 @@ namespace Hat.ViewModels
         }
 
         private async void SelectBrand(ProductViewModel product)
-        {
-            await MauiApp.Current.MainPage.Navigation.PushAsync(_brandDetailView);
-        }
+        => await _navigationService.NavigateToBrandDetails();
+
         private async void SelectProduct(ProductViewModel product)
-        {
-           await _navigationService.NavigateToProductDetails(product.Id);
-           
-        }
+        => await _navigationService.NavigateToProductDetails(product.Id);
 
         private async void SelectCategory(CategoryViewModel category)
-        {
-           await _navigationService.NavigateToCategoryDetails();
-          //  await MauiApp.Current.MainPage.Navigation.PushModalAsync(new CategoryDetailView(_categoryDetailViewModel));
-        }
+        => await _navigationService.NavigateToCategoryDetails();
+
         private async void SelectRecommend(object product)
-        {
-            await _navigationService.NavigateToAllProducts();
-           // await MauiApp.Current.MainPage.Navigation.PushAsync(_allProductView);
-        }
+        => await _navigationService.NavigateToAllProducts();
         private async void OpenCamera()
         {
             var response = await MauiApp.Current.MainPage.DisplayAlert("Scan QR", "Do you want to open camera?", "Yes", "No");

@@ -1,5 +1,6 @@
 ﻿using Hat.Mobile.Model;
 using Hat.Model;
+using Hat.Services;
 using Hat.Views;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
@@ -27,12 +28,11 @@ namespace Hat.ViewModels
 
         public ICommand SelectMenuCommand { get; }
         private readonly LoginView _loginView;
-        private readonly NavigationService _navigationService;
-        public ProfileViewModel(LoginView loginView, NavigationService navigationService)
+       
+        public ProfileViewModel(LoginView loginView, NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
             SelectMenuCommand = new Command<MenuItems>(SelectMenu);
             _loginView = loginView;
-            _navigationService = navigationService;
             _ = InitializeAsync();
 
         }

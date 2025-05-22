@@ -1,9 +1,8 @@
 ﻿using Hat.Views;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
-    public class RegisterViewModel: BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         private string _Email;
         public string Email
@@ -27,24 +26,19 @@ namespace Hat.ViewModels
         }
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
-        private readonly VerificationView _verificationView;
-        private readonly LoginView _loginView;
-        public RegisterViewModel(VerificationView verificationView, LoginView loginView)
+        public RegisterViewModel(LoginView loginView)
         {
             LoginCommand = new Command(Login);
             RegisterCommand = new Command(SignUp);
-            _verificationView = verificationView;
-            _loginView = loginView;
         }
 
         private async void SignUp(object obj)
-        {
-            await MauiApp.Current.MainPage.Navigation.PushModalAsync(_verificationView);
-        }
+        => await _navigationService.NavigateToVerification();
 
-        private void Login(object obj)
-        {
-            MauiApp.Current.MainPage =_loginView;
-        }
+
+
+        private async void Login(object obj)
+        =>await _navigationService.NavigateToLogin();
+        
     }
 }

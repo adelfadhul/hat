@@ -1,4 +1,5 @@
 ﻿using Hat.DataViewModels;
+using Hat.Services;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -14,8 +15,8 @@ namespace Hat.ViewModels
             set => SetProperty(ref _DeliveryType, value);
         }
 
-        private DataViewModels.ShippingAddressViewModel _PrimaryAddress;
-        public DataViewModels.ShippingAddressViewModel PrimaryAddress
+        private ShippingAddressViewModel _PrimaryAddress;
+        public ShippingAddressViewModel PrimaryAddress
         {
             get => _PrimaryAddress;
             set => SetProperty(ref _PrimaryAddress, value);
@@ -37,13 +38,10 @@ namespace Hat.ViewModels
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
 
-        private readonly ConfirmPaymentView _confirmPaymentView;
-        private readonly NavigationService _navigationService;
-        public ConfirmAddressViewModel(ObservableCollection<ProductViewModel> products,NavigationService navigationService, ConfirmPaymentView confirmPaymentView)
+        public ConfirmAddressViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
-            _navigationService = navigationService;
-            _confirmPaymentView = confirmPaymentView;
-            Products = products;
+  
+            Products = new();
             NextCommand = new Command(ConfirmAddress);
             BackCommand = new Command(GoBack);
             _ = InitializeAsync();

@@ -2,6 +2,7 @@
 using Hat.DataViewModels;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Services;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Windows.Input;
@@ -24,10 +25,10 @@ namespace Hat.ViewModels
             set => SetProperty(ref _IsLoaded, value);
         }
         public ICommand SelectAddressCommand { get; }
-        private readonly HttpClient _httpCleint;
-        public ShippingAddressSelectorViewModel(IHttpClientFactory httpClientFactory)
+
+
+        public ShippingAddressSelectorViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
         {
-            _httpCleint = httpClientFactory.CreateClient("Default");
             SelectAddressCommand = new Command<ShippingAddressViewModel>(SelectAddress);
             _ = InitializeAsync();
         }
@@ -54,8 +55,7 @@ namespace Hat.ViewModels
 
         async Task PopulateDataAsync()
         {
-
-            var storedShippingAddresses = await _httpCleint.GetFromJsonAsync<List<ShippingAddressModel>>("/api/shipping-address");
+            var storedShippingAddresses = await _dataService.GetShippingAddresses();
             Addressess = storedShippingAddresses.Select(x => new ShippingAddressViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }

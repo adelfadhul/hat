@@ -8,6 +8,7 @@ using Hat.Domain.Queries;
 using MauiApp = Microsoft.Maui.Controls.Application;
 using Hat.Domain.Models;
 using System.Net.Http.Json;
+using Hat.Services;
 namespace Hat.ViewModels
 {
     public class BrandDetailViewModel : BaseViewModel
@@ -35,16 +36,13 @@ namespace Hat.ViewModels
         public ICommand SelectProductCommand { get; }
         public ICommand SelectMenuCommand { get; }
 
-        private readonly IMediator _mediator;
-        private readonly HttpClient _httpClient;
-        private readonly ProductDetailsView _productDetailsView;
-        private readonly NavigationService _navigationService;
-        public BrandDetailViewModel(NavigationService navigationService, IMediator mediator, IHttpClientFactory httpClientFactory, ProductDetailsView productDetailsView)
+
+        public BrandDetailViewModel(NavigationService navigationService,DataService dataService) : base(navigationService,dataService)
         {
-            _mediator = mediator;
-            _httpClient = httpClientFactory.CreateClient("Default");
-            _navigationService = navigationService;
-            _productDetailsView = productDetailsView;
+            TabPages = new ObservableCollection<TabPageModel>();
+
+
+
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             SelectMenuCommand = new Command<TabPageModel>(SelectMenu);
             _ = InitializeAsync();
@@ -56,8 +54,8 @@ namespace Hat.ViewModels
         }
         private async void SelectProduct(ProductViewModel obj)
         {
-           await _navigationService.NavigateToProductDetails(obj.Id);
-           // await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+            await _navigationService.NavigateToProductDetails(obj.Id);
+            // await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
         }
 
         private void SelectMenu(TabPageModel obj)
@@ -77,14 +75,14 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
-
-            Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
+            var storedProducts = await _dataService.GetProducts(); 
            
-            var storedBrands = await _mediator.Send(new BrandsQuery());
+            Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
+
+            var storedBrands = await _dataService.getBrands();
             TabPages.Add(new TabPageModel("All", 0, true));
             var index = 0;
-            foreach(var item in storedBrands)
+            foreach (var item in storedBrands)
             {
                 TabPages.Add(new TabPageModel(item, index, false));
                 index++;

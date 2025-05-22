@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Services;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -26,13 +27,10 @@ namespace Hat.ViewModels
 
         public ICommand AddNewCommand { get; }
 
-        private readonly HttpClient _httpClient;
-        private readonly NavigationService _navigationService;
-        public CardInfoManagerViewModel(IHttpClientFactory httpClientFactory, NavigationService navigationService)
+       
+        public CardInfoManagerViewModel( NavigationService navigationService,DataService dataService)
         {
             AddNewCommand = new Command(AddNewCard);
-            _httpClient = httpClientFactory.CreateClient("Default");
-            _navigationService = navigationService;
             _ = InitializeAsync();
           
         }
@@ -42,9 +40,8 @@ namespace Hat.ViewModels
             await PopulateDataAsync();
         }
         async Task PopulateDataAsync()
-        {
-           
-            var storedCards= await _httpClient.GetFromJsonAsync<List<CardInfoModel>>("/api/card-infos");
+        { 
+            var storedCards= await _dataService.GetCardInfos();
             Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }

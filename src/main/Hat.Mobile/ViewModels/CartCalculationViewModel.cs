@@ -1,4 +1,5 @@
 ﻿using Hat.DataViewModels;
+using Hat.Services;
 using Hat.Views;
 using MediatR;
 using System.Collections.ObjectModel;
@@ -31,34 +32,29 @@ namespace Hat.ViewModels
         public ICommand ApplyVoucherCommand { get; }
         public ICommand BackCommand { get; }
 
-       
-        private readonly NavigationService _navigationService;
-        public CartCalculationViewModel(NavigationService navigationService )
+
+
+        public CartCalculationViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
         {
-          
+
             Products = new();
-            _navigationService = navigationService;
+
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
             BackCommand = new Command(GoBack);
-           
+
             IsLoaded = true;
         }
 
         private async void Checkout()
-        {
-            //you will need to pass the products
-            await _navigationService.NavigateToDeliverySelectorType();
-        }
+        => await _navigationService.NavigateToDeliverySelectorType();
         private void ApplyVoucher(string vaucher)
         {
 
         }
 
         private async void GoBack(object obj)
-        {
-            await MauiApp.Current.MainPage.Navigation.PopAsync();
-        }
+        => await _navigationService.GoBack();
     }
 }

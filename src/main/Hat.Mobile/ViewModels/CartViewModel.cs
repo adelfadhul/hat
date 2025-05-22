@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Domain.Queries;
-using Hat.Views;
-using MediatR;
+using Hat.Services;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Windows.Input;
@@ -39,13 +37,10 @@ namespace Hat.ViewModels
 
 
 
-        private readonly HttpClient _httpClient;
-        private readonly NavigationService _navigationService;
-        public CartViewModel(NavigationService navigationService, DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, IHttpClientFactory httpClientFactory)
+
+        public CartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
           
-            _navigationService = navigationService;
-            _httpClient = httpClientFactory.CreateClient("Default");
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
             FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
             QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
@@ -60,7 +55,8 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
 
-            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
+            var storedProducts = await _dataService.GetProducts();
+           
             Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             IsLoaded = true;
@@ -78,9 +74,6 @@ namespace Hat.ViewModels
             SubTotal = Products.Sum(item => item.Qty * item.Price);
         }
         private async void Checkout()
-        {
-            await _navigationService.NavigateToCartCalculation();
-           // await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new CartCalculationView(_cartCalculationViewModel));
-        }
+        => await _navigationService.NavigateToCartCalculation();
     }
 }

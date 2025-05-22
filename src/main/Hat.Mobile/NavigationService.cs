@@ -117,4 +117,14 @@ public class NavigationService
     {
        await Shell.Current.GoToAsync($"{nameof(CardInfoManagerView)}");    
     }
+
+    internal async Task NavigateToBrandDetails()
+    {
+       await Shell.Current.GoToAsync($"{nameof(BrandDetailView)}");
+    }
+
+    internal async Task NavigateToVerification()
+    {
+       await Shell.Current.GoToAsync($"{nameof(VerificationView)}");
+    }
 }

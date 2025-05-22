@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Queries;
-using Hat.Views;
-using MediatR;
+using Hat.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 
 namespace Hat.ViewModels
 {
@@ -26,21 +23,19 @@ namespace Hat.ViewModels
 
         public ICommand SelectProductCommand { get; }
 
-        private readonly IMediator _mediator;
-        private readonly ProductDetailsView _productDetailsView;
-        public WishListViewModel(IMediator mediator, ProductDetailsView productDetailsView)
+        public WishListViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
-            _mediator = mediator;
+          
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
             _ = InitializeAsync();
-            _productDetailsView = productDetailsView;
         }
 
         private async void SelectProduct(ProductViewModel model)
         {
             if (model.IsAvailable)
             {
-                await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
+                await _navigationService.NavigateToProductDetails(model.Id);
+                
             }
         }
 
@@ -53,7 +48,7 @@ namespace Hat.ViewModels
         {
          
             Products.Clear();
-            var storedProducts = await _mediator.Send(new ProductsQuery());
+            var storedProducts = await _dataService.GetProducts();
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
                IsLoaded = true;
         }

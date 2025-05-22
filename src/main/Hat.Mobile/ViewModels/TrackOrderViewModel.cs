@@ -1,10 +1,7 @@
 ﻿using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Model;
+using Hat.Services;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class TrackOrderViewModel : BaseViewModel
@@ -31,13 +28,11 @@ namespace Hat.ViewModels
             set => SetProperty(ref _IsLoaded, value);
         }
         public ICommand BackCommand { get; set; }
-        public NavigationService _navigationService { get; set; }
-
-        private readonly HttpClient _httpClient;
-        public TrackOrderViewModel(NavigationService navigationService, IHttpClientFactory httpClientFactory, TrackViewModel data, bool emptyGroups = false)
+       
+        public TrackOrderViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
-            _httpClient = httpClientFactory.CreateClient("Default");
-            TrackOrderData = data;
+           
+            TrackOrderData = new();
             _navigationService = navigationService;
             BackCommand = new Command<object>(GoBack);
             _ = InitializeAsync();
@@ -49,7 +44,8 @@ namespace Hat.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            var storedDeliverySteps= await _httpClient.GetFromJsonAsync<List<DeliveryStepModel>>("/api/deliverysteps");    
+           
+            var deliverySteps = _dataService.GetDeliverySteps();
             IsLoaded = true;
         }
 

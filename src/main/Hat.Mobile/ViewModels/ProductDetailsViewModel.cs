@@ -1,5 +1,6 @@
 ﻿using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Services;
 using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
@@ -74,16 +75,14 @@ namespace Hat.ViewModels
             }
         }
 
-        private readonly HttpClient _httpClient;
-        private readonly NavigationService _navigationService;
-        public ProductDetailsViewModel(IHttpClientFactory httpClientFactory, NavigationService navigationService)
+       public ProductDetailsViewModel(NavigationService navigationService,DataService dataService)
         {
-            _httpClient = httpClientFactory.CreateClient("Default");
+           
             BackCommand = new Command<object>(GoBack);
             FavCommand = new Command<Color>(FavItem);
             AddToCartCommand = new Command(AddToCart);
             _ = InitializeAsync();
-            _navigationService = navigationService;
+    
         }
 
         private async Task InitializeAsync()
@@ -97,7 +96,8 @@ namespace Hat.ViewModels
             {
                 return;
             }
-            var storedProduct= await _httpClient.GetFromJsonAsync<ProductModel>($"/api/products/{productId}");
+           // var storedProduct= await _httpClient.GetFromJsonAsync<ProductModel>($"/api/products/{productId}");
+            var storedProduct = await _dataService.GetProductById(Guid.Parse(productId));
             ProductDetail = new ProductViewModel(storedProduct);
             IsLoaded = true;
         }

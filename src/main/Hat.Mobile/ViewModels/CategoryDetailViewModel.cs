@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Services;
 using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
@@ -42,17 +43,14 @@ namespace Hat.ViewModels
         public ICommand SelectProductCommand { get; }
 
       
-        private readonly HttpClient _httpClient;
-        private readonly ProductDetailsView _productDetailsView;
-        private readonly NavigationService _navigationService;
-        public CategoryDetailViewModel(NavigationService navigationService, CategoryViewModel data,  HttpClient httpClient, ProductDetailsView productDetailsView) 
+ 
+        public CategoryDetailViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService) 
         {
-            _navigationService = navigationService;
-            _httpClient = httpClient;
+           
+        
             BackCommand = new Command(GoBack);
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
-            _productDetailsView = productDetailsView;
-            CategoryModel = data;
+      
             _ = InitializeAsync();
         }
 
@@ -63,24 +61,18 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
 
-            var storedProducts= await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
+            var storedProducts= await _dataService.GetProducts();
             Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
 
-            var storedFeaturedBrands = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/featured-brand");
+            var storedFeaturedBrands = await _dataService.GetFeaturedProducts();
             FeaturedBrandsDataList= storedFeaturedBrands.Select(x => new ProductViewModel(x)).ToObservableCollection(); 
             IsLoaded = true;
         }
 
         private async void GoBack()
-        {
-            await _navigationService.GoBack();
-           // await MauiApp.Current.MainPage.Navigation.PopModalAsync();
-        }
+        => await _navigationService.GoBack();
         private async void SelectProduct(ProductViewModel product)
-        {
-            await _navigationService.NavigateToProductDetails(product.Id);
-           // await MauiApp.Current.MainPage.Navigation.PushModalAsync(_productDetailsView);
-        }
+       => await _navigationService.NavigateToProductDetails(product.Id);
 
     }
 }
