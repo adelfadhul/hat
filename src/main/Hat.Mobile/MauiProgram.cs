@@ -60,13 +60,14 @@ public static class MauiProgram
             });
 
         // ViewModels
+        builder.Services.AddTransient<DeliveryTypeViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();
         builder.Services.AddTransient<AddNewCardView>();
         builder.Services.AddTransient<AddNewCardViewModel>();
         builder.Services.AddTransient<HomePageViewModel>(); 
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
-        builder.Services.AddTransient<ViewModels.CardInfoManagerViewModel>();
+        builder.Services.AddTransient<CardInfoManagerViewModel>();
         builder.Services.AddTransient<CartCalculationViewModel>();
         builder.Services.AddTransient<CartViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
@@ -101,7 +102,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CategoryDetailView>();
         builder.Services.AddTransient<ConfirmAddressView>();
         builder.Services.AddTransient<ConfirmPaymentView>();
-        builder.Services.AddTransient<DeliveryTypeView>();
+        builder.Services.AddTransient<DeliveryTypeSelectorView>();
         builder.Services.AddTransient<FinishCartView>();
         builder.Services.AddTransient<OrderDetailsView>();
         builder.Services.AddTransient<ProductDetailsView>();

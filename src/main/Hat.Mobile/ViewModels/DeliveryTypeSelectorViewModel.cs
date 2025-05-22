@@ -39,15 +39,13 @@ namespace Hat.ViewModels
         public ICommand BackCommand { get; }
 
         private readonly IMediator _mediator;
-        private readonly ConfirmAddressView _confirmAddressView;
         private readonly NavigationService _navigationService;
-        public DeliveryTypeSelectorViewModel(ObservableCollection<ProductViewModel> products,NavigationService navigationService, ConfirmAddressView confirmAddressView)
+        public DeliveryTypeSelectorViewModel(NavigationService navigationService)
         {
             SelectDeliveryTypeCommand = new Command<DeliveryTypeViewModel>(SelectDeliveryType);
             NextCommand = new Command(ConfirmDeliverType);
             BackCommand = new Command(GoBack);
-            Products = products;
-            _confirmAddressView = confirmAddressView;
+            Products = new();
             _navigationService = navigationService; 
             _ = InitializeAsync();
         }
@@ -83,7 +81,6 @@ namespace Hat.ViewModels
         private async void ConfirmDeliverType()
         {
             await _navigationService.NavigateToConfirmAddress();
-          //  await MauiApp.Current.MainPage.Navigation.PushAsync(_confirmAddressView);
         }
         private async void GoBack(object obj)
         {

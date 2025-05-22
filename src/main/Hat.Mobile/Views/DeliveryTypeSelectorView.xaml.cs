@@ -1,12 +1,13 @@
 using Hat.DataViewModels;
+using Hat.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace Hat.Views;
 
-public partial class DeliveryTypeView : ContentPage
+public partial class DeliveryTypeSelectorView : ContentPage
 {
 	
-	public DeliveryTypeView(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel vm)
+	public DeliveryTypeSelectorView(DeliveryTypeSelectorViewModel vm)
 	{
 		InitializeComponent();
         BindingContext = vm;

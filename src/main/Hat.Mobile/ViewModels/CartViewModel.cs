@@ -41,11 +41,11 @@ namespace Hat.ViewModels
 
         private readonly HttpClient _httpClient;
         private readonly NavigationService _navigationService;
-        public CartViewModel(NavigationService navigationService, DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, HttpClient httpClient)
+        public CartViewModel(NavigationService navigationService, DeliveryTypeViewModel deliveryTypeViewModel,CartCalculationViewModel cartCalculationViewModel, IHttpClientFactory httpClientFactory)
         {
           
             _navigationService = navigationService;
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Default");
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
             FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
             QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
@@ -60,7 +60,7 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
 
-            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
+            var storedProducts = await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
             Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             IsLoaded = true;

@@ -75,6 +75,9 @@
 	  <Compile Update="Views\ConfirmAddressView.xaml.cs">
 	    <DependentUpon>ConfirmAddressView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\DeliveryTypeSelectorView.xaml.cs">
+	    <DependentUpon>DeliveryTypeSelectorView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ScanCameraView.xaml.cs">
 	    <DependentUpon>ScanCameraView.xaml</DependentUpon>
 	  </Compile>
@@ -129,7 +132,7 @@
 	  <MauiXaml Update="Views\ConfirmPaymentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DeliveryTypeView.xaml">
+	  <MauiXaml Update="Views\DeliveryTypeSelectorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\FinishCartView.xaml">
