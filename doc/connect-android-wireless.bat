@@ -1,0 +1,21 @@
+﻿@echo off
+REM Replace this with your device IP address
+SET DEVICE_IP=192.168.100.205
+
+REM Set the path to adb.exe
+SET ADB_PATH="C:\Program Files (x86)\Android\android-sdk\platform-tools\adb.exe"
+
+echo [*] Listing connected devices via USB...
+%ADB_PATH% devices
+
+echo [*] Switching device to TCP/IP mode on port 5555...
+%ADB_PATH% tcpip 5555
+
+echo [*] Connecting to %DEVICE_IP%:5555...
+%ADB_PATH% connect %DEVICE_IP%:5555
+
+echo [*] Showing current connected devices...
+%ADB_PATH% devices
+
+echo [*] You can now unplug the USB cable.
+pause
