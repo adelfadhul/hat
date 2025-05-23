@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Queries;
-using Hat.Services;
-using MediatR;
+using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.ViewModels

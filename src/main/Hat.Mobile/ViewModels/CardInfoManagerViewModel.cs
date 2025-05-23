@@ -1,12 +1,8 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Services;
-using Hat.Views;
+using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class CardInfoManagerViewModel : BaseViewModel

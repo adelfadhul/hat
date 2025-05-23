@@ -1,5 +1,5 @@
 ﻿using Hat.DataViewModels;
-using Hat.Services;
+using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.ViewModels

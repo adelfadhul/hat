@@ -1,7 +1,7 @@
 using Hat.Domain.Models;
 using System.Net.Http.Json;
 
-namespace Hat.Services
+namespace Hat.Mobile.Services
 {
     public class DataService
     {
@@ -11,19 +11,23 @@ namespace Hat.Services
         {
             _httpClient = httpClientFactory.CreateClient("Default");
         }
-
+      
         public async Task<List<ProductModel>> GetProducts()
         {
-            return await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products");
+
+            var products= await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products");
+
+
+            return products;
         }
         public async Task<List<ProductModel>> GetFeaturedProducts()
         {
-            return await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/featured");
+            return await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/featured");
         }
 
         public async Task<List<ProductModel>> GetBestSellingProducts()
         {
-            return await _httpClient.GetFromJsonAsync<List<ProductModel>>("api/products/best-selling");
+            return await _httpClient.GetFromJsonAsync<List<ProductModel>>("/api/products/best-selling");
         }
         public async Task<ProductModel> GetProductById(Guid id)
         {

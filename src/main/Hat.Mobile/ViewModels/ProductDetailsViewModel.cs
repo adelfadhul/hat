@@ -1,9 +1,6 @@
 ﻿using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Services;
-using System.Net.Http.Json;
+using Hat.Mobile.Services;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     [QueryProperty(nameof(ProductId), "productId")]

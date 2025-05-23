@@ -1,10 +1,7 @@
 ﻿using Hat.DataViewModels;
-using Hat.Services;
-using Hat.Views;
-using MediatR;
+using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class CartCalculationViewModel : BaseViewModel

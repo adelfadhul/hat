@@ -3,6 +3,7 @@ using Camera.MAUI;
 using CommunityToolkit.Maui;
 using Hat.Application.Registeration;
 using Hat.DataViewModels;
+using Hat.Mobile.Services;
 using Hat.ViewModels;
 using Hat.Views;
 
@@ -86,7 +87,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ShippingAddressSelectorViewModel>();
 
         builder.Services.AddTransient<CategoryViewModel>();
-
+        builder.Services.AddTransient<DataService>();
         builder.Services.AddTransient<NavigationService>();
 
         // Views

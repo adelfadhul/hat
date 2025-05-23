@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
+using Hat.Mobile.Services;
 using MediatR;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;

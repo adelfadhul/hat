@@ -1,14 +1,8 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
-using Hat.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Hat.DataViewModels;
-using MediatR;
-using Hat.Domain.Queries;
-using MauiApp = Microsoft.Maui.Controls.Application;
-using Hat.Domain.Models;
-using System.Net.Http.Json;
-using Hat.Services;
+using Hat.Mobile.Services;
 namespace Hat.ViewModels
 {
     public class BrandDetailViewModel : BaseViewModel

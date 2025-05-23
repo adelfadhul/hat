@@ -1,12 +1,10 @@
 ﻿using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.Services;
+using Hat.Mobile.Services;
 using Hat.Views;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 
@@ -100,7 +98,7 @@ namespace Hat.ViewModels
         }
 
         private async void SelectBrand(ProductViewModel product)
-        => await _navigationService.NavigateToBrandDetails();
+        => await _navigationService.NavigateToBrandDetail();
 
         private async void SelectProduct(ProductViewModel product)
         => await _navigationService.NavigateToProductDetails(product.Id);

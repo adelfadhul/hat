@@ -1,8 +1,7 @@
 ﻿using Hat.DataViewModels;
 using Hat.Helpers;
-using Hat.Services;
+using Hat.Mobile.Services;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.ViewModels
 {
     public class AddNewCardViewModel : BaseViewModel

@@ -1,6 +1,5 @@
 ﻿using Hat.Mobile.Model;
-using Hat.Model;
-using Hat.Services;
+using Hat.Mobile.Services;
 using Hat.Views;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;

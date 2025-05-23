@@ -1,14 +1,12 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Models;
+using Hat.Mobile.Services;
 using Hat.Model;
-using Hat.Services;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
 using System.Windows.Input;
 namespace Hat.ViewModels
 {
-  
+
     public class OrderDetailsViewModel : BaseViewModel
     {
         private ObservableCollection<TrackOrderModel> _TrackData = [];
