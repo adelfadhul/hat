@@ -12,32 +12,34 @@ namespace Hat;
 
 public static class MauiProgram
 {
-   
-    public static string getBaseUrl(int port)
+    
+    public static string getBaseUrl()
     {
+        var httpPort = 5166;
+        var httpsPort = 7068;
 
 #if DEBUG
-       
+
         if (DeviceInfo.Platform == DevicePlatform.Android)
         {
             // Check if running on an emulator
             if (DeviceInfo.DeviceType == DeviceType.Virtual)
             {
                 // Android Emulator
-                return $"http://10.0.2.2:{port}/";
+                return $"http://10.0.2.2:{httpPort}/";
             }
             else
             {
                 // Physical Android Device - Get local IP of the machine
                 //string localIp = GetLocalIPAddress();
-                string localIp = "192.168.100.232";
-                return $"http://{localIp}:{port}";
+                string localIp = "192.168.100.46";
+                return $"http://{localIp}:{httpsPort}";
             }
         }
         else if (DeviceInfo.Platform == DevicePlatform.WinUI)
         {
             // Windows
-            return $"http://localhost:{port}";
+            return $"http://localhost:{httpsPort}";
         }
         throw new NotSupportedException("Unsupported platform");
 #else
@@ -114,7 +116,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AddNewCardView>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();
 
-        var url = getBaseUrl(5166);
+        var url = getBaseUrl();
         builder.Services.AddHttpClient("Default", client =>
         {
            

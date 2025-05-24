@@ -50,9 +50,8 @@ namespace Hat.ViewModels
 
 
 
-        private readonly BrandDetailView _brandDetailView;
         private readonly ILogger<HomePageViewModel> _logger;
-        public HomePageViewModel(NavigationService navigationService, DataService dataService, ILogger<HomePageViewModel> logger)
+        public HomePageViewModel(NavigationService navigationService, DataService dataService, ILogger<HomePageViewModel> logger):base(navigationService,dataService)
         {
             _logger = logger;
 
@@ -91,8 +90,10 @@ namespace Hat.ViewModels
             }
             catch (Exception ex)
             {
+                
                 _logger.LogError(ex, "Error fetching categories");
-                await MauiApp.Current.MainPage.DisplayAlert("Error", "An error occurred while fetching data. Please try again later.", "OK");
+                var msg = "An error occurred while fetching data. Please try again later "+ex.Message;
+                await MauiApp.Current.MainPage.DisplayAlert("Error", msg, "OK");
             }
             IsLoaded = true;
         }
