@@ -2,13 +2,13 @@
 using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Mobile.Services;
-using Hat.Views;
+using Hat.Mobile.Views;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
 
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class HomePageViewModel : BaseViewModel
     {

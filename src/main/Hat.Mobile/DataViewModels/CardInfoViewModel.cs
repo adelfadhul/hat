@@ -1,7 +1,7 @@
 ﻿using Hat.Domain.Constants;
 using Hat.Domain.Models;
 using Hat.Helpers.ExtensionMethods;
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
 {

@@ -12,6 +12,7 @@ namespace Hat.Infrastructure.Registeration
             switch (type)
             {
                 case "Memory":
+                    services.AddScoped<IShoppingCartRepository, MemoryShoppingCartRepository>();
                     services.AddScoped<IProductRepository, MemoryProductRepository>();
                     services.AddScoped<ICardRepository, MemoryCardRepository>();
                     services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();

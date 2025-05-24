@@ -4,11 +4,12 @@ using CommunityToolkit.Maui;
 using Hat.Application.Registeration;
 using Hat.DataViewModels;
 using Hat.Mobile.Services;
-using Hat.ViewModels;
-using Hat.Views;
+using Hat.Mobile.ViewModels;
+using Hat.Mobile.Views;
 
 
-namespace Hat;
+
+namespace Hat.Mobile;
 
 public static class MauiProgram
 {
@@ -26,7 +27,7 @@ public static class MauiProgram
             if (DeviceInfo.DeviceType == DeviceType.Virtual)
             {
                 // Android Emulator
-                return $"http://10.0.2.2:{httpPort}/";
+                return $"http://10.0.2.2:{httpPort}";
             }
             else
             {
@@ -63,6 +64,7 @@ public static class MauiProgram
             });
 
         // ViewModels
+        builder.Services.AddTransient<ShoppingCartViewModel>();
         builder.Services.AddTransient<DeliveryTypeViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();
         builder.Services.AddTransient<AddNewCardView>();
@@ -71,8 +73,8 @@ public static class MauiProgram
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
         builder.Services.AddTransient<CardInfoManagerViewModel>();
-        builder.Services.AddTransient<CartCalculationViewModel>();
-        builder.Services.AddTransient<CartViewModel>();
+        builder.Services.AddTransient<ShoppingCartCalculationViewModel>();
+        builder.Services.AddTransient<ShoppingCartViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
         builder.Services.AddTransient<ConfirmAddressViewModel>();
         builder.Services.AddTransient<ConfirmPaymentViewModel>();
@@ -93,6 +95,7 @@ public static class MauiProgram
         builder.Services.AddTransient<NavigationService>();
 
         // Views
+        builder.Services.AddTransient<ShoppingCartView>();
         builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<HomePageView>();
         builder.Services.AddTransient<RegisterView>();
@@ -100,8 +103,8 @@ public static class MauiProgram
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
         builder.Services.AddTransient<CardInfoManagerView>();
-        builder.Services.AddTransient<CartCalculationView>();
-        builder.Services.AddTransient<CartView>();
+        builder.Services.AddTransient<ShoppingCartCalculationView>();
+        builder.Services.AddTransient<ShoppingCartView>();
         builder.Services.AddTransient<CategoryDetailView>();
         builder.Services.AddTransient<ConfirmAddressView>();
         builder.Services.AddTransient<ConfirmPaymentView>();
@@ -117,6 +120,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ShippingAddressSelectorView>();
 
         var url = getBaseUrl();
+        
         builder.Services.AddHttpClient("Default", client =>
         {
            

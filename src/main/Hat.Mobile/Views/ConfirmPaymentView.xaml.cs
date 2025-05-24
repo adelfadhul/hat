@@ -1,14 +1,14 @@
 using Hat.DataViewModels;
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 
 public partial class ConfirmPaymentView : ContentPage
 {
 
 
 
-	public ConfirmPaymentView(DataViewModels.ShippingAddressViewModel address, ConfirmPaymentViewModel vm)
+	public ConfirmPaymentView(ShippingAddressViewModel address, ConfirmPaymentViewModel vm)
 
     {
 		InitializeComponent();

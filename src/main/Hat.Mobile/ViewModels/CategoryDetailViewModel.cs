@@ -3,7 +3,7 @@ using Hat.DataViewModels;
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class CategoryDetailViewModel : BaseViewModel
     {

@@ -1,5 +1,7 @@
-using Hat.ViewModels;
-namespace Hat.Views;
+
+using Hat.Mobile.ViewModels;
+
+namespace Hat.Mobile.Views;
 public partial class AllProductView : ContentPage
 {
     public AllProductView(AllProductViewModel vm)

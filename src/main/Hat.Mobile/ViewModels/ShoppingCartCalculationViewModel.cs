@@ -2,12 +2,12 @@
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
-    public class CartCalculationViewModel : BaseViewModel
+    public class ShoppingCartCalculationViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductViewModel> _Products = [];
-        public ObservableCollection<ProductViewModel> Products
+        private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
+        public ObservableCollection<ShoppingCartItemViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -31,16 +31,13 @@ namespace Hat.ViewModels
 
 
 
-        public CartCalculationViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
+        public ShoppingCartCalculationViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
         {
-
             Products = new();
-
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
             BackCommand = new Command(GoBack);
-
             IsLoaded = true;
         }
 

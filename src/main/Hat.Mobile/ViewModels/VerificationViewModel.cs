@@ -1,7 +1,7 @@
 ﻿using Hat.Helpers;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class VerificationViewModel : BaseViewModel
     {

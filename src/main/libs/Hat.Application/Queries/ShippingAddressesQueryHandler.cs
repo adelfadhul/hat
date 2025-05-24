@@ -18,5 +18,5 @@ namespace Hat.Application.Queries
         }
     }
 
-    
+
 }

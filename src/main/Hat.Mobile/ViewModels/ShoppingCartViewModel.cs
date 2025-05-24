@@ -4,12 +4,12 @@ using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
-    public class CartViewModel : BaseViewModel
+    public class ShoppingCartViewModel : BaseViewModel
     {
-        private ObservableCollection<ProductViewModel> _Products = [];
-        public ObservableCollection<ProductViewModel> Products
+        private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
+        public ObservableCollection<ShoppingCartItemViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -36,7 +36,7 @@ namespace Hat.ViewModels
 
 
 
-        public CartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public ShoppingCartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
           
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
@@ -53,9 +53,9 @@ namespace Hat.ViewModels
         async Task PopulateDataAsync()
         {
 
-            var storedProducts = await _dataService.GetProducts();
+            var storedProducts = await _dataService.GetShoppingCartItems();
            
-            Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
+            Products = storedProducts.Select(x=> new ShoppingCartItemViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Qty * item.Price);
             IsLoaded = true;
         }

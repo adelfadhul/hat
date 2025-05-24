@@ -2,7 +2,7 @@
 using Hat.Helpers;
 using Hat.Mobile.Services;
 using System.Windows.Input;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class AddNewCardViewModel : BaseViewModel
     {

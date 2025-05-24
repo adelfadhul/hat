@@ -1,6 +1,6 @@
-﻿using Hat.Views;
+﻿using Hat.Mobile.Views;
 using System.Windows.Input;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {

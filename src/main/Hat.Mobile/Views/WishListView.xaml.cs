@@ -1,6 +1,5 @@
-using Hat.ViewModels;
-using MediatR;
-namespace Hat.Views;
+using Hat.Mobile.ViewModels;
+namespace Hat.Mobile.Views;
 
 public partial class WishListView : ContentPage
 {   

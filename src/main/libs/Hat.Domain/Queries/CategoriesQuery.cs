@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Hat.Domain.Models;
 using MediatR;
 

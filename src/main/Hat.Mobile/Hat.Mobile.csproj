@@ -70,9 +70,6 @@
 	  <Compile Update="Views\CardInfoManagerView.xaml.cs">
 	    <DependentUpon>CardInfoManagerView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\CartCalculationView.xaml.cs">
-	    <DependentUpon>CartCalculationView.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\ConfirmAddressView.xaml.cs">
 	    <DependentUpon>ConfirmAddressView.xaml</DependentUpon>
 	  </Compile>
@@ -82,7 +79,7 @@
 	  <Compile Update="Views\ScanCameraView.xaml.cs">
 	    <DependentUpon>ScanCameraView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\CartView.xaml.cs">
+	  <Compile Update="Views\ShoppingCartView.xaml.cs">
 	    <DependentUpon>CartView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\CategoryDetailView.xaml.cs">
@@ -124,7 +121,7 @@
 	  <MauiXaml Update="Views\BrandDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CartCalculationView.xaml">
+	  <MauiXaml Update="Views\ShoppingCartCalculationView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ConfirmAddressView.xaml">
@@ -145,7 +142,7 @@
 	  <MauiXaml Update="Views\CardInfoManagerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CartView.xaml">
+	  <MauiXaml Update="Views\ShoppingCartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\CategoryDetailView.xaml">

@@ -8,9 +8,9 @@ namespace Hat.Backend.Controllers
     [ApiController]
     [AllowAnonymous]
     [Route("api/categories")]
-    public class CategoriesController : HatController
+    public class CategoryController : HatController
     {
-        public CategoriesController(IMediator mediator, ILogger<CategoriesController> logger) : base(mediator, logger)
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger) : base(mediator, logger)
         {
         }
 

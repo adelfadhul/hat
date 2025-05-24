@@ -1,6 +1,7 @@
 ﻿using Foundation;
 
-namespace Hat;
+
+namespace Hat.Mobile;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

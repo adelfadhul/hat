@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace Hat;
+namespace Hat.Mobile;
 
 public class Program
 {

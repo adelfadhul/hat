@@ -1,5 +1,5 @@
-﻿using Hat.ViewModels;
-using Hat.Views;
+﻿using Hat.Mobile.ViewModels;
+using Hat.Mobile.Views;
 
 namespace Hat;
 using MauiApp = Microsoft.Maui.Controls.Application;

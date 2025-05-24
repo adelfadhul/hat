@@ -1,4 +1,4 @@
-using Hat.Views;
+using Hat.Mobile.Views;
 namespace Hat.Mobile.Services;
 public class NavigationService
 {
@@ -36,7 +36,7 @@ public class NavigationService
     // Navigate to the cart page
     public async Task NavigateToCart()
     {
-        await Shell.Current.GoToAsync($"{nameof(CartView)}");
+        await Shell.Current.GoToAsync($"{nameof(ShoppingCartView)}");
     }
 
 
@@ -78,7 +78,7 @@ public class NavigationService
     // Navigate to the card calculation page
     public async Task NavigateToCartCalculation()
     {
-        await Shell.Current.GoToAsync($"{nameof(CartCalculationView)}");
+        await Shell.Current.GoToAsync($"{nameof(ShoppingCartCalculationView)}");
     }
     public async Task NavigateToConfirmPyment()
     {

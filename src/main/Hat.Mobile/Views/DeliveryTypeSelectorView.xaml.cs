@@ -1,8 +1,6 @@
-using Hat.DataViewModels;
-using Hat.ViewModels;
-using System.Collections.ObjectModel;
+using Hat.Mobile.ViewModels;
 
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 
 public partial class DeliveryTypeSelectorView : ContentPage
 {

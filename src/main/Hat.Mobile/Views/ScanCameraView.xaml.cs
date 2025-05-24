@@ -1,4 +1,4 @@
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 
 public partial class ScanCameraView : ContentPage
 {

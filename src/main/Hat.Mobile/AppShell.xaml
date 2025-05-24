@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Hat.AppShell"
+    x:Class="Hat.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:Hat.Views"
+    xmlns:views="clr-namespace:Hat.Mobile.Views"
     Shell.FlyoutBehavior="Disabled">
     <TabBar>
         <Tab Title="Explore">
@@ -16,7 +16,7 @@
             <Tab.Icon>
                 <FontImageSource FontFamily="MaterialIcon" Glyph="&#xf110;" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:CartView}" Route="CartView" />
+            <ShellContent ContentTemplate="{DataTemplate views:ShoppingCartView}" Route="CartView" />
         </Tab>
         <Tab Title="Account">
             <Tab.Icon>

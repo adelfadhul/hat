@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Hat.Converters
+namespace Hat.Mobile.Converters
 {
     public class InverseBooleanConverter : IValueConverter
     {

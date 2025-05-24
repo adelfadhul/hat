@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Windows.Input;
 
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class AllProductViewModel : BaseViewModel
     {

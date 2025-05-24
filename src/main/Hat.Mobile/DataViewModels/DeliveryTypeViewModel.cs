@@ -1,5 +1,5 @@
 ﻿using Hat.Domain.Models;
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
 {

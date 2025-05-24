@@ -1,11 +1,6 @@
+using Hat.Mobile.ViewModels;
 
-using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.ViewModels;
-using MediatR;
-using System.Collections.ObjectModel;
-
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 
 public partial class ConfirmAddressView : ContentPage
 {

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {

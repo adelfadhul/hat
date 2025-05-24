@@ -2,7 +2,7 @@ using Hat.Helpers.ExtensionMethods;
 using System.Globalization;
 using Hat.Domain.Helpers;
 using MauiApp = Microsoft.Maui.Controls.Application;
-namespace Hat.Controls;
+namespace Hat.Mobile.Controls;
 
 
 public partial class CreditCardView : Frame

@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Hat;
+namespace Hat.Mobile;
 
 [Application]
 public class MainApplication : MauiApplication

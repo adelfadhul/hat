@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Hat.Views.CardInfoManagerView"
+    x:Class="Hat.Mobile.Views.CardInfoManagerView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:Hat.Converters"
-    xmlns:views="clr-namespace:Hat.Controls"
+    xmlns:converters="clr-namespace:Hat.Mobile.Converters"
+    xmlns:views="clr-namespace:Hat.Mobile.Controls"
     Title="Cards">
     <ContentPage.Resources>
         <ResourceDictionary>

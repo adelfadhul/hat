@@ -1,9 +1,9 @@
 ﻿using Hat.Mobile.Model;
 using Hat.Mobile.Services;
-using Hat.Views;
+using Hat.Mobile.Views;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {        

@@ -1,7 +1,7 @@
 ﻿using Hat.DataViewModels;
 using Hat.Mobile.Services;
 using System.Windows.Input;
-namespace Hat.ViewModels
+namespace Hat.Mobile.ViewModels
 {
     [QueryProperty(nameof(ProductId), "productId")]
     public class ProductDetailsViewModel : BaseViewModel
@@ -72,7 +72,7 @@ namespace Hat.ViewModels
             }
         }
 
-       public ProductDetailsViewModel(NavigationService navigationService,DataService dataService)
+       public ProductDetailsViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
            
             BackCommand = new Command<object>(GoBack);

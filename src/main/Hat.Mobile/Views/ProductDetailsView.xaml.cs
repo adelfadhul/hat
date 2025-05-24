@@ -1,6 +1,6 @@
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 [QueryProperty(nameof(ProductId), "productId")]
 public partial class ProductDetailsView : ContentPage
 {

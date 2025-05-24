@@ -1,6 +1,7 @@
-﻿using Hat.Views;
+﻿using Hat.Mobile.Views;
 
-namespace Hat;
+
+namespace Hat.Mobile;
 
 public partial class AppShell : Shell
 {
@@ -12,7 +13,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ProductDetailsView), typeof(ProductDetailsView));
         Routing.RegisterRoute(nameof(CategoryDetailView), typeof(CategoryDetailView));
         Routing.RegisterRoute(nameof(BrandDetailView), typeof(BrandDetailView));
-        Routing.RegisterRoute(nameof(CartView), typeof(CartView));
+        Routing.RegisterRoute(nameof(ShoppingCartView), typeof(ShoppingCartView));
         Routing.RegisterRoute(nameof(ShippingAddressSelectorView), typeof(ShippingAddressSelectorView));
         Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
         Routing.RegisterRoute(nameof(ConfirmAddressView), typeof(ConfirmAddressView));
@@ -23,7 +24,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(OrderDetailsView), typeof(OrderDetailsView));
         Routing.RegisterRoute(nameof(WishListView), typeof(WishListView));
         Routing.RegisterRoute(nameof(AllProductView), typeof(AllProductView));
-        Routing.RegisterRoute(nameof(CartCalculationView), typeof(CartCalculationView));
+        Routing.RegisterRoute(nameof(ShoppingCartCalculationView), typeof(ShoppingCartCalculationView));
         Routing.RegisterRoute(nameof(VerificationView), typeof(VerificationView));
         Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
         Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));

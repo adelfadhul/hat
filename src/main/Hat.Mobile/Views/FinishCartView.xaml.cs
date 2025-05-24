@@ -1,9 +1,8 @@
 using Hat.DataViewModels;
-using Hat.Domain.Models;
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 using System.Collections.ObjectModel;
 
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 public partial class FinishCartView : ContentPage
 {
     public FinishCartView(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, ShippingAddressViewModel address, CardInfoViewModel card)

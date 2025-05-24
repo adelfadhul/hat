@@ -1,6 +1,6 @@
-using Hat.ViewModels;
+using Hat.Mobile.ViewModels;
 
-namespace Hat.Views;
+namespace Hat.Mobile.Views;
 
 public partial class ProfileView : ContentPage
 {
