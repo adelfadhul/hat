@@ -17,10 +17,10 @@ namespace Hat.Backend.Controllers
         }
 
         // GET: api/shopping-cart/{userId}
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetCart(Guid userId)
+        [HttpGet("")]
+        public async Task<IActionResult> GetCart()
         {
-            _logger.LogInformation("GetCart for user {UserId}", userId);
+            _logger.LogInformation("GetCart");
             var cartItems = await _mediator.Send(new ShoppingCartQuery());
             return Ok(cartItems);
         }

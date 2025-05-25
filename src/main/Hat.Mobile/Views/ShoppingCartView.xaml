@@ -88,7 +88,7 @@
                             <Image
                                 Aspect="AspectFit"
                                 HeightRequest="120"
-                                Source="{Binding ImageUrl}"
+                                Source="{Binding ProductImageUrl}"
                                 WidthRequest="120" />
                             <StackLayout Spacing="6">
                                 <Label
@@ -108,6 +108,13 @@
                                         HorizontalOptions="StartAndExpand"
                                         Text="{Binding Price, StringFormat='${0:F2}'}"
                                         TextColor="{StaticResource Primary}" />
+
+                                    <Label
+                                        FontSize="16"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding Amount, StringFormat='${0:F2}'}"
+                                        TextColor="{StaticResource Primary}" />
+
                                 </StackLayout>
                                 <Stepper
                                     x:Name="_stepper"

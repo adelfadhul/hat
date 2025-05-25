@@ -148,7 +148,7 @@ namespace Hat.Mobile.Services
         }
         internal async Task<List<ShoppingCartItemModel>> GetShoppingCartItems()
         {
-            var response = await _httpClient.GetAsync("/api/shoppingcart/items");
+            var response = await _httpClient.GetAsync("/api/shopping-cart");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching shopping cart items: {response.ReasonPhrase}");

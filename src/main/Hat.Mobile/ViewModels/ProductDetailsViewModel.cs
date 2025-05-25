@@ -1,5 +1,7 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Views;
+using Hat.DataViewModels;
 using Hat.Mobile.Services;
+using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
@@ -42,6 +44,7 @@ namespace Hat.Mobile.ViewModels
             }
         }
 
+        private double qty => ProductDetail?.Qty ?? 1;
         private ProductViewModel _ProductDetail = new();
         public ProductViewModel ProductDetail
         {
@@ -77,7 +80,9 @@ namespace Hat.Mobile.ViewModels
            
             BackCommand = new Command<object>(GoBack);
             FavCommand = new Command<Color>(FavItem);
-            AddToCartCommand = new Command(AddToCart);
+            // Update the AddToCartCommand initialization to match the expected Action<object> signature
+            AddToCartCommand = new Command<object>(async (obj) => await AddToCart());
+            //AddToCartCommand = new Command(AddToCart);
             _ = InitializeAsync();
     
         }
@@ -93,7 +98,6 @@ namespace Hat.Mobile.ViewModels
             {
                 return;
             }
-           // var storedProduct= await _httpClient.GetFromJsonAsync<ProductModel>($"/api/products/{productId}");
             var storedProduct = await _dataService.GetProductById(Guid.Parse(productId));
             ProductDetail = new ProductViewModel(storedProduct);
             IsLoaded = true;
@@ -121,9 +125,11 @@ namespace Hat.Mobile.ViewModels
             lastScrollIndex = currentScrollIndex;
         }
 
-        private void AddToCart()
+        private async Task AddToCart()
         {
            
+           await _dataService.AddShoppingCartItem(Guid.Parse(productId),(int)qty);
+          
         }       
     }
 }
