@@ -1,4 +1,5 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -25,6 +26,14 @@ namespace Hat.Mobile.ViewModels
             get => _SubTotal;
             set => SetProperty(ref _SubTotal, value);
         }
+
+        private double _Vat = 0;
+        public double Vat
+        {
+            get => _Vat;
+            set => SetProperty(ref _Vat, value);
+        }
+
         public ICommand CheckoutCommand { get; }
         public ICommand ApplyVoucherCommand { get; }
         public ICommand BackCommand { get; }
@@ -33,14 +42,23 @@ namespace Hat.Mobile.ViewModels
 
         public ShoppingCartCalculationViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
         {
-            Products = new();
-            SubTotal = Products.Sum(item => item.Qty * item.Price);
+           
+
             CheckoutCommand = new Command(Checkout);
             ApplyVoucherCommand = new Command<string>(ApplyVoucher);
             BackCommand = new Command(GoBack);
             IsLoaded = true;
+
+            _ = populteDataAsync();
         }
 
+        private async Task populteDataAsync()
+        {
+            var cartItems = await _dataService.GetShoppingCartItems();
+            Products = cartItems.Select(x => new ShoppingCartItemViewModel(x)).ToObservableCollection();
+            SubTotal = Products.Sum(item => item.Amount);
+            IsLoaded = true;
+        }
         private async void Checkout()
         => await _navigationService.NavigateToDeliverySelectorType();
         private void ApplyVoucher(string vaucher)

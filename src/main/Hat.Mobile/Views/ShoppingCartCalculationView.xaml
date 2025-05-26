@@ -92,7 +92,7 @@
                         FontAttributes="Bold"
                         FontSize="18"
                         HorizontalOptions="EndAndExpand"
-                        Text="$3950"
+                        Text="{Binding SubTotal}"
                         TextColor="Black" />
                     <Label
                         Grid.Row="2"
@@ -100,7 +100,7 @@
                         FontAttributes="Bold"
                         FontSize="18"
                         HorizontalOptions="EndAndExpand"
-                        Text="$50"
+                        Text="{Binding Vat}"
                         TextColor="Black" />
 
                     <Path

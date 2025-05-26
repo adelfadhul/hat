@@ -127,8 +127,8 @@ namespace Hat.Mobile.ViewModels
         {
             await _dataService.AddShoppingCartItem(Guid.Parse(productId), (int)qty, "standard");
             await ToastHelper.ShowToast("Item added to cart");
-           
-          
+           await _navigationService.NavigateToShoppingCart();
+
         }       
     }
 }

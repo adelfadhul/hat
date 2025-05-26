@@ -2,14 +2,15 @@
 
 namespace Hat.Domain.Models
 {
-    public class ProductModel
+    public class ProductModel 
     {
-
+      
         #region data
         public Guid Id { get; set; }
 
         public Guid CategoryId { get; set; }
         public Guid CustomerId { get; set; }
+
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
@@ -21,6 +22,7 @@ namespace Hat.Domain.Models
         public string ColorText { get; set; }
         public string SizesText { get; set; }
 
+       
         public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
         #endregion
 

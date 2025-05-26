@@ -5,20 +5,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Hat.Mobile.Views"
     Shell.FlyoutBehavior="Disabled">
-    <TabBar>
+    <TabBar Route="tabs">
         <Tab Title="Explore">
             <Tab.Icon>
                 <FontImageSource FontFamily="MaterialIcon" Glyph="&#xf56e;" />
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate views:HomePageView}" Route="HomePageView" />
         </Tab>
-        <Tab Title="Cart">
+        <Tab Title="Cart" Route="cart">
             <Tab.Icon>
                 <FontImageSource FontFamily="MaterialIcon" Glyph="&#xf110;" />
             </Tab.Icon>
             <ShellContent 
-                 Content="{views:ShoppingCartView}"
-                Route="ShoppingCartView" />
+                 ContentTemplate="{DataTemplate views:ShoppingCartView}"
+                Route="view" />
         </Tab>
         <Tab Title="Account">
             <Tab.Icon>

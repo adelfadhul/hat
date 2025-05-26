@@ -14,9 +14,11 @@
         public string ProductDetails { get; set; }
         public int Qty { get; set; }
         public double Price { get; set; }
+        public double Vat { get; set; } = 0.2; // 20% VAT by default
         public string Size { get; set; }
         #endregion
 
         public double Amount => Price * Qty;
+        public double VatAmount => Amount * Vat;
     }
 }
