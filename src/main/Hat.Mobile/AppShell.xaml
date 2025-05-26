@@ -16,7 +16,9 @@
             <Tab.Icon>
                 <FontImageSource FontFamily="MaterialIcon" Glyph="&#xf110;" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate views:ShoppingCartView}" Route="CartView" />
+            <ShellContent 
+                 Content="{views:ShoppingCartView}"
+                Route="ShoppingCartView" />
         </Tab>
         <Tab Title="Account">
             <Tab.Icon>
@@ -25,5 +27,5 @@
             <ShellContent ContentTemplate="{DataTemplate views:ProfileView}" Route="ProfileView" />
         </Tab>
     </TabBar>
-
 </Shell>
+<!--ContentTemplate="{DataTemplate views:ShoppingCartView}"-->

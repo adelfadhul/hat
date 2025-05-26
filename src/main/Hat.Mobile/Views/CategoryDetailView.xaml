@@ -83,58 +83,7 @@
                         Text="Top Brands"
                         TextColor="Black"
                         VerticalOptions="EndAndExpand" />
-                    <CollectionView Margin="0,2" ItemsSource="{Binding FeaturedBrandsDataList}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="12" Orientation="Horizontal" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Border
-                                        Padding="16,8"
-                                        Background="white"
-                                        HorizontalOptions="CenterAndExpand"
-                                        Stroke="wheat"
-                                        StrokeShape="RoundRectangle 6"
-                                        VerticalOptions="CenterAndExpand">
-                                        <StackLayout Orientation="Horizontal">
-                                            <Frame
-                                                Padding="0"
-                                                CornerRadius="20"
-                                                HasShadow="False"
-                                                HeightRequest="40"
-                                                Opacity="10"
-                                                WidthRequest="40">
-                                                <Image
-                                                    Aspect="AspectFit"
-                                                    HeightRequest="40"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    Source="{Binding ImageUrl}"
-                                                    VerticalOptions="CenterAndExpand"
-                                                    WidthRequest="40" />
-                                            </Frame>
-                                            <StackLayout Margin="6,0">
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontSize="16"
-                                                    HorizontalOptions="Center"
-                                                    Text="{Binding BrandName}"
-                                                    TextColor="Black" />
-                                                <Label
-                                                    FontSize="12"
-                                                    HorizontalOptions="Center"
-                                                    Text="{Binding Details}"
-                                                    TextColor="{StaticResource SecondaryTextColor}" />
-                                            </StackLayout>
-                                        </StackLayout>
-                                        <Border.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={x:Reference CategoryDetail}, Path=BindingContext.FeaturedTapCommand}" CommandParameter="{Binding .}" />
-                                        </Border.GestureRecognizers>
-                                    </Border>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                  
                     <CollectionView Margin="12" ItemsSource="{Binding Products}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout

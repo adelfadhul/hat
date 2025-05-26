@@ -28,28 +28,28 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
             return items;
         });
-        private static List<ShoppingCartItemModel> ITEMS()=> _cartitems.Value;
+        private static List<ShoppingCartItemModel> ITEMS=> _cartitems.Value;
         public async Task AddCartItem(ShoppingCartItemModel item)
         {
-            ITEMS().Add(item);
+            ITEMS.Add(item);
             await Task.CompletedTask;
         }
 
         public async Task ClearCart()
         {
-             ITEMS().Clear();
+             ITEMS.Clear();
              await Task.CompletedTask;
         }
 
         public async Task DeleteCartItem(Guid itemId)
         {
-            ITEMS().RemoveAll(item => item.Id == itemId);
+            ITEMS.RemoveAll(item => item.Id == itemId);
             await Task.CompletedTask;
         }
 
         public Task<List<ShoppingCartItemModel>> GetCartItems()
         {
-            return Task.FromResult(ITEMS());
+            return Task.FromResult(ITEMS);
         }
     }
 }

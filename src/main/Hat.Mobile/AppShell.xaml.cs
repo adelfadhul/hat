@@ -1,4 +1,6 @@
-﻿using Hat.Mobile.Views;
+﻿using Hat.Mobile.ViewModels;
+using Hat.Mobile.Views;
+using System.Threading.Tasks;
 
 
 namespace Hat.Mobile;
@@ -34,4 +36,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(CardInfoManagerView), typeof(CardInfoManagerView));
         Routing.RegisterRoute(nameof(HomePageView), typeof(HomePageView));
     }
+
+   
+
+
 }

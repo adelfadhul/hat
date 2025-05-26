@@ -1,14 +1,17 @@
-using Hat.Domain.Models;
 using MediatR;
 
 namespace Hat.Domain.Commands
 {
     public class AddShoppingCartItemCommand : IRequest
     {
-        public ShoppingCartItemModel Item { get; set; }
-        public AddShoppingCartItemCommand(ShoppingCartItemModel item)
+        public  Guid ProductId { get; set; }
+        public  int Qty { get; set; }
+        public string Size { get; set; }
+        public AddShoppingCartItemCommand(Guid productid, int qty, string size)
         {
-            Item = item;
+            ProductId = productid;
+            Qty = qty;
+            Size = size;
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Persistance.SqlServer.Entities;
 
 namespace Hat.Infrastructure.Persistance.SqlServer.Features
 {

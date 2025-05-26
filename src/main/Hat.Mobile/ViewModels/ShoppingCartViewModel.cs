@@ -43,6 +43,7 @@ namespace Hat.Mobile.ViewModels
             FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
             QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
             CheckoutCommand = new Command(Checkout);
+            _=  PopulateDataAsync();
             _ = InitializeAsync();
         }      
 
@@ -50,7 +51,7 @@ namespace Hat.Mobile.ViewModels
         {
             await PopulateDataAsync();
         }
-        async Task PopulateDataAsync()
+        public async Task PopulateDataAsync()
         {
 
             var storedProducts = await _dataService.GetShoppingCartItems();

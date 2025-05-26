@@ -1,4 +1,5 @@
 ﻿using Hat.DataViewModels;
+using Hat.Helpers;
 using Hat.Mobile.Services;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
@@ -124,8 +125,9 @@ namespace Hat.Mobile.ViewModels
 
         private async Task AddToCart()
         {
+            await _dataService.AddShoppingCartItem(Guid.Parse(productId), (int)qty, "standard");
+            await ToastHelper.ShowToast("Item added to cart");
            
-           await _dataService.AddShoppingCartItem(Guid.Parse(productId),(int)qty);
           
         }       
     }

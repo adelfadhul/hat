@@ -74,7 +74,6 @@ public static class MauiProgram
         builder.Services.AddTransient<BrandDetailViewModel>();
         builder.Services.AddTransient<CardInfoManagerViewModel>();
         builder.Services.AddTransient<ShoppingCartCalculationViewModel>();
-        builder.Services.AddTransient<ShoppingCartViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
         builder.Services.AddTransient<ConfirmAddressViewModel>();
         builder.Services.AddTransient<ConfirmPaymentViewModel>();

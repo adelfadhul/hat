@@ -1,6 +1,7 @@
 ﻿using Hat.Domain.Constants;
 using Hat.Domain.Models;
 using Hat.Helpers.ExtensionMethods;
+using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels

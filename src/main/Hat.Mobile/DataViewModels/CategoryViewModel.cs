@@ -1,4 +1,5 @@
 ﻿using Hat.Domain.Models;
+using Hat.Infrastructure.Persistance.SqlServer.Entities;
 
 namespace Hat.DataViewModels
 {

@@ -1,5 +1,9 @@
+using Hat.Domain.Commands;
 using Hat.Domain.Models;
+using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 
 namespace Hat.Mobile.Services
 {
@@ -133,14 +137,10 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task AddShoppingCartItem(Guid productId, int quantity)
+        internal async Task AddShoppingCartItem(Guid productId, int quantity, string size)
         {
-            var payload = new
-            {
-                ProductId = productId,
-                Quantity = quantity
-            };
-            var response = await _httpClient.PostAsJsonAsync("/api/shoppingcart/items", payload);
+            var payload = new AddShoppingCartItemCommand(productId, quantity, size);
+            var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add",payload);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");
@@ -166,7 +166,7 @@ namespace Hat.Mobile.Services
             }
         }
 
-     
+
         public async Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
         {
             var response = await _httpClient.GetAsync($"/api/products/category/{categoryId}");

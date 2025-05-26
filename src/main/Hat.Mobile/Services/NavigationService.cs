@@ -34,7 +34,7 @@ public class NavigationService
     }
 
     // Navigate to the cart page
-    public async Task NavigateToCart()
+    public async Task NavigateToShoppingCart()
     {
         await Shell.Current.GoToAsync($"{nameof(ShoppingCartView)}");
     }

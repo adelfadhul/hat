@@ -1,13 +1,13 @@
-using Hat.Domain.Queries;
 using Hat.Domain.Commands;
+using Hat.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace Hat.Backend.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/shopping-cart")]
     public class ShoppingCartController : HatController
     {
@@ -30,7 +30,7 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> AddToCart([FromBody] AddShoppingCartItemCommand command)
         {
             _logger.LogInformation("AddToCart: {@Command}", command);
-          await _mediator.Send(command);
+            await _mediator.Send(command);
             return Ok();
         }
 
