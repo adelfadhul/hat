@@ -44,5 +44,13 @@ public class ProductController : HatController
             }
             return Ok(product);
         }
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetProductsByCategory(Guid categoryId)
+        {
+            _logger.LogInformation("GetProductsByCategory: {CategoryId}", categoryId);
+            var products = await _mediator.Send(new ProductsByCategoryQuery(categoryId));
+            return Ok(products);
+        }
+
     }
 }

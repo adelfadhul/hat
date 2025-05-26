@@ -105,7 +105,7 @@ namespace Hat.Mobile.ViewModels
         => await _navigationService.NavigateToProductDetails(product.Id);
 
         private async void SelectCategory(CategoryViewModel category)
-        => await _navigationService.NavigateToCategoryDetails();
+        => await _navigationService.NavigateToCategoryDetails(category.CategoryID);
 
         private async void SelectRecommend(object product)
         => await _navigationService.NavigateToAllProducts();

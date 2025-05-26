@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class CategoriesQueryHandler : IRequestHandler<CategoriesQuery, List<CategoryModel>>
+    internal class CategoriesQueryHandler : IRequestHandler<CategoriesQuery, List<CategoryModel>>
     {
         private readonly ICategoryRepository _categoryRepository;
 

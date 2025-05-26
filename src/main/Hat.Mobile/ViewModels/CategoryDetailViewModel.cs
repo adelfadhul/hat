@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
+    [QueryProperty(nameof(CategoryId), "categoryId")]
     public class CategoryDetailViewModel : BaseViewModel
     {
         private ObservableCollection<ProductViewModel> _Products = [];
@@ -21,13 +23,9 @@ namespace Hat.Mobile.ViewModels
             set => SetProperty(ref _FeaturedBrandsDataList, value);
         }
         public string PageTitle
-        {
-            get
-            {
-                return CategoryModel.CategoryName;
-            }
-        }
-        CategoryViewModel CategoryModel { get; set; }
+        => CategoryModel?.Name;
+  
+        private CategoryModel CategoryModel { get; set; }
 
         private bool _IsLoaded = false;
         public bool IsLoaded
@@ -38,30 +36,47 @@ namespace Hat.Mobile.ViewModels
         public ICommand BackCommand { get; }
         public ICommand SelectProductCommand { get; }
 
-      
- 
+        private string categoryId;
+        public string CategoryId
+        {
+            get => categoryId;
+            set
+            {
+                categoryId = value;
+                // Trigger loading logic
+                _ = PopulateDataAsync(categoryId);//fire and forget
+            }
+        }
+
         public CategoryDetailViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService) 
         {
            
         
             BackCommand = new Command(GoBack);
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
-      
+           
+
             _ = InitializeAsync();
         }
 
         private async Task InitializeAsync()
         {
-            await PopulateDataAsync();
+            await PopulateDataAsync(categoryId);
         }
-        async Task PopulateDataAsync()
+        private async Task PopulateDataAsync(string categoryId)
         {
+            if (string.IsNullOrEmpty(categoryId))
+            {
+                return;
+            }
 
-            var storedProducts= await _dataService.GetProducts();
+            CategoryModel = await _dataService.GetCategoryById(Guid.Parse(categoryId));
+
+            var storedProducts= await _dataService.GetProductsByCategory(CategoryModel.Id);
             Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
 
-            var storedFeaturedBrands = await _dataService.GetFeaturedProducts();
-            FeaturedBrandsDataList= storedFeaturedBrands.Select(x => new ProductViewModel(x)).ToObservableCollection(); 
+            //var storedFeaturedBrands = await _dataService.GetFeaturedProducts();
+            //FeaturedBrandsDataList= storedFeaturedBrands.Select(x => new ProductViewModel(x)).ToObservableCollection(); 
             IsLoaded = true;
         }
 

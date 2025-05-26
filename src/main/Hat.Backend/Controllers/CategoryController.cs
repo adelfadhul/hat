@@ -21,7 +21,18 @@ namespace Hat.Backend.Controllers
             var list = await _mediator.Send(new CategoriesQuery());
             return Ok(list);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategoryById(Guid id)
+        {
+            _logger.LogInformation("GetCategoryById: {CategoryId}", id);
+            var category = await _mediator.Send(new CategoryByIdQuery(id));
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
 
-      
+       
     }
 }

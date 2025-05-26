@@ -1,7 +1,5 @@
-﻿using CommunityToolkit.Maui.Core.Views;
-using Hat.DataViewModels;
+﻿using Hat.DataViewModels;
 using Hat.Mobile.Services;
-using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
@@ -82,14 +80,13 @@ namespace Hat.Mobile.ViewModels
             FavCommand = new Command<Color>(FavItem);
             // Update the AddToCartCommand initialization to match the expected Action<object> signature
             AddToCartCommand = new Command<object>(async (obj) => await AddToCart());
-            //AddToCartCommand = new Command(AddToCart);
             _ = InitializeAsync();
     
         }
 
         private async Task InitializeAsync()
         {
-            await PopulateDataAsync(ProductId);
+            await PopulateDataAsync(productId);
         }
 
         async Task PopulateDataAsync(string productId)

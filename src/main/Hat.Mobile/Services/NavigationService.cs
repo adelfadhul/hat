@@ -88,9 +88,9 @@ public class NavigationService
     {
         await Shell.Current.GoToAsync($"{nameof(DeliveryTypeSelectorView)}");
     }
-    public async Task NavigateToCategoryDetails()
+    public async Task NavigateToCategoryDetails(Guid categoryId)
     {
-        await Shell.Current.GoToAsync($"{nameof(CategoryDetailView)}");
+        await Shell.Current.GoToAsync($"{nameof(CategoryDetailView)}?categoryId={categoryId}");
     }
 
     public async Task NavigateToAllProducts()
@@ -128,4 +128,6 @@ public class NavigationService
     {
         await Shell.Current.GoToAsync($"{nameof(BrandDetailView)}");
     }
+
+    
 }

@@ -165,5 +165,30 @@ namespace Hat.Mobile.Services
                 throw new HttpRequestException($"Error removing shopping cart item: {response.ReasonPhrase}");
             }
         }
+
+     
+        public async Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
+        {
+            var response = await _httpClient.GetAsync($"/api/products/category/{categoryId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching products by category: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<ProductModel>>();
+            return data;
+        }
+        public async Task<CategoryModel?> GetCategoryById(Guid categoryId)
+        {
+            var response = await _httpClient.GetAsync($"/api/categories/{categoryId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching category by id: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<CategoryModel>();
+            return data;
+        }
+
+
+
     }
 }

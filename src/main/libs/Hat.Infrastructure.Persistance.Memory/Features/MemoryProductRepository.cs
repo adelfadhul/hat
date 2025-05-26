@@ -13,6 +13,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "BeoPlay Speaker",
                     BrandName = "Bang and Olufsen",
                     Price = 755,
@@ -27,6 +28,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
                     Name = "Leather Wristwatch",
                     BrandName = "Tag Heuer",
                     Price = 450,
@@ -41,6 +43,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "Smart Bluetooth Speaker",
                     BrandName = "Google LLC",
                     Price = 900,
@@ -55,6 +58,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
                     Name = "Smart Luggage",
                     BrandName = "Smart Inc",
                     Price = 1200,
@@ -150,16 +154,13 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return products;
         });
 
-        private static List<ProductModel> PRODUCTS()
-        {
-            
-            return _products.Value;
-        }
-       
+        private static List<ProductModel> PRODUCTS
+       => _products.Value;
+
         public Task<List<ProductModel>> GetBestSettlingProducts()
         {
 
-            var products= PRODUCTS();
+            var products= PRODUCTS;
             return Task.FromResult(products);
         }
 
@@ -171,25 +172,25 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public Task<List<ProductModel>> GetFeaturedProducts()
         {
-            var products = PRODUCTS();
+            var products = PRODUCTS;
             return Task.FromResult(products);
         }
 
         public Task<ProductModel?> GetProductById(Guid productId)
         {
-            var products = PRODUCTS();
+            var products = PRODUCTS;
             var product = products.FirstOrDefault(p => p.Id == productId);
             return Task.FromResult(product);
         }
 
         public async Task<List<ProductModel>> GetProducts()
         {
-            return await Task.FromResult(PRODUCTS());
+            return await Task.FromResult(PRODUCTS);
         }
 
         public Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
         {
-           var products= PRODUCTS().Where(x => x.CategoryId == categoryId);
+           var products= PRODUCTS.Where(x => x.CategoryId == categoryId);
             return Task.FromResult(products.ToList());
         }
 

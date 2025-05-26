@@ -5,7 +5,6 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-
     internal class ProductByIdQueryHandler : IRequestHandler<ProductByIdQuery, ProductModel?>
     {
         private readonly IProductRepository _productRepository;
