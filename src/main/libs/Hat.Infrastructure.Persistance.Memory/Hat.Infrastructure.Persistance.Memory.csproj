@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\User.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Hat.Domain\Hat.Domain.csproj" />
   </ItemGroup>
 

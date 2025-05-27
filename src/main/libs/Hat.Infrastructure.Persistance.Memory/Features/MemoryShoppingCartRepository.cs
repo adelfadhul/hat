@@ -1,10 +1,10 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
-using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryShoppingCartRepository : IShoppingCartRepository
+    public class MemoryShoppingCartRepository :UserRepository, IShoppingCartRepository
     {
         private static readonly Lazy<List<ShoppingCartItemModel>> _cartitems= new(() =>
         {
@@ -28,6 +28,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
             return items;
         });
+
+        public MemoryShoppingCartRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
         private static List<ShoppingCartItemModel> ITEMS=> _cartitems.Value;
         public async Task AddCartItem(ShoppingCartItemModel item)
         {

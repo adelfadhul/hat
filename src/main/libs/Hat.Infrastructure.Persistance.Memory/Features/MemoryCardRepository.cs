@@ -1,10 +1,15 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCardRepository : ICardRepository
+    public class MemoryCardRepository :UserRepository, ICardRepository
     {
+        public MemoryCardRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
         public Task AddCard(CardInfoModel card)
         {
             throw new NotImplementedException();

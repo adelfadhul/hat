@@ -1,9 +1,10 @@
-﻿using Hat.Domain.Store;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Store;
 using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryReviewRepository : IReviewRepository
+    public class MemoryReviewRepository :UserRepository, IReviewRepository
     {
         private static readonly Lazy<List<ReviewModel>> _reviews = new(() =>
         {
@@ -93,6 +94,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             L.AddRange(Reviews4);
             return L;
         });
+
+        public MemoryReviewRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
 
         private static List<ReviewModel> REVIEWS
        => _reviews.Value;

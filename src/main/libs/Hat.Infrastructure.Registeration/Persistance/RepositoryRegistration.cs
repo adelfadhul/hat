@@ -1,4 +1,6 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 using Hat.Infrastructure.Persistance.Memory.Features;
 using Hat.Infrastructure.Persistance.SqlServer.Features;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IDeliveryStepRepository, MemoryDeliveryStepRepository>();
                     services.AddScoped<IShippingAddressRepository, MemoryShippingAddressRepository>();
                     services.AddScoped<IReviewRepository, MemoryReviewRepository>();
+                    services.AddScoped<ICurrentUser, MemoryCurrentUser>();
                     break;
                 case "SqlServer":
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

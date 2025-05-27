@@ -1,11 +1,16 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryDeliveryTypeRepository: IDeliveryTypeRepository
+    public class MemoryDeliveryTypeRepository:UserRepository, IDeliveryTypeRepository
     {
-       public Task<List<DeliveryTypeModel>> GetDeliveryTypes()
+        public MemoryDeliveryTypeRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
+        public Task<List<DeliveryTypeModel>> GetDeliveryTypes()
         {
             var deliveryTypes = new List<DeliveryTypeModel>
             {

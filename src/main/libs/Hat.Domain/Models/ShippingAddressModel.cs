@@ -4,6 +4,8 @@
     {
 
         #region data
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public string AddressType { get; set; }
         public string FullAddress { get; set; }
         public string Street { get; set; }

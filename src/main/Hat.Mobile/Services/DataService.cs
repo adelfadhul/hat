@@ -1,19 +1,19 @@
 using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Models;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
 
 namespace Hat.Mobile.Services
 {
     public class DataService
     {
         private readonly HttpClient _httpClient;
+        private ICurrentUser _currentUser;
 
-        public DataService(IHttpClientFactory httpClientFactory)
+        public DataService(IHttpClientFactory httpClientFactory,ICurrentUser currentUser)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
+            _currentUser = currentUser;
         }
 
         public async Task<List<ProductModel>> GetProducts()
@@ -193,7 +193,15 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-
-
+        internal async Task<ShippingAddressModel> GetPrimaryAddress()
+        {
+            var response = await _httpClient.GetAsync($"/api/shipping-addresses/primary/{_currentUser.Oid()}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching category by id: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<ShippingAddressModel>();
+            return data;
+        }
     }
 }

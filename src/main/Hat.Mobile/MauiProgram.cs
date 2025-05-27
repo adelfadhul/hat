@@ -3,6 +3,8 @@ using Camera.MAUI;
 using CommunityToolkit.Maui;
 using Hat.Application.Registeration;
 using Hat.DataViewModels;
+using Hat.Domain.Identity;
+using Hat.Infrastructure.Identity.Memory;
 using Hat.Mobile.Services;
 using Hat.Mobile.ViewModels;
 using Hat.Mobile.Views;
@@ -131,8 +133,8 @@ public static class MauiProgram
 
         // Register MediatR handlers from the application assembly
         builder.Services.AddHatApplications("Hat.Application");
+        builder.Services.AddScoped<ICurrentUser,MemoryCurrentUser>();
 
-      
 
         return builder.Build();
     }

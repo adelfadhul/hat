@@ -52,16 +52,9 @@ namespace Hat.Mobile.ViewModels
         }
         async Task PopulateDataAsync()
         {
-            await Task.Delay(500);
-            //TODO: Remove Delay here and call API if needed
-            PrimaryAddress = new ShippingAddressViewModel()
-            {
-                StreetOne = "21, Alex Davidson Avenue",
-                StreetTwo = "Opposite Omegatron, Vicent Quarters",
-                City = "Victoria Island",
-                State = "Lagos State"
-            };
-             IsLoaded = true;
+            var primaryShippingAddress = await _dataService.GetPrimaryAddress();
+            PrimaryAddress = new ShippingAddressViewModel(primaryShippingAddress);
+            IsLoaded =true;
         }
 
         private async void ConfirmAddress()

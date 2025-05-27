@@ -1,10 +1,11 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
 using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryProductRepository : IProductRepository
+    public class MemoryProductRepository :UserRepository, IProductRepository
     {
         public static  Guid Product1 => PRODUCTS[0].Id;
         public static Guid Product2 => PRODUCTS[1].Id;
@@ -18,7 +19,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "BeoPlay Speaker",
                     BrandName = "Bang and Olufsen",
@@ -34,7 +34,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
-                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
                     Name = "Leather Wristwatch",
                     BrandName = "Tag Heuer",
@@ -50,7 +49,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
-                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "Smart Bluetooth Speaker",
                     BrandName = "Google LLC",
@@ -66,7 +64,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
-                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
                     Name = "Smart Luggage",
                     BrandName = "Smart Inc",
@@ -84,6 +81,14 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             
             return products;
         });
+
+        public MemoryProductRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+            foreach (var product in PRODUCTS)
+            {
+                product.UserId = _currentUser.Oid();
+            }
+        }
 
         private static List<ProductModel> PRODUCTS
        => _products.Value;

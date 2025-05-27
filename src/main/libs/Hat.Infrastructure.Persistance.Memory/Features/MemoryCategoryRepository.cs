@@ -1,9 +1,10 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCategoryRepository : ICategoryRepository
+    public class MemoryCategoryRepository :UserRepository, ICategoryRepository
     {
         private static readonly Lazy<List<CategoryModel>> _categories = new(() => new List<CategoryModel>
             {
@@ -13,6 +14,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new CategoryModel { Id = Guid.NewGuid(), Name = "Toys", Icon = "\uf1ae" },
                 new CategoryModel { Id = Guid.NewGuid(), Name = "Sports", Icon = "\uf44b" }
             });
+
+        public MemoryCategoryRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
         public static List<CategoryModel> CATEGORIES => _categories.Value;
         public static Guid CATEGORY_ElectronicId => CATEGORIES.Single(c => c.Name == "Electronics").Id;
         public static Guid CATEGORY_FashionId => CATEGORIES.Single(c => c.Name == "Fashion").Id;

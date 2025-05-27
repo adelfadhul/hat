@@ -6,5 +6,6 @@ namespace Hat.Domain.Queries
     public class ShippingAddressesQuery : IRequest<List<ShippingAddressModel>>
     {
     }
+   
 
 }

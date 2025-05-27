@@ -1,10 +1,15 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryTrackRepository : ITrackRepository
+    public class MemoryTrackRepository :UserRepository, ITrackRepository
     {
+        public MemoryTrackRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
         public Task<List<TrackModel>> GetTracks()
         {
             var tracks = new List<TrackModel>

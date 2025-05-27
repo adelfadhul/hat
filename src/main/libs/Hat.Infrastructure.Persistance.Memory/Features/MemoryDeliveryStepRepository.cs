@@ -1,11 +1,15 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Identity;
+using Hat.Domain.Models;
 using Hat.Domain.Store;
-using System.Threading.Tasks;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryDeliveryStepRepository : IDeliveryStepRepository
+    public class MemoryDeliveryStepRepository :UserRepository, IDeliveryStepRepository
     {
+        public MemoryDeliveryStepRepository(ICurrentUser currentUser) : base(currentUser)
+        {
+        }
+
         public Task<List<DeliveryStepModel>> GetDeliverySteps()
         {
            

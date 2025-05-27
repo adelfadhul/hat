@@ -1,3 +1,4 @@
+using Hat.DataViewModels;
 using Hat.Mobile.Views;
 namespace Hat.Mobile.Services;
 public class NavigationService
@@ -129,5 +130,5 @@ public class NavigationService
         await Shell.Current.GoToAsync($"{nameof(BrandDetailView)}");
     }
 
-    
+   
 }
