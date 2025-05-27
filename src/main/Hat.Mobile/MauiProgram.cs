@@ -73,7 +73,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
         builder.Services.AddTransient<CardInfoManagerViewModel>();
-        builder.Services.AddTransient<ShoppingCartCalculationViewModel>();
+        builder.Services.AddTransient<CheckOutViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
         builder.Services.AddTransient<ConfirmAddressViewModel>();
         builder.Services.AddTransient<ConfirmPaymentViewModel>();
@@ -89,6 +89,7 @@ public static class MauiProgram
         builder.Services.AddTransient<WishListViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorViewModel>();
 
+        builder.Services.AddTransient<ShippingAddressViewModel>();
         builder.Services.AddTransient<CategoryViewModel>();
         builder.Services.AddTransient<DataService>();
         builder.Services.AddTransient<NavigationService>();
@@ -102,7 +103,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
         builder.Services.AddTransient<CardInfoManagerView>();
-        builder.Services.AddTransient<ShoppingCartCalculationView>();
+        builder.Services.AddTransient<CheckOutView>();
         builder.Services.AddTransient<ShoppingCartView>();
         builder.Services.AddTransient<CategoryDetailView>();
         builder.Services.AddTransient<ConfirmAddressView>();
@@ -116,7 +117,6 @@ public static class MauiProgram
         builder.Services.AddTransient<VerificationView>();
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<AddNewCardView>();
-        builder.Services.AddTransient<ShippingAddressSelectorView>();
 
         var url = getBaseUrl();
         

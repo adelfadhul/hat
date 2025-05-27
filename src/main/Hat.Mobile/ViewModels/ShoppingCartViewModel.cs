@@ -73,6 +73,6 @@ namespace Hat.Mobile.ViewModels
             SubTotal = Products.Sum(item => item.Qty * item.Price);
         }
         private async void Checkout()
-        => await _navigationService.NavigateToCartCalculation();
+        => await _navigationService.NavigateToCheckOut();
     }
 }

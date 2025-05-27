@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
-    public class ShoppingCartCalculationViewModel : BaseViewModel
+    public class CheckOutViewModel : BaseViewModel
     {
         private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
         public ObservableCollection<ShoppingCartItemViewModel> Products
@@ -40,7 +40,7 @@ namespace Hat.Mobile.ViewModels
 
 
 
-        public ShoppingCartCalculationViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
+        public CheckOutViewModel(NavigationService navigationService, DataService dataService) : base(navigationService, dataService)
         {
            
 
@@ -57,6 +57,7 @@ namespace Hat.Mobile.ViewModels
             var cartItems = await _dataService.GetShoppingCartItems();
             Products = cartItems.Select(x => new ShoppingCartItemViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Amount);
+            Vat = Products.Sum(item => item.Vat);
             IsLoaded = true;
         }
         private async void Checkout()

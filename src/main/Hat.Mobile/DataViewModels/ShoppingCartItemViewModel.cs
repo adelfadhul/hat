@@ -19,6 +19,7 @@ namespace Hat.DataViewModels
             Qty = domainModel.Qty;
             Size = domainModel.Size;
             Amount = domainModel.Amount;
+            Vat = domainModel.VatAmount;
         }
         public Guid Id { get; set; }
         public string ProductImageUrl { get; set; }
@@ -30,5 +31,6 @@ namespace Hat.DataViewModels
         public string Size { get; set; }
 
         public double Amount { get; init; }
+        public double Vat { get; init; }
     }
 }

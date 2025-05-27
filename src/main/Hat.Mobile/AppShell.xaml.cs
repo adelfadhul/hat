@@ -26,7 +26,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(OrderDetailsView), typeof(OrderDetailsView));
         Routing.RegisterRoute(nameof(WishListView), typeof(WishListView));
         Routing.RegisterRoute(nameof(AllProductView), typeof(AllProductView));
-        Routing.RegisterRoute(nameof(ShoppingCartCalculationView), typeof(ShoppingCartCalculationView));
+        Routing.RegisterRoute(nameof(CheckOutView), typeof(CheckOutView));
         Routing.RegisterRoute(nameof(VerificationView), typeof(VerificationView));
         Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
         Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));

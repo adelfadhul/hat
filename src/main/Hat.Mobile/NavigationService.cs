@@ -76,9 +76,9 @@ public class NavigationService
         await Shell.Current.GoToAsync($"{nameof(AddNewCardView)}");
     }
     // Navigate to the card calculation page
-    public async Task NavigateToCartCalculation()
+    public async Task NavigateToCheckOut()
     {
-        await Shell.Current.GoToAsync($"{nameof(CartCalculationView)}");
+        await Shell.Current.GoToAsync($"{nameof(CheckOutView)}");
     }
     public async Task NavigateToConfirmPyment()
     {
