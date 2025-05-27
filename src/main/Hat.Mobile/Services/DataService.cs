@@ -49,9 +49,10 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        public async Task<ProductModel> GetProductById(Guid id)
+        private async Task<ProductModel> getProductById(Guid id, bool isDetailed)
         {
-            var response = await _httpClient.GetAsync($"/api/products/{id}");
+            var url = isDetailed ? $"/api/products/{id}?detailed=true" : $"/api/products/{id}";
+            var response = await _httpClient.GetAsync(url);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching product by id: {response.ReasonPhrase}");
@@ -60,15 +61,9 @@ namespace Hat.Mobile.Services
             return data;
         }
         public async Task<ProductModel> GetProductByIdWithDetails(Guid id)
-        {
-            var response = await _httpClient.GetAsync($"/api/products/detailed/{id}");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Error fetching product by id: {response.ReasonPhrase}");
-            }
-            var data = await response.Content.ReadFromJsonAsync<ProductModel>();
-            return data;
-        }
+        => await getProductById(id, true);
+        public async Task<ProductModel> GetProductById(Guid id)
+            => await getProductById(id, false);
 
         public async Task<List<CategoryModel>> GetCategories()
         {
@@ -150,7 +145,7 @@ namespace Hat.Mobile.Services
         internal async Task AddShoppingCartItem(Guid productId, int quantity, string size)
         {
             var payload = new AddShoppingCartItemCommand(productId, quantity, size);
-            var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add",payload);
+            var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add", payload);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");

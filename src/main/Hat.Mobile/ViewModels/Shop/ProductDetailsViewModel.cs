@@ -96,7 +96,7 @@ namespace Hat.Mobile.ViewModels
             {
                 return;
             }
-            var storedProduct = await _dataService.GetProductById(Guid.Parse(productId));
+            var storedProduct = await _dataService.GetProductByIdWithDetails(Guid.Parse(productId));
             ProductDetail = new ProductViewModel(storedProduct);
             
             IsLoaded = true;

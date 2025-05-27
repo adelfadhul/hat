@@ -1,6 +1,8 @@
 ﻿using Hat.Domain.Models;
 using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
+using Hat.Model;
+using System.Collections.ObjectModel;
 
 namespace Hat.DataViewModels
 {
@@ -19,9 +21,12 @@ namespace Hat.DataViewModels
             Details = domainModel.Details; Qty = domainModel.Qty;
             IsAvailable = domainModel.IsAvailable;
             Sizes = domainModel.Sizes;
+            Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(domainModel.Reviews));
+
         }
 
         public Guid Id { get; set; }
+        public ReadOnlyObservableCollection<ReviewModel> Reviews { get; set; } = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>());
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
