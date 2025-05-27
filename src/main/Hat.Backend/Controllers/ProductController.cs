@@ -34,10 +34,15 @@ public class ProductController : HatController
             return Ok(products);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(Guid id)
+        public async Task<IActionResult> GetProductById(Guid id, [FromQuery] bool detailed)
         {
             _logger.LogInformation("GetProductById: {ProductId}", id);
-            var product = await _mediator.Send(new ProductByIdQuery(id));
+            var isDetailed = false;
+            if (detailed)
+            {
+                isDetailed = true;
+            }
+            var product = await _mediator.Send(new ProductByIdQuery(id,isDetailed));
             if (product == null)
             {
                 return NotFound();

@@ -6,10 +6,11 @@ namespace Hat.Domain.Queries
     public class ProductByIdQuery : IRequest<ProductModel?>
     {
         public Guid ProductId { get; }
-
-        public ProductByIdQuery(Guid productId)
+        public bool IsFull { get; } 
+        public ProductByIdQuery(Guid productId, bool isFull)
         {
             ProductId = productId;
+            IsFull = isFull;
         }
     }
 }

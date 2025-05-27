@@ -54,7 +54,7 @@ namespace Hat.Mobile.ViewModels
         {
             await Task.Delay(500);
             //TODO: Remove Delay here and call API if needed
-            PrimaryAddress = new DataViewModels.ShippingAddressViewModel()
+            PrimaryAddress = new ShippingAddressViewModel()
             {
                 StreetOne = "21, Alex Davidson Avenue",
                 StreetTwo = "Opposite Omegatron, Vicent Quarters",

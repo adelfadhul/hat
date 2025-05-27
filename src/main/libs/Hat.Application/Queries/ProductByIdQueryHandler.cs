@@ -8,15 +8,22 @@ namespace Hat.Application.Queries
     internal class ProductByIdQueryHandler : IRequestHandler<ProductByIdQuery, ProductModel?>
     {
         private readonly IProductRepository _productRepository;
-
-        public ProductByIdQueryHandler(IProductRepository productRepository)
+        private readonly IReviewRepository _reviewRepository;
+        public ProductByIdQueryHandler(IProductRepository productRepository, IReviewRepository reviewRepository)
         {
             _productRepository = productRepository;
+            _reviewRepository = reviewRepository;
         }
 
         public async Task<ProductModel?> Handle(ProductByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _productRepository.GetProductById(request.ProductId);
+            var product = await _productRepository.GetProductById(request.ProductId);
+            if (request.IsFull && product is not null)
+                product.Reviews = await _reviewRepository.GetReviewsByProduct(product.Id);
+
+            return product;
+
         }
+
     }
 }

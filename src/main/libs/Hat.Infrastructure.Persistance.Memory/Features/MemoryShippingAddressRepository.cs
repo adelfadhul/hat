@@ -14,8 +14,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     AddressType = "Home Address",
                     FullAddress = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
-                    StreetOne = "21, Alex Davidson Avenue",
-                    StreetTwo = "Opposite Omegatron, Vicent Smith Quarters",
+                    Street = "21, Alex Davidson Avenue",
                     City = "Victoria Island",
                     State = "Lagos"
                 },
@@ -23,8 +22,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     AddressType = "Work Address",
                     FullAddress = "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria",
-                    StreetOne = "9, Martins Crescent",
-                    StreetTwo = "Bank of Nigeria",
+                    Street = "9, Martins Crescent",
                     City = "Abuja",
                     State = ""
                 }

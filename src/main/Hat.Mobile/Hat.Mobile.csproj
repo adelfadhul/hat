@@ -61,49 +61,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\AllProductView.xaml.cs">
+	  <Compile Update="Views\Shop\AllProductView.xaml.cs">
 	    <DependentUpon>AllProductView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\BrandDetailView.xaml.cs">
+	  <Compile Update="Views\Shop\BrandDetailView.xaml.cs">
 	    <DependentUpon>BrandDetailView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\CardInfoManagerView.xaml.cs">
+	  <Compile Update="Views\Account\CardInfoManagerView.xaml.cs">
 	    <DependentUpon>CardInfoManagerView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ConfirmAddressView.xaml.cs">
+	  <Compile Update="Views\Cart\ConfirmAddressView.xaml.cs">
 	    <DependentUpon>ConfirmAddressView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\DeliveryTypeSelectorView.xaml.cs">
+	  <Compile Update="Views\Cart\DeliveryTypeSelectorView.xaml.cs">
 	    <DependentUpon>DeliveryTypeSelectorView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ScanCameraView.xaml.cs">
+	  <Compile Update="Views\Shop\ScanCameraView.xaml.cs">
 	    <DependentUpon>ScanCameraView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ShoppingCartView.xaml.cs">
+	  <Compile Update="Views\Cart\ShoppingCartView.xaml.cs">
 	    <DependentUpon>CartView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\CategoryDetailView.xaml.cs">
+	  <Compile Update="Views\Shop\CategoryDetailView.xaml.cs">
 	    <DependentUpon>CategoryDetailView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\HomePageView.xaml.cs">
+	  <Compile Update="Views\Shop\HomePageView.xaml.cs">
 	    <DependentUpon>HomePageView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\OrderDetailsView.xaml.cs">
+	  <Compile Update="Views\Order\OrderDetailsView.xaml.cs">
 	    <DependentUpon>OrderDetailsView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ProductDetailsView.xaml.cs">
+	  <Compile Update="Views\Shop\ProductDetailsView.xaml.cs">
 	    <DependentUpon>ProductDetailsView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ProfileView.xaml.cs">
+	  <Compile Update="Views\Account\ProfileView.xaml.cs">
 	    <DependentUpon>ProfileView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\RegisterView.xaml.cs">
+	  <Compile Update="Views\Account\RegisterView.xaml.cs">
 	    <DependentUpon>RegisterView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ShippingAddressSelectorView.xaml.cs">
+	  <Compile Update="Views\Cart\ShippingAddressSelectorView.xaml.cs">
 	    <DependentUpon>ShippingAddressSelectorView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\TrackOrderView.xaml.cs">
+	  <Compile Update="Views\Order\TrackOrderView.xaml.cs">
 	    <DependentUpon>TrackOrderView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -112,70 +112,70 @@
 	  <MauiXaml Update="Controls\CreditCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AddNewCardView.xaml">
+	  <MauiXaml Update="Views\Account\AddNewCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AllProductView.xaml">
+	  <MauiXaml Update="Views\Shop\AllProductView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\BrandDetailView.xaml">
+	  <MauiXaml Update="Views\Shop\BrandDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CheckOutView.xaml">
+	  <MauiXaml Update="Views\Cart\CheckOutView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ConfirmAddressView.xaml">
+	  <MauiXaml Update="Views\Cart\ConfirmAddressView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ConfirmPaymentView.xaml">
+	  <MauiXaml Update="Views\Cart\ConfirmPaymentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DeliveryTypeSelectorView.xaml">
+	  <MauiXaml Update="Views\Cart\DeliveryTypeSelectorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\FinishCartView.xaml">
+	  <MauiXaml Update="Views\Cart\FinishCartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ScanCameraView.xaml">
+	  <MauiXaml Update="Views\Shop\ScanCameraView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CardInfoManagerView.xaml">
+	  <MauiXaml Update="Views\Account\CardInfoManagerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ShoppingCartView.xaml">
+	  <MauiXaml Update="Views\Cart\ShoppingCartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CategoryDetailView.xaml">
+	  <MauiXaml Update="Views\Shop\CategoryDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\HomePageView.xaml">
+	  <MauiXaml Update="Views\Shop\HomePageView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginView.xaml">
+	  <MauiXaml Update="Views\Account\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OrderDetailsView.xaml">
+	  <MauiXaml Update="Views\Order\OrderDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ProductDetailsView.xaml">
+	  <MauiXaml Update="Views\Shop\ProductDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ProfileView.xaml">
+	  <MauiXaml Update="Views\Account\ProfileView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RegisterView.xaml">
+	  <MauiXaml Update="Views\Account\RegisterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ShippingAddressSelectorView.xaml">
+	  <MauiXaml Update="Views\Cart\ShippingAddressSelectorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TrackOrderView.xaml">
+	  <MauiXaml Update="Views\Order\TrackOrderView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\VerificationView.xaml">
+	  <MauiXaml Update="Views\Account\VerificationView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\WishListView.xaml">
+	  <MauiXaml Update="Views\Shop\WishListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

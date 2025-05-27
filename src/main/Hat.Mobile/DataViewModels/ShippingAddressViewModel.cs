@@ -13,8 +13,7 @@ namespace Hat.DataViewModels
         {
             AddressType = data.AddressType;
             FullAddress = data.FullAddress;
-            StreetOne = data.StreetOne;
-            StreetTwo = data.StreetTwo;
+            StreetOne = data.Street;
             City = data.City;
             State = data.State;
         }

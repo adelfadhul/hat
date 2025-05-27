@@ -6,6 +6,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryProductRepository : IProductRepository
     {
+        public static  Guid Product1 => PRODUCTS[0].Id;
+        public static Guid Product2 => PRODUCTS[1].Id;
+        public static Guid Product3 => PRODUCTS[2].Id;
+        public static Guid Product4 => PRODUCTS[3].Id;
+
         private static readonly Lazy<List<ProductModel>> _products = new(() =>
         {
             var products = new List<ProductModel>
@@ -13,6 +18,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "BeoPlay Speaker",
                     BrandName = "Bang and Olufsen",
@@ -28,6 +34,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
                     Name = "Leather Wristwatch",
                     BrandName = "Tag Heuer",
@@ -43,6 +50,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "Smart Bluetooth Speaker",
                     BrandName = "Google LLC",
@@ -58,6 +66,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= User.Id,
                     CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
                     Name = "Smart Luggage",
                     BrandName = "Smart Inc",
@@ -71,86 +80,8 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Reviews = new List<ReviewModel>()
                 }
             };
-
-            products[0].Reviews = new List<ReviewModel>
-            {
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[0].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/men/1.jpg",
-                    Name = "John Doe",
-                    Review = "Amazing sound quality!",
-                    Rating = 4.8f
-                },
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[0].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/men/5.jpg",
-                    Name = "Michael Brown",
-                    Review = "Great bass and clarity.",
-                    Rating = 4.6f
-                }
-            };
-
-            products[1].Reviews = new List<ReviewModel>
-            {
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[1].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/women/2.jpg",
-                    Name = "Jane Smith",
-                    Review = "Stylish and comfortable.",
-                    Rating = 4.5f
-                },
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[1].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/men/6.jpg",
-                    Name = "David Lee",
-                    Review = "Looks premium and feels durable.",
-                    Rating = 4.7f
-                }
-            };
-
-            products[2].Reviews = new List<ReviewModel>
-            {
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[2].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/men/3.jpg",
-                    Name = "Alex Johnson",
-                    Review = "Very convenient for my smart home.",
-                    Rating = 4.7f
-                }
-            };
-
-            products[3].Reviews = new List<ReviewModel>
-            {
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[3].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/women/4.jpg",
-                    Name = "Emily Davis",
-                    Review = "Perfect for frequent travelers.",
-                    Rating = 4.9f
-                },
-                new ReviewModel
-                {
-                    Id = Guid.NewGuid(),
-                    ProductId = products[3].Id,
-                    ImageUrl = "https://randomuser.me/api/portraits/men/7.jpg",
-                    Name = "Chris Evans",
-                    Review = "Love the GPS feature!",
-                    Rating = 4.8f
-                }
-            };
-
+            
+            
             return products;
         });
 

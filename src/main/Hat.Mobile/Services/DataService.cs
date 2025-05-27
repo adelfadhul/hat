@@ -59,6 +59,16 @@ namespace Hat.Mobile.Services
             var data = await response.Content.ReadFromJsonAsync<ProductModel>();
             return data;
         }
+        public async Task<ProductModel> GetProductByIdWithDetails(Guid id)
+        {
+            var response = await _httpClient.GetAsync($"/api/products/detailed/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching product by id: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<ProductModel>();
+            return data;
+        }
 
         public async Task<List<CategoryModel>> GetCategories()
         {
