@@ -39,13 +39,13 @@
                         FontAttributes="Bold"
                         FontSize="26"
                         HorizontalOptions="CenterAndExpand"
-                        Text="David Spade"
+                        Text="{Binding Name}"
                         TextColor="Black"
                         VerticalTextAlignment="Center" />
                     <Label
                         FontSize="14"
                         HorizontalOptions="CenterAndExpand"
-                        Text="iamdavid@gmail.com"
+                        Text="{Binding Email}"
                         TextColor="Black"
                         VerticalTextAlignment="Center" />
                 </StackLayout>

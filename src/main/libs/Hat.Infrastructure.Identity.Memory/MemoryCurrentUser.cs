@@ -27,5 +27,8 @@ namespace Hat.Infrastructure.Identity.Memory
 
         public void SetClaims(IEnumerable<Claim> claims)
         => _oid = claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value is string oidStr && Guid.TryParse(oidStr, out var oid) ? oid : Guid.NewGuid();
+
+        public string Image()
+       => "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Avatar.png";
     }
 }

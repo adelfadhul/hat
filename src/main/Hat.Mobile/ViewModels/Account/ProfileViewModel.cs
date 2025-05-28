@@ -1,4 +1,5 @@
-﻿using Hat.Mobile.Model;
+﻿using Hat.Domain.Identity;
+using Hat.Mobile.Model;
 using Hat.Mobile.Services;
 using Hat.Mobile.Views;
 using System.Windows.Input;
@@ -7,9 +8,9 @@ namespace Hat.Mobile.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {        
-        public string Name { get; set; } = "David Spade";
-        public string Email { get; set; } = "iamdavid@gmail.com";
-        public string ImageUrl { get; set; } = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Avatar.png";
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string ImageUrl { get; set; } 
 
         private List<MenuItems> _MenuItems = [];
         public List<MenuItems> MenuItems
@@ -28,21 +29,24 @@ namespace Hat.Mobile.ViewModels
         public ICommand SelectMenuCommand { get; }
         private readonly LoginView _loginView;
        
-        public ProfileViewModel(LoginView loginView, NavigationService navigationService,DataService dataService):base(navigationService,dataService)
+        private readonly ICurrentUser _currentUser;
+        public ProfileViewModel(LoginView loginView, NavigationService navigationService,DataService dataService, ICurrentUser currentUser):base(navigationService,dataService)
         {
+            _currentUser = currentUser;
             SelectMenuCommand = new Command<MenuItems>(SelectMenu);
             _loginView = loginView;
-            _ = InitializeAsync();
+             InitializeAsync();
 
         }
-        private async Task InitializeAsync()
+        private  void InitializeAsync()
         {
-            await PopulateDataAsync();
+             PopulateDataAsync();
         }
-        async Task PopulateDataAsync()
+        private void PopulateDataAsync()
         {
-            await Task.Delay(500);
-            //TODO: Remove Delay here and call API if needed
+             Name=  _currentUser.Name();
+            Email = _currentUser.Email();
+            ImageUrl = _currentUser.Image();
             MenuItems.Clear();
             //MenuItems.Add(new MenuItems() { Title = "Edit Profile", Body = "\uf3eb" });
             MenuItems.Add(new MenuItems() { Title = "Shipping Address", Body = "\uf34e", TargetType = typeof(ShippingAddressSelectorView) });
