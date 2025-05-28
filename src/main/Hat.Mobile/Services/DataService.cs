@@ -203,5 +203,27 @@ namespace Hat.Mobile.Services
             var data = await response.Content.ReadFromJsonAsync<ShippingAddressModel>();
             return data;
         }
+
+        internal async Task<List<VatModel>> GetVats()
+        {
+            var response = await _httpClient.GetAsync("/api/vats");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching VATs: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<VatModel>>();
+            return data;
+        }
+
+        internal async Task<VatModel?> GetVat(Guid vatId)
+        {
+            var response = await _httpClient.GetAsync($"/api/vats/{vatId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching VAT by id: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<VatModel>();
+            return data;
+        }
     }
 }
