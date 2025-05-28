@@ -19,6 +19,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    VatId = MemoryVatRepository.VATS_ZeroVAT,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "BeoPlay Speaker",
                     BrandName = "Bang and Olufsen",
@@ -35,6 +36,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     Id = Guid.NewGuid(),
                     CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
+                    VatId = MemoryVatRepository.VATS_ReducedVAT,
                     Name = "Leather Wristwatch",
                     BrandName = "Tag Heuer",
                     Price = 450,
@@ -50,6 +52,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     Id = Guid.NewGuid(),
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
+                    VatId = MemoryVatRepository.VAT_StandardVAT,
                     Name = "Smart Bluetooth Speaker",
                     BrandName = "Google LLC",
                     Price = 900,
@@ -65,6 +68,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     Id = Guid.NewGuid(),
                     CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
+                    VatId = MemoryVatRepository.VAT_StandardVAT,
                     Name = "Smart Luggage",
                     BrandName = "Smart Inc",
                     Price = 1200,

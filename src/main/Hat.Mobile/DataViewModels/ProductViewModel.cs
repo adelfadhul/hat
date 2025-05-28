@@ -22,7 +22,7 @@ namespace Hat.DataViewModels
             IsAvailable = domainModel.IsAvailable;
             Sizes = domainModel.Sizes;
             Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(domainModel.Reviews));
-
+            VatRate = domainModel.VatRate;
         }
 
         public Guid Id { get; set; }
@@ -33,6 +33,8 @@ namespace Hat.DataViewModels
         public double Price { get; set; }
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
+
+        public double VatRate { get; private set; }
 
         private List<string> _sizes = new();
         public List<string> Sizes

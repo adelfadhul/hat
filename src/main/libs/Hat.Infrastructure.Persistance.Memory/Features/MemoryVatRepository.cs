@@ -5,6 +5,9 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryVatRepository : IVatRepository
     {
+        public static Guid VAT_StandardVAT => VATS.Single(c => c.Name == "Standard VAT").Id;
+        public static Guid VATS_ReducedVAT => VATS.Single(c => c.Name == "Reduced VAT").Id;
+        public static Guid VATS_ZeroVAT => VATS.Single(c => c.Name == "Zero VAT").Id;
         private static readonly Lazy<List<VatModel>> _vats = new(() =>
         {
             var vats = new List<VatModel>

@@ -108,7 +108,7 @@
                         </StackLayout>
 
                         <StackLayout>
-
+                            <!--Details-->
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="18"
@@ -124,6 +124,23 @@
                                 TextColor="Black"
                                 VerticalTextAlignment="Center" />
 
+                            <!--Vat-->
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Vat"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Text="{Binding ProductDetail.VatRate}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
+                            
+                            <!--Reviews-->
                             <Label
                                 Margin="0,30,0,0"
                                 FontAttributes="Bold"

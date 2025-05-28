@@ -9,15 +9,27 @@ namespace Hat.Application.Queries
     {
         private readonly IProductRepository _productRepository;
         private readonly IReviewRepository _reviewRepository;
-        public ProductByIdQueryHandler(IProductRepository productRepository, IReviewRepository reviewRepository)
+        private readonly IVatRepository _vatRepository;
+
+        public ProductByIdQueryHandler(IProductRepository productRepository, IReviewRepository reviewRepository, IVatRepository vatRepository)
         {
             _productRepository = productRepository;
             _reviewRepository = reviewRepository;
+            _vatRepository = vatRepository;
         }
 
         public async Task<ProductModel?> Handle(ProductByIdQuery request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetProductById(request.ProductId);
+            if (product is null) return null;
+
+            var vat = await _vatRepository.GetVat(product?.VatId ?? Guid.Empty);
+            if(vat is not null)
+            {
+                product.Vat = vat;
+            }
+           
+
             if (request.IsFull && product is not null)
                 product.Reviews = await _reviewRepository.GetReviewsByProduct(product.Id);
 

@@ -12,6 +12,8 @@ namespace Hat.Domain.Models
         public Guid CategoryId { get; set; }
         public Guid CustomerId { get; set; }
 
+        public Guid VatId { get; set; }
+
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
@@ -25,13 +27,15 @@ namespace Hat.Domain.Models
 
        
         public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
+        public VatModel Vat { get; set; } = new VatModel();
         #endregion
 
         #region rich
         public List<string> Sizes =>
             SizesText.Split(",").Select(x => x.Trim()).ToList();
 
-
+        public double VatRate=>Vat.Rate;
+        public string VatCode => Vat.Code;
         #endregion
 
     }

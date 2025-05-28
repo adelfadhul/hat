@@ -6,7 +6,10 @@
         public string Name { get; set; }
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
+
+        public double ProductVatRate { get; set; } // Optional, if you want to track VAT separately
         public string ProductName { get; set; }
+
 
         public string BrandName { get; set; }
         public string ProductImageUrl { get; set; } 
@@ -18,7 +21,12 @@
         public string Size { get; set; }
         #endregion
 
+        #region rich
         public double Amount => Price * Qty;
-        public double VatAmount => Amount * Vat;
+        public double VatAmount => Amount * ProductVatRate;
+
+      
+
+        #endregion
     }
 }
