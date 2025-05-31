@@ -33,43 +33,49 @@
                             Text="{Binding ProductDetail.Name}"
                             TextColor="Black"
                             VerticalTextAlignment="Center" />
+                        
+                        <!--Available or not-->
+                        <Label
+     FontAttributes="Bold"
+     FontSize="10" Padding="3" Margin="0 0 15 0"
+     HorizontalOptions="StartAndExpand"
+     Text="{Binding ProductDetail.AvailableText}"
+     TextColor="White" 
+     BackgroundColor="{Binding ProductDetail.AvailableColor}"
+     VerticalTextAlignment="Center" />
 
-                      
+                        <!--Size-->
+                        <Label Style="{StaticResource LBL}">Size</Label>
+                        <ScrollView  HorizontalOptions="Center">
 
-                        <StackLayout>
-
-                            <!--Size-->
-                            <Label Style="{StaticResource LBL}">Size</Label>
-                            <ScrollView  HorizontalOptions="Center">
-
-                                <CollectionView
+                            <CollectionView
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding ProductDetail.ProductSize}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Margin="5,0" Text="{Binding}"/>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </ScrollView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Margin="5,0" Text="{Binding}"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
 
 
 
-                            <!--Color-->
-                            <Label Style="{StaticResource LBL}">Color</Label>
-                            <ScrollView>
-                                <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
+                        <!--Color-->
+                        <Label Style="{StaticResource LBL}">Color</Label>
+                        <ScrollView>
+                            <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
  ItemsLayout="HorizontalList"
  SelectionMode="Single"
  SelectedItem="{Binding ProductDetail.ProductColor}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border>
-                                                <VerticalStackLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border>
+                                            <VerticalStackLayout>
 
-                                                    <Border
+                                                <Border
           BackgroundColor="{Binding}" 
           HeightRequest="26"
           HorizontalOptions="Start"
@@ -78,95 +84,93 @@
           WidthRequest="26" />
 
 
-                                                </VerticalStackLayout>
-                                            </Border>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </ScrollView>
-                            <!--Details-->
-                            <Label Style="{StaticResource LBL}">Details</Label>
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                        <!--Details-->
+                        <Label Style="{StaticResource LBL}">Details</Label>
 
-                            <Label
+                        <Label
                                 FontSize="14"
                                 HorizontalOptions="StartAndExpand"
                                 Text="{Binding ProductDetail.Details}"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center" />
 
-                            <!--Vat-->
-                            <Label Style="{StaticResource LBL}">VAT</Label>
+                        <!--Vat-->
+                        <Label Style="{StaticResource LBL}">VAT</Label>
 
-                            <Label
+                        <Label
                                 FontSize="14"
                                 HorizontalOptions="StartAndExpand"
                                 Text="{Binding ProductDetail.VatRate}"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center" />
 
-                            <!--Reviews-->
-                            <Label Style="{StaticResource LBL}">Reviews</Label>
-
-                            <Label
-Margin="0,5,0,0"
-FontAttributes="Bold"
-FontSize="14"
-HorizontalOptions="StartAndExpand"
-Text="Write your Review"
-TextColor="{StaticResource Primary}"
-VerticalTextAlignment="Center" />
-                            <CollectionView
-                     Margin="0,16"
+                        <!--Reviews-->
+                        <Label Style="{StaticResource LBL}">Reviews</Label>
+                        <Label
+                                Margin="0,5,0,0"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Write your Review"
+                                TextColor="{StaticResource Primary}"
+                                VerticalTextAlignment="Center" />
+                        <CollectionView
+                                Margin="0,16"
                      ItemSizingStrategy="MeasureAllItems"
                      ItemsSource="{Binding ProductDetail.Reviews}">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid ColumnDefinitions="Auto,*">
-                                            <Border
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <Border
                                      Grid.Column="0"
                                      Padding="0"
                                      HeightRequest="46"
                                      StrokeShape="RoundRectangle 23"
                                      StrokeThickness="0"
                                      WidthRequest="46">
-                                                <Image
+                                            <Image
                                          Aspect="AspectFill"
                                          HeightRequest="46"
                                          Source="{Binding ImageUrl}"
                                          WidthRequest="46" />
-                                            </Border>
+                                        </Border>
 
-                                            <Grid
+                                        <Grid
                                      Grid.Column="1"
                                      Margin="8,0"
                                      RowDefinitions="Auto,2,Auto">
-                                                <Label
+                                            <Label
                                          Grid.Row="0"
                                          FontAttributes="Bold"
                                          FontSize="14"
                                          Text="{Binding Name}"
                                          TextColor="Black" />
 
-                                                <Label
+                                            <Label
                                          Grid.Row="2"
                                          FontSize="14"
                                          LineBreakMode="WordWrap"
                                          Text="{Binding Review}"
                                          TextColor="Black"
                                          VerticalTextAlignment="Center" />
-                                            </Grid>
                                         </Grid>
+                                    </Grid>
 
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
-                        </StackLayout>
 
-                      
+
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

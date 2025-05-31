@@ -1,5 +1,4 @@
 ﻿using Hat.Domain.Models;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
 using Hat.Model;
 using System.Collections.ObjectModel;
