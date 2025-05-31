@@ -29,36 +29,33 @@
                             VerticalTextAlignment="Center" />
 
                         <StackLayout
-                            Margin="0"
+                            Margin="0" Spacing="15"
                             HorizontalOptions="FillAndExpand"
                             Orientation="Vertical">
-                            <Border
-                                Margin="6,0"
-                                Padding="2"
-                                Background="transparent"
-                                HorizontalOptions="FillAndExpand"
-                                StrokeShape="RoundRectangle 0"
-                                StrokeThickness="1">
-                                <StackLayout
-                                    
+                            <!--Size-->
+                            <StackLayout
                                     HorizontalOptions="FillAndExpand"
                                     Orientation="Horizontal"
                                     VerticalOptions="CenterAndExpand">
-                                    <Label
-                                        Margin="20,15,35,15"
-                                        FontSize="14"
+                                <Label
+                                        FontSize="14" FontAttributes="Bold"
                                         HorizontalOptions="StartAndExpand"
-                                        Text="Size"
+                                        Text="Size: "
                                         TextColor="Black"
                                         VerticalTextAlignment="Center" />
+                                <ScrollView VerticalOptions="Center">
                                     <CollectionView
-                                        Margin="0,0,0,0"
-                                        ItemsSource="{Binding ProductDetail.Sizes}"
+                                        
+                                        ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
-                                        HeightRequest="40"
                                         SelectionMode="Single"
-                                        SelectedItem="{Binding SelectedSize}">
+                                        SelectedItem="{Binding ProductDetail.ProductSize}">
                                         <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Margin="5,0" Text="{Binding}"/>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                        <!--<CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <Border
                                                     Margin="4,8"
@@ -72,38 +69,39 @@
                                                     <Label Text="{Binding .}"/>
                                                 </Border>
                                             </DataTemplate>
-                                        </CollectionView.ItemTemplate>
+                                        </CollectionView.ItemTemplate>-->
                                     </CollectionView>
-                                </StackLayout>
-                            </Border>
+                                </ScrollView>
 
-                            <Border
-                                Margin="6,6"
-                                Padding="0"
-                                Background="transparent"
-                                HorizontalOptions="FillAndExpand"
-                                StrokeShape="RoundRectangle 0"
-                                StrokeThickness="1">
-                                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
-                                    <Label
-                                        Margin="20,15"
+                            </StackLayout>
+
+                            <!--Color-->
+                            <StackLayout Orientation="Horizontal" 
+                                             VerticalOptions="FillAndExpand">
+                                <Label
                                         FontSize="14"
-                                        HorizontalOptions="StartAndExpand"
-                                        Text="Color"
+                                        HorizontalOptions="Start"
+                                        Text="Color: "
+                                        FontAttributes="Bold"
                                         TextColor="Black"
                                         VerticalTextAlignment="Center" />
+                                <Label
+                        FontSize="14"
+       HorizontalOptions="Start"
+       Text="{Binding ProductDetail.ProductColor}"
+       FontAttributes="Bold"
+       TextColor="Black"
+       VerticalTextAlignment="Center" />
 
-                                    <Border
-                                        Margin="10"
-                                        Padding="0"
-                                        Background="{Binding ProductDetail.Colors}"
+                                <Border
+                                        Background="#00C569"
                                         HeightRequest="26"
-                                        HorizontalOptions="FillAndExpand"
+                                        HorizontalOptions="Start"
                                         StrokeShape="RoundRectangle 8"
                                         StrokeThickness="1"
                                         WidthRequest="26" />
-                                </StackLayout>
-                            </Border>
+                            </StackLayout>
+
 
                         </StackLayout>
 
@@ -139,7 +137,7 @@
                                 Text="{Binding ProductDetail.VatRate}"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center" />
-                            
+
                             <!--Reviews-->
                             <Label
                                 Margin="0,30,0,0"

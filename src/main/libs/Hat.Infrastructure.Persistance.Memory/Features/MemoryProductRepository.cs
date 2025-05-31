@@ -28,8 +28,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Details = "High-quality wireless speaker with immersive sound.",
                     Qty = 10,
                     IsAvailable = true,
-                    ColorText = "#000000",
-                    SizesText = "Standard,Large",
+                    ProductColorsText = "#00C569",
+                    ProductColor="#00C569",
+                    ProductSizesText = "Standard,Large,Small,XSmall,XLarge,Medium",
+                    ProductSize="XLarge",
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -44,8 +46,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Details = "Elegant leather wristwatch for all occasions.",
                     Qty = 5,
                     IsAvailable = true,
-                    ColorText = "#A52A2A",
-                    SizesText = "One Size",
+                    ProductColorsText = "#A52A2A",
+                    ProductColor ="#A52A2A",
+                    ProductSizesText = "One Size",
+                    ProductSize="One Size",
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -60,8 +64,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Details = "Smart speaker with voice assistant integration.",
                     Qty = 8,
                     IsAvailable = true,
-                    ColorText = "#FFFFFF",
-                    SizesText = "Small,Medium,Large",
+                    ProductColorsText = "#FFFFFF",
+                    ProductColor ="#FFFFFF",
+                    ProductSizesText = "Small,Medium,Large",
+                    ProductSize ="Small",
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -76,8 +82,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Details = "Luggage with built-in GPS and charging ports.",
                     Qty = 3,
                     IsAvailable = false,
-                    ColorText = "#808080,#FFFFFF",
-                    SizesText = "Medium,Large",
+                    ProductColorsText = "#808080,#FFFFFF",
+                    ProductSizesText = "Medium,Large",
+                    ProductColor ="#808080",
+                    ProductSize ="Medium",
                     Reviews = new List<ReviewModel>()
                 }
             };

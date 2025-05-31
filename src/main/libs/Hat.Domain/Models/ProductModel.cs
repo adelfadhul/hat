@@ -22,8 +22,10 @@ namespace Hat.Domain.Models
         public double Qty { get; set; }
         public bool IsAvailable { get; set; }
 
-        public string ColorText { get; set; }
-        public string SizesText { get; set; }
+        public string ProductSize { get; set; }
+        public string ProductColor { get; set; }
+        public string ProductColorsText { get; set; }
+        public string ProductSizesText { get; set; }
 
        
         public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
@@ -31,9 +33,12 @@ namespace Hat.Domain.Models
         #endregion
 
         #region rich
-        public List<string> Sizes =>
-            SizesText.Split(",").Select(x => x.Trim()).ToList();
+        public List<string> ProductSizes =>
+            ProductSizesText.Split(",").Select(x => x.Trim()).ToList();
+        public List<string> ProductColors => ProductColorsText.Split(",").Select(x => x.Trim()).ToList();
 
+        public int SelectedSizeIndex => ProductSizes.IndexOf(ProductSize);
+        public int SelectedColorIndex => ProductColors.IndexOf(ProductColor);
         public double VatRate=>Vat.Rate;
         public string VatCode => Vat.Code;
         #endregion
