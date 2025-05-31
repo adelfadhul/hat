@@ -13,6 +13,7 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="10 0 0 0"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
@@ -48,14 +49,16 @@
                         <Label Style="{StaticResource LBL}">Size</Label>
                         <ScrollView  HorizontalOptions="Center">
 
-                            <CollectionView
+                            <CollectionView 
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding ProductDetail.ProductSize}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Label Margin="5,0" Text="{Binding}"/>
+                                       
+                                            <Label Text="{Binding}" Margin="0 10 0 10" HorizontalOptions="Center"/>
+                                       
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
