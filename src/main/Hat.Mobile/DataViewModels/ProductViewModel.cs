@@ -49,7 +49,7 @@ namespace Hat.DataViewModels
             }
         }
 
-
+       
         public Color ProductColor { get; private set; }
         public double VatRate { get; private set; }
 

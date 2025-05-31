@@ -43,9 +43,9 @@
                                         Text="Size: "
                                         TextColor="Black"
                                         VerticalTextAlignment="Center" />
-                                <ScrollView VerticalOptions="Center">
+                                <ScrollView  HorizontalOptions="Center">
+
                                     <CollectionView
-                                        
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
@@ -55,51 +55,49 @@
                                                 <Label Margin="5,0" Text="{Binding}"/>
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>
-                                        <!--<CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border
-                                                    Margin="4,8"
-                                                    Padding="10,3"
-                                                    HeightRequest="26"
-                                                    StrokeShape="RoundRectangle 0"
-                                                    StrokeThickness="1">
-                                                    <Border.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding BindingContext.SelectSizeCommand, Source={x:Reference Name=ProductDetailsView}}" CommandParameter="{Binding .}" />
-                                                    </Border.GestureRecognizers>
-                                                    <Label Text="{Binding .}"/>
-                                                </Border>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>-->
                                     </CollectionView>
                                 </ScrollView>
 
                             </StackLayout>
 
                             <!--Color-->
-                            <StackLayout Orientation="Horizontal" 
+                            <StackLayout Orientation="Horizontal" Spacing="10"
                                              VerticalOptions="FillAndExpand">
                                 <Label
                                         FontSize="14"
-                                        HorizontalOptions="Start"
+                                        HorizontalOptions="StartAndExpand"
                                         Text="Color: "
                                         FontAttributes="Bold"
                                         TextColor="Black"
                                         VerticalTextAlignment="Center" />
-                                <Label
-                        FontSize="14"
-       HorizontalOptions="Start"
-       Text="{Binding ProductDetail.ProductColor}"
-       FontAttributes="Bold"
-       TextColor="Black"
-       VerticalTextAlignment="Center" />
 
-                                <Border
-                                        Background="#00C569"
-                                        HeightRequest="26"
-                                        HorizontalOptions="Start"
-                                        StrokeShape="RoundRectangle 8"
-                                        StrokeThickness="1"
-                                        WidthRequest="26" />
+                                <ScrollView>
+                                    <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
+ ItemsLayout="HorizontalList"
+ SelectionMode="Single"
+ SelectedItem="{Binding ProductDetail.ProductColor}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border>
+                                                    <VerticalStackLayout>
+                                                   
+                                                        <Border
+          BackgroundColor="{Binding}" 
+          HeightRequest="26"
+          HorizontalOptions="Start"
+          StrokeShape="RoundRectangle 8"
+          StrokeThickness="1"
+          WidthRequest="26" />
+                                                   
+                                               
+                                                </VerticalStackLayout>
+                                                </Border>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </ScrollView>
+
+
                             </StackLayout>
 
 
