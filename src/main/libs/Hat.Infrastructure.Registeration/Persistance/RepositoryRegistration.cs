@@ -25,6 +25,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IReviewRepository, MemoryReviewRepository>();
                     services.AddScoped<IVatRepository,MemoryVatRepository>();
                     services.AddScoped<ICurrentUser, MemoryCurrentUser>();
+                    services.AddScoped<IInventoryRepository, MemoryInventoryRepository>();
                     break;
                 case "SqlServer":
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

@@ -9,6 +9,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBoolConverter" />
+            <Style x:Key="LBL" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="*,Auto">
@@ -28,90 +34,58 @@
                             TextColor="Black"
                             VerticalTextAlignment="Center" />
 
-                        <StackLayout
-                            Margin="0" Spacing="15"
-                            HorizontalOptions="FillAndExpand"
-                            Orientation="Vertical">
-                            <!--Size-->
-                            <StackLayout
-                                    HorizontalOptions="FillAndExpand"
-                                    Orientation="Horizontal"
-                                    VerticalOptions="CenterAndExpand">
-                                <Label
-                                        FontSize="14" FontAttributes="Bold"
-                                        HorizontalOptions="StartAndExpand"
-                                        Text="Size: "
-                                        TextColor="Black"
-                                        VerticalTextAlignment="Center" />
-                                <ScrollView  HorizontalOptions="Center">
+                      
 
-                                    <CollectionView
+                        <StackLayout>
+
+                            <!--Size-->
+                            <Label Style="{StaticResource LBL}">Size</Label>
+                            <ScrollView  HorizontalOptions="Center">
+
+                                <CollectionView
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding ProductDetail.ProductSize}">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label Margin="5,0" Text="{Binding}"/>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-                                </ScrollView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Margin="5,0" Text="{Binding}"/>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </ScrollView>
 
-                            </StackLayout>
+
 
                             <!--Color-->
-                            <StackLayout Orientation="Horizontal" Spacing="10"
-                                             VerticalOptions="FillAndExpand">
-                                <Label
-                                        FontSize="14"
-                                        HorizontalOptions="StartAndExpand"
-                                        Text="Color: "
-                                        FontAttributes="Bold"
-                                        TextColor="Black"
-                                        VerticalTextAlignment="Center" />
-
-                                <ScrollView>
-                                    <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
+                            <Label Style="{StaticResource LBL}">Color</Label>
+                            <ScrollView>
+                                <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
  ItemsLayout="HorizontalList"
  SelectionMode="Single"
  SelectedItem="{Binding ProductDetail.ProductColor}">
-                                        <CollectionView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border>
-                                                    <VerticalStackLayout>
-                                                   
-                                                        <Border
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border>
+                                                <VerticalStackLayout>
+
+                                                    <Border
           BackgroundColor="{Binding}" 
           HeightRequest="26"
           HorizontalOptions="Start"
           StrokeShape="RoundRectangle 8"
           StrokeThickness="1"
           WidthRequest="26" />
-                                                   
-                                               
+
+
                                                 </VerticalStackLayout>
-                                                </Border>
-                                            </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
-                                </ScrollView>
-
-
-                            </StackLayout>
-
-
-                        </StackLayout>
-
-                        <StackLayout>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </ScrollView>
                             <!--Details-->
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="18"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Details"
-                                TextColor="Black"
-                                VerticalTextAlignment="Center" />
+                            <Label Style="{StaticResource LBL}">Details</Label>
 
                             <Label
                                 FontSize="14"
@@ -121,13 +95,7 @@
                                 VerticalTextAlignment="Center" />
 
                             <!--Vat-->
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="18"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Vat"
-                                TextColor="Black"
-                                VerticalTextAlignment="Center" />
+                            <Label Style="{StaticResource LBL}">VAT</Label>
 
                             <Label
                                 FontSize="14"
@@ -137,73 +105,68 @@
                                 VerticalTextAlignment="Center" />
 
                             <!--Reviews-->
-                            <Label
-                                Margin="0,30,0,0"
-                                FontAttributes="Bold"
-                                FontSize="18"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Reviews"
-                                TextColor="Black"
-                                VerticalTextAlignment="Center" />
+                            <Label Style="{StaticResource LBL}">Reviews</Label>
 
                             <Label
-                                Margin="0,5,0,0"
-                                FontAttributes="Bold"
-                                FontSize="14"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Write your Review"
-                                TextColor="{StaticResource Primary}"
-                                VerticalTextAlignment="Center" />
+Margin="0,5,0,0"
+FontAttributes="Bold"
+FontSize="14"
+HorizontalOptions="StartAndExpand"
+Text="Write your Review"
+TextColor="{StaticResource Primary}"
+VerticalTextAlignment="Center" />
+                            <CollectionView
+                     Margin="0,16"
+                     ItemSizingStrategy="MeasureAllItems"
+                     ItemsSource="{Binding ProductDetail.Reviews}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Border
+                                     Grid.Column="0"
+                                     Padding="0"
+                                     HeightRequest="46"
+                                     StrokeShape="RoundRectangle 23"
+                                     StrokeThickness="0"
+                                     WidthRequest="46">
+                                                <Image
+                                         Aspect="AspectFill"
+                                         HeightRequest="46"
+                                         Source="{Binding ImageUrl}"
+                                         WidthRequest="46" />
+                                            </Border>
+
+                                            <Grid
+                                     Grid.Column="1"
+                                     Margin="8,0"
+                                     RowDefinitions="Auto,2,Auto">
+                                                <Label
+                                         Grid.Row="0"
+                                         FontAttributes="Bold"
+                                         FontSize="14"
+                                         Text="{Binding Name}"
+                                         TextColor="Black" />
+
+                                                <Label
+                                         Grid.Row="2"
+                                         FontSize="14"
+                                         LineBreakMode="WordWrap"
+                                         Text="{Binding Review}"
+                                         TextColor="Black"
+                                         VerticalTextAlignment="Center" />
+                                            </Grid>
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
                         </StackLayout>
 
-                        <CollectionView
-                            Margin="0,16"
-                            ItemSizingStrategy="MeasureAllItems"
-                            ItemsSource="{Binding ProductDetail.Reviews}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid ColumnDefinitions="Auto,*">
-                                        <Border
-                                            Grid.Column="0"
-                                            Padding="0"
-                                            HeightRequest="46"
-                                            StrokeShape="RoundRectangle 23"
-                                            StrokeThickness="0"
-                                            WidthRequest="46">
-                                            <Image
-                                                Aspect="AspectFill"
-                                                HeightRequest="46"
-                                                Source="{Binding ImageUrl}"
-                                                WidthRequest="46" />
-                                        </Border>
-
-                                        <Grid
-                                            Grid.Column="1"
-                                            Margin="8,0"
-                                            RowDefinitions="Auto,2,Auto">
-                                            <Label
-                                                Grid.Row="0"
-                                                FontAttributes="Bold"
-                                                FontSize="14"
-                                                Text="{Binding Name}"
-                                                TextColor="Black" />
-
-                                            <Label
-                                                Grid.Row="2"
-                                                FontSize="14"
-                                                LineBreakMode="WordWrap"
-                                                Text="{Binding Review}"
-                                                TextColor="Black"
-                                                VerticalTextAlignment="Center" />
-                                        </Grid>
-                                    </Grid>
-
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                      
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

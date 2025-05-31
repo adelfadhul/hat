@@ -19,13 +19,13 @@ namespace Hat.Domain.Models
         public string BrandName { get; set; }
         public double Price { get; set; }
         public string Details { get; set; }
-        public double Qty { get; set; }
-        public bool IsAvailable { get; set; }
+      
+
 
         public string ProductSize { get; set; }
         public string ProductColor { get; set; }
-        public string ProductColorsText { get; set; }
-        public string ProductSizesText { get; set; }
+        //public string ProductColorsText { get; set; }
+        //public string ProductSizesText { get; set; }
 
        
         public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
@@ -33,12 +33,14 @@ namespace Hat.Domain.Models
         #endregion
 
         #region rich
-        public List<string> ProductSizes =>
-            ProductSizesText.Split(",").Select(x => x.Trim()).ToList();
-        public List<string> ProductColors => ProductColorsText.Split(",").Select(x => x.Trim()).ToList();
+        public List<string> ProductSizes { get; set; }//sourced from inventory
+        public List<string> ProductColors { get; set; }//sourced from inventory
 
-        public int SelectedSizeIndex => ProductSizes.IndexOf(ProductSize);
-        public int SelectedColorIndex => ProductColors.IndexOf(ProductColor);
+        public double Qty { get; set; } //sourced from inventory
+
+        public bool IsAvailable => Qty > 0;
+        public int? SelectedSizeIndex => ProductSizes?.IndexOf(ProductSize);
+        public int? SelectedColorIndex => ProductColors?.IndexOf(ProductColor);
         public double VatRate=>Vat.Rate;
         public string VatCode => Vat.Code;
         #endregion
