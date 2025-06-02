@@ -5,10 +5,10 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class CardInfosHandler : IRequestHandler<CardInfosQuery, List<CardInfoModel>>
+    public class CardInfosQueryHandler : IRequestHandler<CardInfosQuery, List<CardInfoModel>>
     {
         private readonly ICardRepository _cardInfoRepository;
-        public CardInfosHandler(ICardRepository cardInfoRepository)
+        public CardInfosQueryHandler(ICardRepository cardInfoRepository)
         {
             _cardInfoRepository = cardInfoRepository;
         }

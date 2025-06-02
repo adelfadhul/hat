@@ -24,17 +24,15 @@ namespace Hat.Mobile.ViewModels
         public ICommand AddNewCommand { get; }
 
        
-        public CardInfoManagerViewModel( NavigationService navigationService,DataService dataService)
+        public CardInfoManagerViewModel( NavigationService navigationService,DataService dataService):base(navigationService, dataService)
         {
             AddNewCommand = new Command(AddNewCard);
-            _ = InitializeAsync();
-          
+            _ = PopulateDataAsync();
+
+
         }
 
-        private async Task InitializeAsync()
-        {
-            await PopulateDataAsync();
-        }
+      
         async Task PopulateDataAsync()
         { 
             var storedCards= await _dataService.GetCardInfos();
@@ -44,7 +42,6 @@ namespace Hat.Mobile.ViewModels
         private async void AddNewCard()
         {
             await _navigationService.NavigateToAddNewCard();
-          //  await MauiApp.Current.MainPage.Navigation.PushAsync(new AddNewCardView(new AddNewCardViewModel()));
         }
 
     }
