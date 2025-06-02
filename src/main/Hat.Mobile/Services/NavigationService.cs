@@ -130,5 +130,8 @@ public class NavigationService
         await Shell.Current.GoToAsync($"{nameof(BrandDetailView)}");
     }
 
-   
+    internal async Task NavigateToCreateProduct()
+    {
+       await Shell.Current.GoToAsync($"{nameof(CreateProductView)}");
+    }
 }

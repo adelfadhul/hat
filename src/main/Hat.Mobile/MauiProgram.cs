@@ -91,6 +91,7 @@ public static class MauiProgram
         builder.Services.AddTransient<VerificationViewModel>();
         builder.Services.AddTransient<WishListViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorViewModel>();
+        builder.Services.AddTransient<CreateProductViewModel>();
 
         builder.Services.AddTransient<ShippingAddressViewModel>();
         builder.Services.AddTransient<CategoryViewModel>();
@@ -120,6 +121,7 @@ public static class MauiProgram
         builder.Services.AddTransient<VerificationView>();
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<AddNewCardView>();
+        builder.Services.AddTransient<CreateProductView>();
 
         var url = getBaseUrl();
         

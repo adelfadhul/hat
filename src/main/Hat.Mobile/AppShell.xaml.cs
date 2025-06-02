@@ -35,6 +35,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
         Routing.RegisterRoute(nameof(CardInfoManagerView), typeof(CardInfoManagerView));
         Routing.RegisterRoute(nameof(HomePageView), typeof(HomePageView));
+        Routing.RegisterRoute(nameof(CreateProductView), typeof(CreateProductView));
     }
 
    

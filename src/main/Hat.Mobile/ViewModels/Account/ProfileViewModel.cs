@@ -56,6 +56,10 @@ namespace Hat.Mobile.ViewModels
             MenuItems.Add(new MenuItems() { Title = "Cards", Body = "\uf19b", TargetType = typeof(CardInfoManagerView) });
             //MenuItems.Add(new MenuItems() { Title = "Notifications", Body = "\uf09c"});
             MenuItems.Add(new MenuItems() { Title = "Logout", Body = "\uf343", TargetType = typeof(LoginView) });
+            if (_currentUser.IsAdmin())
+            {
+                MenuItems.Add(new MenuItems() { Title = "Create Product", Body = "\uf0e7", TargetType = typeof(CreateProductView) });
+            }
             IsLoaded = true;
         }
 
@@ -85,6 +89,9 @@ namespace Hat.Mobile.ViewModels
                             break;
                         case Type type when type == typeof(CardInfoManagerView):
                             await _navigationService.NavigateToCard();
+                            break;
+                        case Type type when type == typeof(CreateProductView):
+                            await _navigationService.NavigateToCreateProduct();
                             break;
                         default:
                             break;

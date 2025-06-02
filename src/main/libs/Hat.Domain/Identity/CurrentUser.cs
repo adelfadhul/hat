@@ -15,7 +15,7 @@ namespace Hat.Domain.Identity
 
         void SetClaims(IEnumerable<Claim> claims);
 
-        Task<bool> IsAdmin();
+        bool IsAdmin();
         string Image();
     }
 }

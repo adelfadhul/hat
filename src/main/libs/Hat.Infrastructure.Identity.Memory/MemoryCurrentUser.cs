@@ -8,8 +8,7 @@ namespace Hat.Infrastructure.Identity.Memory
         public string Email()
        => "test@hat.com";
 
-        public Task<bool> IsAdmin()
-       => Task.FromResult(true);
+        public bool IsAdmin()=>true;
 
         public string Name()
        => "Test User";
