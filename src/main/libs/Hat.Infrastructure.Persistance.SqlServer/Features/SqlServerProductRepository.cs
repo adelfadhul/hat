@@ -5,7 +5,7 @@ namespace Hat.Infrastructure.Persistance.SqlServer.Features
 {
     public class SqlServerProductRepository : IProductRepository
     {
-        public Task Create(ProductModel model)
+        public Task<Guid> Create(ProductModel model)
         {
             throw new NotImplementedException();
         }

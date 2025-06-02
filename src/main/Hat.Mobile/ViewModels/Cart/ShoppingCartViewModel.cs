@@ -21,8 +21,8 @@ namespace Hat.Mobile.ViewModels
             get => _IsLoaded;
             set => SetProperty(ref _IsLoaded, value);
         }
-        private double _SubTotal = 0;
-        public double SubTotal
+        private decimal _SubTotal = 0;
+        public decimal SubTotal
         {
             get => _SubTotal;
             set => SetProperty(ref _SubTotal, value);
@@ -57,7 +57,7 @@ namespace Hat.Mobile.ViewModels
             var storedProducts = await _dataService.GetShoppingCartItems();
            
             Products = storedProducts.Select(x=> new ShoppingCartItemViewModel(x)).ToObservableCollection();
-            SubTotal = Products.Sum(item => item.Qty * item.Price);
+            SubTotal = Products.Sum(item => (decimal)item.Qty * item.Price);
             IsLoaded = true;
         }
         private async void DeleteProduct(ProductViewModel product)
@@ -70,7 +70,7 @@ namespace Hat.Mobile.ViewModels
         }
         private void ChangeProductQty(ProductViewModel product)
         {
-            SubTotal = Products.Sum(item => item.Qty * item.Price);
+            SubTotal = Products.Sum(item => (decimal)item.Qty * item.Price);
         }
         private async void Checkout()
         => await _navigationService.NavigateToCheckOut();

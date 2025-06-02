@@ -32,7 +32,7 @@ namespace Hat.DataViewModels
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
 

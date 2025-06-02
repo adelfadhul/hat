@@ -1,4 +1,5 @@
-﻿using Hat.Domain.Queries;
+﻿using Hat.Domain.Commands;
+using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,17 @@ public class ProductController : HatController
             _logger.LogInformation("GetProducts");
             var list = await _mediator.Send(new ProductsQuery());
             return Ok(list);
+        }
+        
+
+        [HttpPost()]
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
+        {
+            _logger.LogInformation("CreateProduct: {ProductName}", command.Name);
+            var result = await _mediator.Send(command);
+
+            // assuming result is the new product ID
+            return CreatedAtAction(nameof(GetProductById), new { id = result }, new { id = result });
         }
 
         [HttpGet("best-selling")]

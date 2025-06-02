@@ -8,6 +8,6 @@
 
         #endregion 
         public List<ShoppingCartItemModel> CartItems { get; set; } = new List<ShoppingCartItemModel>();
-        public double TotalPrice => CartItems.Sum(p => p.Price * p.Qty);
+        public decimal TotalPrice => CartItems.Sum(p => p.Price * p.Qty);
     }
 }

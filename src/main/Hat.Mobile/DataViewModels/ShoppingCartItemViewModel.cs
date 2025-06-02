@@ -26,11 +26,11 @@ namespace Hat.DataViewModels
         public string ProductDetails { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public double Qty { get; set; } = 1;
         public string Size { get; set; }
 
-        public double Amount { get; init; }
-        public double Vat { get; init; }
+        public decimal Amount { get; init; }
+        public decimal Vat { get; init; }
     }
 }

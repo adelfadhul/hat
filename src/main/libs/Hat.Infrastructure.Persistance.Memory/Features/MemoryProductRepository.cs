@@ -143,10 +143,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return Task.FromResult(products);
         }
 
-        public async Task Create(ProductModel model)
+        public async Task<Guid> Create(ProductModel model)
         {
+            model.Id = Guid.NewGuid();
             PRODUCTS.Add(model);
-            await Task.CompletedTask;
+            return await Task.FromResult(model.Id);
         }
     }
 }

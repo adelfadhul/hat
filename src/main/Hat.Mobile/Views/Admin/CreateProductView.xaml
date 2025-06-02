@@ -12,7 +12,7 @@
         <VerticalStackLayout Padding="20" Spacing="16">
 
             <Label Text="Product Name" />
-            <Entry Text="{Binding Name}" Placeholder="Enter product name" />
+            <Entry Text="{Binding ProductName}" Placeholder="Enter product name" />
 
             <Label Text="Brand Name" />
             <Entry Text="{Binding BrandName}" Placeholder="Enter brand name" />

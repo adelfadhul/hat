@@ -171,6 +171,14 @@ namespace Hat.Mobile.Services
             }
         }
 
+        public async Task CreateProduct(ProductModel product)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/products", product);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error creating product: {response.ReasonPhrase}");
+            }
+        }
 
         public async Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
         {

@@ -1,14 +1,13 @@
-﻿using Hat.Domain.Models;
-using MediatR;
+﻿using MediatR;
 
 namespace Hat.Domain.Commands
 {
-    public class AddProductCommand : IRequest
+    public class CreateProductCommand : IRequest<Guid>
     {
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string BrandName { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
       

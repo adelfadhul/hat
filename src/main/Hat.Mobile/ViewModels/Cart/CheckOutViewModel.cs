@@ -20,15 +20,15 @@ namespace Hat.Mobile.ViewModels
             get => _IsLoaded;
             set => SetProperty(ref _IsLoaded, value);
         }
-        private double _SubTotal = 0;
-        public double SubTotal
+        private decimal _SubTotal = 0;
+        public decimal SubTotal
         {
             get => _SubTotal;
             set => SetProperty(ref _SubTotal, value);
         }
 
-        private double _Vat = 0;
-        public double Vat
+        private decimal _Vat = 0;
+        public decimal Vat
         {
             get => _Vat;
             set => SetProperty(ref _Vat, value);
