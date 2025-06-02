@@ -69,8 +69,8 @@ namespace Hat.Mobile.ViewModels
         }
         private async Task PopulateDataAsync()
         {
-            try
-            {
+          //  try
+          //  {
 
                 _logger.LogInformation("Fetching categories");
                 var storedCategories = await _dataService.GetCategories();
@@ -87,14 +87,14 @@ namespace Hat.Mobile.ViewModels
                 var storedFeaturedBrandsProducts = await _dataService.GetFeaturedProducts();
                 FeaturedBrands = storedFeaturedBrandsProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
 
-            }
-            catch (Exception ex)
-            {
+         //   }
+         //   catch (Exception ex)
+          //  {
                 
-                _logger.LogError(ex, "Error fetching categories");
-                var msg = "An error occurred while fetching data. Please try again later "+ex.Message;
-                await MauiApp.Current.MainPage.DisplayAlert("Error", msg, "OK");
-            }
+              //  _logger.LogError(ex, "Error fetching categories");
+              //  var msg = "An error occurred while fetching data. Please try again later "+ex.Message;
+                //await MauiApp.Current.MainPage.DisplayAlert("Error", msg, "OK");
+           // }
             IsLoaded = true;
         }
 

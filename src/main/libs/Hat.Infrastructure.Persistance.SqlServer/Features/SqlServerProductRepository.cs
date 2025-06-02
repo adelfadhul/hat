@@ -1,11 +1,15 @@
 ﻿using Hat.Domain.Models;
 using Hat.Domain.Store;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 
 namespace Hat.Infrastructure.Persistance.SqlServer.Features
 {
     public class SqlServerProductRepository : IProductRepository
     {
+        public Task Create(ProductModel model)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<ProductModel>> GetBestSettlingProducts()
         {
             throw new NotImplementedException();

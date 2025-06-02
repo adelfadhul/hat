@@ -1,15 +1,13 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
-using Hat.Domain.Models;
 using Hat.Mobile.Services;
 using MediatR;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
 using System.Windows.Input;
 
 namespace Hat.Mobile.ViewModels
 {
-    public class AllProductViewModel : BaseViewModel
+        public class AllProductViewModel : BaseViewModel
     {
         private ObservableCollection<ProductViewModel> _Products = [];
 

@@ -43,6 +43,13 @@ namespace Hat.Mobile.ViewModels
             }
         }
 
+      
+        private string _selectedSize;
+        public string SelectedSize { get=>_selectedSize; set=>SetProperty(ref _selectedSize,value); }  // Default size, can be changed by user
+
+
+        private Color _selectedColor; // Default color, can be changed by user
+        public Color SelectedColor { get=>_selectedColor; set=>SetProperty(ref _selectedColor,value); }
         private double qty => ProductDetail?.Qty ?? 1;
         private ProductViewModel _ProductDetail = new();
         public ProductViewModel ProductDetail

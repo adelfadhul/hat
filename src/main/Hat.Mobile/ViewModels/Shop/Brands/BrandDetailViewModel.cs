@@ -3,7 +3,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Hat.DataViewModels;
 using Hat.Mobile.Services;
-namespace Hat.Mobile.ViewModels
+using Hat.Mobile.ViewModels;
+namespace Hat.ViewModels
 {
     public class BrandDetailViewModel : BaseViewModel
     {

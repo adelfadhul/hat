@@ -19,12 +19,10 @@ namespace Hat.DataViewModels
             Price = domainModel.Price;
             Details = domainModel.Details; Qty = domainModel.Qty;
             IsAvailable = domainModel.IsAvailable;
-            ProductSizes = domainModel.ProductSizes;
             Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(domainModel.Reviews));
             VatRate = domainModel.VatRate;
-            ProductSize = domainModel.ProductSize;
-            ProductColor = Color.FromArgb(domainModel.ProductColor);
-            ProductColors = domainModel.ProductColors;
+            ProductColors = domainModel.ProductColors?.Select(x=>Color.FromArgb(x)).ToList();
+            ProductSizes = domainModel.ProductSizes;
 
 
         }
@@ -38,18 +36,10 @@ namespace Hat.DataViewModels
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
 
-        private string _size;
-        public string ProductSize
-        {
-            get => _size; set
-            {
-                _size = value;
-                OnPropertyChanged(nameof(ProductSize));
-            }
-        }
+       
 
        
-        public Color ProductColor { get; private set; }
+     
         public double VatRate { get; private set; }
 
         private List<string> _sizes = new();
@@ -66,8 +56,8 @@ namespace Hat.DataViewModels
             }
         }
 
-        private List<string> _colors = new();
-        public List<string> ProductColors
+        private List<Color> _colors = new();
+        public List<Color> ProductColors
         {
             get => _colors;
             set

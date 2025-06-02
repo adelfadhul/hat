@@ -12,6 +12,8 @@ namespace Hat.Domain.Store
         Task<List<ProductModel>> GetWhishListProducts(string brandId);
         Task<List<string>> GetBrands();
         Task<ProductModel?> GetProductById(Guid productId);
+
+        Task Create(ProductModel model);
         Task GetTabPages();
     }
 }

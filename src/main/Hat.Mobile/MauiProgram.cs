@@ -8,6 +8,7 @@ using Hat.Infrastructure.Identity.Memory;
 using Hat.Mobile.Services;
 using Hat.Mobile.ViewModels;
 using Hat.Mobile.Views;
+using Hat.ViewModels;
 
 
 

@@ -13,7 +13,7 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="Margin" Value="10 0 0 0"/>
+                <!--<Setter Property="Margin" Value="10 0 0 0"/>-->
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
@@ -38,7 +38,7 @@
                         <!--Available or not-->
                         <Label
      FontAttributes="Bold"
-     FontSize="10" Padding="3" Margin="0 0 15 0"
+     FontSize="10" Padding="3" Margin="0,0,15,0"
      HorizontalOptions="StartAndExpand"
      Text="{Binding ProductDetail.AvailableText}"
      TextColor="White" 
@@ -53,11 +53,11 @@
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
-                                        SelectedItem="{Binding ProductDetail.ProductSize}">
+                                        SelectedItem="{Binding ProductDetail.SelectedSize}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                        
-                                            <Label Text="{Binding}" Margin="0 10 0 10" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding}" Margin="0,10,0,10" HorizontalOptions="Center"/>
                                        
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -72,7 +72,7 @@
                             <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
  ItemsLayout="HorizontalList"
  SelectionMode="Single"
- SelectedItem="{Binding ProductDetail.ProductColor}">
+ SelectedItem="{Binding ProductDetail.SelectedColor}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border>

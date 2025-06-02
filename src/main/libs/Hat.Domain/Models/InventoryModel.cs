@@ -11,5 +11,7 @@
         public string Color { get; set; }
         public string Location { get; set; }
         #endregion
+
+       
     }
 }

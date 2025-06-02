@@ -1,4 +1,4 @@
-using Hat.Mobile.ViewModels;
+using Hat.ViewModels;
 
 namespace Hat.Mobile.Views;
 

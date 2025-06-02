@@ -2,11 +2,6 @@
 using Hat.Domain.Models;
 using Hat.Domain.Store;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hat.Application.Commands
 {

@@ -5,9 +5,9 @@ using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryProductRepository :UserRepository, IProductRepository
+    public class MemoryProductRepository : UserRepository, IProductRepository
     {
-        public static  Guid Product1 => PRODUCTS[0].Id;
+        public static Guid Product1 => PRODUCTS[0].Id;
         public static Guid Product2 => PRODUCTS[1].Id;
         public static Guid Product3 => PRODUCTS[2].Id;
         public static Guid Product4 => PRODUCTS[3].Id;
@@ -26,8 +26,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Price = 755,
                     ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png",
                     Details = "High-quality wireless speaker with immersive sound.",
-                    ProductColor="#00C569",
-                    ProductSize="XLarge",
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -40,8 +38,6 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Price = 450,
                     ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png",
                     Details = "Elegant leather wristwatch for all occasions.",
-                    ProductColor ="#A52A2A",
-                    ProductSize="One Size",
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -54,8 +50,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Price = 900,
                     ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png",
                     Details = "Smart speaker with voice assistant integration.",
-                    ProductColor ="#FFFFFF",
-                    ProductSize ="Small",
+
                     Reviews = new List<ReviewModel>()
                 },
                 new ProductModel
@@ -68,13 +63,12 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Price = 1200,
                     ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png",
                     Details = "Luggage with built-in GPS and charging ports.",
-                    ProductColor ="#808080",
-                    ProductSize ="Medium",
+
                     Reviews = new List<ReviewModel>()
                 }
             };
-            
-            
+
+
             return products;
         });
 
@@ -92,7 +86,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         public Task<List<ProductModel>> GetBestSettlingProducts()
         {
 
-            var products= PRODUCTS;
+            var products = PRODUCTS;
             return Task.FromResult(products);
         }
 
@@ -122,11 +116,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public Task<List<ProductModel>> GetProductsByCategory(Guid categoryId)
         {
-           var products= PRODUCTS.Where(x => x.CategoryId == categoryId);
+            var products = PRODUCTS.Where(x => x.CategoryId == categoryId);
             return Task.FromResult(products.ToList());
         }
 
-      
+
 
         public Task GetTabPages()
         {
@@ -147,6 +141,12 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" },
              };
             return Task.FromResult(products);
+        }
+
+        public async Task Create(ProductModel model)
+        {
+            PRODUCTS.Add(model);
+            await Task.CompletedTask;
         }
     }
 }
