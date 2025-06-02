@@ -15,10 +15,7 @@ namespace Hat.Mobile.ViewModels
 
         }
         public CreateProductViewModel() { }
-        // Add properties and methods for adding a product
-        // For example, you might have properties for ProductName, Price, Description, etc.
-        // and methods to handle the logic of adding a product to the database or API.
-        // Example properties:
+
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string Details { get; set; }
@@ -65,21 +62,13 @@ namespace Hat.Mobile.ViewModels
         public VatModel SelectedVat { get; set; }
         private async Task PopulateDataAsync()
         {
-            // Implement logic to populate data if needed
-            // For example, you might want to load categories or other related data
-            // await _dataService.LoadCategories();
-            // Or any other initialization logic specific to adding a product
+           
             Categories = await _dataService.GetCategories();
             Vats = await _dataService.GetVats();
 
         }
 
-        private async Task InitializeAsync()
-        {
-            // Call PopulateDataAsync to load any necessary data when the view model is initialized
-            await PopulateDataAsync();
-        }
-
+      
 
     }
 }

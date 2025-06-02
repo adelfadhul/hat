@@ -19,10 +19,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return vats;
         });
         public static List<VatModel> VATS => _vats.Value;
-        public async Task AddVat(VatModel vat)
+        public async Task<Guid> CreateVat(VatModel vat)
         {
+            vat.Id = Guid.NewGuid();
             VATS.Add(vat);
-            await Task.FromResult(Task.CompletedTask);
+            return await Task.FromResult(vat.Id);
         }
 
         public async Task DeleteVat(Guid vatId)

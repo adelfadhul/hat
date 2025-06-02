@@ -1,3 +1,4 @@
+using Hat.Domain.Commands;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,16 @@ namespace Hat.Backend.Controllers
                 return NotFound();
             }
             return Ok(vat);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVat([FromBody] CreateVatCommand  command)
+        {
+            _logger.LogInformation("CreateVat: {command}", command.Name);
+            var result = await _mediator.Send(command);
+
+            // assuming result is the new product ID
+            return CreatedAtAction(nameof(GetVatById), new { id = result }, new { id = result });
         }
     }
 }

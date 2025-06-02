@@ -2,6 +2,7 @@
 
 namespace Hat.Domain.Commands
 {
+
     public class CreateProductCommand : IRequest<Guid>
     {
         public string Name { get; set; }

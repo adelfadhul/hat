@@ -7,7 +7,7 @@ namespace Hat.Domain.Store
 
         Task<List<VatModel>> GetVats();
         Task<VatModel> GetVat(Guid vatId);
-        Task AddVat(VatModel vat);
+        Task<Guid> CreateVat(VatModel vat);
         Task DeleteVat(Guid vatId);
     }
 }

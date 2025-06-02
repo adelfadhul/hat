@@ -61,6 +61,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Admin\CreateVatView.xaml.cs">
+	    <DependentUpon>CreateVatView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Admin\CreateProductView.xaml.cs">
 	    <DependentUpon>CreateProductView.xaml</DependentUpon>
 	  </Compile>
@@ -116,6 +119,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\AddNewCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Admin\CreateVatView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Admin\CreateProductView.xaml">

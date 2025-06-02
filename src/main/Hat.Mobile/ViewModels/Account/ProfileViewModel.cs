@@ -59,6 +59,7 @@ namespace Hat.Mobile.ViewModels
             if (_currentUser.IsAdmin())
             {
                 MenuItems.Add(new MenuItems() { Title = "Create Product", Body = "\uf0e7", TargetType = typeof(CreateProductView) });
+                MenuItems.Add(new MenuItems() { Title = "Create Vat", Body = "\uf0e7", TargetType = typeof(CreateVatView) });
             }
             IsLoaded = true;
         }
@@ -92,6 +93,9 @@ namespace Hat.Mobile.ViewModels
                             break;
                         case Type type when type == typeof(CreateProductView):
                             await _navigationService.NavigateToCreateProduct();
+                            break;
+                        case Type type when type == typeof(CreateVatView):
+                            await _navigationService.NavigateToCreateVat();
                             break;
                         default:
                             break;
