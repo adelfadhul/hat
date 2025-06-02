@@ -22,10 +22,17 @@
 
             <Label Text="Category" />
             <Picker
-    Title="Select category"
+    Title="Select Category"
     ItemsSource="{Binding Categories}"
     ItemDisplayBinding="{Binding Name}"
     SelectedItem="{Binding SelectedCategory}" />
+
+            <Label Text="Vat" />
+            <Picker
+Title="Select Vat"
+ItemsSource="{Binding Vats}"
+ItemDisplayBinding="{Binding Name}"
+SelectedItem="{Binding SelectedVat}" />
 
             <Label Text="Image URL" />
             <Entry Text="{Binding ImageUrl}" Placeholder="Enter image URL" />

@@ -35,6 +35,10 @@ namespace Hat.Mobile.ViewModels
         private List<CategoryModel> _Categories;
         public List<CategoryModel> Categories { get=>_Categories; set=>SetProperty(ref _Categories,value); }
         public CategoryModel SelectedCategory { get; set; }
+
+        private List<VatModel> _Vats;
+        public List<VatModel> Vats { get => _Vats; set => SetProperty(ref _Vats, value); }
+        public VatModel SelectedVat { get; set; }
         private async Task PopulateDataAsync()
         {
             // Implement logic to populate data if needed
@@ -42,6 +46,7 @@ namespace Hat.Mobile.ViewModels
             // await _dataService.LoadCategories();
             // Or any other initialization logic specific to adding a product
             Categories= await _dataService.GetCategories();
+            Vats = await _dataService.GetVats();
 
         }
        
