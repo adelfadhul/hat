@@ -8,36 +8,40 @@
 
 
 
-        <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="16">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-                <Label Text="Product Name" />
-                <Entry Text="{Binding Name}" Placeholder="Enter product name" />
+            <Label Text="Product Name" />
+            <Entry Text="{Binding Name}" Placeholder="Enter product name" />
 
-                <Label Text="Brand Name" />
-                <Entry Text="{Binding BrandName}" Placeholder="Enter brand name" />
+            <Label Text="Brand Name" />
+            <Entry Text="{Binding BrandName}" Placeholder="Enter brand name" />
 
-                <Label Text="Price" />
-                <Entry Text="{Binding Price}" Placeholder="Enter price" Keyboard="Numeric" />
+            <Label Text="Price" />
+            <Entry Text="{Binding Price}" Placeholder="Enter price" Keyboard="Numeric" />
 
-                <Label Text="Category" />
-                <Entry Text="{Binding CategoryId}" Placeholder="Enter category id" />
+            <Label Text="Category" />
+            <Picker
+    Title="Select category"
+    ItemsSource="{Binding Categories}"
+    ItemDisplayBinding="{Binding Name}"
+    SelectedItem="{Binding SelectedCategory}" />
 
-                <Label Text="Image URL" />
-                <Entry Text="{Binding ImageUrl}" Placeholder="Enter image URL" />
+            <Label Text="Image URL" />
+            <Entry Text="{Binding ImageUrl}" Placeholder="Enter image URL" />
 
-                <Label Text="Details" />
-                <Editor Text="{Binding Details}" Placeholder="Enter product details" AutoSize="TextChanges" />
+            <Label Text="Details" />
+            <Editor Text="{Binding Details}" Placeholder="Enter product details" AutoSize="TextChanges" />
 
-                <Button
+            <Button
                 Text="Create Product"
                 Command="{Binding CreateProductCommand}"
                 BackgroundColor="{DynamicResource Primary}"
                 TextColor="White"
                 CornerRadius="8" />
 
-            </VerticalStackLayout>
-        </ScrollView>
+        </VerticalStackLayout>
+    </ScrollView>
 
 
 </ContentPage>
