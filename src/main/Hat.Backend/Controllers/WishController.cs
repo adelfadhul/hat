@@ -20,6 +20,18 @@ namespace Hat.Backend.Controllers
             var list = await _mediator.Send(new UserWishProductsQuery(UserId));
             return Ok(list);
         }
+        [HttpGet("{UserId}/products/{ProductId}")]
+        public async Task<IActionResult> GetWishByUserAndProduct([FromRoute] Guid UserId, [FromRoute] Guid ProductId)
+        {
+            var wish = await _mediator.Send(new WishByUserAndProductQuery(UserId, ProductId));
+            if (wish == null)
+            {
+                return NotFound();
+            }
+
+            _logger.LogInformation("GetWishByUserAndProduct: UserId={UserId}, ProductId={ProductId}", UserId, ProductId);
+            return Ok(wish);
+        }
 
         [HttpDelete("")]
         public async Task<IActionResult> DeleteWish([FromQuery] Guid WishId)

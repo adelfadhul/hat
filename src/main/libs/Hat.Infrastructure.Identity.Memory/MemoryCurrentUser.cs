@@ -3,6 +3,7 @@ using System.Security.Claims;
 
 namespace Hat.Infrastructure.Identity.Memory
 {
+   
     public class MemoryCurrentUser : ICurrentUser
     {
         public string Email()
@@ -20,7 +21,7 @@ namespace Hat.Infrastructure.Identity.Memory
         {
             if (_oid == null)
             {
-                _oid = Guid.NewGuid();
+                _oid = Guid.Parse("00000000-0000-0000-0000-000000000001"); ;
             }
             return _oid.Value;
         }

@@ -36,7 +36,7 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-       
+
 
         public async Task<List<ProductModel>> GetFeaturedProducts()
         {
@@ -288,16 +288,24 @@ namespace Hat.Mobile.Services
 
         }
 
-        internal async Task<List<WishModel>> GetWishesByUserAndProduct(Guid productId)
+        internal async Task<bool> IsFav(Guid productId)
         {
             var response = await _httpClient.GetAsync($"/api/wishes/{_currentUser.Oid()}/products/{productId}");
+            // return false if not found
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return false;
+            }
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return true; // Wish exists
+            }
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"Error fetching wish: {response.ReasonPhrase}");
+                throw new HttpRequestException($"Error checking if product is fav: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<List<WishModel>>();
-            return data;
 
+            return false;
         }
 
     }

@@ -77,8 +77,7 @@ namespace Hat.Mobile.ViewModels
             set
             {
                 productId = value;
-                // Trigger loading logic
-               _= PopulateDataAsync(productId);//fire and forget
+               _= PopulateData(productId);//fire and forget
             }
         }
 
@@ -94,10 +93,10 @@ namespace Hat.Mobile.ViewModels
 
         private async Task InitializeAsync()
         {
-            await PopulateDataAsync(productId);
+            await PopulateData(productId);
         }
 
-        async Task PopulateDataAsync(string productId)
+        async Task PopulateData(string productId)
         {
             if(string.IsNullOrEmpty(productId))
             {
@@ -105,7 +104,9 @@ namespace Hat.Mobile.ViewModels
             }
             var storedProduct = await _dataService.GetProductByIdWithDetails(Guid.Parse(productId));
             ProductDetail = new ProductViewModel(storedProduct);
-            
+
+            IsFavorite = await _dataService.IsFav(Guid.Parse(productId));
+
             IsLoaded = true;
         }
         private async void GoBack(object obj)
