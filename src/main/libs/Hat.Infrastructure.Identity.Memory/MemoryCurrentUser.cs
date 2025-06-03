@@ -15,6 +15,7 @@ namespace Hat.Infrastructure.Identity.Memory
 
         private Guid? _oid;
 
+       
         public Guid Oid()
         {
             if (_oid == null)

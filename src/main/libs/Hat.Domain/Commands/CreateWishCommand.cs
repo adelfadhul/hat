@@ -4,7 +4,12 @@ namespace Hat.Domain.Commands
 {
     public class CreateWishCommand : IRequest<Guid>
     {
-        public Guid UserId { get; set; }
-        public Guid ProductId { get; set; }
+        public CreateWishCommand(Guid userId, Guid productId)
+        {
+            UserId = userId;
+            ProductId = productId;
+        }
+        public Guid UserId { get; init; }
+        public Guid ProductId { get; init; }
     }
 }

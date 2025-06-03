@@ -15,5 +15,6 @@ namespace Hat.Domain.Store
 
         Task<Guid> Create(ProductModel model);
         Task GetTabPages();
+        Task<List<ProductModel>> GetProductsByIds(List<Guid> guids);
     }
 }

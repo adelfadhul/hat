@@ -68,6 +68,12 @@ public class ProductController : HatController
             var products = await _mediator.Send(new ProductsByCategoryQuery(categoryId));
             return Ok(products);
         }
-
+        [HttpGet("wish/{userId}")]
+        public async Task<IActionResult> GetWishProducts(Guid userId)
+        {
+            _logger.LogInformation("GetWishProducts: {UserId}", userId);
+            var products = await _mediator.Send(new UserWishProductsQuery(userId));
+            return Ok(products);
+        }
     }
 }

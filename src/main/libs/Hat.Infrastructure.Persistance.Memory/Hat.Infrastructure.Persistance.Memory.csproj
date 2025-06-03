@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hat.Domain\Hat.Domain.csproj" />
+    <ProjectReference Include="..\Hat.Infrastructure.Identity.Memory\Hat.Infrastructure.Identity.Memory.csproj" />
   </ItemGroup>
 
 </Project>

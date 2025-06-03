@@ -149,5 +149,17 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             PRODUCTS.Add(model);
             return await Task.FromResult(model.Id);
         }
+
+        public Task<List<ProductModel>> GetProductsByIds(List<Guid> guids)
+        {
+            var products = PRODUCTS.Where(p => guids.Contains(p.Id)).ToList();
+            if (products.Count == 0)
+            {
+                return Task.FromResult(new List<ProductModel>());
+            }
+            return Task.FromResult(products);
+        }
+
+       
     }
 }

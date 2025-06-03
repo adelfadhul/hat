@@ -10,12 +10,21 @@ namespace Hat.Mobile.Services
         private readonly HttpClient _httpClient;
         private ICurrentUser _currentUser;
 
-        public DataService(IHttpClientFactory httpClientFactory,ICurrentUser currentUser)
+        public DataService(IHttpClientFactory httpClientFactory, ICurrentUser currentUser)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
             _currentUser = currentUser;
         }
-
+        public async Task<List<ProductModel>> GetUserWishProducts()
+        {
+            var response = await _httpClient.GetAsync($"/api/products/wish/{_currentUser.Oid()}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching user wish products: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<ProductModel>>();
+            return data;
+        }
         public async Task<List<ProductModel>> GetProducts()
         {
             var response = await _httpClient.GetAsync("/api/products");
@@ -26,6 +35,8 @@ namespace Hat.Mobile.Services
             var data = await response.Content.ReadFromJsonAsync<List<ProductModel>>();
             return data;
         }
+
+       
 
         public async Task<List<ProductModel>> GetFeaturedProducts()
         {
@@ -242,5 +253,52 @@ namespace Hat.Mobile.Services
             var data = await response.Content.ReadFromJsonAsync<VatModel>();
             return data;
         }
+
+        internal async Task CreateWish(Guid productId)
+        {
+            var wish = new WishModel
+            {
+                UserId = _currentUser.Oid(),
+                ProductId = productId
+            };
+            var response = await _httpClient.PostAsJsonAsync("/api/wishes", wish);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error creating product: {response.ReasonPhrase}");
+            }
+        }
+        internal async Task DeleteWish(Guid wishId)
+        {
+            var response = await _httpClient.DeleteAsync($"/api/wishes/{wishId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error removing wish: {response.ReasonPhrase}");
+            }
+        }
+
+        internal async Task<List<WishModel>> GetWishesByUser()
+        {
+            var response = await _httpClient.GetAsync($"/api/wishes/{_currentUser.Oid()}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching wishes: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<WishModel>>();
+            return data;
+
+        }
+
+        internal async Task<List<WishModel>> GetWishesByUserAndProduct(Guid productId)
+        {
+            var response = await _httpClient.GetAsync($"/api/wishes/{_currentUser.Oid()}/products/{productId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching wish: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<WishModel>>();
+            return data;
+
+        }
+
     }
 }

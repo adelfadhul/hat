@@ -24,7 +24,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IShippingAddressRepository, MemoryShippingAddressRepository>();
                     services.AddScoped<IReviewRepository, MemoryReviewRepository>();
                     services.AddScoped<IVatRepository,MemoryVatRepository>();
-                    services.AddScoped<ICurrentUser, MemoryCurrentUser>();
+                    services.AddSingleton<ICurrentUser, MemoryCurrentUser>();
                     services.AddScoped<IInventoryRepository, MemoryInventoryRepository>();
                     services.AddScoped<IWishRepository, MemoryWishRepository>();
                     break;

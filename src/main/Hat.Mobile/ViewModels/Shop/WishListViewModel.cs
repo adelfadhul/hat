@@ -48,7 +48,7 @@ namespace Hat.Mobile.ViewModels
         {
          
             Products.Clear();
-            var storedProducts = await _dataService.GetProducts();
+            var storedProducts = await _dataService.GetUserWishProducts();
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();
                IsLoaded = true;
         }

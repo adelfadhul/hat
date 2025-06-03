@@ -3,10 +3,10 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class WishesByUserQuery : IRequest<List<WishModel>>
+    public class UserWishProductsQuery : IRequest<List<ProductModel>>
     {
         public readonly Guid UserId;
-        public WishesByUserQuery(Guid userId)
+        public UserWishProductsQuery(Guid userId)
         {
             UserId = userId;
         }

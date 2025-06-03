@@ -1,4 +1,5 @@
 ﻿using Hat.DataViewModels;
+using Hat.Domain.Models;
 using Hat.Helpers;
 using Hat.Mobile.Services;
 using System.Windows.Input;
@@ -86,7 +87,6 @@ namespace Hat.Mobile.ViewModels
            
             BackCommand = new Command<object>(GoBack);
             FavCommand = new Command<Color>(FavItem);
-            // Update the AddToCartCommand initialization to match the expected Action<object> signature
             AddToCartCommand = new Command<object>(async (obj) => await AddToCart());
             _ = InitializeAsync();
     
@@ -115,6 +115,15 @@ namespace Hat.Mobile.ViewModels
 
         private void FavItem(Color obj)
         {
+            if (!IsFavorite)
+            {
+                _ = _dataService.CreateWish(Guid.Parse(productId));
+            }
+            else
+            {
+                _ = _dataService.DeleteWish(Guid.Parse(productId));
+            }
+           
             IsFavorite = true ? !IsFavorite : IsFavorite;
         }
         public void ChageFooterVisibility(double currentY)

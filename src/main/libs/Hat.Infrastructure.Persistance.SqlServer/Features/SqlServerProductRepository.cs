@@ -45,6 +45,11 @@ namespace Hat.Infrastructure.Persistance.SqlServer.Features
             throw new NotImplementedException();
         }
 
+        public Task<List<ProductModel>> GetProductsByIds(List<Guid> guids)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task GetTabPages()
         {
             throw new NotImplementedException();
