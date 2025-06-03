@@ -18,8 +18,8 @@ namespace Hat.Application.Commands
             {
                 Name = request.Name,
                 Rate = request.Rate,
-                 Code= request.Code
-                 
+                Code = request.Code
+
             });
         }
     }
