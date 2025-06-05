@@ -308,5 +308,26 @@ namespace Hat.Mobile.Services
             return false;
         }
 
+        internal async Task<List<InventoryModel>> GetInventoriesByProduct(Guid productId)
+        {
+            var response = await _httpClient.GetAsync($"/api/inventories/product/{productId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching inventories by product: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<InventoryModel>>();
+            return data;
+        }
+
+        internal async Task<Guid> CreateInventory(InventoryModel inventory)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/inventories", inventory);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error creating inventory: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<Guid>();
+            return data;
+        }
     }
 }

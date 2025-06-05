@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hat.Backend.Controllers
 {
     [ApiController]
-    [Route("api/products")]    
-public class ProductController : HatController
+    [Route("api/products")]
+    public class ProductController : HatController
     {
         public ProductController(IMediator mediator, ILogger<ProductController> logger) : base(mediator, logger)
         {
@@ -20,7 +20,7 @@ public class ProductController : HatController
             var list = await _mediator.Send(new ProductsQuery());
             return Ok(list);
         }
-        
+
 
         [HttpPost()]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
@@ -54,7 +54,7 @@ public class ProductController : HatController
             {
                 isDetailed = true;
             }
-            var product = await _mediator.Send(new ProductByIdQuery(id,isDetailed));
+            var product = await _mediator.Send(new ProductByIdQuery(id, isDetailed));
             if (product == null)
             {
                 return NotFound();

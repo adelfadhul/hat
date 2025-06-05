@@ -7,7 +7,7 @@ namespace Hat.Domain.Store
     {
         Task<List<InventoryModel>> GetAll();    
         Task<List<InventoryModel>> Get(Guid id);
-        Task Add(InventoryModel model);
+        Task<Guid> Create(InventoryModel model);
         Task Delete(Guid id);
         Task Update(InventoryModel model);
 

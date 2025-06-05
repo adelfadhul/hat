@@ -4,13 +4,13 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryInventoryRepository:UserRepository, IInventoryRepository
+    public class MemoryInventoryRepository : UserRepository, IInventoryRepository
     {
         public MemoryInventoryRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
         public static List<InventoryModel> INVENTORIES => _inventories.Value;
-        private static readonly Lazy<List<InventoryModel>> _inventories= new(() =>
+        private static readonly Lazy<List<InventoryModel>> _inventories = new(() =>
         {
             var inventories = new List<InventoryModel>
             {
@@ -53,9 +53,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             };
             return inventories;
         });
-        public Task Add(InventoryModel model)
+        public async Task<Guid> Create(InventoryModel model)
         {
-            throw new NotImplementedException();
+            INVENTORIES.Add(model);
+            await Task.CompletedTask;
+            return model.Id;
         }
 
         public Task Delete(Guid id)
@@ -98,11 +100,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public Task<int> GetCountByProduct(Guid productId)
         {
-           return Task.FromResult(INVENTORIES
-                .Count(i => i.ProductId == productId));
+            return Task.FromResult(INVENTORIES
+                 .Count(i => i.ProductId == productId));
         }
         // Implement methods for inventory management here
         // For example, methods to add, update, or delete inventory items
     }
-   
+
 }

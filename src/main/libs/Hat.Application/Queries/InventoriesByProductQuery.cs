@@ -1,7 +1,7 @@
-﻿using Hat.Domain.Models;
+using Hat.Domain.Models;
 using MediatR;
 
-namespace Hat.Domain.Queries
+namespace Hat.Application.Queries
 {
     public class InventoriesByProductQuery : IRequest<List<InventoryModel>>
     {
@@ -10,6 +10,5 @@ namespace Hat.Domain.Queries
         {
             ProductId = productId;
         }
-
     }
 }
