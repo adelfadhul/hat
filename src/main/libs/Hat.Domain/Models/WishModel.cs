@@ -1,5 +1,7 @@
 ﻿namespace Hat.Domain.Models
 {
+
+
     public class WishModel
     {
         public Guid Id { get; set; }

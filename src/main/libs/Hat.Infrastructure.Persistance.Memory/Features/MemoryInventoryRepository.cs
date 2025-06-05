@@ -20,6 +20,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     ProductId = MemoryProductRepository.Product1,
                     ProductColor = "#00C569",
                     ProductSize = "XLarge",
+                    SKU = "SKU-001",
+                    Description = "High-quality wireless speaker with immersive sound.",
+                    Location = "Warehouse A",
+                    IsSold = false
                 },
                 new InventoryModel
                 {
@@ -27,6 +31,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     ProductId = MemoryProductRepository.Product1,
                     ProductColor = "#A52A2A",
                     ProductSize = "Med",
+                    SKU = "SKU-002",
+                    Description = "High-quality wireless speaker with immersive sound.",
+                    Location = "Warehouse B",
+                    IsSold = false
                 },
 
                 new InventoryModel
@@ -34,21 +42,33 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product2,
                     ProductColor = "#A52A2A",
-                    ProductSize = "One Size"
+                    ProductSize = "One Size",
+                    SKU = "SKU-003",
+                    Description = "Elegant leather wristwatch for all occasions.",
+                    Location = "Warehouse C",
+                    IsSold = false
                 },
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product3,
                     ProductColor = "#FF5733",
-                    ProductSize = "Medium"
+                    ProductSize = "Medium",
+                    SKU = "SKU-004",
+                    Description = "Smart speaker with voice assistant integration.",
+                    Location = "Warehouse D",
+                    IsSold = false
                 },
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product4,
                     ProductColor = "#0000FF",
-                    ProductSize = "Large"
+                    ProductSize = "Large",
+                    SKU = "SKU-005",
+                    Description = "Stylish and comfortable sofa for your living room.",
+                    Location = "Warehouse E",
+                    IsSold = false
                 }
             };
             return inventories;

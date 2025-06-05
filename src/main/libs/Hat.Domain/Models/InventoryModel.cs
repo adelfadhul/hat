@@ -10,7 +10,7 @@
         public string Description { get; set; }
         public string ProductColor { get; set; }
         public string Location { get; set; }
-        public bool IsAvailable { get; set; }
+        public bool IsSold { get; set; }
 
         #endregion
 

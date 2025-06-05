@@ -24,6 +24,7 @@ namespace Hat.Application.Commands
                 ProductId = request.ProductId,
                 ProductSize = request.Size,
                 SKU = request.SKU,
+                IsSold=false
             });
 
             return await Task.FromResult(id);   
