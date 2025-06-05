@@ -6,9 +6,9 @@
         public Guid Id { get; set; }
         public Guid ProductId { get; set; } 
         public string SKU { get; set; }
-        public string Size { get; set; }
+        public string ProductSize { get; set; }
         public string Description { get; set; }
-        public string Color { get; set; }
+        public string ProductColor { get; set; }
         public string Location { get; set; }
         #endregion
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Hat.Mobile.Views.CreateInventoryView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Hat.Mobile.Converters"
+    Title="Create Inventory">
+
+
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Product" />
+            <Picker
+Title="Select Product"
+ItemsSource="{Binding Products}"
+ItemDisplayBinding="{Binding Name}"
+SelectedItem="{Binding SelectedProduct}" />
+
+            <Label Text="SKU" />
+            <Entry Text="{Binding VatName}" Placeholder="SKU" />
+
+            <Label Text="Size" />
+            <Entry Text="{Binding ProductSize}" Placeholder="Enter Size" />
+
+            <Label Text="Color" />
+            <Entry Text="{Binding ProductColor}" Placeholder="Enter Color" />
+
+          
+            <Button
+                Text="Create Vat"
+                Command="{Binding CreateInventoryCommand}"
+                BackgroundColor="{DynamicResource Primary}"
+                TextColor="White"
+                CornerRadius="8" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+
+</ContentPage>

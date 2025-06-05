@@ -18,37 +18,37 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product1,
-                    Color = "#00C569",
-                    Size = "XLarge",
+                    ProductColor = "#00C569",
+                    ProductSize = "XLarge",
                 },
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product1,
-                    Color = "#A52A2A",
-                    Size = "Med",
+                    ProductColor = "#A52A2A",
+                    ProductSize = "Med",
                 },
 
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product2,
-                    Color = "#A52A2A",
-                    Size = "One Size"
+                    ProductColor = "#A52A2A",
+                    ProductSize = "One Size"
                 },
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product3,
-                    Color = "#FF5733",
-                    Size = "Medium"
+                    ProductColor = "#FF5733",
+                    ProductSize = "Medium"
                 },
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
                     ProductId = MemoryProductRepository.Product4,
-                    Color = "#0000FF",
-                    Size = "Large"
+                    ProductColor = "#0000FF",
+                    ProductSize = "Large"
                 }
             };
             return inventories;
@@ -79,7 +79,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return Task.FromResult(INVENTORIES
                 .Where(i => i.ProductId == productId)
-                .Select(i => i.Color)
+                .Select(i => i.ProductColor)
                 .Distinct()
                 .ToList());
         }
@@ -88,7 +88,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return Task.FromResult(INVENTORIES
                 .Where(i => i.ProductId == productId)
-                .Select(i => i.Size)
+                .Select(i => i.ProductSize)
                 .Distinct()
                 .ToList());
         }

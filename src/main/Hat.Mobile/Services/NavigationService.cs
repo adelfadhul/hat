@@ -138,4 +138,8 @@ public class NavigationService
     {
         await Shell.Current.GoToAsync($"{nameof(CreateVatView)}");
     }
+    internal async Task NavigateToCreateInventory()
+    {
+        await Shell.Current.GoToAsync($"{nameof(CreateInventoryView)}");
+    }
 }

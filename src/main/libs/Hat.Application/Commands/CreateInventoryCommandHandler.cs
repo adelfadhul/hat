@@ -18,11 +18,11 @@ namespace Hat.Application.Commands
         {
             var id = await _inventoryRepository.Create(new InventoryModel
             {
-                Color = request.Color,
+                ProductColor = request.Color,
                 Description = request.Description,
                 Location = request.Location,
                 ProductId = request.ProductId,
-                Size = request.Size,
+                ProductSize = request.Size,
                 SKU = request.SKU,
             });
 
