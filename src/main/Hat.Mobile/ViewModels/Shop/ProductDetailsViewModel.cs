@@ -1,5 +1,4 @@
 ﻿using Hat.DataViewModels;
-using Hat.Domain.Models;
 using Hat.Helpers;
 using Hat.Mobile.Services;
 using System.Windows.Input;
@@ -44,13 +43,28 @@ namespace Hat.Mobile.ViewModels
             }
         }
 
-      
+
         private string _selectedSize;
-        public string SelectedSize { get=>_selectedSize; set=>SetProperty(ref _selectedSize,value); }  // Default size, can be changed by user
+        public string SelectedSize
+        {
+            get => _selectedSize;
+            set
+            {
+                if (SetProperty(ref _selectedSize, value))
+                    UpdateCanAddToCart();
+            }
+        }
 
-
-        private Color _selectedColor; // Default color, can be changed by user
-        public Color SelectedColor { get=>_selectedColor; set=>SetProperty(ref _selectedColor,value); }
+        private Color _selectedColor;
+        public Color SelectedColor
+        {
+            get => _selectedColor;
+            set
+            {
+                if (SetProperty(ref _selectedColor, value))
+                    UpdateCanAddToCart();
+            }
+        }
         private double qty => ProductDetail?.Qty ?? 1;
         private ProductViewModel _ProductDetail = new();
         public ProductViewModel ProductDetail
@@ -80,8 +94,17 @@ namespace Hat.Mobile.ViewModels
                _= PopulateData(productId);//fire and forget
             }
         }
-
-       public ProductDetailsViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
+        private bool _canAddToCart;
+        public bool CanAddToCart
+        {
+            get => _canAddToCart;
+            set => SetProperty(ref _canAddToCart, value);
+        }
+        private void UpdateCanAddToCart()
+        {
+            CanAddToCart = !string.IsNullOrEmpty(SelectedSize) && SelectedColor != default;
+        }
+        public ProductDetailsViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
            
             BackCommand = new Command<object>(GoBack);

@@ -53,7 +53,7 @@
                                         ItemsSource="{Binding ProductDetail.ProductSizes}"
                                         ItemsLayout="HorizontalList"
                                         SelectionMode="Single"
-                                        SelectedItem="{Binding ProductDetail.SelectedSize}">
+                                        SelectedItem="{Binding SelectedSize}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                        
@@ -72,7 +72,7 @@
                             <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
  ItemsLayout="HorizontalList"
  SelectionMode="Single"
- SelectedItem="{Binding ProductDetail.SelectedColor}">
+ SelectedItem="{Binding SelectedColor}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border>
@@ -263,6 +263,7 @@
             </StackLayout>
 
             <Button
+                IsEnabled="{Binding CanAddToCart}"
                 Grid.Column="3"
                 Padding="16"
                 Background="{DynamicResource Primary}"
