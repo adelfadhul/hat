@@ -2,9 +2,9 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class AddNewCardView : ContentPage
+public partial class CreateCardView : ContentPage
 {
-	public AddNewCardView(AddNewCardViewModel vm)
+	public CreateCardView(CreateCardViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

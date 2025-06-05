@@ -3,14 +3,14 @@ using Hat.Domain.Helpers;
 
 namespace Hat.Domain.Models
 {
-    public class CardInfoModel
+    public class CardModel
     {
         #region data
         public Guid Id { get; set; }
         public string? CardNumber { get; set; }
         public string? NameOnCard { get; set; }
         public string? CardValidationCode { get; set; }
-        public string? ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
 
         public bool IsSelected { get;set; }
 

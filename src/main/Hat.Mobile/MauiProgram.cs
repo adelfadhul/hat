@@ -70,12 +70,12 @@ public static class MauiProgram
         builder.Services.AddTransient<ShoppingCartViewModel>();
         builder.Services.AddTransient<DeliveryTypeViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();
-        builder.Services.AddTransient<AddNewCardView>();
-        builder.Services.AddTransient<AddNewCardViewModel>();
+        builder.Services.AddTransient<CreateCardView>();
+        builder.Services.AddTransient<CreateCardViewModel>();
         builder.Services.AddTransient<HomePageViewModel>(); 
         builder.Services.AddTransient<AllProductViewModel>();
         builder.Services.AddTransient<BrandDetailViewModel>();
-        builder.Services.AddTransient<CardInfoManagerViewModel>();
+        builder.Services.AddTransient<CardManagerViewModel>();
         builder.Services.AddTransient<CheckOutViewModel>();
         builder.Services.AddTransient<CategoryDetailViewModel> ();
         builder.Services.AddTransient<ConfirmAddressViewModel>();
@@ -107,7 +107,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfileView>();
         builder.Services.AddTransient<AllProductView>();
         builder.Services.AddTransient<BrandDetailView>();
-        builder.Services.AddTransient<CardInfoManagerView>();
+        builder.Services.AddTransient<CardManagerView>();
         builder.Services.AddTransient<CheckOutView>();
         builder.Services.AddTransient<ShoppingCartView>();
         builder.Services.AddTransient<CategoryDetailView>();
@@ -121,7 +121,7 @@ public static class MauiProgram
         builder.Services.AddTransient<TrackOrderView>();
         builder.Services.AddTransient<VerificationView>();
         builder.Services.AddTransient<WishListView>();
-        builder.Services.AddTransient<AddNewCardView>();
+        builder.Services.AddTransient<CreateCardView>();
         builder.Services.AddTransient<CreateProductView>();
         builder.Services.AddTransient<CreateVatView>();
         builder.Services.AddTransient<CreateInventoryView>();

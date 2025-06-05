@@ -1,15 +1,14 @@
 ﻿using Hat.Domain.Constants;
 using Hat.Domain.Models;
 using Hat.Helpers.ExtensionMethods;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
 {
-    public class CardInfoViewModel : BaseViewModel
+    public class CardViewModel : BaseViewModel
     {
-        public CardInfoViewModel() { }
-        public CardInfoViewModel(CardInfoModel domainModel)
+        public CardViewModel() { }
+        public CardViewModel(CardModel domainModel)
         {
             CardNumber = domainModel.CardNumber;
             NameOnCard = domainModel.NameOnCard;

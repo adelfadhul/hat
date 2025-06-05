@@ -34,7 +34,7 @@ namespace Hat.Mobile.ViewModels
         {
             foreach (var add in Addressess)
             {
-                if (add.AddressType == address.AddressType)
+                if (add.Name == address.Name)
                 {
                     add.IsSelected = true;
                 }

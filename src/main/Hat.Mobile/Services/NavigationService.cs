@@ -74,7 +74,7 @@ public class NavigationService
 
     internal async Task NavigateToAddNewCard()
     {
-        await Shell.Current.GoToAsync($"{nameof(AddNewCardView)}");
+        await Shell.Current.GoToAsync($"{nameof(CreateCardView)}");
     }
     // Navigate to the card calculation page
     public async Task NavigateToCheckOut()
@@ -116,7 +116,7 @@ public class NavigationService
 
     internal async Task NavigateToCard()
     {
-       await Shell.Current.GoToAsync($"{nameof(CardInfoManagerView)}");    
+       await Shell.Current.GoToAsync($"{nameof(CardManagerView)}");    
     }
 
     internal async Task NavigateToVerification()

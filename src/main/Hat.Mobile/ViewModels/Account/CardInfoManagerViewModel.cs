@@ -5,10 +5,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
-    public class CardInfoManagerViewModel : BaseViewModel
+    public class CardManagerViewModel : BaseViewModel
     {
-        private ObservableCollection<CardInfoViewModel> _Cards = [];
-        public ObservableCollection<CardInfoViewModel> Cards
+        private ObservableCollection<CardViewModel> _Cards = [];
+        public ObservableCollection<CardViewModel> Cards
         {
             get => _Cards;
             set => SetProperty(ref _Cards, value);
@@ -24,7 +24,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand AddNewCommand { get; }
 
        
-        public CardInfoManagerViewModel( NavigationService navigationService,DataService dataService):base(navigationService, dataService)
+        public CardManagerViewModel( NavigationService navigationService,DataService dataService):base(navigationService, dataService)
         {
             AddNewCommand = new Command(AddNewCard);
             _ = PopulateDataAsync();
@@ -35,8 +35,8 @@ namespace Hat.Mobile.ViewModels
       
         async Task PopulateDataAsync()
         { 
-            var storedCards= await _dataService.GetCardInfos();
-            Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
+            var storedCards= await _dataService.GetCards();
+            Cards = storedCards.Select(x => new CardViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }
         private async void AddNewCard()

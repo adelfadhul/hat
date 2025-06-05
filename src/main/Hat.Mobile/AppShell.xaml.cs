@@ -17,7 +17,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(BrandDetailView), typeof(BrandDetailView));
         Routing.RegisterRoute(nameof(ShoppingCartView), typeof(ShoppingCartView));
         Routing.RegisterRoute(nameof(ShippingAddressSelectorView), typeof(ShippingAddressSelectorView));
-        Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
+        Routing.RegisterRoute(nameof(CreateCardView), typeof(CreateCardView));
         Routing.RegisterRoute(nameof(ConfirmAddressView), typeof(ConfirmAddressView));
         // Register route for confirm payment navigation
         Routing.RegisterRoute(nameof(ConfirmPaymentView), typeof(ConfirmPaymentView));
@@ -32,8 +32,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));
         Routing.RegisterRoute(nameof(ProfileView), typeof(ProfileView));
         //Routing.RegisterRoute(nameof(CameraView), typeof(CameraView));
-        Routing.RegisterRoute(nameof(AddNewCardView), typeof(AddNewCardView));
-        Routing.RegisterRoute(nameof(CardInfoManagerView), typeof(CardInfoManagerView));
+        Routing.RegisterRoute(nameof(CreateCardView), typeof(CreateCardView));
+        Routing.RegisterRoute(nameof(CardManagerView), typeof(CardManagerView));
         Routing.RegisterRoute(nameof(HomePageView), typeof(HomePageView));
         Routing.RegisterRoute(nameof(CreateProductView), typeof(CreateProductView));
         Routing.RegisterRoute(nameof(CreateVatView), typeof(CreateVatView));

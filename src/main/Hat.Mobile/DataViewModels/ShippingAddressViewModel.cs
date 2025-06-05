@@ -3,7 +3,7 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
 {
-    public class ShippingAddressViewModel: BaseViewModel
+    public class ShippingAddressViewModel : BaseViewModel
     {
         public ShippingAddressViewModel()
         {
@@ -11,19 +11,16 @@ namespace Hat.DataViewModels
         }
         public ShippingAddressViewModel(ShippingAddressModel data)
         {
-            AddressType = data.AddressType;
-            FullAddress = data.FullAddress;
-            StreetOne = data.Street;
-            City = data.City;
-            State = data.State;
+            Name = data.Name;
+            Address = data.Address;
+            IsPrimary = data.IsPrimary;
         }
         #region data
-        public string AddressType { get; set; }
-        public string FullAddress { get; set; }
-        public string StreetOne { get; set; }
-        public string StreetTwo { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+
+        public bool IsPrimary { get; set; }
+
         #endregion
 
         private bool _IsSelected = false;

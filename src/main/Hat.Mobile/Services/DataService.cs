@@ -109,14 +109,24 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<CardInfoModel>> GetCardInfos()
+        internal async Task<List<CardModel>> GetCards()
         {
-            var response = await _httpClient.GetAsync("/api/card-infos");
+            var response = await _httpClient.GetAsync("/api/cards");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching card infos: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<List<CardInfoModel>>();
+            var data = await response.Content.ReadFromJsonAsync<List<CardModel>>();
+            return data;
+        }
+        internal async Task<Guid> CreateCard(CardModel card)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/cards", card);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error creating card: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<Guid>();
             return data;
         }
 

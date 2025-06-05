@@ -4,7 +4,7 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryShippingAddressRepository :UserRepository, IShippingAddressRepository
+    public class MemoryShippingAddressRepository : UserRepository, IShippingAddressRepository
     {
         private static Lazy<List<ShippingAddressModel>> _addresses = new(() =>
         {
@@ -15,22 +15,18 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                      Id = Guid.NewGuid(),
                       UserId = Guid.NewGuid(),
                       IsPrimary = true,
-                    AddressType = "Home Address",
-                    FullAddress = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
-                    Street = "21, Alex Davidson Avenue",
-                    City = "Victoria Island",
-                    State = "Lagos"
+                    Name = "Home Address",
+                    Address = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
+
                 },
                 new ShippingAddressModel
                 {
                         Id = Guid.NewGuid(),
                         UserId = Guid.NewGuid(),
                         IsPrimary = false,
-                    AddressType = "Work Address",
-                    FullAddress = "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria",
-                    Street = "9, Martins Crescent",
-                    City = "Abuja",
-                    State = ""
+                    Name = "Work Address",
+                    Address = "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria",
+
                 }
             };
         });
@@ -48,9 +44,39 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public Task<ShippingAddressModel?> GetPrimaryShippingAddress()
         {
-           return Task.FromResult(ADDRESSES.FirstOrDefault(a => a.IsPrimary) ?? null);
+            return Task.FromResult(ADDRESSES.FirstOrDefault(a => a.IsPrimary) ?? null);
         }
 
-         
+        public Task<Guid> CreateShippingAddress(ShippingAddressModel model)
+        {
+            var newAddress = new ShippingAddressModel
+            {
+                Id = Guid.NewGuid(),
+                UserId = model.UserId,
+                IsPrimary = model.IsPrimary,
+                Address = model.Address,
+                Name = model.Name
+            };
+            ADDRESSES.Add(newAddress);
+            return Task.FromResult(newAddress.Id);
+        }
+
+        public Task DeleteShippingAddress(Guid id)
+        {
+            ADDRESSES.RemoveAll(a => a.Id == id);
+            return Task.CompletedTask;
+        }
+
+        public Task InactivateShippingAddress(Guid id)
+        {
+            ADDRESSES.Single(a => a.Id == id).IsInactive = true;
+            return Task.CompletedTask;
+        }
+
+        public Task ActivateShippingAddress(Guid id)
+        {
+            ADDRESSES.Single(a => a.Id == id).IsInactive = false;
+            return Task.CompletedTask;
+        }
     }
 }

@@ -5,11 +5,11 @@ using MediatR;
 
 namespace Hat.Application.Commands
 {
-    public class AddShoppingCartItemCommandHandler : IRequestHandler<AddShoppingCartItemCommand>
+    public class CreateShoppingCartItemCommandHandler : IRequestHandler<AddShoppingCartItemCommand>
     {
         private readonly IShoppingCartRepository _repository;
         private readonly IProductRepository _productRepository;
-        public AddShoppingCartItemCommandHandler(IShoppingCartRepository repository, IProductRepository productRepository)
+        public CreateShoppingCartItemCommandHandler(IShoppingCartRepository repository, IProductRepository productRepository)
         {
             _repository = repository;
             _productRepository = productRepository;

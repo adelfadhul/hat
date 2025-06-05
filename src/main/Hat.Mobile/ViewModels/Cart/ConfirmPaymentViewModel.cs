@@ -17,8 +17,8 @@ namespace Hat.Mobile.ViewModels
             set => SetProperty(ref _IsLoaded, value);
         }
 
-        private ObservableCollection<CardInfoViewModel> _Cards = [];
-        public ObservableCollection<CardInfoViewModel> Cards
+        private ObservableCollection<CardViewModel> _Cards = [];
+        public ObservableCollection<CardViewModel> Cards
         {
             get => _Cards;
             set => SetProperty(ref _Cards, value);
@@ -33,7 +33,7 @@ namespace Hat.Mobile.ViewModels
         {
          
             NextCommand = new Command(ConfirmPayment);
-            SelectPaymentCommand = new Command<CardInfoViewModel>(SelectPayment);
+            SelectPaymentCommand = new Command<CardViewModel>(SelectPayment);
             BackCommand = new Command(GoBack);
             _ = InitializeAsync();
            
@@ -46,8 +46,8 @@ namespace Hat.Mobile.ViewModels
 
         async Task PopulateDataAsync()
         {
-            var storedCards = await _dataService.GetCardInfos();
-            Cards = storedCards.Select(x => new CardInfoViewModel(x)).ToObservableCollection();
+            var storedCards = await _dataService.GetCards();
+            Cards = storedCards.Select(x => new CardViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }
         private async void ConfirmPayment()
@@ -55,7 +55,7 @@ namespace Hat.Mobile.ViewModels
             await _navigationService.NavigateToConfirmPyment();
             //await Microsoft.Maui.Controls.Application.Current.MainPage.Navigation.PushAsync(new FinishCartView(_Products, _DeliveryType, _PrimaryAddress, _SelectedCard));
         }
-        private void SelectPayment(CardInfoViewModel selectedCard)
+        private void SelectPayment(CardViewModel selectedCard)
         {
             foreach (var card in Cards)
             {

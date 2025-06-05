@@ -5,14 +5,14 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class CardInfosQueryHandler : IRequestHandler<CardInfosQuery, List<CardInfoModel>>
+    public class CardInfosQueryHandler : IRequestHandler<CardsQuery, List<CardModel>>
     {
         private readonly ICardRepository _cardInfoRepository;
         public CardInfosQueryHandler(ICardRepository cardInfoRepository)
         {
             _cardInfoRepository = cardInfoRepository;
         }
-        public async Task<List<CardInfoModel>> Handle(CardInfosQuery request, CancellationToken cancellationToken)
+        public async Task<List<CardModel>> Handle(CardsQuery request, CancellationToken cancellationToken)
         {
             return await _cardInfoRepository.GetCards();
         }

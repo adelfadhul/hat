@@ -4,8 +4,8 @@ namespace Hat.Domain.Store
 {
     public interface ICardRepository
     {
-        Task<List<CardInfoModel>> GetCards();
-        Task AddCard(CardInfoModel card);
+        Task<List<CardModel>> GetCards();
+        Task<Guid> CreateCard(CardModel card);
         Task DeleteCard(string cardNumber);
     }
 }

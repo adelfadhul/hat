@@ -4,11 +4,11 @@ using Hat.Mobile.Services;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
-    public class AddNewCardViewModel : BaseViewModel
+    public class CreateCardViewModel : BaseViewModel
     {
-        private CardInfoViewModel _Card = new();
+        private CardViewModel _Card = new();
 
-        public CardInfoViewModel Card
+        public CardViewModel Card
         {
             get => _Card;
             set => SetProperty(ref _Card, value);
@@ -65,7 +65,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand BackCommand { get; }
       
-        public AddNewCardViewModel(DataService dataService, NavigationService navigationService):base(navigationService, dataService)
+        public CreateCardViewModel(DataService dataService, NavigationService navigationService):base(navigationService, dataService)
         {
             SaveCommand = new Command(SaveCard);
             BackCommand = new Command(GoBack);

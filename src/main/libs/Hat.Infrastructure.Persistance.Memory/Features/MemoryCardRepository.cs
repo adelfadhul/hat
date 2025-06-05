@@ -4,36 +4,41 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCardRepository :UserRepository, ICardRepository
+    public class MemoryCardRepository : UserRepository, ICardRepository
     {
         public MemoryCardRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
 
-        public Task AddCard(CardInfoModel card)
+        public Task<Guid> CreateCard(CardModel card)
         {
-            throw new NotImplementedException();
+            CARDS.Add(card);
+            return Task.FromResult(card.Id);
         }
 
         public Task DeleteCard(string cardNumber)
         {
-            throw new NotImplementedException();
+            CARDS.RemoveAll(c => c.CardNumber == cardNumber);
+            return Task.CompletedTask;
         }
 
-        public Task<List<CardInfoModel>> GetCards()
+        private static Lazy<List<CardModel>> _cards = new(() =>
         {
-
-            var cards = new List<CardInfoModel>
+            return new List<CardModel>
             {
-                new CardInfoModel() { CardNumber = "371449635398431", CardValidationCode = "123", ExpirationDate = "2024-12-01", IsSelected = true },
-                new CardInfoModel() { CardNumber = "38520000023237", CardValidationCode = "456", ExpirationDate = "2025-12-01" },
-                new CardInfoModel() { CardNumber = "6011000990139424", CardValidationCode = "789", ExpirationDate = "2026-12-01" },
-                new CardInfoModel() { CardNumber = "3566002020360505", CardValidationCode = "321", ExpirationDate = "2027-12-01" },
-                new CardInfoModel() { CardNumber = "5555555555554444", CardValidationCode = "654", ExpirationDate = "2028-12-01" },
-                new CardInfoModel() { CardNumber = "4012888888881881", CardValidationCode = "987", ExpirationDate = "2028-12-01" }
+                new CardModel() { CardNumber = "371449635398431", CardValidationCode = "123", ExpirationDate = "2024-12-01", IsSelected = true },
+                new CardModel() { CardNumber = "38520000023237", CardValidationCode = "456", ExpirationDate = "2025-12-01" },
+                new CardModel() { CardNumber = "6011000990139424", CardValidationCode = "789", ExpirationDate = "2026-12-01" },
+                new CardModel() { CardNumber = "3566002020360505", CardValidationCode = "321", ExpirationDate = "2027-12-01" },
+                new CardModel() { CardNumber = "5555555555554444", CardValidationCode = "654", ExpirationDate = "2028-12-01" },
+                new CardModel() { CardNumber = "4012888888881881", CardValidationCode = "987", ExpirationDate = "2028-12-01" }
             };
+        });
 
-            return Task.FromResult(cards);
+        public static List<CardModel> CARDS => _cards.Value;
+        public Task<List<CardModel>> GetCards()
+        {
+            return Task.FromResult(CARDS);
         }
     }
 }

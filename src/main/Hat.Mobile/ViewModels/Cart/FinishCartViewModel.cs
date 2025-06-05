@@ -25,7 +25,7 @@ namespace Hat.Mobile.ViewModels
                 {
                     _PrimaryAddress = value;
                     OnPropertyChanged(nameof(PrimaryAddress));
-                    OnPropertyChanged(nameof(FullAddress));
+                   
                 }
             }
         }
@@ -37,16 +37,14 @@ namespace Hat.Mobile.ViewModels
             set => SetProperty(ref _Products, value);
         }
 
-        private CardInfoViewModel _SelectedCard;
-        public CardInfoViewModel SelectedCard
+        private CardViewModel _SelectedCard;
+        public CardViewModel SelectedCard
         {
             get => _SelectedCard;
             set => SetProperty(ref _SelectedCard, value);
         }
 
-        public string FullAddress
-        => $"{PrimaryAddress.StreetOne}, {PrimaryAddress.StreetTwo}, {PrimaryAddress.City}, {PrimaryAddress.State}";
-
+      
         private bool _IsLoaded = false;
         public bool IsLoaded
         {
@@ -56,7 +54,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, ShippingAddressViewModel address, CardInfoViewModel card)
+        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, ShippingAddressViewModel address, CardViewModel card)
         {
             DeliveryType = deliveryType;
             Products = products;
