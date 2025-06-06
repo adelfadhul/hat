@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Mobile.Services;
-using Hat.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
@@ -9,11 +8,11 @@ namespace Hat.Mobile.ViewModels
 
     public class OrderDetailsViewModel : BaseViewModel
     {
-        private ObservableCollection<TrackOrderModel> _TrackData = [];
-        public ObservableCollection<TrackOrderModel> TrackData
+        private ObservableCollection<OrderViewModel> _Orders = [];
+        public ObservableCollection<OrderViewModel> Orders
         {
-            get => _TrackData;
-            set => SetProperty(ref _TrackData, value);
+            get => _Orders;
+            set => SetProperty(ref _Orders, value);
         }
 
         private bool _IsLoaded;
@@ -42,9 +41,9 @@ namespace Hat.Mobile.ViewModels
         => await _navigationService.GoBack();
         private async Task PopulateDataAsync()
         {
-            var storedTracks = await _dataService.GetTracks();
-            var tracks= storedTracks.Select(x=> new TrackViewModel(x)).ToList();
-            TrackData = storedTracks.Select(x => new TrackOrderModel("Sept 23", tracks)).ToObservableCollection();
+            var storedOrders = await _dataService.GetOrders();
+            Orders= storedOrders.Select(x=> new OrderViewModel(x)).ToObservableCollection();
+           
             IsLoaded = true;
         }
 

@@ -4,19 +4,20 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryTrackRepository :UserRepository, ITrackRepository
+    public class MemoryOrderRepository :UserRepository, ITrackRepository
     {
-        public MemoryTrackRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryOrderRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
 
-        public Task<List<TrackModel>> GetTracks()
+        public Task<List<OrderModel>> GetTracks()
         {
-            var tracks = new List<TrackModel>
+            var tracks = new List<OrderModel>
         {
-            new TrackModel
+            new OrderModel
             {
-                OrderId = "OD - 424923192 - N",
+                OrderDate= new DateTime(2022,9,1,0,0,0),
+                Name = "OD - 424923192 - N",
                 Price = "$4500",
                 Status = "Delivered",
                 ImageUrls = string.Join(",",
@@ -26,9 +27,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"
                 )
             },
-            new TrackModel
+            new OrderModel
             {
-                OrderId = "OD - 424923192 - N",
+                OrderDate= new DateTime(2022,9,1,0,0,0),
+                Name = "OD - 424923192 - N",
                 Price = "$500",
                 Status = "Delivered",
                 ImageUrls = string.Join(",",
@@ -38,9 +40,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"
                 )
             },
-            new TrackModel
+            new OrderModel
             {
-                OrderId = "OD - 424923192 - N",
+                OrderDate= new DateTime(2022,9,1,0,0,0),
+                Name = "OD - 424923192 - N",
                 Price = "$700",
                 Status = "Delivered",
                 ImageUrls = string.Join(",",
@@ -50,9 +53,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"
                 )
             },
-            new TrackModel
+            new OrderModel
             {
-                OrderId = "OD - 424923192 - N",
+                OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
+                Name = "OD - 424923192 - N",
                 Price = "$1500",
                 Status = "Delivered",
                 ImageUrls = string.Join(",",
@@ -65,9 +69,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Icon_Bo.png"
                 )
             },
-            new TrackModel
+            new OrderModel
             {
-                OrderId = "OD - 424923192 - N",
+                 OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
+                Name = "OD - 424923192 - N",
                 Price = "$2700",
                 Status = "Delivered",
                 ImageUrls = string.Join(",",

@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class TracksQueryHandler : IRequestHandler<TracksQuery, List<TrackModel>>
+    public class OrdersQueryHandler : IRequestHandler<OrdersQuery, List<OrderModel>>
     {
         private readonly ITrackRepository _trackRepository;
 
-        public TracksQueryHandler(ITrackRepository categoryRepository)
+        public OrdersQueryHandler(ITrackRepository categoryRepository)
         {
             _trackRepository = categoryRepository;
         }
 
-        public async Task<List<TrackModel>> Handle(TracksQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderModel>> Handle(OrdersQuery request, CancellationToken cancellationToken)
         {
             return await _trackRepository.GetTracks();
         }

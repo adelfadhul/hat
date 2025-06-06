@@ -18,7 +18,7 @@ public class NavigationService
     }
     public async Task NavigateToTrackOrder()
     {
-        await Shell.Current.GoToAsync($"{nameof(TrackOrderView)}");
+        await Shell.Current.GoToAsync($"{nameof(OrderTrackView)}");
     }
     public async Task NavigateToConfirmAddress()
     {

@@ -130,14 +130,14 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<TrackModel>> GetTracks()
+        internal async Task<List<OrderModel>> GetOrders()
         {
-            var response = await _httpClient.GetAsync("/api/trackorders");
+            var response = await _httpClient.GetAsync("/api/orders");
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"Error fetching track orders: {response.ReasonPhrase}");
+                throw new HttpRequestException($"Error fetching  orders: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<List<TrackModel>>();
+            var data = await response.Content.ReadFromJsonAsync<List<OrderModel>>();
             return data;
         }
 

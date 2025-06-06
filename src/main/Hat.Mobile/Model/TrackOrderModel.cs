@@ -1,13 +1,12 @@
 ﻿using Hat.DataViewModels;
-using static Hat.Model.TrackOrderModel;
 
 namespace Hat.Model
 {
-    public partial class TrackOrderModel : List<TrackViewModel>
+    public partial class OrderModel : List<OrderViewModel>
     {
         public string Date { get; private set; }
 
-        public TrackOrderModel(string date, List<TrackViewModel> tracks) : base(tracks)
+        public OrderModel(string date, List<OrderViewModel> tracks) : base(tracks)
         {
             Date = date;
         }

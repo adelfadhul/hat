@@ -22,7 +22,7 @@ public partial class AppShell : Shell
         // Register route for confirm payment navigation
         Routing.RegisterRoute(nameof(ConfirmPaymentView), typeof(ConfirmPaymentView));
         Routing.RegisterRoute(nameof(FinishCartView), typeof(FinishCartView));
-        Routing.RegisterRoute(nameof(TrackOrderView), typeof(TrackOrderView));
+        Routing.RegisterRoute(nameof(OrderTrackView), typeof(OrderTrackView));
         Routing.RegisterRoute(nameof(OrderDetailsView), typeof(OrderDetailsView));
         Routing.RegisterRoute(nameof(WishListView), typeof(WishListView));
         Routing.RegisterRoute(nameof(AllProductView), typeof(AllProductView));

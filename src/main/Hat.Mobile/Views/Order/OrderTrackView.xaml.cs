@@ -2,9 +2,9 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class TrackOrderView : ContentPage
+public partial class OrderTrackView : ContentPage
 {
-    public TrackOrderView(TrackOrderViewModel vm)
+    public OrderTrackView(OrderTrackViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;

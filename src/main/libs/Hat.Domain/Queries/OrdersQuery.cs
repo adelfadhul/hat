@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class TracksQuery : IRequest<List<TrackModel>>
+    public class OrdersQuery : IRequest<List<OrderModel>>
     {
     }
 }

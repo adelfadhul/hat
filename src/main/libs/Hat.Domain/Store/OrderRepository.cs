@@ -4,6 +4,6 @@ namespace Hat.Domain.Store
 {
     public interface ITrackRepository
     {
-        Task<List<TrackModel>> GetTracks();
+        Task<List<OrderModel>> GetTracks();
     }
 }

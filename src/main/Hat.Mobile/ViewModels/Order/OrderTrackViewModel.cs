@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
-    public class TrackOrderViewModel : BaseViewModel
+    public class OrderTrackViewModel : BaseViewModel
     {
         private ObservableCollection<DeliveryStepViewModel> _TrackStatus = [];
         public ObservableCollection<DeliveryStepViewModel> TrackStatus
@@ -13,12 +13,12 @@ namespace Hat.Mobile.ViewModels
             set => SetProperty(ref _TrackStatus, value);
 
         }  
-        public TrackViewModel TrackOrderData { get; set; }
+        public OrderViewModel TrackOrderData { get; set; }
         public string PageTitle
         {
             get
             {
-                return TrackOrderData.OrderId;
+                return TrackOrderData.Name;
             }
         }
         private bool _IsLoaded = false;
@@ -29,11 +29,10 @@ namespace Hat.Mobile.ViewModels
         }
         public ICommand BackCommand { get; set; }
        
-        public TrackOrderViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public OrderTrackViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
            
             TrackOrderData = new();
-            _navigationService = navigationService;
             BackCommand = new Command<object>(GoBack);
             _ = InitializeAsync();
         }

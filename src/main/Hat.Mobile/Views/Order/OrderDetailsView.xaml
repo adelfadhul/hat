@@ -16,8 +16,8 @@
         <StackLayout Margin="6,12" IsVisible="{Binding IsLoaded}">
             <CollectionView
                 Margin="18,0"
-                IsGrouped="True"
-                ItemsSource="{Binding TrackData}"
+                IsGrouped="False"
+                ItemsSource="{Binding Orders}"
                 VerticalOptions="FillAndExpand">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="12" />
@@ -30,13 +30,19 @@
                                     <Label
                                         FontSize="16"
                                         HorizontalOptions="StartAndExpand"
-                                        Text="{Binding OrderId}"
+                                        Text="{Binding Name}"
                                         TextColor="Black" />
                                     <Label
                                         Margin="0,5"
                                         FontSize="14"
                                         HorizontalOptions="StartAndExpand"
                                         Text="{Binding Price}"
+                                        TextColor="{StaticResource Primary}" />
+                                    <Label
+                                        Margin="0,5"
+                                        FontSize="14"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding OrderDate}"
                                         TextColor="{StaticResource Primary}" />
                                     <Frame
                                         Margin="0,16"
@@ -139,15 +145,7 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <Label
-                            FontSize="14"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding Date}"
-                            TextColor="Black" />
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
+
             </CollectionView>
         </StackLayout>
         <ActivityIndicator
