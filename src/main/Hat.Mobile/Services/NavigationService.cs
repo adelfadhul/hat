@@ -16,9 +16,9 @@ public class NavigationService
     {
         await Shell.Current.GoToAsync($"{nameof(ProductDetailsView)}?productId={productId}");
     }
-    public async Task NavigateToTrackOrder()
+    public async Task NavigateToTrackOrder(Guid orderId)
     {
-        await Shell.Current.GoToAsync($"{nameof(OrderTrackView)}");
+        await Shell.Current.GoToAsync($"{nameof(OrderTrackView)}?orderId={orderId}");
     }
     public async Task NavigateToConfirmAddress()
     {
@@ -111,7 +111,7 @@ public class NavigationService
 
     internal async Task NavigateToOrderDetails()
     {
-        await Shell.Current.GoToAsync($"{nameof(OrderDetailsView)}");
+        await Shell.Current.GoToAsync($"{nameof(OrderListView)}");
     }
 
     internal async Task NavigateToCard()

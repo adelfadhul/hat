@@ -1,5 +1,4 @@
 ﻿using Hat.Domain.Models;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
@@ -15,6 +14,7 @@ namespace Hat.DataViewModels
             IsComplete = data.IsComplete;
             IsLineVisible = data.IsLineVisible;
             DeliveryStatusDate = data.DeliveryStatusDate;
+          
 
         }
         public Guid Id { get; set; }

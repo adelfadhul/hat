@@ -73,7 +73,7 @@
 	  <Compile Update="Views\Admin\CreateProductView.xaml.cs">
 	    <DependentUpon>CreateProductView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Order\OrderTrackView.xaml.cs">
+	  <Compile Update="Views\Cart\OrderTrackView.xaml.cs">
 	    <DependentUpon>OrderTrackView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Shop\AllProductView.xaml.cs">
@@ -103,8 +103,8 @@
 	  <Compile Update="Views\Shop\HomePageView.xaml.cs">
 	    <DependentUpon>HomePageView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Order\OrderDetailsView.xaml.cs">
-	    <DependentUpon>OrderDetailsView.xaml</DependentUpon>
+	  <Compile Update="Views\Cart\OrderListView.xaml.cs">
+	    <DependentUpon>OrderListView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Shop\ProductDetailsView.xaml.cs">
 	    <DependentUpon>ProductDetailsView.xaml</DependentUpon>
@@ -117,9 +117,6 @@
 	  </Compile>
 	  <Compile Update="Views\Cart\ShippingAddressSelectorView.xaml.cs">
 	    <DependentUpon>ShippingAddressSelectorView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Order\OrderView.xaml.cs">
-	    <DependentUpon>OrderView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -178,7 +175,7 @@
 	  <MauiXaml Update="Views\Account\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Order\OrderDetailsView.xaml">
+	  <MauiXaml Update="Views\Cart\OrderListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Shop\ProductDetailsView.xaml">
@@ -193,7 +190,7 @@
 	  <MauiXaml Update="Views\Cart\ShippingAddressSelectorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Order\OrderTrackView.xaml">
+	  <MauiXaml Update="Views\Cart\OrderTrackView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\VerificationView.xaml">

@@ -16,7 +16,7 @@ namespace Hat.DataViewModels
             Status = domainModel.Status;
             Images = domainModel.ImageUrls.Split(',').ToList();
             OrderDate = domainModel.OrderDate;
-
+            Id= domainModel.Id;
             NumberOfItems= Images.Count;
             ImageOneVisibility = NumberOfItems >= 1;
             ImageOneUrl= Images[0];
@@ -27,8 +27,9 @@ namespace Hat.DataViewModels
 
             ImageMoreVisibility = NumberOfItems >= 4;
             RemainingImages = NumberOfItems - 3;
-
+            
         }
+        public Guid Id { get; init; }
         private string _Name;
         public string Name
         {

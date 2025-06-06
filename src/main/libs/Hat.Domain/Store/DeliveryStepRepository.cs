@@ -4,6 +4,6 @@ namespace Hat.Domain.Store
 {
     public interface IDeliveryStepRepository
     {
-        Task<List<DeliveryStepModel>> GetDeliverySteps();
+        Task<List<DeliveryStepModel>> GetDeliverySteps(Guid OrderId);
     }
 }

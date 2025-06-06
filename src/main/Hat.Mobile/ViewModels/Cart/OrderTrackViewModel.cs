@@ -1,16 +1,19 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Hat.DataViewModels;
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
+    [QueryProperty(nameof(OrderId), "orderId")]
     public class OrderTrackViewModel : BaseViewModel
     {
-        private ObservableCollection<DeliveryStepViewModel> _TrackStatus = [];
-        public ObservableCollection<DeliveryStepViewModel> TrackStatus
+
+        private ObservableCollection<DeliveryStepViewModel> _DeliverySteps = [];
+        public ObservableCollection<DeliveryStepViewModel> DeliverySteps
         {
-            get => _TrackStatus;
-            set => SetProperty(ref _TrackStatus, value);
+            get => _DeliverySteps;
+            set => SetProperty(ref _DeliverySteps, value);
 
         }  
         public OrderViewModel TrackOrderData { get; set; }
@@ -37,6 +40,12 @@ namespace Hat.Mobile.ViewModels
             _ = InitializeAsync();
         }
 
+        private string _OrderId;
+        public string OrderId
+        {
+            get => _OrderId;
+            set=> SetProperty(ref _OrderId, value);
+        }
         private async Task InitializeAsync()
         {
             await PopulateDataAsync();
@@ -44,7 +53,8 @@ namespace Hat.Mobile.ViewModels
         async Task PopulateDataAsync()
         {
            
-            var deliverySteps = _dataService.GetDeliverySteps();
+            var storedDeliverySteps = await _dataService.GetDeliverySteps(Guid.Parse(OrderId));
+            DeliverySteps= storedDeliverySteps.Select(x=>new DeliveryStepViewModel(x)).ToObservableCollection();    
             IsLoaded = true;
         }
 

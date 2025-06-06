@@ -6,7 +6,7 @@ using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
 
-    public class OrderDetailsViewModel : BaseViewModel
+    public class OrderListViewModel : BaseViewModel
     {
         private ObservableCollection<OrderViewModel> _Orders = [];
         public ObservableCollection<OrderViewModel> Orders
@@ -24,7 +24,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand BackCommand { get; }
         public ICommand SelectOrderCommand { get; }
 
-        public OrderDetailsViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public OrderListViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
             BackCommand = new Command<object>(GoBack);
             SelectOrderCommand = new Command<object>(TrackCommand);
@@ -36,7 +36,11 @@ namespace Hat.Mobile.ViewModels
             await PopulateDataAsync();
         }
         private async void TrackCommand(object obj)
-        => await _navigationService.NavigateToTrackOrder();
+        {
+            var test = obj;
+            var id = ((OrderViewModel)obj).Id;
+            await _navigationService.NavigateToTrackOrder(id);
+        }
         private async void GoBack(object obj)
         => await _navigationService.GoBack();
         private async Task PopulateDataAsync()

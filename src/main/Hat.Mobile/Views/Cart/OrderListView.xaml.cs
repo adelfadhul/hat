@@ -2,9 +2,9 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class OrderDetailsView : ContentPage
+public partial class OrderListView : ContentPage
 {
-    public OrderDetailsView(OrderDetailsViewModel vm)
+    public OrderListView(OrderListViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;

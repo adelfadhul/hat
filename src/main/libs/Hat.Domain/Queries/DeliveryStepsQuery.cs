@@ -3,8 +3,14 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class DeliveryStepsQuery : IRequest<List<DeliveryStepModel>>
+    public class DeliveryStepsByOrderQuery : IRequest<List<DeliveryStepModel>>
     {
+        public readonly Guid OrderId;
+        public DeliveryStepsByOrderQuery(Guid orderId)
+        {
+            OrderId = orderId;
+        }
+
     }
    
 }

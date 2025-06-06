@@ -152,9 +152,9 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<DeliveryStepModel>> GetDeliverySteps()
+        internal async Task<List<DeliveryStepModel>> GetDeliverySteps(Guid OrderId)
         {
-            var response = await _httpClient.GetAsync("/api/delivery-steps");
+            var response = await _httpClient.GetAsync($"/api/delivery-steps/{OrderId}");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching delivery steps: {response.ReasonPhrase}");

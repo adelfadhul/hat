@@ -12,11 +12,11 @@ namespace Hat.Backend.Controllers
         {
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetDeliverySteps()
+        [HttpGet("{OrderId}")]
+        public async Task<IActionResult> GetDeliverySteps([FromRoute] Guid OrderId)
         {
-            _logger.LogInformation("GetDeliverySteps");
-            var list = await _mediator.Send(new DeliveryStepsQuery());
+            _logger.LogInformation($"GetDeliverySteps of {OrderId}");
+            var list = await _mediator.Send(new DeliveryStepsByOrderQuery(OrderId));
             return Ok(list);
         }
     }

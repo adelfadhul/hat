@@ -51,8 +51,8 @@ namespace Hat.Mobile.ViewModels
             //MenuItems.Add(new MenuItems() { Title = "Edit Profile", Body = "\uf3eb" });
             MenuItems.Add(new MenuItems() { Title = "Shipping Address", Body = "\uf34e", TargetType = typeof(ShippingAddressSelectorView) });
             MenuItems.Add(new MenuItems() { Title = "Wishlist", Body = "\uf2d5", TargetType = typeof(WishListView) });
-            MenuItems.Add(new MenuItems() { Title = "Order History", Body = "\uf150", TargetType = typeof(OrderDetailsView) });
-            MenuItems.Add(new MenuItems() { Title = "Track Order", Body = "\uf787", TargetType = typeof(OrderDetailsView) });
+            MenuItems.Add(new MenuItems() { Title = "Order History", Body = "\uf150", TargetType = typeof(OrderListView) });
+            MenuItems.Add(new MenuItems() { Title = "Track Order", Body = "\uf787", TargetType = typeof(OrderListView) });
             MenuItems.Add(new MenuItems() { Title = "Cards", Body = "\uf19b", TargetType = typeof(CardManagerView) });
             //MenuItems.Add(new MenuItems() { Title = "Notifications", Body = "\uf09c"});
             MenuItems.Add(new MenuItems() { Title = "Logout", Body = "\uf343", TargetType = typeof(LoginView) });
@@ -87,7 +87,7 @@ namespace Hat.Mobile.ViewModels
                         case Type type when type == typeof(WishListView):
                             await _navigationService.NavigateToWhishList();
                             break;
-                        case Type type when type == typeof(OrderDetailsView):
+                        case Type type when type == typeof(OrderListView):
                             await _navigationService.NavigateToOrderDetails();
                             break;
                         case Type type when type == typeof(CardManagerView):

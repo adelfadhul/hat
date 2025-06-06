@@ -4,20 +4,19 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryDeliveryStepRepository :UserRepository, IDeliveryStepRepository
+    public class MemoryDeliveryStepRepository : UserRepository, IDeliveryStepRepository
     {
         public MemoryDeliveryStepRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
-
-        public Task<List<DeliveryStepModel>> GetDeliverySteps()
+        private static Lazy<List<DeliveryStepModel>> _steps = new(() =>
         {
-           
-            var deliverySteps = new List<DeliveryStepModel>
-    {
-        new DeliveryStepModel
+            var tracks = new List<DeliveryStepModel>
         {
+                new DeliveryStepModel
+                {
             Id = Guid.NewGuid(),
+            OrderId= MemoryOrderRepository.Order1,
             DeliveryStatusDate = DateTime.Now.AddDays(-4),
             IsComplete = true,
             Name = "Order Placed",
@@ -27,6 +26,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         new DeliveryStepModel
         {
             Id = Guid.NewGuid(),
+            OrderId= MemoryOrderRepository.Order2,
             DeliveryStatusDate = DateTime.Now.AddDays(-3),
             IsComplete = true,
             Name = "Order Confirmed",
@@ -35,7 +35,8 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         },
         new DeliveryStepModel
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.NewGuid(), 
+            OrderId= MemoryOrderRepository.Order3,
             DeliveryStatusDate = DateTime.Now.AddDays(-2),
             IsComplete = true,
             Name = "Order Dispatched",
@@ -45,6 +46,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         new DeliveryStepModel
         {
             Id = Guid.NewGuid(),
+            OrderId= MemoryOrderRepository.Order4,
             DeliveryStatusDate = DateTime.Now.AddDays(-1),
             IsComplete = false,
             Name = "Out for Delivery",
@@ -54,15 +56,25 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         new DeliveryStepModel
         {
             Id = Guid.NewGuid(),
+            OrderId= MemoryOrderRepository.Order4,
             DeliveryStatusDate = DateTime.Now,
             IsComplete = false,
             Name = "Order Delivered",
             Location = "Lagos State, Nigeria",
             IsLineVisible = false
         }
-    };
 
-            return Task.FromResult(deliverySteps);
+        };
+            return tracks;
+        });
+
+        public static List<DeliveryStepModel> STEPS => _steps.Value;
+        public Task<List<DeliveryStepModel>> GetDeliverySteps(Guid OrderId)
+        {
+
+            var steps = STEPS.Where(x => x.OrderId == OrderId).ToList();
+
+            return Task.FromResult(steps);
         }
     }
 }

@@ -14,7 +14,7 @@
     <Grid>
         <StackLayout Margin="6,12" IsVisible="{Binding IsLoaded}">
 
-            <CollectionView Margin="20" ItemsSource="{Binding TrackStatus}">
+            <CollectionView Margin="20" ItemsSource="{Binding DeliverySteps}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnDefinitions="*,12,Auto,12,*">
