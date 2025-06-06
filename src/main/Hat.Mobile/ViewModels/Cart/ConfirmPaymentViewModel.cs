@@ -8,7 +8,7 @@ namespace Hat.Mobile.ViewModels
 {
     public class ConfirmPaymentViewModel : BaseViewModel
     {
-       readonly private ObservableCollection<ProductViewModel> _Products = [];
+      
        
         private bool _IsLoaded = false;
         public bool IsLoaded
@@ -29,7 +29,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand SelectPaymentCommand { get; }
         public ICommand BackCommand { get; }
 
-        public ConfirmPaymentViewModel(ObservableCollection<ProductViewModel> products, NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public ConfirmPaymentViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
          
             NextCommand = new Command(ConfirmPayment);

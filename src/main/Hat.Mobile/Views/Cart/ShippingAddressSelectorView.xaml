@@ -22,14 +22,14 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="18"
-                            Text="{Binding AddressType}"
+                            Text="{Binding Name}"
                             TextColor="Black" />
                         <Grid ColumnDefinitions="*,18,24">
                             <Label
                                 Grid.Column="0"
                                 FontSize="14"
                                 HorizontalOptions="Start"
-                                Text="{Binding FullAddress}"
+                                Text="{Binding Address}"
                                 TextColor="Black" />
                             <Label
                                 Grid.Column="2"

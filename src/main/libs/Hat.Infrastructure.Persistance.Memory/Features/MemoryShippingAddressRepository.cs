@@ -14,7 +14,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                      Id = Guid.NewGuid(),
                       UserId = Guid.NewGuid(),
-                      IsPrimary = true,
+                      IsPrimary = true, 
                     Name = "Home Address",
                     Address = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
 

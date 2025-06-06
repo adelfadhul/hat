@@ -146,52 +146,20 @@
                             <Label
                                 FontSize="14"
                                 HorizontalOptions="Start"
-                                Text="Street 1"
+                                Text="Address"
                                 TextColor="{StaticResource SecondaryTextColor}"
                                 VerticalOptions="Center" />
-                            <Entry
-                                FontSize="18"
-                                Placeholder="Enter Street 1"
-                                Text="{Binding PrimaryAddress.StreetOne}" />
+                            <Editor 
+        FontSize="18"
+        Placeholder="Enter Street 1"
+        Text="{Binding PrimaryAddress.Address}"
+        AutoSize="TextChanges"
+        HeightRequest="100" />
                         </StackLayout>
 
-                        <StackLayout Spacing="0">
-                            <Label
-                                FontSize="14"
-                                HorizontalOptions="Start"
-                                Text="Street 2"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                VerticalOptions="Center" />
-                            <Entry
-                                FontSize="18"
-                                Placeholder="Enter Street 2"
-                                Text="{Binding PrimaryAddress.StreetTwo}" />
-                        </StackLayout>
+                     
 
-                        <StackLayout Spacing="0">
-                            <Label
-                                FontSize="14"
-                                HorizontalOptions="Start"
-                                Text="City"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                VerticalOptions="Center" />
-                            <Entry
-                                FontSize="18"
-                                Placeholder="Enter city"
-                                Text="{Binding PrimaryAddress.City}" />
-                        </StackLayout>
-                        <StackLayout Spacing="0">
-                            <Label
-                                FontSize="14"
-                                HorizontalOptions="Start"
-                                Text="State"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                VerticalOptions="Center" />
-                            <Entry
-                                FontSize="18"
-                                Placeholder="Enter State"
-                                Text="{Binding PrimaryAddress.State}" />
-                        </StackLayout>
+                      
                     </StackLayout>
                 </StackLayout>
 
