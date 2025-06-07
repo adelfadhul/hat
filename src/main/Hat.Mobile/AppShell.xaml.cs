@@ -11,11 +11,11 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        Routing.RegisterRoute(nameof(DeliveryTypeSelectorView), typeof(DeliveryTypeSelectorView));
+        Routing.RegisterRoute(nameof(ConfirmDeliveryView), typeof(ConfirmDeliveryView));
         Routing.RegisterRoute(nameof(ProductDetailsView), typeof(ProductDetailsView));
         Routing.RegisterRoute(nameof(CategoryDetailView), typeof(CategoryDetailView));
         Routing.RegisterRoute(nameof(BrandDetailView), typeof(BrandDetailView));
-        Routing.RegisterRoute(nameof(ShoppingCartView), typeof(ShoppingCartView));
+        Routing.RegisterRoute(nameof(CartView), typeof(CartView));
         Routing.RegisterRoute(nameof(ShippingAddressSelectorView), typeof(ShippingAddressSelectorView));
         Routing.RegisterRoute(nameof(CreateCardView), typeof(CreateCardView));
         Routing.RegisterRoute(nameof(ConfirmAddressView), typeof(ConfirmAddressView));

@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Hat.Mobile.ViewModels
 {
-    public class ShoppingCartViewModel : BaseViewModel
+    public class CartViewModel : BaseViewModel
     {
         private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
         public ObservableCollection<ShoppingCartItemViewModel> Products
@@ -36,7 +36,7 @@ namespace Hat.Mobile.ViewModels
 
 
 
-        public ShoppingCartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public CartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
           
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);

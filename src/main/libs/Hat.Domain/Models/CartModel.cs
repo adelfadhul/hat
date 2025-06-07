@@ -7,7 +7,7 @@
         public Guid CustomerId { get; set; }
 
         #endregion 
-        public List<ShoppingCartItemModel> CartItems { get; set; } = new List<ShoppingCartItemModel>();
+        public List<CartItemModel> CartItems { get; set; } = new List<CartItemModel>();
         public decimal TotalPrice => CartItems.Sum(p => p.Price * p.Qty);
     }
 }

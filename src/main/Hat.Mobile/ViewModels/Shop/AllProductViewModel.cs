@@ -31,16 +31,16 @@ namespace Hat.Mobile.ViewModels
         public AllProductViewModel(NavigationService navigationService, IMediator mediator, IHttpClientFactory httpClientFactory )
         {
             SelectProductCommand = new Command<ProductViewModel>(SelectProduct);
-            _ = InitializeAsync();
+            _ = Initialize();
            
         }
         public AllProductViewModel() { }
 
-        private async Task InitializeAsync()
+        private async Task Initialize()
         {
-            await PopulateDataAsync();
+            await PopulateData();
         }
-        async Task PopulateDataAsync()
+        async Task PopulateData()
         {
             var storedProducts= await _dataService.GetProducts();
             Products = storedProducts.Select(x => new ProductViewModel(x)).ToObservableCollection();    

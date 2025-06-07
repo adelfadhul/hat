@@ -27,7 +27,7 @@ namespace Hat.Backend.Controllers
 
         // POST: api/shopping-cart/add
         [HttpPost("add")]
-        public async Task<IActionResult> AddToCart([FromBody] AddShoppingCartItemCommand command)
+        public async Task<IActionResult> AddToCart([FromBody] CreateCartItemCommand command)
         {
             _logger.LogInformation("AddToCart: {@Command}", command);
             await _mediator.Send(command);
@@ -36,7 +36,7 @@ namespace Hat.Backend.Controllers
 
         // POST: api/shopping-cart/remove
         [HttpPost("remove")]
-        public async Task<IActionResult> RemoveFromCart([FromBody] RemoveShoppingCartItemCommand command)
+        public async Task<IActionResult> RemoveFromCart([FromBody] DeleteCartItemCommand command)
         {
             _logger.LogInformation("RemoveFromCart: {@Command}", command);
            await _mediator.Send(command);

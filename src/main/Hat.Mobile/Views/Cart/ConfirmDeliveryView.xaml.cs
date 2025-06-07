@@ -2,10 +2,10 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class DeliveryTypeSelectorView : ContentPage
+public partial class ConfirmDeliveryView : ContentPage
 {
 	
-	public DeliveryTypeSelectorView(DeliveryTypeSelectorViewModel vm)
+	public ConfirmDeliveryView(ConfirmDeliveryViewModel vm)
 	{
 		InitializeComponent();
         BindingContext = vm;

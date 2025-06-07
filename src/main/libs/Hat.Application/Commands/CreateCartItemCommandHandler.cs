@@ -5,19 +5,19 @@ using MediatR;
 
 namespace Hat.Application.Commands
 {
-    public class CreateShoppingCartItemCommandHandler : IRequestHandler<AddShoppingCartItemCommand>
+    public class CreateCartItemCommandHandler : IRequestHandler<CreateCartItemCommand>
     {
-        private readonly IShoppingCartRepository _repository;
+        private readonly ICartRepository _cartRepository;
         private readonly IProductRepository _productRepository;
-        public CreateShoppingCartItemCommandHandler(IShoppingCartRepository repository, IProductRepository productRepository)
+        public CreateCartItemCommandHandler(ICartRepository repository, IProductRepository productRepository)
         {
-            _repository = repository;
+            _cartRepository = repository;
             _productRepository = productRepository;
         }
-        public async Task Handle(AddShoppingCartItemCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateCartItemCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetProductById(request.ProductId);
-            ShoppingCartItemModel cart = new ShoppingCartItemModel
+            CartItemModel cart = new CartItemModel
             {
                 Name = product.Name,
                 Price = product.Price,
@@ -30,7 +30,7 @@ namespace Hat.Application.Commands
                 ProductName = product.Name,
                  
             };
-            await _repository.AddCartItem(cart);
+            await _cartRepository.AddCartItem(cart);
 
         }
     }

@@ -87,7 +87,7 @@ public class NavigationService
     }
     public async Task NavigateToDeliverySelectorType()
     {
-        await Shell.Current.GoToAsync($"{nameof(DeliveryTypeSelectorView)}");
+        await Shell.Current.GoToAsync($"{nameof(ConfirmDeliveryView)}");
     }
     public async Task NavigateToCategoryDetails(Guid categoryId)
     {

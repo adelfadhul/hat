@@ -9,7 +9,7 @@ namespace Hat.DataViewModels
         public CartItemViewModel()
         {
         }
-        public CartItemViewModel(ShoppingCartItemModel domainModel)
+        public CartItemViewModel(CartItemModel domainModel)
         {
             Id = domainModel.Id;
             Name = domainModel.Name;

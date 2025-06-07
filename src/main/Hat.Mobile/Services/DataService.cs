@@ -165,27 +165,40 @@ namespace Hat.Mobile.Services
 
         internal async Task AddShoppingCartItem(Guid productId, int quantity, string size)
         {
-            var payload = new AddShoppingCartItemCommand(productId, quantity, size);
+            var payload = new CreateCartItemCommand(productId, quantity, size);
             var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add", payload);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");
             }
         }
-        internal async Task<List<ShoppingCartItemModel>> GetShoppingCartItems()
+        internal async Task<string> GetCartDeliveryAddress()
         {
-            var response = await _httpClient.GetAsync("/api/shopping-cart");
+            var userid = _currentUser.Oid();
+            var response = await _httpClient.GetAsync($"/api/carts/{userid}/deliverytype");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching shopping cart items: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<List<ShoppingCartItemModel>>();
+            var data = await response.Content.ReadAsStringAsync();
+            return data;
+        }
+        
+        internal async Task<List<CartItemModel>> GetShoppingCartItems()
+        {
+            var userid = _currentUser.Oid();
+            var response = await _httpClient.GetAsync($"/api/cartitems/{userid}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching shopping cart items: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<List<CartItemModel>>();
             return data;
         }
 
         internal async Task RemoveShoppingCartItem(Guid itemId)
         {
-            var response = await _httpClient.DeleteAsync($"/api/shoppingcart/items/{itemId}");
+            var response = await _httpClient.DeleteAsync($"/api/cartitems/{itemId}");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error removing shopping cart item: {response.ReasonPhrase}");

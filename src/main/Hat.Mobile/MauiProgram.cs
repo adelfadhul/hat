@@ -67,7 +67,7 @@ public static class MauiProgram
             });
 
         // ViewModels
-        builder.Services.AddTransient<ShoppingCartViewModel>();
+        builder.Services.AddTransient<CartViewModel>();
         builder.Services.AddTransient<DeliveryTypeViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();
         builder.Services.AddTransient<CreateCardView>();
@@ -80,7 +80,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CategoryDetailViewModel> ();
         builder.Services.AddTransient<ConfirmAddressViewModel>();
         builder.Services.AddTransient<ConfirmPaymentViewModel>();
-        builder.Services.AddTransient<DeliveryTypeSelectorViewModel>();
+        builder.Services.AddTransient<ConfirmDeliveryViewModel>();
         builder.Services.AddTransient<FinishCartViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<OrderListViewModel>();
@@ -100,7 +100,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateInventoryViewModel>();
 
         // Views
-        builder.Services.AddTransient<ShoppingCartView>();
+        builder.Services.AddTransient<CartView>();
         builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<HomePageView>();
         builder.Services.AddTransient<RegisterView>();
@@ -109,11 +109,10 @@ public static class MauiProgram
         builder.Services.AddTransient<BrandDetailView>();
         builder.Services.AddTransient<CardManagerView>();
         builder.Services.AddTransient<CheckOutView>();
-        builder.Services.AddTransient<ShoppingCartView>();
         builder.Services.AddTransient<CategoryDetailView>();
         builder.Services.AddTransient<ConfirmAddressView>();
         builder.Services.AddTransient<ConfirmPaymentView>();
-        builder.Services.AddTransient<DeliveryTypeSelectorView>();
+        builder.Services.AddTransient<ConfirmDeliveryView>();
         builder.Services.AddTransient<FinishCartView>();
         builder.Services.AddTransient<OrderListView>();
         builder.Services.AddTransient<ProductDetailsView>();

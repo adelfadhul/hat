@@ -88,13 +88,13 @@
 	  <Compile Update="Views\Cart\ConfirmAddressView.xaml.cs">
 	    <DependentUpon>ConfirmAddressView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Cart\DeliveryTypeSelectorView.xaml.cs">
-	    <DependentUpon>DeliveryTypeSelectorView.xaml</DependentUpon>
+	  <Compile Update="Views\Cart\ConfirmDeliveryView.xaml.cs">
+	    <DependentUpon>ConfirmDeliveryView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Shop\ScanCameraView.xaml.cs">
 	    <DependentUpon>ScanCameraView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Cart\ShoppingCartView.xaml.cs">
+	  <Compile Update="Views\Cart\CartView.xaml.cs">
 	    <DependentUpon>CartView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Shop\CategoryDetailView.xaml.cs">
@@ -115,7 +115,7 @@
 	  <Compile Update="Views\Account\RegisterView.xaml.cs">
 	    <DependentUpon>RegisterView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Cart\ShippingAddressSelectorView.xaml.cs">
+	  <Compile Update="Views\Account\ShippingAddressSelectorView.xaml.cs">
 	    <DependentUpon>ShippingAddressSelectorView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -151,7 +151,7 @@
 	  <MauiXaml Update="Views\Cart\ConfirmPaymentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Cart\DeliveryTypeSelectorView.xaml">
+	  <MauiXaml Update="Views\Cart\ConfirmDeliveryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Cart\FinishCartView.xaml">
@@ -163,7 +163,7 @@
 	  <MauiXaml Update="Views\Account\CardInfoManagerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Cart\ShoppingCartView.xaml">
+	  <MauiXaml Update="Views\Cart\CartView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Shop\CategoryDetailView.xaml">
@@ -187,7 +187,7 @@
 	  <MauiXaml Update="Views\Account\RegisterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Cart\ShippingAddressSelectorView.xaml">
+	  <MauiXaml Update="Views\Account\ShippingAddressSelectorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Cart\OrderTrackView.xaml">

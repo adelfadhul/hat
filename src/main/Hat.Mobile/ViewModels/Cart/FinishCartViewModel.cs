@@ -1,9 +1,11 @@
-﻿using Hat.DataViewModels;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Foundation;
+using Hat.DataViewModels;
 using Hat.Domain.Models;
 using Hat.Helpers;
+using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MauiApp = Microsoft.Maui.Controls.Application;
 namespace Hat.Mobile.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
@@ -30,8 +32,8 @@ namespace Hat.Mobile.ViewModels
             }
         }
 
-        private ObservableCollection<ProductViewModel> _Products = [];
-        public ObservableCollection<ProductViewModel> Products
+        private ObservableCollection<CartItemModel> _Products = [];
+        public ObservableCollection<CartItemModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -54,10 +56,9 @@ namespace Hat.Mobile.ViewModels
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
 
-        public FinishCartViewModel(ObservableCollection<ProductViewModel> products, DeliveryTypeViewModel deliveryType, ShippingAddressViewModel address, CardViewModel card)
+        public FinishCartViewModel(NavigationService navigationService, DataService dataService):base(navigationService, dataService)
         {
             DeliveryType = deliveryType;
-            Products = products;
             PrimaryAddress = address;
             SelectedCard = card;          
             FinishCommand = new Command(FinishOrder);
@@ -65,10 +66,17 @@ namespace Hat.Mobile.ViewModels
             IsLoaded = true;
 
         }
+        private async Task Initialize()
+        {
+            await PopulateData();
+        }
+        async Task PopulateData()
+        {
+            var storedDeliveryType= _dataService.AddShoppingCartItem
+            IsLoaded = true;
+        }
         private async void FinishOrder()
         {            
-            //await MauiApp.Current.MainPage.Navigation.PopToRootAsync();
-            //await Shell.Current.GoToAsync("///HomePageView");
             await _navigationService.NavigateToHome();
             await ToastHelper.ShowToast("Order Complete");
         }

@@ -64,26 +64,20 @@ namespace Hat.Mobile.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand BackCommand { get; }
-      
-        public CreateCardViewModel(DataService dataService, NavigationService navigationService):base(navigationService, dataService)
+
+        public CreateCardViewModel(DataService dataService, NavigationService navigationService) : base(navigationService, dataService)
         {
             SaveCommand = new Command(SaveCard);
             BackCommand = new Command(GoBack);
-            _navigationService = navigationService;
-            _dataService = dataService;
+           
         }
 
         private async void SaveCard()
         {
-           // await MauiApp.Current.MainPage.Navigation.PopAsync();
             await _navigationService.GoBack();
             await ToastHelper.ShowToast("Add card added.");
         }
         private async void GoBack()
-        {
-          //  await MauiApp.Current.MainPage.Navigation.PopAsync();
-            await _navigationService.GoBack();
-        }
-
+        => await _navigationService.GoBack();
     }
 }

@@ -4,14 +4,14 @@ using MediatR;
 
 namespace Hat.Application.Commands
 {
-    public class RemoveShoppingCartItemCommandHandler : IRequestHandler<RemoveShoppingCartItemCommand>
+    public class RemoveShoppingCartItemCommandHandler : IRequestHandler<DeleteCartItemCommand>
     {
-        private readonly IShoppingCartRepository _repository;
-        public RemoveShoppingCartItemCommandHandler(IShoppingCartRepository repository)
+        private readonly ICartRepository _repository;
+        public RemoveShoppingCartItemCommandHandler(ICartRepository repository)
         {
             _repository = repository;
         }
-        public async Task Handle(RemoveShoppingCartItemCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteCartItemCommand request, CancellationToken cancellationToken)
         {
             await _repository.DeleteCartItem(request.Item.Id);
         }

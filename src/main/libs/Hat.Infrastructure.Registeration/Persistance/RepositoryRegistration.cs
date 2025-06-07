@@ -14,7 +14,10 @@ namespace Hat.Infrastructure.Registeration
             switch (type)
             {
                 case "Memory":
-                    services.AddScoped<IShoppingCartRepository, MemoryShoppingCartRepository>();
+
+                    services.AddSingleton<ICurrentUser, MemoryCurrentUser>();
+
+                    services.AddScoped<ICartRepository, MemoryShoppingCartRepository>();
                     services.AddScoped<IProductRepository, MemoryProductRepository>();
                     services.AddScoped<ICardRepository, MemoryCardRepository>();
                     services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();
@@ -24,9 +27,9 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IShippingAddressRepository, MemoryShippingAddressRepository>();
                     services.AddScoped<IReviewRepository, MemoryReviewRepository>();
                     services.AddScoped<IVatRepository,MemoryVatRepository>();
-                    services.AddSingleton<ICurrentUser, MemoryCurrentUser>();
                     services.AddScoped<IInventoryRepository, MemoryInventoryRepository>();
                     services.AddScoped<IWishRepository, MemoryWishRepository>();
+                    services.AddScoped<ICartRepository, MemoryCartRepository>();
                     break;
                 case "SqlServer":
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

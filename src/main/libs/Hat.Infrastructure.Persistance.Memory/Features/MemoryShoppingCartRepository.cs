@@ -4,13 +4,13 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryShoppingCartRepository :UserRepository, IShoppingCartRepository
+    public class MemoryShoppingCartRepository :UserRepository, ICartRepository
     {
-        private static readonly Lazy<List<ShoppingCartItemModel>> _cartitems= new(() =>
+        private static readonly Lazy<List<CartItemModel>> _cartitems= new(() =>
         {
-            var items = new List<ShoppingCartItemModel>
+            var items = new List<CartItemModel>
             {
-                new ShoppingCartItemModel
+                new CartItemModel
                 {
                     Id = Guid.NewGuid(),
                     Name = "BeoPlay Speaker",
@@ -33,8 +33,8 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
         }
 
-        private static List<ShoppingCartItemModel> ITEMS=> _cartitems.Value;
-        public async Task AddCartItem(ShoppingCartItemModel item)
+        private static List<CartItemModel> ITEMS=> _cartitems.Value;
+        public async Task AddCartItem(CartItemModel item)
         {
             ITEMS.Add(item);
             await Task.CompletedTask;
@@ -52,7 +52,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             await Task.CompletedTask;
         }
 
-        public Task<List<ShoppingCartItemModel>> GetCartItems()
+        public Task<List<CartItemModel>> GetCartItems()
         {
             return Task.FromResult(ITEMS);
         }

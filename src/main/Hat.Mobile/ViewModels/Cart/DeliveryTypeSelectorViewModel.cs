@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
-    public class DeliveryTypeSelectorViewModel : BaseViewModel
+    public class ConfirmDeliveryViewModel : BaseViewModel
     {
         private ObservableCollection<DeliveryTypeViewModel> _DeliveryTypes = [];
         public ObservableCollection<DeliveryTypeViewModel> DeliveryTypes
@@ -34,7 +34,7 @@ namespace Hat.Mobile.ViewModels
         public ICommand NextCommand { get; }
         public ICommand BackCommand { get; }
 
-        public DeliveryTypeSelectorViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
+        public ConfirmDeliveryViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
         {
             SelectDeliveryTypeCommand = new Command<DeliveryTypeViewModel>(SelectDeliveryType);
             NextCommand = new Command(ConfirmDeliverType);
