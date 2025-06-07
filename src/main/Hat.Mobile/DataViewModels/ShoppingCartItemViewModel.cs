@@ -16,7 +16,7 @@ namespace Hat.DataViewModels
             BrandName = domainModel.BrandName;
             Price = domainModel.Price;
             ProductDetails = domainModel.ProductDetails;
-            Qty = domainModel.Qty;
+            Qty = domainModel.Quantity;
             Size = domainModel.Size;
             Amount = domainModel.Amount;
             Vat = domainModel.VatAmount;

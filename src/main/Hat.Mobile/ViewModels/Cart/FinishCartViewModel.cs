@@ -72,7 +72,7 @@ namespace Hat.Mobile.ViewModels
         }
         async Task PopulateData()
         {
-            var storedDeliveryType= _dataService.AddShoppingCartItem
+           
             IsLoaded = true;
         }
         private async void FinishOrder()

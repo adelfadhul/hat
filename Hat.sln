@@ -52,6 +52,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{98
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hat.Infrastructure.Identity.Memory", "src\main\libs\Hat.Infrastructure.Identity.Memory\Hat.Infrastructure.Identity.Memory.csproj", "{D666FF13-0CDB-4B5F-9200-8D1A8F2E1182}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hat.Infrastructure.Payment.Fake", "src\main\libs\Hat.Infrastructure.Payment.Fake\Hat.Infrastructure.Payment.Fake.csproj", "{B1D20095-B33F-480A-B92A-27F2C962836C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{CE1B7C5E-6739-4995-B0B5-3B2F002344FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +100,10 @@ Global
 		{D666FF13-0CDB-4B5F-9200-8D1A8F2E1182}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D666FF13-0CDB-4B5F-9200-8D1A8F2E1182}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D666FF13-0CDB-4B5F-9200-8D1A8F2E1182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1D20095-B33F-480A-B92A-27F2C962836C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D20095-B33F-480A-B92A-27F2C962836C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D20095-B33F-480A-B92A-27F2C962836C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D20095-B33F-480A-B92A-27F2C962836C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +122,8 @@ Global
 		{3F8CCD36-CEBC-4CB6-92DB-B0C716E3D33D} = {F33188D7-8976-4E99-BA80-B508EA7E99AA}
 		{98158B34-AF3D-4FF8-867F-88E213DD4D3F} = {F33188D7-8976-4E99-BA80-B508EA7E99AA}
 		{D666FF13-0CDB-4B5F-9200-8D1A8F2E1182} = {98158B34-AF3D-4FF8-867F-88E213DD4D3F}
+		{B1D20095-B33F-480A-B92A-27F2C962836C} = {CE1B7C5E-6739-4995-B0B5-3B2F002344FD}
+		{CE1B7C5E-6739-4995-B0B5-3B2F002344FD} = {F33188D7-8976-4E99-BA80-B508EA7E99AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}

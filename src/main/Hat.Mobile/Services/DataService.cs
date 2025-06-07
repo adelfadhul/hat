@@ -165,7 +165,7 @@ namespace Hat.Mobile.Services
 
         internal async Task AddShoppingCartItem(Guid productId, int quantity, string size)
         {
-            var payload = new CreateCartItemCommand(productId, quantity, size);
+            var payload = new AddCartItemCommand(productId, quantity, size);
             var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add", payload);
             if (!response.IsSuccessStatusCode)
             {

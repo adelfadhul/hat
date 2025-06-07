@@ -6,7 +6,7 @@ using MediatR;
 namespace Hat.Application.Queries
 {
     
-    public class CartByIdQueryHandler : IRequestHandler<CartByIdQuery, Guid>
+    public class CartByIdQueryHandler : IRequestHandler<CartByIdQuery, CartModel?>
     {
         private readonly ICartRepository _cartRepository;
         public CartByIdQueryHandler(ICartRepository cartRepository)
@@ -14,14 +14,11 @@ namespace Hat.Application.Queries
 
             _cartRepository = cartRepository
                 ?? throw new ArgumentException("CartRepository must implement ICartRepository");
-
         }
-        public async Task<Guid> Handle(CartByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CartModel?> Handle(CartByIdQuery request, CancellationToken cancellationToken)
         {
             CartModel cart = await _cartRepository.GetCartById(request.Id);
-
-            return
-                cart.Id;
+            return cart;
         }
     }
 }

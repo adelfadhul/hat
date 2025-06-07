@@ -1,14 +1,13 @@
-using Hat.Domain.Models;
 using MediatR;
 
 namespace Hat.Domain.Commands
 {
-    public class  DeleteCartItemCommand:IRequest
+    public class  RemoveCartItemCommand:IRequest
     {
-        public CartItemModel Item { get; set; }
-        public DeleteCartItemCommand(CartItemModel item)
+        public Guid Id { get; set; }
+        public RemoveCartItemCommand(Guid id)
         {
-            Item = item;
+            Id = id;
         }
     }
 

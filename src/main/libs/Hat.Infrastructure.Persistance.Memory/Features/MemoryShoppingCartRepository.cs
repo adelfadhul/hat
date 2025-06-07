@@ -18,7 +18,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     Price = 755,
                     ProductImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png",
                     ProductDetails = "High-quality wireless speaker with immersive sound.",
-                    Qty = 10,
+                    Quantity = 10,
                     Size = "Standard"
                 },
                
@@ -34,7 +34,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         }
 
         private static List<CartItemModel> ITEMS=> _cartitems.Value;
-        public async Task AddCartItem(CartItemModel item)
+        public async Task AddItem(CartItemModel item)
         {
             ITEMS.Add(item);
             await Task.CompletedTask;
@@ -46,7 +46,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
              await Task.CompletedTask;
         }
 
-        public async Task DeleteCartItem(Guid itemId)
+        public async Task RemoveItem(Guid itemId)
         {
             ITEMS.RemoveAll(item => item.Id == itemId);
             await Task.CompletedTask;
@@ -55,6 +55,16 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         public Task<List<CartItemModel>> GetCartItems()
         {
             return Task.FromResult(ITEMS);
+        }
+
+        public Task<CartModel> GetCartById(Guid cartId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteCart(Guid cartId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

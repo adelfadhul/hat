@@ -6,33 +6,60 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryCartRepository : UserRepository, ICartRepository
     {
+        private static readonly Lazy<List<CartModel>> _categories = new(() => new List<CartModel>
+        {
+        });
+        public static List<CartModel> CARTS => _categories.Value;
         public MemoryCartRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
 
-        public Task AddCartItem(CartItemModel item)
+        public Task<Guid> AddCart(CartModel cart)
         {
-            throw new NotImplementedException();
+            CARTS.Add(cart);
+            return Task.FromResult(cart.Id);
         }
 
-        public Task ClearCart()
+        public Task<CartModel> GetCartById(Guid cartId)
         {
-            throw new NotImplementedException();
+            cartId = cartId == Guid.Empty ? CARTS.FirstOrDefault()?.Id ?? Guid.Empty : cartId;
+            var cart = CARTS.FirstOrDefault(c => c.Id == cartId);
+            if (cart == null)
+            {
+                throw new KeyNotFoundException($"Cart with ID {cartId} not found.");
+            }
+            return Task.FromResult(cart);
         }
 
-        public Task<Guid> CreateCart(Guid UserId, string Address)
+        public Task AddItem(CartItemModel item)
         {
-            throw new NotImplementedException();
+            CARTS.Where(c => c.Id == item.CartId)
+                 .ToList()
+                 .ForEach(c => c.CartItems.Add(item));
+            return Task.CompletedTask;
         }
 
-        public Task DeleteCartItem(Guid itemId)
+
+
+        public Task RemoveItem(Guid itemId)
         {
-            throw new NotImplementedException();
+            CARTS.Where(c => c.CartItems.Any(i => i.Id == itemId))
+                 .ToList()
+                 .ForEach(c => c.CartItems.RemoveAll(i => i.Id == itemId));
+            return Task.CompletedTask;
         }
 
-        public Task<List<CartItemModel>> GetCartItems()
+        public Task DeleteCart(Guid Id)
         {
-            throw new NotImplementedException();
+            var cart = CARTS.FirstOrDefault(c => c.Id == Id);
+            if (cart == null)
+            {
+                throw new KeyNotFoundException($"Cart with ID {Id} not found.");
+            }
+            
+            CARTS.RemoveAll(c => c.Id == Id);
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -5,11 +5,9 @@ namespace Hat.Domain.Store
     public interface ICartRepository
     {
         Task<CartModel> GetCartById(Guid cartId);
-        Task<List<CartItemModel>> GetCartItems();
-        Task AddCartItem(CartItemModel item);
-        Task DeleteCartItem(Guid itemId);
-        Task ClearCart();
+        Task AddItem(CartItemModel item);
+        Task RemoveItem(Guid itemId);
+        Task DeleteCart(Guid cartId);
 
-        Task<Guid> CreateCart(Guid UserId, string Address);
     }
 }

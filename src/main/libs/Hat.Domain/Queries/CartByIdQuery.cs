@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class CartByIdQuery : IRequest<Guid>
+    public class CartByIdQuery : IRequest<CartModel?>
     {
         public Guid Id { get; }
         public CartByIdQuery(Guid id)
