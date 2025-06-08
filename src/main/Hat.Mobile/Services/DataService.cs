@@ -332,7 +332,7 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<Guid> CreateInventory(InventoryModel inventory)
+        internal async Task<Guid> CreateUserInventory(InventoryModel inventory)
         {
             var response = await _httpClient.PostAsJsonAsync("/api/inventories", inventory);
             if (!response.IsSuccessStatusCode)
@@ -343,14 +343,22 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<CartModel> GetCart()
+        internal async Task<CartModel?> GetUserCart()
         {
-            var response= await _httpClient.GetAsync($"/api/carts/{_currentUser.Oid()}");
+            var response = await _httpClient.GetAsync($"/api/carts/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching cart: {response.ReasonPhrase}");
             }
             var data = await response.Content.ReadFromJsonAsync<CartModel>();
+            if (data == null)
+            {
+                // Return a new empty CartModel or handle as needed
+                return new CartModel
+                {
+                    CartItems = new List<CartItemModel>()
+                };
+            }
             return data;
 
         }

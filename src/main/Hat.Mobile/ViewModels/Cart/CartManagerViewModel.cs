@@ -43,7 +43,6 @@ namespace Hat.Mobile.ViewModels
             FavoriteCommand = new Command<ProductViewModel>(FavoriteProduct);
             QtyChangeCommand = new Command<ProductViewModel>(ChangeProductQty);
             CheckoutCommand = new Command(Checkout);
-            _=  PopulateDataAsync();
             _ = InitializeAsync();
         }      
 
@@ -54,10 +53,10 @@ namespace Hat.Mobile.ViewModels
         public async Task PopulateDataAsync()
         {
 
-            var storedProducts = await _dataService.GetShoppingCartItems();
+            var storedUserCart = await _dataService.GetUserCart();
            
-            Products = storedProducts.Select(x=> new CartItemViewModel(x)).ToObservableCollection();
-            SubTotal = Products.Sum(item => (decimal)item.Qty * item.Price);
+            Products = storedUserCart.CartItems?.Select(x=> new CartItemViewModel(x)).ToObservableCollection();
+            SubTotal = storedUserCart.TotalPrice;
             IsLoaded = true;
         }
         private  void DeleteProduct(ProductViewModel product)

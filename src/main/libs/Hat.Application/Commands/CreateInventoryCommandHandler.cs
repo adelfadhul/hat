@@ -18,6 +18,7 @@ namespace Hat.Application.Commands
         {
             var id = await _inventoryRepository.Create(new InventoryModel
             {
+                UserId = request.UserId,
                 ProductColor = request.Color,
                 Description = request.Description,
                 Location = request.Location,

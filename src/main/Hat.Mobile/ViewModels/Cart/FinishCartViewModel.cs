@@ -7,8 +7,8 @@ namespace Hat.Mobile.ViewModels
     public class FinishCartViewModel : BaseViewModel
     {
 
-        private CartManagerViewModel _CartViewModel;
-        public CartManagerViewModel CartViewModel
+        private CartViewModel _CartViewModel;
+        public CartViewModel CartViewModel
         {
             get => _CartViewModel;
             set => SetProperty(ref _CartViewModel, value);
@@ -47,7 +47,7 @@ namespace Hat.Mobile.ViewModels
         }
         async Task PopulateData()
         {
-            var storedCart = await _dataService.GetCart();
+            var storedCart = await _dataService.GetUserCart();
 
 
             IsLoaded = true;

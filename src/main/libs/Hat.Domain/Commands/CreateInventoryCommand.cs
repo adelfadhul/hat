@@ -6,6 +6,7 @@ namespace Hat.Domain.Commands
     {
        
         public Guid ProductId { get; set; }
+        public Guid UserId { get; set; }
         public string SKU { get; set; }
         public string Size { get; set; }
         public string Description { get; set; }

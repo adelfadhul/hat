@@ -60,7 +60,7 @@ public class CreateInventoryViewModel : BaseViewModel
            
         };
 
-        await _dataService.CreateInventory(inventoryModel).ContinueWith(async (result) =>
+        await _dataService.CreateUserInventory(inventoryModel).ContinueWith(async (result) =>
         {
             if (result.IsCompletedSuccessfully)
             {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hat.Backend.Controllers
 {
     [ApiController]
-    [Route("api/user/cart")]
+    [Route("api/carts")]
     public class CartController : HatController
     {
         public CartController(IMediator mediator, ILogger<CartController> logger,ICurrentUser currentUser) : base(mediator, logger,currentUser)
@@ -16,14 +16,14 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCart()
         {
             _logger.LogInformation("GetCarts");
-            var cart = await _mediator.Send(new CartsQuery());
+            var cart = await _mediator.Send(new CartByUserQuery(_currentUser.Oid()));
             return Ok(cart);
         }
 
         [HttpGet("user")]
         public async Task<IActionResult> GetUserCart()
         {
-            _logger.LogInformation("GetCarts");
+            _logger.LogInformation("GetCart By User");
             var cart = await _mediator.Send(new CartByUserQuery(_currentUser.Oid()));
             return Ok(cart);
         }
