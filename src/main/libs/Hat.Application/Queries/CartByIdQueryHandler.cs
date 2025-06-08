@@ -5,7 +5,6 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    
     public class CartByIdQueryHandler : IRequestHandler<CartByIdQuery, CartModel?>
     {
         private readonly ICartRepository _cartRepository;

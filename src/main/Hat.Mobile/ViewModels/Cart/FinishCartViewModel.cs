@@ -1,52 +1,28 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
-using Foundation;
-using Hat.DataViewModels;
-using Hat.Domain.Models;
+﻿using Hat.DataViewModels;
 using Hat.Helpers;
 using Hat.Mobile.Services;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
     public class FinishCartViewModel : BaseViewModel
     {
-        private DeliveryTypeViewModel _DeliveryType;
-        public DeliveryTypeViewModel DeliveryType
+
+        private CartManagerViewModel _CartViewModel;
+        public CartManagerViewModel CartViewModel
         {
-            get => _DeliveryType;
-            set => SetProperty(ref _DeliveryType, value);
+            get => _CartViewModel;
+            set => SetProperty(ref _CartViewModel, value);
         }
 
-        private ShippingAddressViewModel _PrimaryAddress;
-        public ShippingAddressViewModel PrimaryAddress
+
+        private OrderViewModel _OrderViewModel;
+        public OrderViewModel OrderViewModel
         {
-            get => _PrimaryAddress;
-            set
-            {
-                if (_PrimaryAddress != value)
-                {
-                    _PrimaryAddress = value;
-                    OnPropertyChanged(nameof(PrimaryAddress));
-                   
-                }
-            }
+            get => _OrderViewModel;
+            set => SetProperty(ref _OrderViewModel, value);
         }
 
-        private ObservableCollection<CartItemModel> _Products = [];
-        public ObservableCollection<CartItemModel> Products
-        {
-            get => _Products;
-            set => SetProperty(ref _Products, value);
-        }
 
-        private CardViewModel _SelectedCard;
-        public CardViewModel SelectedCard
-        {
-            get => _SelectedCard;
-            set => SetProperty(ref _SelectedCard, value);
-        }
-
-      
         private bool _IsLoaded = false;
         public bool IsLoaded
         {
@@ -58,12 +34,11 @@ namespace Hat.Mobile.ViewModels
 
         public FinishCartViewModel(NavigationService navigationService, DataService dataService):base(navigationService, dataService)
         {
-            DeliveryType = deliveryType;
-            PrimaryAddress = address;
-            SelectedCard = card;          
+                 
             FinishCommand = new Command(FinishOrder);
             BackCommand = new Command(GoBack);
             IsLoaded = true;
+            _ = Initialize();
 
         }
         private async Task Initialize()
@@ -72,7 +47,9 @@ namespace Hat.Mobile.ViewModels
         }
         async Task PopulateData()
         {
-           
+            var storedCart = await _dataService.GetCart();
+
+
             IsLoaded = true;
         }
         private async void FinishOrder()

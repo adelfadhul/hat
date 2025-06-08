@@ -8,6 +8,7 @@ namespace Hat.Domain.Models
         #region data
 
         public Guid Id { get; set; }
+        public Guid UserId { get; set; } 
         public string Name { get; set; }
 
         public string Price { get; set; }

@@ -16,12 +16,12 @@ namespace Hat.Infrastructure.Identity.Memory
 
         private Guid? _oid;
 
-       
+        public static Guid USERID => Guid.Parse("00000000-0000-0000-0000-000000000001");
         public Guid Oid()
         {
             if (_oid == null)
             {
-                _oid = Guid.Parse("00000000-0000-0000-0000-000000000001"); ;
+                _oid = USERID;
             }
             return _oid.Value;
         }

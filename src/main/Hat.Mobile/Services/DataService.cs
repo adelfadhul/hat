@@ -111,7 +111,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<CardModel>> GetCards()
         {
-            var response = await _httpClient.GetAsync("/api/cards");
+            var response = await _httpClient.GetAsync("/api/user/cards");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching card infos: {response.ReasonPhrase}");
@@ -121,7 +121,7 @@ namespace Hat.Mobile.Services
         }
         internal async Task<Guid> CreateCard(CardModel card)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/cards", card);
+            var response = await _httpClient.PostAsJsonAsync("/api/user/cards", card);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error creating card: {response.ReasonPhrase}");
@@ -132,7 +132,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<OrderModel>> GetOrders()
         {
-            var response = await _httpClient.GetAsync("/api/orders");
+            var response = await _httpClient.GetAsync("/api/user/orders");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching  orders: {response.ReasonPhrase}");
@@ -172,17 +172,7 @@ namespace Hat.Mobile.Services
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");
             }
         }
-        internal async Task<string> GetCartDeliveryAddress()
-        {
-            var userid = _currentUser.Oid();
-            var response = await _httpClient.GetAsync($"/api/carts/{userid}/deliverytype");
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Error fetching shopping cart items: {response.ReasonPhrase}");
-            }
-            var data = await response.Content.ReadAsStringAsync();
-            return data;
-        }
+       
         
         internal async Task<List<CartItemModel>> GetShoppingCartItems()
         {
@@ -351,6 +341,18 @@ namespace Hat.Mobile.Services
             }
             var data = await response.Content.ReadFromJsonAsync<Guid>();
             return data;
+        }
+
+        internal async Task<CartModel> GetCart()
+        {
+            var response= await _httpClient.GetAsync($"/api/carts/{_currentUser.Oid()}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching cart: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<CartModel>();
+            return data;
+
         }
     }
 }

@@ -1,3 +1,4 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/delivery-steps")]
     public class DeliveryStepController : HatController
     {
-        public DeliveryStepController(IMediator mediator, ILogger<DeliveryStepController> logger) : base(mediator, logger)
+        public DeliveryStepController(IMediator mediator, ILogger<DeliveryStepController> logger,ICurrentUser currentUser) : base(mediator, logger,currentUser)
         {
         }
 

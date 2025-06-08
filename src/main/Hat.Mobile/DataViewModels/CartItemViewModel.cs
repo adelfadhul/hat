@@ -1,5 +1,4 @@
 ﻿using Hat.Domain.Models;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
@@ -16,9 +15,11 @@ namespace Hat.DataViewModels
             ProductImageUrl = domainModel.ProductImageUrl;
             BrandName = domainModel.BrandName;
             Price = domainModel.Price;
-            ProductDetials = domainModel.ProductDetails; 
+            ProductDetials = domainModel.ProductDetails;
             Qty = domainModel.Quantity;
             Size = domainModel.Size;
+            Amount = domainModel.Amount;
+            Vat = domainModel.Vat;
         }
 
         public Guid Id { get; set; }
@@ -31,11 +32,11 @@ namespace Hat.DataViewModels
         public double Qty { get; set; } = 1;
 
         public string Size { get; set; }
-       
-      
-       
 
-      
+        public decimal Amount { get; set; }
+        public decimal Vat { get; set; }
+
+
 
 
     }

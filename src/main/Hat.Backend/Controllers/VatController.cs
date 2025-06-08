@@ -1,4 +1,5 @@
 using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/vats")]
     public class VatController : HatController
     {
-        public VatController(IMediator mediator, ILogger<VatController> logger) : base(mediator, logger)
+        public VatController(IMediator mediator, ILogger<VatController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
         [HttpGet("")]

@@ -1,5 +1,6 @@
 using Hat.Application.Queries;
 using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/wishes")]
     public class WishController : HatController
     {
-        public WishController(IMediator mediator, ILogger<WishController> logger) : base(mediator, logger)
+        public WishController(IMediator mediator, ILogger<WishController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
         [HttpGet("{UserId}")]

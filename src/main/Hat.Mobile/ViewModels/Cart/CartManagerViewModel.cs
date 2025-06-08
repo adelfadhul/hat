@@ -6,10 +6,10 @@ using System.Windows.Input;
 
 namespace Hat.Mobile.ViewModels
 {
-    public class CartViewModel : BaseViewModel
+    public class CartManagerViewModel : BaseViewModel
     {
-        private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
-        public ObservableCollection<ShoppingCartItemViewModel> Products
+        private ObservableCollection<CartItemViewModel> _Products = [];
+        public ObservableCollection<CartItemViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -36,7 +36,7 @@ namespace Hat.Mobile.ViewModels
 
 
 
-        public CartViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
+        public CartManagerViewModel(NavigationService navigationService, DataService dataService):base(navigationService,dataService)
         {
           
             DeleteCommand = new Command<ProductViewModel>(DeleteProduct);
@@ -56,15 +56,15 @@ namespace Hat.Mobile.ViewModels
 
             var storedProducts = await _dataService.GetShoppingCartItems();
            
-            Products = storedProducts.Select(x=> new ShoppingCartItemViewModel(x)).ToObservableCollection();
+            Products = storedProducts.Select(x=> new CartItemViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => (decimal)item.Qty * item.Price);
             IsLoaded = true;
         }
-        private async void DeleteProduct(ProductViewModel product)
+        private  void DeleteProduct(ProductViewModel product)
         {
             
         }
-        private async void FavoriteProduct(ProductViewModel product)
+        private  void FavoriteProduct(ProductViewModel product)
         {
 
         }

@@ -1,3 +1,4 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/categories")]
     public class CategoryController : HatController
     {
-        public CategoryController(IMediator mediator, ILogger<CategoryController> logger) : base(mediator, logger)
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger,ICurrentUser currentUser) : base(mediator, logger,currentUser)
         {
         }
 

@@ -7,8 +7,8 @@ namespace Hat.Mobile.ViewModels
 {
     public class CheckOutViewModel : BaseViewModel
     {
-        private ObservableCollection<ShoppingCartItemViewModel> _Products = [];
-        public ObservableCollection<ShoppingCartItemViewModel> Products
+        private ObservableCollection<CartItemViewModel> _Products = [];
+        public ObservableCollection<CartItemViewModel> Products
         {
             get => _Products;
             set => SetProperty(ref _Products, value);
@@ -55,7 +55,7 @@ namespace Hat.Mobile.ViewModels
         private async Task populteDataAsync()
         {
             var cartItems = await _dataService.GetShoppingCartItems();
-            Products = cartItems.Select(x => new ShoppingCartItemViewModel(x)).ToObservableCollection();
+            Products = cartItems.Select(x => new CartItemViewModel(x)).ToObservableCollection();
             SubTotal = Products.Sum(item => item.Amount);
             Vat = Products.Sum(item => item.Vat);
             IsLoaded = true;

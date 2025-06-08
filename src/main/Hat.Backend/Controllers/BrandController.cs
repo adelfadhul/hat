@@ -1,3 +1,4 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/brands")]
     public class BrandController : HatController
     {
-        public BrandController(IMediator mediator, ILogger<BrandController> logger) : base(mediator, logger)
+        public BrandController(IMediator mediator, ILogger<BrandController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
 

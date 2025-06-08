@@ -1,4 +1,5 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Enums;
+using Hat.Domain.Models;
 using Hat.Mobile.ViewModels;
 
 namespace Hat.DataViewModels
@@ -42,8 +43,8 @@ namespace Hat.DataViewModels
             get => _Price;
             set => SetProperty(ref _Price, value);
         }
-        private string _Status;
-        public string Status
+        private OrderStatus _Status;
+        public OrderStatus Status
         {
             get => _Status;
             set => SetProperty(ref _Status, value);

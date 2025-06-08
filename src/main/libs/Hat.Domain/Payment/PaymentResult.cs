@@ -1,9 +1,11 @@
-﻿namespace Hat.Domain.Payment
+﻿using Hat.Domain.Enums;
+
+namespace Hat.Domain.Payment
 {
     public class PaymentResult
     {
         public bool IsSuccess { get; set; }
-        public string Status { get; set; }           // e.g. "SUCCESS", "FAILED", "PENDING"
+        public PaymentStatus Status { get; set; }           // e.g. "SUCCESS", "FAILED", "PENDING"
         public string TransactionId { get; set; }    // From the gateway
         public string Reference { get; set; }        // Your internal reference
         public decimal Amount { get; set; }

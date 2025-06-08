@@ -6,10 +6,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryCartRepository : UserRepository, ICartRepository
     {
-        private static readonly Lazy<List<CartModel>> _categories = new(() => new List<CartModel>
+        private static readonly Lazy<List<CartModel>> _carts = new(() => new List<CartModel>
         {
+
         });
-        public static List<CartModel> CARTS => _categories.Value;
+        public static List<CartModel> CARTS => _carts.Value;
         public MemoryCartRepository(ICurrentUser currentUser) : base(currentUser)
         {
         }
@@ -60,6 +61,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             CARTS.RemoveAll(c => c.Id == Id);
 
             return Task.CompletedTask;
+        }
+
+        public Task<CartModel?> GetCartByUser(Guid userId)
+        {
+            return Task.FromResult(CARTS.FirstOrDefault(c => c.CustomerId == userId));
         }
     }
 }

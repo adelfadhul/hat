@@ -17,7 +17,7 @@
                 <FontImageSource FontFamily="MaterialIcon" Glyph="&#xf110;" />
             </Tab.Icon>
             <ShellContent 
-                 ContentTemplate="{DataTemplate views:ShoppingCartView}"
+                 ContentTemplate="{DataTemplate views:CartManagerView}"
                 Route="view" />
         </Tab>
         <Tab Title="Account">

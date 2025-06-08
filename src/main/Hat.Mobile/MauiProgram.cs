@@ -100,7 +100,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateInventoryViewModel>();
 
         // Views
-        builder.Services.AddTransient<CartView>();
+        builder.Services.AddTransient<CartManagerView>();
         builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<HomePageView>();
         builder.Services.AddTransient<RegisterView>();

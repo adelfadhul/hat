@@ -1,3 +1,4 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +9,8 @@ namespace Hat.Backend.Controllers
     [Route("api/shipping-addresses")]
     public class ShippingAddressController : HatController
     {
-        public ShippingAddressController(IMediator mediator, ILogger<ShippingAddressController> logger)
-            : base(mediator, logger)
+        public ShippingAddressController(IMediator mediator, ILogger<ShippingAddressController> logger,ICurrentUser currentUser)
+            : base(mediator, logger, currentUser)
         {
         }
 

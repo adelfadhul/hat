@@ -1,4 +1,5 @@
-﻿using Hat.Domain.Payment;
+﻿using Hat.Domain.Enums;
+using Hat.Domain.Payment;
 
 namespace Hat.Infrastructure.Payment.Fake
 {
@@ -13,7 +14,7 @@ namespace Hat.Infrastructure.Payment.Fake
             return new PaymentResult
             {
                 IsSuccess = true,
-                Status = "SUCCESS",
+                Status = PaymentStatus.Completed,
                 TransactionId = Guid.NewGuid().ToString(),
                 Reference = reference,
                 Amount = amount,

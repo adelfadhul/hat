@@ -1,4 +1,5 @@
 ﻿using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/inventories")]
     public class InventoryController : HatController
     {
-        public InventoryController(IMediator mediator, ILogger<HatController> logger) : base(mediator, logger)
+        public InventoryController(IMediator mediator, ILogger<HatController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
 

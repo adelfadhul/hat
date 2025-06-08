@@ -1,5 +1,6 @@
 ﻿using Hat.Domain.Commands;
 using Hat.Domain.Enums;
+using Hat.Domain.Payment;
 using Hat.Domain.Store;
 using MediatR;
 
@@ -19,11 +20,10 @@ namespace Hat.Application.Commands
             {
                 throw new Exception("Order not found");
             }
-            // Here you would typically finalize the payment process
-            // For simplicity, we are just updating the order status
-           // order.PaymentMethod = request.PaymentMethod;
-            order.Status =  OrderStatus.Paid;
-            await _orderRepository.UpdateOrder(order);
+            if (request.PaymentResult.Status == PaymentStatus.Completed)
+                await _orderRepository.UpdateOrderStatus(request.OrderId,OrderStatus.Paid);
+
+
         }
     }
 }

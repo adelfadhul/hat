@@ -9,19 +9,17 @@ namespace Hat.Infrastructure.Registeration
 {
     public static class RepositoryRegistration
     {
-        public static IServiceCollection AddHatRepositories(this IServiceCollection services, string type)
+        public static IServiceCollection AddHatRepositories(this IServiceCollection services, RepositoryType type)
         {
             switch (type)
             {
-                case "Memory":
+                case  RepositoryType.Memory:
 
                     services.AddSingleton<ICurrentUser, MemoryCurrentUser>();
-
-                    services.AddScoped<ICartRepository, MemoryShoppingCartRepository>();
                     services.AddScoped<IProductRepository, MemoryProductRepository>();
                     services.AddScoped<ICardRepository, MemoryCardRepository>();
                     services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();
-                    services.AddScoped<ITrackRepository, MemoryOrderRepository>();
+                    services.AddScoped<IOrderRepository, MemoryOrderRepository>();
                     services.AddScoped<ICategoryRepository, MemoryCategoryRepository>();
                     services.AddScoped<IDeliveryStepRepository, MemoryDeliveryStepRepository>();
                     services.AddScoped<IShippingAddressRepository, MemoryShippingAddressRepository>();
@@ -31,7 +29,7 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IWishRepository, MemoryWishRepository>();
                     services.AddScoped<ICartRepository, MemoryCartRepository>();
                     break;
-                case "SqlServer":
+                case RepositoryType.SqlServer:
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();
                     // Add other SqlServer repositories here as needed
                     break;

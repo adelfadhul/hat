@@ -1,15 +1,17 @@
 using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hat.Backend.Controllers
 {
+
     [ApiController]
     [Route("api/cards")]
     public class CardController : HatController
     {
-        public CardController(IMediator mediator, ILogger<CardController> logger) : base(mediator, logger)
+        public CardController(IMediator mediator, ILogger<CardController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
 

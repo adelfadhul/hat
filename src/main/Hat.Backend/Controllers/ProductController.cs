@@ -1,4 +1,5 @@
 ﻿using Hat.Domain.Commands;
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/products")]
     public class ProductController : HatController
     {
-        public ProductController(IMediator mediator, ILogger<ProductController> logger) : base(mediator, logger)
+        public ProductController(IMediator mediator, ILogger<ProductController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
 

@@ -1,9 +1,14 @@
-﻿using Hat.Domain.Models;
+﻿using Hat.Domain.Enums;
+using Hat.Domain.Models;
 
 namespace Hat.Domain.Store
 {
-    public interface ITrackRepository
+    public interface IOrderRepository
     {
-        Task<List<OrderModel>> GetTracks();
+        Task<OrderModel> GetOrderById(Guid orderId);
+        Task CreateOrder(OrderModel order);
+        Task UpdateOrderStatus(Guid orderId,OrderStatus status);
+        Task<List<OrderModel>> GetOrdersByUserId(Guid userId);
+
     }
 }

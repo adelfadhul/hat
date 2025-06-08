@@ -20,7 +20,7 @@
         public string ProductDetails { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public double Vat { get; set; } = 0.2; // 20% VAT by default
+        public decimal Vat { get; set; } = 0m; // 20% VAT by default
         public string Size { get; set; }
         #endregion
 

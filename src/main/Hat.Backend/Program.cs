@@ -16,7 +16,8 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 // Register infrastructure repositories (choose the type: "Memory", "SqlServer", or "Http")
 #region hat services
-builder.Services.AddHatRepositories("Memory");
+builder.Services.AddHatRepositories(RepositoryType.Memory);
+builder.Services.AddHatPayment(PaymentType.Fake);
 builder.Services.AddHatApplications("Hat.Application");
 #endregion
 

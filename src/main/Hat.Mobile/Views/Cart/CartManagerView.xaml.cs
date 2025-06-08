@@ -2,10 +2,10 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class CartView : ContentPage
+public partial class CartManagerView : ContentPage
 {
-    private readonly CartViewModel _viewModel;
-    public CartView(CartViewModel vm)
+    private readonly CartManagerViewModel _viewModel;
+    public CartManagerView(CartManagerViewModel vm)
     {
         InitializeComponent();
         _viewModel = vm;

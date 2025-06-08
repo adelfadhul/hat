@@ -1,3 +1,4 @@
+using Hat.Domain.Identity;
 using Hat.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/delivery-types")]
     public class DeliveryTypeController : HatController
     {
-        public DeliveryTypeController(IMediator mediator, ILogger<DeliveryTypeController> logger) : base(mediator, logger)
+        public DeliveryTypeController(IMediator mediator, ILogger<DeliveryTypeController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
 
