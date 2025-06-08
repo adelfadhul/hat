@@ -78,5 +78,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             ADDRESSES.Single(a => a.Id == id).IsInactive = false;
             return Task.CompletedTask;
         }
+
+        public Task<List<ShippingAddressModel>> GetShippingAddressesByUser(Guid userId)
+        {
+            return Task.FromResult(ADDRESSES.Where(a => a.UserId == userId && !a.IsInactive).ToList());
+        }
     }
 }

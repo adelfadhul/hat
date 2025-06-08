@@ -9,6 +9,6 @@ namespace Hat.Domain.Store
         Task AddItem(CartItemModel item);
         Task RemoveItem(Guid itemId);
         Task DeleteCart(Guid cartId);
-
+        Task<List<CartModel>> GetCarts();
     }
 }

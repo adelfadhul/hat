@@ -35,7 +35,7 @@ namespace Hat.Mobile.ViewModels
       
         async Task PopulateDataAsync()
         { 
-            var storedCards= await _dataService.GetCards();
+            var storedCards= await _dataService.GetUserCards();
             Cards = storedCards.Select(x => new CardViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }

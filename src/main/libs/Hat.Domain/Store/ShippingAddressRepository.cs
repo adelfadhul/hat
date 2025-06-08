@@ -11,5 +11,6 @@ namespace Hat.Domain.Store
         Task DeleteShippingAddress(Guid id);
         Task InactivateShippingAddress(Guid id);
         Task ActivateShippingAddress(Guid id);
+        Task<List<ShippingAddressModel>> GetShippingAddressesByUser(Guid userId);
     }
 }

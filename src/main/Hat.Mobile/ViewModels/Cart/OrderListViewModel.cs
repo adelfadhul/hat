@@ -45,7 +45,7 @@ namespace Hat.Mobile.ViewModels
         => await _navigationService.GoBack();
         private async Task PopulateDataAsync()
         {
-            var storedOrders = await _dataService.GetOrders();
+            var storedOrders = await _dataService.GetUserOrders();
             Orders= storedOrders.Select(x=> new OrderViewModel(x)).ToObservableCollection();
            
             IsLoaded = true;

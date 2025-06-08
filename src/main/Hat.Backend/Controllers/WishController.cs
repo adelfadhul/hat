@@ -14,11 +14,11 @@ namespace Hat.Backend.Controllers
         public WishController(IMediator mediator, ILogger<WishController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
         {
         }
-        [HttpGet("{UserId}")]
-        public async Task<IActionResult> GetWishes([FromQuery] Guid UserId)
+        [HttpGet("user")]
+        public async Task<IActionResult> GetWishes()
         {
             _logger.LogInformation("GetWishes By User");
-            var list = await _mediator.Send(new UserWishProductsQuery(UserId));
+            var list = await _mediator.Send(new UserWishProductsQuery(_currentUser.Oid()));
             return Ok(list);
         }
         [HttpGet("{UserId}/products/{ProductId}")]

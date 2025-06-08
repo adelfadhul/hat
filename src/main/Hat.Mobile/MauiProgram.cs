@@ -67,6 +67,7 @@ public static class MauiProgram
             });
 
         // ViewModels
+        builder.Services.AddTransient<CartManagerViewModel>();
         builder.Services.AddTransient<CartViewModel>();
         builder.Services.AddTransient<DeliveryTypeViewModel>();
         builder.Services.AddTransient<ShippingAddressSelectorView>();

@@ -67,5 +67,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return Task.FromResult(CARTS.FirstOrDefault(c => c.CustomerId == userId));
         }
+
+        public Task<List<CartModel>> GetCarts()
+        {
+            return Task.FromResult(CARTS.ToList());
+        }
     }
 }

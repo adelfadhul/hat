@@ -23,6 +23,14 @@ namespace Hat.Backend.Controllers
             return Ok(list);
         }
 
+        [HttpGet("user")]
+        public async Task<IActionResult> GetCardsByUser()
+        {
+            _logger.LogInformation("GetCardsByUser");
+            var list = await _mediator.Send(new CardsByUserQuery(_currentUser.Oid()));
+            return Ok(list);
+        }
+
         [HttpGet("{CardId}")]
         public async Task<IActionResult> GetCard(Guid CardId)
         {

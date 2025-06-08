@@ -21,6 +21,14 @@ namespace Hat.Backend.Controllers
             return Ok(vat);
         }
 
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUserVats()
+        {
+            _logger.LogInformation("GetVatByUser");
+            var vat = await _mediator.Send(new VatsByUserQuery(_currentUser.Oid()));
+            return Ok(vat);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVatById([FromQuery] Guid id)
         {

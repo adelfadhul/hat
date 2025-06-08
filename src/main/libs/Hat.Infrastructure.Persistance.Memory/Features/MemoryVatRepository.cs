@@ -28,7 +28,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public async Task DeleteVat(Guid vatId)
         {
-           VATS.RemoveAll(v => v.Id == vatId);
+            VATS.RemoveAll(v => v.Id == vatId);
             await Task.FromResult(Task.CompletedTask);
         }
 
@@ -39,7 +39,13 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public Task<List<VatModel>> GetVats()
         {
-          return Task.FromResult(VATS);
+            return Task.FromResult(VATS);
+        }
+        public Task<List<VatModel>> GetVatsByUser(Guid userId)
+        {
+            // In a real application, you would filter by userId
+            return Task.FromResult(VATS.Where(x => x.UserId == userId).ToList());
         }
     }
+
 }

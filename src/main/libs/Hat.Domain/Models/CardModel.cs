@@ -7,6 +7,7 @@ namespace Hat.Domain.Models
     {
         #region data
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public string? CardNumber { get; set; }
         public string? NameOnCard { get; set; }
         public string? CardValidationCode { get; set; }

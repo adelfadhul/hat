@@ -21,11 +21,19 @@ namespace Hat.Backend.Controllers
             var shippingAddresses = await _mediator.Send(new ShippingAddressesQuery());
             return Ok(shippingAddresses);
         }
-        [HttpGet("primary/{UserId}")]
-        public async Task<IActionResult> GetPrimaryShippingAddress([FromRoute]Guid UserId)
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUserShippingAddresses()
+        {
+            _logger.LogInformation("GetShippingAddressesByUser");
+            var shippingAddresses = await _mediator.Send(new ShippingAddressesByUserQuery(_currentUser.Oid()));
+            return Ok(shippingAddresses);
+        }
+        [HttpGet("user/primary")]
+        public async Task<IActionResult> GetUserPrimaryShippingAddress()
         {
             _logger.LogInformation("GetPrimaryShippingAddress");
-            var primaryAddress = await _mediator.Send(new PrimaryShippingAddressQuery(UserId));
+            var primaryAddress = await _mediator.Send(new PrimaryShippingAddressQuery(_currentUser.Oid()));
             if (primaryAddress == null)
             {
                 return NotFound();

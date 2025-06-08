@@ -1,6 +1,7 @@
 ﻿using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
@@ -26,12 +27,12 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return new List<CardModel>
             {
-                new CardModel() { CardNumber = "371449635398431", CardValidationCode = "123", ExpirationDate = "2024-12-01", IsSelected = true },
-                new CardModel() { CardNumber = "38520000023237", CardValidationCode = "456", ExpirationDate = "2025-12-01" },
-                new CardModel() { CardNumber = "6011000990139424", CardValidationCode = "789", ExpirationDate = "2026-12-01" },
-                new CardModel() { CardNumber = "3566002020360505", CardValidationCode = "321", ExpirationDate = "2027-12-01" },
-                new CardModel() { CardNumber = "5555555555554444", CardValidationCode = "654", ExpirationDate = "2028-12-01" },
-                new CardModel() { CardNumber = "4012888888881881", CardValidationCode = "987", ExpirationDate = "2028-12-01" }
+                new CardModel() { UserId= MemoryCurrentUser.USERID, CardNumber = "371449635398431", CardValidationCode = "123", ExpirationDate = "2024-12-01", IsSelected = true },
+                new CardModel() {UserId= MemoryCurrentUser.USERID, CardNumber = "38520000023237", CardValidationCode = "456", ExpirationDate = "2025-12-01" },
+                new CardModel() {UserId= MemoryCurrentUser.USERID, CardNumber = "6011000990139424", CardValidationCode = "789", ExpirationDate = "2026-12-01" },
+                new CardModel() {UserId= MemoryCurrentUser.USERID, CardNumber = "3566002020360505", CardValidationCode = "321", ExpirationDate = "2027-12-01" },
+                new CardModel() { UserId= MemoryCurrentUser.USERID,CardNumber = "5555555555554444", CardValidationCode = "654", ExpirationDate = "2028-12-01" },
+                new CardModel() { UserId= MemoryCurrentUser.USERID,CardNumber = "4012888888881881", CardValidationCode = "987", ExpirationDate = "2028-12-01" }
             };
         });
 
@@ -39,6 +40,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         public Task<List<CardModel>> GetCards()
         {
             return Task.FromResult(CARDS);
+        }
+
+        public Task<List<CardModel>> GetCardsByUser(Guid userId)
+        {
+             return Task.FromResult(CARDS.Where(c => c.UserId == userId).ToList());
         }
     }
 }

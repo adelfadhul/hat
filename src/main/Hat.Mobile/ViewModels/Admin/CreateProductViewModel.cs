@@ -64,7 +64,7 @@ namespace Hat.Mobile.ViewModels
         {
            
             Categories = await _dataService.GetCategories();
-            Vats = await _dataService.GetVats();
+            Vats = await _dataService.GetUserVats();
 
         }
 

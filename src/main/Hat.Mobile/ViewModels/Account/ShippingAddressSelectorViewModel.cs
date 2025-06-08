@@ -52,7 +52,7 @@ namespace Hat.Mobile.ViewModels
 
         async Task PopulateDataAsync()
         {
-            var storedShippingAddresses = await _dataService.GetShippingAddresses();
+            var storedShippingAddresses = await _dataService.GetUserShippingAddresses();
             Addressess = storedShippingAddresses.Select(x => new ShippingAddressViewModel(x)).ToObservableCollection();
             IsLoaded = true;
         }

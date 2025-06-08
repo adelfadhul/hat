@@ -109,9 +109,9 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<CardModel>> GetCards()
+        internal async Task<List<CardModel>> GetUserCards()
         {
-            var response = await _httpClient.GetAsync("/api/user/cards");
+            var response = await _httpClient.GetAsync("/api/cards/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching card infos: {response.ReasonPhrase}");
@@ -121,7 +121,7 @@ namespace Hat.Mobile.Services
         }
         internal async Task<Guid> CreateCard(CardModel card)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/user/cards", card);
+            var response = await _httpClient.PostAsJsonAsync("/api/cards", card);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error creating card: {response.ReasonPhrase}");
@@ -130,9 +130,9 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<OrderModel>> GetOrders()
+        internal async Task<List<OrderModel>> GetUserOrders()
         {
-            var response = await _httpClient.GetAsync("/api/user/orders");
+            var response = await _httpClient.GetAsync("/api/orders/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching  orders: {response.ReasonPhrase}");
@@ -141,9 +141,9 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<ShippingAddressModel>> GetShippingAddresses()
+        internal async Task<List<ShippingAddressModel>> GetUserShippingAddresses()
         {
-            var response = await _httpClient.GetAsync("/api/shipping-address");
+            var response = await _httpClient.GetAsync("/api/shipping-address/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching shipping addresses: {response.ReasonPhrase}");
@@ -236,7 +236,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<ShippingAddressModel> GetPrimaryAddress()
         {
-            var response = await _httpClient.GetAsync($"/api/shipping-addresses/primary/{_currentUser.Oid()}");
+            var response = await _httpClient.GetAsync($"/api/shipping-addresses/user/primary");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching category by id: {response.ReasonPhrase}");
@@ -245,9 +245,9 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<VatModel>> GetVats()
+        internal async Task<List<VatModel>> GetUserVats()
         {
-            var response = await _httpClient.GetAsync("/api/vats");
+            var response = await _httpClient.GetAsync("/api/vats/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching VATs: {response.ReasonPhrase}");
@@ -274,7 +274,7 @@ namespace Hat.Mobile.Services
                 UserId = _currentUser.Oid(),
                 ProductId = productId
             };
-            var response = await _httpClient.PostAsJsonAsync("/api/wishes", wish);
+            var response = await _httpClient.PostAsJsonAsync("/api/wishes/product", wish);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error creating product: {response.ReasonPhrase}");
@@ -291,7 +291,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<WishModel>> GetWishesByUser()
         {
-            var response = await _httpClient.GetAsync($"/api/wishes/{_currentUser.Oid()}");
+            var response = await _httpClient.GetAsync($"/api/wishes/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching wishes: {response.ReasonPhrase}");

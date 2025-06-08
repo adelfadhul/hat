@@ -16,6 +16,14 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCart()
         {
             _logger.LogInformation("GetCarts");
+            var cart = await _mediator.Send(new CartsQuery());
+            return Ok(cart);
+        }
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUserCart()
+        {
+            _logger.LogInformation("GetCarts");
             var cart = await _mediator.Send(new CartByUserQuery(_currentUser.Oid()));
             return Ok(cart);
         }

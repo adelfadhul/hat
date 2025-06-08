@@ -7,5 +7,6 @@ namespace Hat.Domain.Store
         Task<List<CardModel>> GetCards();
         Task<Guid> CreateCard(CardModel card);
         Task DeleteCard(string cardNumber);
+        Task<List<CardModel>> GetCardsByUser(Guid userId);
     }
 }
