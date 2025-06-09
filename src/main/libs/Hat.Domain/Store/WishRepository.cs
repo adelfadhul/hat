@@ -8,5 +8,6 @@ namespace Hat.Domain.Store
         Task<WishModel?> GetWishByUserAndProduct(Guid userId, Guid productId);
         Task<Guid> CreateWish(WishModel wish);
         Task DeleteWish(Guid wishId);
+        Task<WishModel?> GetWishById(Guid id);
     }
 }

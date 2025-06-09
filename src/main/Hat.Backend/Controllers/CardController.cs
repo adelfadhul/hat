@@ -11,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/cards")]
     public class CardController : HatController
     {
-        public CardController(IMediator mediator, ILogger<CardController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public CardController(IMediator mediator, ILogger<CardController> logger,ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
 
@@ -27,8 +27,9 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCardsByUser()
         {
             _logger.LogInformation("GetCardsByUser");
-            var list = await _mediator.Send(new CardsByUserQuery(_currentUser.Oid()));
-            return Ok(list);
+            var cards = await _mediator.Send(new CardsByUserQuery(_currentUser.Oid()));
+            ForbidIfUserIdMismatch(cards.FirstOrDefault());
+            return Ok(cards);
         }
 
         [HttpGet("{CardId}")]
@@ -40,6 +41,7 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound();
             }
+            ForbidIfUserIdMismatch(card);
             return Ok(card);
         }
 
@@ -47,6 +49,16 @@ namespace Hat.Backend.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteCard(Guid id)
         {
+            // Retrieve the card first
+            var card = await _mediator.Send(new CardByIdQuery(id));
+            if (card == null)
+            {
+                return NotFound();
+            }
+
+            // Check ownership
+            ForbidIfUserIdMismatch(card);
+
             _logger.LogInformation("DeleteCard: {id}", id);
             await _mediator.Send(new DeleteCardCommand(id));
             return NoContent();

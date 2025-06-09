@@ -2,7 +2,7 @@
 
 namespace Hat.Domain.Models
 {
-    public class OrderModel
+    public class OrderModel:IUserModel
     {
        
         #region data

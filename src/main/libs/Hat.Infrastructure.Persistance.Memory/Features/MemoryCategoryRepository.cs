@@ -15,7 +15,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new CategoryModel { Id = Guid.NewGuid(), Name = "Sports", Icon = "\uf44b" }
             });
 
-        public MemoryCategoryRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryCategoryRepository(ILoginService loginService) : base(loginService)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using Hat.Helpers;
+﻿using Hat.Domain.Identity;
+using Hat.Helpers;
 using Hat.Mobile.Services;
 using System.Windows.Input;
 using MauiApp = Microsoft.Maui.Controls.Application;
@@ -6,6 +7,8 @@ namespace Hat.Mobile.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly ILoginService _loginService;
+
         private string _Email;
         public string Email
         {
@@ -26,16 +29,19 @@ namespace Hat.Mobile.ViewModels
         public ICommand RegisterCommand { get; }
         public ICommand ForgotPasswordCommand { get; }
 
-     
-        public LoginViewModel(NavigationService navigationService,DataService dataService):base(navigationService,dataService)
+        public LoginViewModel(
+            NavigationService navigationService,
+            DataService dataService,
+            ILoginService loginService
+        ) : base(navigationService, dataService)
         {
-            
+            _loginService = loginService;
+
             LoginCommand = new Command(Login);
             LoginFacebookCommand = new Command(LoginWithFacebook);
             LoginGoogleCommand = new Command(LoginWithGoogle);
             RegisterCommand = new Command(SignUp);
             ForgotPasswordCommand = new Command(ForgotPassword);
-          
         }
 
         private void LoginWithGoogle()
@@ -54,15 +60,21 @@ namespace Hat.Mobile.ViewModels
         }
 
         private async void SignUp()
-        =>  await _navigationService.NavigateToRegister();
-           
-        
+            => await _navigationService.NavigateToRegister();
 
         private async void Login()
         {
-            MauiApp.Current.MainPage = new AppShell();
-            await ToastHelper.ShowToast("Welcome");
-
+            ICurrentUser currentUser =  _loginService.Login(Email, Password);
+            var isSuccess = currentUser != null;
+            if (isSuccess)
+            {
+                MauiApp.Current.MainPage = new AppShell();
+                await ToastHelper.ShowToast("Welcome");
+            }
+            else
+            {
+                await ToastHelper.ShowToast("Invalid email or password");
+            }
         }
     }
 }

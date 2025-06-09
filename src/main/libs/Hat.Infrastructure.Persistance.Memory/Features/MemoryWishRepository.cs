@@ -7,7 +7,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryWishRepository : UserRepository, IWishRepository
     {
-        public MemoryWishRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryWishRepository(ILoginService loginService) : base(loginService)
         {
         }
         private static readonly Lazy<List<WishModel>> _wishes = new Lazy<List<WishModel>>(() =>
@@ -62,6 +62,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                wish.UserId = _currentUser.Oid();
             }
             return Task.FromResult(Wishes.SingleOrDefault(w => w.UserId == userId && w.ProductId == productId));
+        }
+
+        public Task<WishModel?> GetWishById(Guid id)
+        {
+            return Task.FromResult(Wishes.SingleOrDefault(w => w.Id == id));
         }
 
 

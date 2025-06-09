@@ -9,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/brands")]
     public class BrandController : HatController
     {
-        public BrandController(IMediator mediator, ILogger<BrandController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public BrandController(IMediator mediator, ILogger<BrandController> logger,ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
 

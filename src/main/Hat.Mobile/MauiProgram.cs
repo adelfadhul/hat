@@ -139,7 +139,7 @@ public static class MauiProgram
 
         // Register MediatR handlers from the application assembly
         builder.Services.AddHatApplications("Hat.Application");
-        builder.Services.AddScoped<ICurrentUser,MemoryCurrentUser>();
+        builder.Services.AddScoped<ILoginService,MemoryLoginService>();
 
 
         return builder.Build();

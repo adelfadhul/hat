@@ -1,6 +1,6 @@
 ﻿namespace Hat.Domain.Models
 {
-    public class VatModel
+    public class VatModel:IUserModel
     {
         public Guid Id { get; set; }
 

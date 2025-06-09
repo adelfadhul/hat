@@ -18,6 +18,7 @@ builder.Services.AddCors(options =>
 #region hat services
 builder.Services.AddHatRepositories(RepositoryType.Memory);
 builder.Services.AddHatPayment(PaymentType.Fake);
+builder.Services.AddHatIdentity(IdentityType.Memory);
 builder.Services.AddHatApplications("Hat.Application");
 #endregion
 

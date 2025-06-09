@@ -11,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/categories")]
     public class CategoryController : HatController
     {
-        public CategoryController(IMediator mediator, ILogger<CategoryController> logger,ICurrentUser currentUser) : base(mediator, logger,currentUser)
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger,ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
 

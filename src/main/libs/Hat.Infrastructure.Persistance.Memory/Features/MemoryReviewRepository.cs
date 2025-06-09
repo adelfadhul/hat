@@ -95,7 +95,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return L;
         });
 
-        public MemoryReviewRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryReviewRepository(ILoginService loginService) : base(loginService)
         {
         }
 

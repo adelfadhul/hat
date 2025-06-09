@@ -11,11 +11,11 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         });
         public static List<CartModel> CARTS => _carts.Value;
-        public MemoryCartRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryCartRepository(ILoginService loginService) : base(loginService)
         {
         }
 
-        public Task<Guid> AddCart(CartModel cart)
+        public Task<Guid> CreateCart(CartModel cart)
         {
             CARTS.Add(cart);
             return Task.FromResult(cart.Id);
@@ -72,5 +72,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return Task.FromResult(CARTS.ToList());
         }
+
+       
     }
 }

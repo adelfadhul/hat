@@ -3,7 +3,7 @@ using Hat.Domain.Helpers;
 
 namespace Hat.Domain.Models
 {
-    public class CardModel
+    public class CardModel:IUserModel
     {
         #region data
         public Guid Id { get; set; }

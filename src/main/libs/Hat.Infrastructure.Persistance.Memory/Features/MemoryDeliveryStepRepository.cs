@@ -6,7 +6,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryDeliveryStepRepository : UserRepository, IDeliveryStepRepository
     {
-        public MemoryDeliveryStepRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryDeliveryStepRepository(ILoginService loginService) : base(loginService)
         {
         }
         private static Lazy<List<DeliveryStepModel>> _steps = new(() =>

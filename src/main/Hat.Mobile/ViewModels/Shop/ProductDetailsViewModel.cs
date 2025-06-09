@@ -166,7 +166,7 @@ namespace Hat.Mobile.ViewModels
 
         private async Task AddToCart()
         {
-            await _dataService.AddShoppingCartItem(Guid.Parse(productId), (int)qty, "standard");
+            await _dataService.AddCartItem(Guid.Parse(productId), (int)qty, "standard");
             await ToastHelper.ShowToast("Item added to cart");
            await _navigationService.NavigateToShoppingCart();
 

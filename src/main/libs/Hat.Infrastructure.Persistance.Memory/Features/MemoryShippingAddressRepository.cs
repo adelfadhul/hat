@@ -31,7 +31,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             };
         });
 
-        public MemoryShippingAddressRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryShippingAddressRepository(ILoginService loginService) : base(loginService)
         {
         }
 

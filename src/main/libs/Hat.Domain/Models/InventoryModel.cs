@@ -1,6 +1,6 @@
 ﻿namespace Hat.Domain.Models
 {
-    public class InventoryModel
+    public class InventoryModel:IUserModel
     {
         #region data
         public Guid Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Hat.Domain.Models
 {
-    public class CartModel
+    public class CartModel:IUserModel
     {
         #region data
         public Guid Id { get; set; }

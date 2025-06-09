@@ -9,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/user/orders")]
     public class OrderController : HatController
     {
-        public OrderController(IMediator mediator, ILogger<OrderController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public OrderController(IMediator mediator, ILogger<OrderController> logger, ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
 

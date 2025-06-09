@@ -3,7 +3,7 @@
 namespace Hat.Domain.Models
 {
 
-    public class ProductModel 
+    public class ProductModel :IUserModel
     {
       
         #region data

@@ -6,7 +6,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryInventoryRepository : UserRepository, IInventoryRepository
     {
-        public MemoryInventoryRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryInventoryRepository(ILoginService loginService) : base(loginService)
         {
         }
         public static List<InventoryModel> INVENTORIES => _inventories.Value;

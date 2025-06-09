@@ -11,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/wishes")]
     public class WishController : HatController
     {
-        public WishController(IMediator mediator, ILogger<WishController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public WishController(IMediator mediator, ILogger<WishController> logger, ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
         [HttpGet("user")]
@@ -19,6 +19,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetWishes By User");
             var list = await _mediator.Send(new UserWishProductsQuery(_currentUser.Oid()));
+            ForbidIfUserIdMismatch(list.FirstOrDefault());  
             return Ok(list);
         }
         [HttpGet("{UserId}/products/{ProductId}")]
@@ -31,6 +32,7 @@ namespace Hat.Backend.Controllers
             }
 
             _logger.LogInformation("GetWishByUserAndProduct: UserId={UserId}, ProductId={ProductId}", UserId, ProductId);
+            ForbidIfUserIdMismatch(wish);
             return Ok(wish);
         }
 
@@ -38,6 +40,17 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> DeleteWish([FromQuery] Guid WishId)
         {
             _logger.LogInformation("DeleteWish By User");
+
+            // Retrieve the wish to check ownership
+            var wish = await _mediator.Send(new WishByIdQuery(WishId));
+            if (wish == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the wish belongs to the current user
+            ForbidIfUserIdMismatch(wish);
+
             var result = await _mediator.Send(new DeleteWishCommand(WishId));
             if (result)
             {

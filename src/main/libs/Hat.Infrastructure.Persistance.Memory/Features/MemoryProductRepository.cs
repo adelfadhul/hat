@@ -72,7 +72,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return products;
         });
 
-        public MemoryProductRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryProductRepository(ILoginService loginService) : base(loginService)
         {
             foreach (var product in PRODUCTS)
             {

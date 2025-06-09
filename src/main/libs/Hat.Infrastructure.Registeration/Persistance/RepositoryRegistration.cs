@@ -15,7 +15,7 @@ namespace Hat.Infrastructure.Registeration
             {
                 case  RepositoryType.Memory:
 
-                    services.AddSingleton<ICurrentUser, MemoryCurrentUser>();
+                  
                     services.AddScoped<IProductRepository, MemoryProductRepository>();
                     services.AddScoped<ICardRepository, MemoryCardRepository>();
                     services.AddScoped<IDeliveryTypeRepository, MemoryDeliveryTypeRepository>();

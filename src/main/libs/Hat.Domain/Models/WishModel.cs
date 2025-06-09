@@ -2,7 +2,7 @@
 {
 
 
-    public class WishModel
+    public class WishModel:IUserModel
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

@@ -8,7 +8,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryOrderRepository : UserRepository, IOrderRepository
     {
-        public MemoryOrderRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryOrderRepository(ILoginService loginService) : base(loginService)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                 Id=Guid.NewGuid(),
-                 UserId= MemoryCurrentUser.USERID,
+                 UserId= MemoryLoginService.UserId1,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$4500",
@@ -40,7 +40,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryCurrentUser.USERID,
+                 UserId= MemoryLoginService.UserId2,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$500",
@@ -55,7 +55,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryCurrentUser.USERID,
+                 UserId= MemoryLoginService.UserId3,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$700",
@@ -70,7 +70,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryCurrentUser.USERID,
+                 UserId= MemoryLoginService.UserId1,
                 OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
                 Name = "OD - 424923192 - N",
                 Price = "$1500",
@@ -88,7 +88,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryCurrentUser.USERID,
+                 UserId= MemoryLoginService.UserId2,
                  OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
                 Name = "OD - 424923192 - N",
                 Price = "$2700",

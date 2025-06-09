@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/inventories")]
     public class InventoryController : HatController
     {
-        public InventoryController(IMediator mediator, ILogger<HatController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public InventoryController(IMediator mediator, ILogger<HatController> logger, ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
 
@@ -22,6 +22,9 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound();
             }
+            // Optionally, you can check if the current user has access to the inventories
+            // For example, if you have a user model associated with the inventories, you can check ownership
+            var forbidResult = ForbidIfUserIdMismatch(inventories.FirstOrDefault());
             _logger.LogInformation("GetInventories: ProductId={ProductId}", productId);
             return Ok(inventories);
         }

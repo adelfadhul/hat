@@ -9,8 +9,8 @@ namespace Hat.Backend.Controllers
     [Route("api/shipping-addresses")]
     public class ShippingAddressController : HatController
     {
-        public ShippingAddressController(IMediator mediator, ILogger<ShippingAddressController> logger,ICurrentUser currentUser)
-            : base(mediator, logger, currentUser)
+        public ShippingAddressController(IMediator mediator, ILogger<ShippingAddressController> logger,ILoginService loginService)
+            : base(mediator, logger, loginService)
         {
         }
 
@@ -19,6 +19,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetShippingAddresses");
             var shippingAddresses = await _mediator.Send(new ShippingAddressesQuery());
+            ForbidIfUserIdMismatch(shippingAddresses.FirstOrDefault());
             return Ok(shippingAddresses);
         }
 
@@ -27,6 +28,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetShippingAddressesByUser");
             var shippingAddresses = await _mediator.Send(new ShippingAddressesByUserQuery(_currentUser.Oid()));
+            ForbidIfUserIdMismatch(shippingAddresses.FirstOrDefault());
             return Ok(shippingAddresses);
         }
         [HttpGet("user/primary")]
@@ -38,6 +40,7 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound();
             }
+            ForbidIfUserIdMismatch(primaryAddress);
             return Ok(primaryAddress);
         }
 

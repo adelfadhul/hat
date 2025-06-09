@@ -1,6 +1,7 @@
 using Hat.Domain.Commands;
 using Hat.Domain.Identity;
 using Hat.Domain.Models;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace Hat.Mobile.Services
@@ -10,10 +11,10 @@ namespace Hat.Mobile.Services
         private readonly HttpClient _httpClient;
         private ICurrentUser _currentUser;
 
-        public DataService(IHttpClientFactory httpClientFactory, ICurrentUser currentUser)
+        public DataService(IHttpClientFactory httpClientFactory, ILoginService loginService)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
-            _currentUser = currentUser;
+            _currentUser = loginService.GetCurrentUser();
         }
         public async Task<List<ProductModel>> GetUserWishProducts()
         {
@@ -163,10 +164,10 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task AddShoppingCartItem(Guid productId, int quantity, string size)
+        internal async Task AddCartItem(Guid productId, int quantity, string size)
         {
             var payload = new AddCartItemCommand(productId, quantity, size);
-            var response = await _httpClient.PostAsJsonAsync("api/shopping-cart/add", payload);
+            var response = await _httpClient.PostAsJsonAsync("api/carts/add", payload);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");
@@ -346,21 +347,16 @@ namespace Hat.Mobile.Services
         internal async Task<CartModel?> GetUserCart()
         {
             var response = await _httpClient.GetAsync($"/api/carts/user");
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching cart: {response.ReasonPhrase}");
             }
             var data = await response.Content.ReadFromJsonAsync<CartModel>();
-            if (data == null)
-            {
-                // Return a new empty CartModel or handle as needed
-                return new CartModel
-                {
-                    CartItems = new List<CartItemModel>()
-                };
-            }
             return data;
-
         }
     }
 }

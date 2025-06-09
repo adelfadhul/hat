@@ -6,7 +6,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryDeliveryTypeRepository:UserRepository, IDeliveryTypeRepository
     {
-        public MemoryDeliveryTypeRepository(ICurrentUser currentUser) : base(currentUser)
+        public MemoryDeliveryTypeRepository(ILoginService loginService) : base(loginService)
         {
         }
 

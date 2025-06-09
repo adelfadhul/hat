@@ -14,8 +14,8 @@ namespace Hat.Application.Queries
         }
         public async Task<WishModel?> Handle(WishByUserAndProductQuery request, CancellationToken cancellationToken)
         {
-            return await _wishRepository.GetWishByUserAndProduct(request.UserId,request.ProductId);
-        
+            return await _wishRepository.GetWishByUserAndProduct(request.UserId, request.ProductId);
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/vats")]
     public class VatController : HatController
     {
-        public VatController(IMediator mediator, ILogger<VatController> logger,ICurrentUser currentUser) : base(mediator, logger, currentUser)
+        public VatController(IMediator mediator, ILogger<VatController> logger, ILoginService loginService) : base(mediator, logger, loginService)
         {
         }
         [HttpGet("")]
@@ -18,6 +18,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVat");
             var vat = await _mediator.Send(new VatsQuery());
+            ForbidIfUserIdMismatch(vat.FirstOrDefault());
             return Ok(vat);
         }
 
@@ -26,6 +27,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVatByUser");
             var vat = await _mediator.Send(new VatsByUserQuery(_currentUser.Oid()));
+            ForbidIfUserIdMismatch(vat.FirstOrDefault());
             return Ok(vat);
         }
 
@@ -34,10 +36,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVatById: {VatId}", id);
             var vat = await _mediator.Send(new VatByIdQuery(id));
-            if (vat == null)
-            {
-                return NotFound();
-            }
+            ForbidIfUserIdMismatch(vat);
             return Ok(vat);
         }
 

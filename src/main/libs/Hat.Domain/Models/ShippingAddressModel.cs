@@ -1,6 +1,6 @@
 ﻿namespace Hat.Domain.Models
 {
-    public class ShippingAddressModel
+    public class ShippingAddressModel:IUserModel
     {
 
         #region data
