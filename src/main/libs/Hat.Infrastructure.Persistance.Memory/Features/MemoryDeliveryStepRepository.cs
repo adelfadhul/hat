@@ -4,9 +4,9 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryDeliveryStepRepository : UserRepository, IDeliveryStepRepository
+    public class MemoryDeliveryStepRepository : IDeliveryStepRepository
     {
-        public MemoryDeliveryStepRepository(ILoginService loginService) : base(loginService)
+        public MemoryDeliveryStepRepository()
         {
         }
         private static Lazy<List<DeliveryStepModel>> _steps = new(() =>

@@ -74,13 +74,6 @@ namespace Hat.Backend.Controllers
          
             return Ok(products);
         }
-        [HttpGet("wish/user")]
-        public async Task<IActionResult> GetWishProducts(Guid userId)
-        {
-            _logger.LogInformation("GetWishProducts: {UserId}", userId);
-            var products = await _mediator.Send(new UserWishProductsQuery(userId));
-            ForbidIfUserIdMismatch(products.FirstOrDefault());  
-            return Ok(products);
-        }
+       
     }
 }

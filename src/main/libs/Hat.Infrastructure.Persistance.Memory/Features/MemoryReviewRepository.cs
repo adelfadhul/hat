@@ -4,7 +4,7 @@ using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryReviewRepository :UserRepository, IReviewRepository
+    public class MemoryReviewRepository : IReviewRepository
     {
         private static readonly Lazy<List<ReviewModel>> _reviews = new(() =>
         {
@@ -95,7 +95,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return L;
         });
 
-        public MemoryReviewRepository(ILoginService loginService) : base(loginService)
+        public MemoryReviewRepository() 
         {
         }
 

@@ -19,7 +19,6 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetShippingAddresses");
             var shippingAddresses = await _mediator.Send(new ShippingAddressesQuery());
-            ForbidIfUserIdMismatch(shippingAddresses.FirstOrDefault());
             return Ok(shippingAddresses);
         }
 
@@ -29,7 +28,7 @@ namespace Hat.Backend.Controllers
             _logger.LogInformation("GetShippingAddressesByUser");
             var userId = _userContext.GetUserId();  
             var shippingAddresses = await _mediator.Send(new ShippingAddressesByUserQuery(userId));
-            ForbidIfUserIdMismatch(shippingAddresses.FirstOrDefault());
+            CheckUser(shippingAddresses.FirstOrDefault(),userId);
             return Ok(shippingAddresses);
         }
         [HttpGet("user/primary")]
@@ -42,7 +41,7 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound();
             }
-            ForbidIfUserIdMismatch(primaryAddress);
+          CheckUser(primaryAddress, userId);
             return Ok(primaryAddress);
         }
 

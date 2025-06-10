@@ -1,5 +1,6 @@
 ﻿using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
@@ -12,9 +13,9 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             var vats = new List<VatModel>
             {
-                new VatModel { Id = Guid.NewGuid(), Name = "Standard VAT", Rate = 0.2 },
-                new VatModel { Id = Guid.NewGuid(), Name = "Reduced VAT", Rate = 0.05 },
-                new VatModel { Id = Guid.NewGuid(), Name = "Zero VAT", Rate = 0.00 }
+                new VatModel { Id = Guid.NewGuid(), UserId= MemoryLoginService.UserId1, Name = "Standard VAT", Rate = 0.2 },
+                new VatModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.UserId2, Name = "Reduced VAT", Rate = 0.05 },
+                new VatModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.UserId3, Name = "Zero VAT", Rate = 0.00 }
             };
             return vats;
         });

@@ -4,9 +4,9 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryDeliveryTypeRepository:UserRepository, IDeliveryTypeRepository
+    public class MemoryDeliveryTypeRepository: IDeliveryTypeRepository
     {
-        public MemoryDeliveryTypeRepository(ILoginService loginService) : base(loginService)
+        public MemoryDeliveryTypeRepository()
         {
         }
 

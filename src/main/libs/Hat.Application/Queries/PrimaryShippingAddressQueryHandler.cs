@@ -14,7 +14,7 @@ namespace Hat.Application.Queries
         }
         public async Task<ShippingAddressModel?> Handle(PrimaryShippingAddressQuery request, CancellationToken cancellationToken)
         {
-            return await _shippingAddressRepository.GetPrimaryShippingAddress();
+            return await _shippingAddressRepository.GetPrimaryShippingAddress(request.UserId);
         }
     }
 

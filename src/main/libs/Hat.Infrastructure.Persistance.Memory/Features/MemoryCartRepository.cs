@@ -4,14 +4,14 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCartRepository : UserRepository, ICartRepository
+    public class MemoryCartRepository :  ICartRepository
     {
         private static readonly Lazy<List<CartModel>> _carts = new(() => new List<CartModel>
         {
 
         });
         public static List<CartModel> CARTS => _carts.Value;
-        public MemoryCartRepository(ILoginService loginService) : base(loginService)
+        public MemoryCartRepository() 
         {
         }
 

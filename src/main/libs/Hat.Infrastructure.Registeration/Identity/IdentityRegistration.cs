@@ -14,7 +14,7 @@ namespace Hat.Infrastructure.Registeration
             {
                 case  IdentityType.Memory:
 
-                    services.AddSingleton<ILoginService, MemoryLoginService>();
+                    //services.AddSingleton<ILoginService, MemoryLoginService>();
                     services.AddSingleton<IUserContext, HeaderUserContext>();
                     services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                     break;

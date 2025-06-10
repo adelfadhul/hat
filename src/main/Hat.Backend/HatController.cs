@@ -16,14 +16,18 @@ namespace Hat.Backend
             _mediator = mediator;
             _userContext = userContext;
         }
-        protected IActionResult ForbidIfUserIdMismatch(IUserModel? userModel)
+        protected IActionResult? CheckUser(IUserModel? userModel, Guid userId)
         {
-            var userId = _userContext.GetUserId();
-
+            
+            if(userModel == null)
+            {
+                _logger.LogWarning("UserModel is null for UserId: {UserId}", userId);
+                return NotFound();
+            }
 
             if (userModel?.UserId != userId)
             {
-                _logger.LogWarning("UserId mismatch: API caller {CurrentUserId} tried to access resource owned by {ResourceUserId}.", userId, userModel.UserId);
+                _logger.LogWarning("UserId mismatch: API caller {CurrentUserId} tried to access resource owned by {ResourceUserId}.", userId, userModel?.UserId);
                 return Forbid();
             }
 

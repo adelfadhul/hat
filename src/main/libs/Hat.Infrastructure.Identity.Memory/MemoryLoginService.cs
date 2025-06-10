@@ -6,24 +6,26 @@ namespace Hat.Infrastructure.Identity.Memory
 
     public class MemoryLoginService : ILoginService
     {
-        private static readonly Lazy<List<ICurrentUser>> _users = new(() => new List<ICurrentUser>
+        private static readonly Lazy<List<ICurrentUser>> _users = new(() 
+            
+            => new List<ICurrentUser>
         {
             new AnonymousCurrentUser(
-                oid: Guid.NewGuid(),
+oid: Guid.Parse("11111111-1111-1111-1111-111111111111"),
                 email: "alice@example.com",
                 name: "Alice Smith",
                 isAdmin: true,
                 image: "alice.png"
             ),
             new AnonymousCurrentUser(
-                oid: Guid.NewGuid(),
+                oid:Guid.Parse("11111111-1111-1111-1111-111111111112"),
                 email: "bob@example.com",
                 name: "Bob Johnson",
                 isAdmin: false,
                 image: "bob.png"
             ),
             new AnonymousCurrentUser(
-                oid: Guid.NewGuid(),
+               oid:Guid.Parse("11111111-1111-1111-1111-111111111113"),
                 email: "lina@example.com",
                 name: "Lina Williams",
                 isAdmin: false,
@@ -50,6 +52,7 @@ namespace Hat.Infrastructure.Identity.Memory
                 string.Equals(u.Email(), email, StringComparison.OrdinalIgnoreCase));
             CurrentUser = user;
             var test = CurrentUser?.Oid().ToString();
+           
             return user;
         }
 

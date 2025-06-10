@@ -6,7 +6,7 @@ using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryProductRepository : UserRepository, IProductRepository
+    public class MemoryProductRepository :  IProductRepository
     {
         public static Guid Product1 => PRODUCTS[0].Id;
         public static Guid Product2 => PRODUCTS[1].Id;
@@ -77,7 +77,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return products;
         });
 
-        public MemoryProductRepository(ILoginService loginService) : base(loginService)
+        public MemoryProductRepository() 
         {
            
         }

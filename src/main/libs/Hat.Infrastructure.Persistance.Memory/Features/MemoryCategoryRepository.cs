@@ -4,7 +4,7 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCategoryRepository :UserRepository, ICategoryRepository
+    public class MemoryCategoryRepository : ICategoryRepository
     {
         private static readonly Lazy<List<CategoryModel>> _categories = new(() => new List<CategoryModel>
             {
@@ -15,7 +15,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new CategoryModel { Id = Guid.NewGuid(), Name = "Sports", Icon = "\uf44b" }
             });
 
-        public MemoryCategoryRepository(ILoginService loginService) : base(loginService)
+        public MemoryCategoryRepository() 
         {
         }
 

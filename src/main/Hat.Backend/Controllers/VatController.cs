@@ -18,7 +18,6 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVat");
             var vat = await _mediator.Send(new VatsQuery());
-            ForbidIfUserIdMismatch(vat.FirstOrDefault());
             return Ok(vat);
         }
 
@@ -28,7 +27,7 @@ namespace Hat.Backend.Controllers
             _logger.LogInformation("GetVatByUser");
             var userId = _userContext.GetUserId();
             var vat = await _mediator.Send(new VatsByUserQuery(userId));
-            ForbidIfUserIdMismatch(vat.FirstOrDefault());
+            CheckUser(vat.FirstOrDefault(), userId);
             return Ok(vat);
         }
 
@@ -37,7 +36,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVatById: {VatId}", id);
             var vat = await _mediator.Send(new VatByIdQuery(id));
-            ForbidIfUserIdMismatch(vat);
+            
             return Ok(vat);
         }
 

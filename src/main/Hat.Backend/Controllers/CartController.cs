@@ -20,11 +20,7 @@ namespace Hat.Backend.Controllers
             _logger.LogInformation("GetCarts");
             var userId = _userContext.GetUserId();
             var cart = await _mediator.Send(new CartByUserQuery(userId));
-            var forbidResult = ForbidIfUserIdMismatch(cart);
-            if (forbidResult != null)
-            {
-                return forbidResult;
-            }
+            CheckUser(cart, userId);
             return Ok(cart);
         }
 
@@ -38,11 +34,7 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound("Cart not found for the current user.");
             }
-            var forbidResult = ForbidIfUserIdMismatch(cart);
-            if (forbidResult != null)
-            {
-                return forbidResult;
-            }
+            CheckUser(cart, userId);
             return Ok(cart);
         }
 
@@ -51,11 +43,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("CreateCart");
             var cart = await _mediator.Send(new CreateCartCommand());
-            var forbidResult = ForbidIfUserIdMismatch(cart);
-            if (forbidResult != null)
-            {
-                return forbidResult;
-            }
+          
             return CreatedAtAction(nameof(GetCart), new { id = cart.Id }, cart);
         }
     }

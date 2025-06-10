@@ -5,7 +5,7 @@ namespace Hat.Domain.Store
     public interface IShippingAddressRepository
     {
         Task<List<ShippingAddressModel>> GetShippingAddresses();
-        Task<ShippingAddressModel?> GetPrimaryShippingAddress();
+        Task<ShippingAddressModel?> GetPrimaryShippingAddress(Guid userId);
 
         Task<Guid> CreateShippingAddress(ShippingAddressModel model);
         Task DeleteShippingAddress(Guid id);

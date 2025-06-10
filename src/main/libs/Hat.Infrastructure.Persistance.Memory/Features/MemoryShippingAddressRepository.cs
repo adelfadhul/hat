@@ -5,7 +5,7 @@ using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryShippingAddressRepository : UserRepository, IShippingAddressRepository
+    public class MemoryShippingAddressRepository : IShippingAddressRepository
     {
         private static Lazy<List<ShippingAddressModel>> _addresses = new(() =>
         {
@@ -91,7 +91,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             };
         });
 
-        public MemoryShippingAddressRepository(ILoginService loginService) : base(loginService)
+        public MemoryShippingAddressRepository()
         {
         }
 
@@ -102,9 +102,9 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return Task.FromResult(ADDRESSES);
         }
 
-        public Task<ShippingAddressModel?> GetPrimaryShippingAddress()
+        public Task<ShippingAddressModel?> GetPrimaryShippingAddress(Guid userId)
         {
-            return Task.FromResult(ADDRESSES.FirstOrDefault(a => a.IsPrimary) ?? null);
+            return Task.FromResult(ADDRESSES.FirstOrDefault(a => a.UserId==userId &&  a.IsPrimary) ?? null);
         }
 
         public Task<Guid> CreateShippingAddress(ShippingAddressModel model)

@@ -5,9 +5,9 @@ using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryCardRepository : UserRepository, ICardRepository
+    public class MemoryCardRepository :  ICardRepository
     {
-        public MemoryCardRepository(ILoginService loginService) : base(loginService)
+        public MemoryCardRepository() 
         {
         }
 

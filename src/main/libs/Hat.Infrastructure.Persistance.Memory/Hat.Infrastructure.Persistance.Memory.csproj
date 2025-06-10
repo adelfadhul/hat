@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Features\User.cs" />
+    <Compile Remove="UserRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

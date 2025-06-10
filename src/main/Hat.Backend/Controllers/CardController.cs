@@ -30,7 +30,7 @@ namespace Hat.Backend.Controllers
             var userId = _userContext.GetUserId();
 
             var cards = await _mediator.Send(new CardsByUserQuery(userId));
-            ForbidIfUserIdMismatch(cards.FirstOrDefault());
+            CheckUser(cards.FirstOrDefault(),userId);
             return Ok(cards);
         }
 
@@ -43,7 +43,6 @@ namespace Hat.Backend.Controllers
             {
                 return NotFound();
             }
-            ForbidIfUserIdMismatch(card);
             return Ok(card);
         }
 
@@ -59,7 +58,7 @@ namespace Hat.Backend.Controllers
             }
 
             // Check ownership
-            ForbidIfUserIdMismatch(card);
+           
 
             _logger.LogInformation("DeleteCard: {id}", id);
             await _mediator.Send(new DeleteCardCommand(id));

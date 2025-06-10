@@ -20,12 +20,13 @@ namespace Hat.Backend.Controllers
             _logger.LogInformation("GetWishes By User");
             var userId = _userContext.GetUserId();
             var list = await _mediator.Send(new UserWishProductsQuery(userId));
-            ForbidIfUserIdMismatch(list.FirstOrDefault());  
+            CheckUser(list.FirstOrDefault(), userId);
             return Ok(list);
         }
-        [HttpGet("{UserId}/products/{ProductId}")]
+        [HttpGet("user/products/{ProductId}")]
         public async Task<IActionResult> GetWishByUserAndProduct([FromRoute] Guid UserId, [FromRoute] Guid ProductId)
         {
+            var userId = _userContext.GetUserId();
             var wish = await _mediator.Send(new WishByUserAndProductQuery(UserId, ProductId));
             if (wish == null)
             {
@@ -33,7 +34,7 @@ namespace Hat.Backend.Controllers
             }
 
             _logger.LogInformation("GetWishByUserAndProduct: UserId={UserId}, ProductId={ProductId}", UserId, ProductId);
-            ForbidIfUserIdMismatch(wish);
+            CheckUser(wish, userId);
             return Ok(wish);
         }
 
@@ -50,7 +51,8 @@ namespace Hat.Backend.Controllers
             }
 
             // Check if the wish belongs to the current user
-            ForbidIfUserIdMismatch(wish);
+            var userId = _userContext.GetUserId();
+            CheckUser(wish, userId);
 
             var result = await _mediator.Send(new DeleteWishCommand(WishId));
             if (result)

@@ -4,9 +4,9 @@ using Hat.Domain.Store;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryInventoryRepository : UserRepository, IInventoryRepository
+    public class MemoryInventoryRepository :  IInventoryRepository
     {
-        public MemoryInventoryRepository(ILoginService loginService) : base(loginService)
+        public MemoryInventoryRepository()
         {
         }
         public static List<InventoryModel> INVENTORIES => _inventories.Value;

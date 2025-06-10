@@ -6,9 +6,9 @@ using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
-    public class MemoryOrderRepository : UserRepository, IOrderRepository
+    public class MemoryOrderRepository :    IOrderRepository
     {
-        public MemoryOrderRepository(ILoginService loginService) : base(loginService)
+        public MemoryOrderRepository()    
         {
         }
 
