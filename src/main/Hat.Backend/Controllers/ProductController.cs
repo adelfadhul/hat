@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/products")]
     public class ProductController : HatController
     {
-        public ProductController(IMediator mediator, ILogger<ProductController> logger,ILoginService loginService) : base(mediator, logger, loginService)
+        public ProductController(IMediator mediator, ILogger<ProductController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 
@@ -37,7 +37,7 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetBestSellingProducts()
         {
             var products = await _mediator.Send(new BestSellingProductsQuery());
-            ForbidIfUserIdMismatch(products.FirstOrDefault());
+  
             return Ok(products);
         }
 
@@ -45,7 +45,7 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetFeaturedProducts()
         {
             var products = await _mediator.Send(new FeaturedProductsQuery());
-            ForbidIfUserIdMismatch(products.FirstOrDefault());
+       
             return Ok(products);
         }
         [HttpGet("{id}")]
@@ -63,7 +63,7 @@ namespace Hat.Backend.Controllers
                 return NotFound();
             }
             // Check if the current user has access to the product
-            ForbidIfUserIdMismatch(product);
+           
             return Ok(product);
         }
         [HttpGet("category/{categoryId}")]
@@ -71,10 +71,10 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetProductsByCategory: {CategoryId}", categoryId);
             var products = await _mediator.Send(new ProductsByCategoryQuery(categoryId));
-            ForbidIfUserIdMismatch(products.FirstOrDefault());
+         
             return Ok(products);
         }
-        [HttpGet("wish/{userId}")]
+        [HttpGet("wish/user")]
         public async Task<IActionResult> GetWishProducts(Guid userId)
         {
             _logger.LogInformation("GetWishProducts: {UserId}", userId);

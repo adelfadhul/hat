@@ -2,6 +2,8 @@ using Hat.Domain.Identity;
 
 namespace Hat.Infrastructure.Identity.Memory
 {
+
+
     public class MemoryLoginService : ILoginService
     {
         private static readonly Lazy<List<ICurrentUser>> _users = new(() => new List<ICurrentUser>
@@ -22,8 +24,8 @@ namespace Hat.Infrastructure.Identity.Memory
             ),
             new AnonymousCurrentUser(
                 oid: Guid.NewGuid(),
-                email: "carol@example.com",
-                name: "Carol Williams",
+                email: "lina@example.com",
+                name: "Lina Williams",
                 isAdmin: false,
                 image: "lina.png"
             )
@@ -47,6 +49,7 @@ namespace Hat.Infrastructure.Identity.Memory
             var user = USERS.FirstOrDefault(u =>
                 string.Equals(u.Email(), email, StringComparison.OrdinalIgnoreCase));
             CurrentUser = user;
+            var test = CurrentUser?.Oid().ToString();
             return user;
         }
 

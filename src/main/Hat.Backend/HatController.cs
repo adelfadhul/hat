@@ -9,30 +9,29 @@ namespace Hat.Backend
     {
         protected readonly IMediator _mediator;
         protected readonly ILogger<HatController> _logger;
-        protected readonly ICurrentUser _currentUser;
-        public HatController(IMediator mediator, ILogger<HatController> logger, ILoginService loginService)
+        protected readonly IUserContext _userContext;
+        public HatController(IMediator mediator, ILogger<HatController> logger, IUserContext userContext)
         {
             _logger = logger;
             _mediator = mediator;
-            _currentUser = loginService.GetCurrentUser();
+            _userContext = userContext;
         }
         protected IActionResult ForbidIfUserIdMismatch(IUserModel? userModel)
         {
-            if (userModel == null)
-            {
-                _logger.LogWarning("User model is null.");
-                return NotFound();
-            }
+            var userId = _userContext.GetUserId();
 
-            var currentUserId = _currentUser.Oid();
-            if (userModel.UserId != currentUserId)
+
+            if (userModel?.UserId != userId)
             {
-                _logger.LogWarning("UserId mismatch: API caller {CurrentUserId} tried to access resource owned by {ResourceUserId}.", currentUserId, userModel.UserId);
+                _logger.LogWarning("UserId mismatch: API caller {CurrentUserId} tried to access resource owned by {ResourceUserId}.", userId, userModel.UserId);
                 return Forbid();
             }
 
             return null;
         }
-       
+
+      
+
+
     }
 }

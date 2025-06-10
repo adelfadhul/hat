@@ -64,7 +64,8 @@ namespace Hat.Mobile.ViewModels
 
         private async void Login()
         {
-            ICurrentUser currentUser =  _loginService.Login(Email, Password);
+
+            var currentUser= _dataService.Login(Email, Password);
             var isSuccess = currentUser != null;
             if (isSuccess)
             {

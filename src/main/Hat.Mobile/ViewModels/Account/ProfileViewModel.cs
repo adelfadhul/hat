@@ -29,10 +29,10 @@ namespace Hat.Mobile.ViewModels
         public ICommand SelectMenuCommand { get; }
         private readonly LoginView _loginView;
        
-        private readonly ICurrentUser _currentUser;
-        public ProfileViewModel(LoginView loginView, NavigationService navigationService,DataService dataService, ICurrentUser currentUser):base(navigationService,dataService)
+        private readonly ILoginService _loginService;
+        public ProfileViewModel(LoginView loginView, NavigationService navigationService,DataService dataService, ILoginService loginService):base(navigationService,dataService)
         {
-            _currentUser = currentUser;
+            _loginService = loginService;
             SelectMenuCommand = new Command<MenuItems>(SelectMenu);
             _loginView = loginView;
              InitializeAsync();
@@ -44,9 +44,10 @@ namespace Hat.Mobile.ViewModels
         }
         private void PopulateDataAsync()
         {
-             Name=  _currentUser.Name();
-            Email = _currentUser.Email();
-            ImageUrl = _currentUser.Image();
+            var currentUser=_loginService.GetCurrentUser();
+            Name =  currentUser.Name();
+            Email = currentUser.Email();
+            ImageUrl = currentUser.Image();
             MenuItems.Clear();
             //MenuItems.Add(new MenuItems() { Title = "Edit Profile", Body = "\uf3eb" });
             MenuItems.Add(new MenuItems() { Title = "Shipping Address", Body = "\uf34e", TargetType = typeof(ShippingAddressSelectorView) });
@@ -56,7 +57,7 @@ namespace Hat.Mobile.ViewModels
             MenuItems.Add(new MenuItems() { Title = "Cards", Body = "\uf19b", TargetType = typeof(CardManagerView) });
             //MenuItems.Add(new MenuItems() { Title = "Notifications", Body = "\uf09c"});
             MenuItems.Add(new MenuItems() { Title = "Logout", Body = "\uf343", TargetType = typeof(LoginView) });
-            if (_currentUser.IsAdmin())
+            if (currentUser.IsAdmin())
             {
                 MenuItems.Add(new MenuItems() { Title = "Create Product", Body = "\uf0e7", TargetType = typeof(CreateProductView) });
                 MenuItems.Add(new MenuItems() { Title = "Create Vat", Body = "\uf0e7", TargetType = typeof(CreateVatView) });

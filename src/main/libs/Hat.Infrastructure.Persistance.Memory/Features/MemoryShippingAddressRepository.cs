@@ -1,6 +1,7 @@
 ﻿using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
@@ -10,23 +11,82 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             return new List<ShippingAddressModel>
             {
+                // User 1 addresses
                 new ShippingAddressModel
                 {
-                     Id = Guid.NewGuid(),
-                      UserId = Guid.NewGuid(),
-                      IsPrimary = true, 
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId1,
+                    IsPrimary = true,
                     Name = "Home Address",
                     Address = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
-
                 },
                 new ShippingAddressModel
                 {
-                        Id = Guid.NewGuid(),
-                        UserId = Guid.NewGuid(),
-                        IsPrimary = false,
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId1,
+                    IsPrimary = false,
+                    Name = "Work Address",
+                    Address = "15, Adeola Odeku Street, Victoria Island, Lagos, Nigeria",
+                },
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId1,
+                    IsPrimary = false,
+                    Name = "Parents' House",
+                    Address = "5, Olumegbon Road, Ikoyi, Lagos, Nigeria",
+                },
+
+                // User 2 addresses
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId2,
+                    IsPrimary = false,
                     Name = "Work Address",
                     Address = "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria",
+                },
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId2,
+                    IsPrimary = true,
+                    Name = "Home Address",
+                    Address = "12, Aminu Kano Crescent, Wuse 2, Abuja, Nigeria",
+                },
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId2,
+                    IsPrimary = false,
+                    Name = "Friend's Place",
+                    Address = "33, Gana Street, Maitama, Abuja, Nigeria",
+                },
 
+                // User 3 addresses
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId3,
+                    IsPrimary = true,
+                    Name = "Home Address",
+                    Address = "44, Opebi Road, Ikeja, Lagos, Nigeria",
+                },
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId3,
+                    IsPrimary = false,
+                    Name = "Work Address",
+                    Address = "18, Allen Avenue, Ikeja, Lagos, Nigeria",
+                },
+                new ShippingAddressModel
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = MemoryLoginService.UserId3,
+                    IsPrimary = false,
+                    Name = "Sibling's House",
+                    Address = "7, Isaac John Street, GRA, Ikeja, Lagos, Nigeria",
                 }
             };
         });

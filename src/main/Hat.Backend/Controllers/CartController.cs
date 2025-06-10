@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/carts")]
     public class CartController : HatController
     {
-        public CartController(IMediator mediator, ILogger<CartController> logger, ILoginService loginService) : base(mediator, logger, loginService)
+        public CartController(IMediator mediator, ILogger<CartController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 
@@ -18,7 +18,8 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCart()
         {
             _logger.LogInformation("GetCarts");
-            var cart = await _mediator.Send(new CartByUserQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+            var cart = await _mediator.Send(new CartByUserQuery(userId));
             var forbidResult = ForbidIfUserIdMismatch(cart);
             if (forbidResult != null)
             {
@@ -31,7 +32,8 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetUserCart()
         {
             _logger.LogInformation("GetCart By User");
-            var cart = await _mediator.Send(new CartByUserQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+            var cart = await _mediator.Send(new CartByUserQuery(userId));
             if (cart == null)
             {
                 return NotFound("Cart not found for the current user.");

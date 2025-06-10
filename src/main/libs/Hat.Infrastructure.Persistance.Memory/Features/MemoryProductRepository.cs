@@ -1,6 +1,7 @@
 ﻿using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 using Hat.Model;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
@@ -19,6 +20,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    UserId= MemoryLoginService.UserId1,
                     VatId = MemoryVatRepository.VATS_ZeroVAT,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     Name = "BeoPlay Speaker",
@@ -31,6 +33,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= MemoryLoginService.UserId2,
                     CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
                     VatId = MemoryVatRepository.VATS_ReducedVAT,
                     Name = "Leather Wristwatch",
@@ -43,6 +46,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= MemoryLoginService.UserId3,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     VatId = MemoryVatRepository.VAT_StandardVAT,
                     Name = "Smart Bluetooth Speaker",
@@ -56,6 +60,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                     UserId= MemoryLoginService.UserId1,
                     CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
                     VatId = MemoryVatRepository.VAT_StandardVAT,
                     Name = "Smart Luggage",
@@ -74,10 +79,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         public MemoryProductRepository(ILoginService loginService) : base(loginService)
         {
-            foreach (var product in PRODUCTS)
-            {
-                product.UserId = _currentUser.Oid();
-            }
+           
         }
 
         private static List<ProductModel> PRODUCTS
@@ -131,14 +133,14 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             var products = new List<ProductModel>
              {
-                 new ProductModel { Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" },
-                new ProductModel { Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" },
-                new ProductModel { Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" },
-                new ProductModel { Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png"},
-                new ProductModel { Name = "Smart Bluetooth Speaker", BrandName = "Bang and Olufsen", Price = 90, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" },
-                new ProductModel { Name = "B&o Desk Lamp", BrandName = "Bang and Olufsen", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image7.png"},
-                new ProductModel { Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png"  },
-                new ProductModel { Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" },
+                 new ProductModel { UserId= MemoryLoginService.UserId1, Name = "BeoPlay Speaker", BrandName = "Bang and Olufsen", Price = 755, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" },
+                new ProductModel {UserId= MemoryLoginService.UserId2, Name = "Leather Wristwatch", BrandName = "Tag Heuer", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image2.png" },
+                new ProductModel {UserId= MemoryLoginService.UserId3, Name = "Smart Bluetooth Speaker", BrandName = "Google LLC", Price = 900, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image3.png" },
+                new ProductModel {UserId= MemoryLoginService.UserId1, Name = "Smart Luggage", BrandName = "Smart Inc", Price = 1200, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image4.png"},
+                new ProductModel { UserId= MemoryLoginService.UserId2,Name = "Smart Bluetooth Speaker", BrandName = "Bang and Olufsen", Price = 90, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image1.png" },
+                new ProductModel { UserId= MemoryLoginService.UserId3,Name = "B&o Desk Lamp", BrandName = "Bang and Olufsen", Price = 450, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image7.png"},
+                new ProductModel {UserId= MemoryLoginService.UserId1, Name = "BeoPlay Stand Speaker", BrandName = "Bang and Olufse", Price = 3000, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image8.png"  },
+                new ProductModel {UserId= MemoryLoginService.UserId2, Name = "Airpods", BrandName = "B&o Phone Case", Price = 30, ImageUrl = "https://raw.githubusercontent.com/exendahal/ecommerceXF/master/eCommerce/eCommerce.Android/Resources/drawable/Image9.png" },
              };
             return Task.FromResult(products);
         }

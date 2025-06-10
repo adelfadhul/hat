@@ -7,7 +7,7 @@ namespace Hat.Infrastructure.Persistance.Memory
         protected ICurrentUser _currentUser;
         public UserRepository(ILoginService loginService)
         {
-            _currentUser = loginService.GetCurrentUser() ?? throw new ArgumentNullException(nameof(loginService), "Current user cannot be null");
+            _currentUser = loginService.GetCurrentUser();
         }
     }
 }

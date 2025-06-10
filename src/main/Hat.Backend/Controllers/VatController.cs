@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/vats")]
     public class VatController : HatController
     {
-        public VatController(IMediator mediator, ILogger<VatController> logger, ILoginService loginService) : base(mediator, logger, loginService)
+        public VatController(IMediator mediator, ILogger<VatController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
         [HttpGet("")]
@@ -26,7 +26,8 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetUserVats()
         {
             _logger.LogInformation("GetVatByUser");
-            var vat = await _mediator.Send(new VatsByUserQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+            var vat = await _mediator.Send(new VatsByUserQuery(userId));
             ForbidIfUserIdMismatch(vat.FirstOrDefault());
             return Ok(vat);
         }

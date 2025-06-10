@@ -11,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/cards")]
     public class CardController : HatController
     {
-        public CardController(IMediator mediator, ILogger<CardController> logger,ILoginService loginService) : base(mediator, logger, loginService)
+        public CardController(IMediator mediator, ILogger<CardController> logger,IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 
@@ -27,7 +27,9 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCardsByUser()
         {
             _logger.LogInformation("GetCardsByUser");
-            var cards = await _mediator.Send(new CardsByUserQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+
+            var cards = await _mediator.Send(new CardsByUserQuery(userId));
             ForbidIfUserIdMismatch(cards.FirstOrDefault());
             return Ok(cards);
         }

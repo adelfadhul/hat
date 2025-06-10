@@ -9,7 +9,7 @@ namespace Hat.Backend.Controllers
     [Route("api/user/orders")]
     public class OrderController : HatController
     {
-        public OrderController(IMediator mediator, ILogger<OrderController> logger, ILoginService loginService) : base(mediator, logger, loginService)
+        public OrderController(IMediator mediator, ILogger<OrderController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 
@@ -17,7 +17,8 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetOrders()
         {
             _logger.LogInformation("GetOrders");
-            var list = await _mediator.Send(new OrdersByUserQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+            var list = await _mediator.Send(new OrdersByUserQuery(userId));
             return Ok(list);
         }
     }

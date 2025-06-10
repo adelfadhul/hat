@@ -1,6 +1,8 @@
 using Hat.Domain.Identity;
 using Hat.Infrastructure.Identity.Memory;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hat.Infrastructure.Registeration
 {
@@ -13,7 +15,8 @@ namespace Hat.Infrastructure.Registeration
                 case  IdentityType.Memory:
 
                     services.AddSingleton<ILoginService, MemoryLoginService>();
-                   
+                    services.AddSingleton<IUserContext, HeaderUserContext>();
+                    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                     break;
                 case IdentityType.AzureB2C:
                     

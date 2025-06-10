@@ -10,7 +10,7 @@ namespace Hat.Backend.Controllers
     [Route("api/inventories")]
     public class InventoryController : HatController
     {
-        public InventoryController(IMediator mediator, ILogger<HatController> logger, ILoginService loginService) : base(mediator, logger, loginService)
+        public InventoryController(IMediator mediator, ILogger<HatController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 

@@ -11,14 +11,15 @@ namespace Hat.Backend.Controllers
     [Route("api/wishes")]
     public class WishController : HatController
     {
-        public WishController(IMediator mediator, ILogger<WishController> logger, ILoginService loginService) : base(mediator, logger, loginService)
+        public WishController(IMediator mediator, ILogger<WishController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
         [HttpGet("user")]
         public async Task<IActionResult> GetWishes()
         {
             _logger.LogInformation("GetWishes By User");
-            var list = await _mediator.Send(new UserWishProductsQuery(_currentUser.Oid()));
+            var userId = _userContext.GetUserId();
+            var list = await _mediator.Send(new UserWishProductsQuery(userId));
             ForbidIfUserIdMismatch(list.FirstOrDefault());  
             return Ok(list);
         }

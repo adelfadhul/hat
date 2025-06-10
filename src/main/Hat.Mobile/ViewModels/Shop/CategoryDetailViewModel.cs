@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using Hat.DataViewModels;
 using Hat.Domain.Models;
-using Hat.Infrastructure.Persistance.SqlServer.Entities;
 using Hat.Mobile.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -76,9 +75,7 @@ namespace Hat.Mobile.ViewModels
             var storedProducts= await _dataService.GetProductsByCategory(CategoryModel.Id);
             Products = storedProducts.Select(x=> new ProductViewModel(x)).ToObservableCollection();
 
-            //var storedFeaturedBrands = await _dataService.GetFeaturedProducts();
-            //FeaturedBrandsDataList= storedFeaturedBrands.Select(x => new ProductViewModel(x)).ToObservableCollection(); 
-            IsLoaded = true;
+             IsLoaded = true;
         }
 
         private async void GoBack()

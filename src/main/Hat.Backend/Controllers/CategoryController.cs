@@ -11,7 +11,7 @@ namespace Hat.Backend.Controllers
     [Route("api/categories")]
     public class CategoryController : HatController
     {
-        public CategoryController(IMediator mediator, ILogger<CategoryController> logger,ILoginService loginService) : base(mediator, logger, loginService)
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger,IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
 
@@ -19,6 +19,8 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetCategories()
         {
             _logger.LogInformation("GetCategories");
+          
+
             var list = await _mediator.Send(new CategoriesQuery());
             return Ok(list);
         }

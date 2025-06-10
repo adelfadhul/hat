@@ -10,15 +10,18 @@ namespace Hat.Mobile.Services
     {
         private readonly HttpClient _httpClient;
         private ICurrentUser _currentUser;
-
+        private readonly ILoginService _loginService;
         public DataService(IHttpClientFactory httpClientFactory, ILoginService loginService)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
-            _currentUser = loginService.GetCurrentUser();
+            _loginService = loginService;
+
+
         }
         public async Task<List<ProductModel>> GetUserWishProducts()
         {
-            var response = await _httpClient.GetAsync($"/api/products/wish/{_currentUser.Oid()}");
+            AddUserHeader();
+            var response = await _httpClient.GetAsync($"/api/products/user/wish");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching user wish products: {response.ReasonPhrase}");
@@ -112,6 +115,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<CardModel>> GetUserCards()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync("/api/cards/user");
             if (!response.IsSuccessStatusCode)
             {
@@ -133,6 +137,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<OrderModel>> GetUserOrders()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync("/api/orders/user");
             if (!response.IsSuccessStatusCode)
             {
@@ -144,7 +149,8 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<ShippingAddressModel>> GetUserShippingAddresses()
         {
-            var response = await _httpClient.GetAsync("/api/shipping-address/user");
+            AddUserHeader();
+            var response = await _httpClient.GetAsync("/api/shipping-addresses/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching shipping addresses: {response.ReasonPhrase}");
@@ -237,6 +243,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<ShippingAddressModel> GetPrimaryAddress()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync($"/api/shipping-addresses/user/primary");
             if (!response.IsSuccessStatusCode)
             {
@@ -248,6 +255,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<VatModel>> GetUserVats()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync("/api/vats/user");
             if (!response.IsSuccessStatusCode)
             {
@@ -292,6 +300,7 @@ namespace Hat.Mobile.Services
 
         internal async Task<List<WishModel>> GetWishesByUser()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync($"/api/wishes/user");
             if (!response.IsSuccessStatusCode)
             {
@@ -344,8 +353,14 @@ namespace Hat.Mobile.Services
             return data;
         }
 
+        private void AddUserHeader()
+        {
+            var userId = _loginService.GetCurrentUser().Oid().ToString();
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("hat-user", userId);
+        }
         internal async Task<CartModel?> GetUserCart()
         {
+            AddUserHeader();
             var response = await _httpClient.GetAsync($"/api/carts/user");
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -357,6 +372,15 @@ namespace Hat.Mobile.Services
             }
             var data = await response.Content.ReadFromJsonAsync<CartModel>();
             return data;
+        }
+
+        internal ICurrentUser Login(string email, string password)
+        {
+             _currentUser = _loginService.Login(email, password);
+            var userId = _currentUser.Oid().ToString();
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("hat-user", userId);
+
+            return _currentUser;
         }
     }
 }
