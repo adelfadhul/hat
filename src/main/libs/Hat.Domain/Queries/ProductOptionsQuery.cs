@@ -3,7 +3,9 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class ProductsQuery : IRequest<List<ProductModel>>
+    public class ProductOptionsQuery : IRequest<List<ProductModel>>
     {
+
+
     }
 }

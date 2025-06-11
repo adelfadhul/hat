@@ -29,7 +29,6 @@
     <Folder Include="Features\Vat\Queries\" />
     <Folder Include="Features\Wish\Commands\" />
     <Folder Include="Features\Wish\Queries\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
