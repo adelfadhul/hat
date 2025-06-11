@@ -11,14 +11,15 @@ namespace Hat.Domain.Models
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
         public string Name { get; set; }
-        public string ValueType { get; set; }
-        public ICollection<ProductOptionSelectionModel> Selections { get; set; } = [];
+        public ProductOptionValueType ValueType { get; set; }
+
+
+
         #endregion
 
         #region rich
-        public ProductOptionValueType ValueEnumType
-        => EnumHelper.ParseOrDefault(ValueType, ProductOptionValueType.Text);
 
+        public List<ProductOptionSelectionModel>? Selections { get; set; } = [];
         #endregion
     }
 }

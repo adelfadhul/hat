@@ -14,7 +14,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
            
             return new List<WishModel>
             {
-                new WishModel { Id = Guid.NewGuid(), ProductId = MemoryProductRepository.Product1 }
+                new WishModel { Id = Guid.NewGuid(), ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker }
             };
         });
         public static List<WishModel> Wishes => _wishes.Value;

@@ -13,7 +13,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId =MemoryProductRepository.Product1,
+                    ProductId =MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
                     ImageUrl = "https://randomuser.me/api/portraits/men/1.jpg",
                     Name = "John Doe",
                     Review = "Amazing sound quality!",
@@ -22,7 +22,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product1,
+                    ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
                     ImageUrl = "https://randomuser.me/api/portraits/men/5.jpg",
                     Name = "Michael Brown",
                     Review = "Great bass and clarity.",
@@ -35,7 +35,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product2,
+                    ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
                     ImageUrl = "https://randomuser.me/api/portraits/women/2.jpg",
                     Name = "Jane Smith",
                     Review = "Stylish and comfortable.",
@@ -44,7 +44,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product2,
+                    ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
                     ImageUrl = "https://randomuser.me/api/portraits/men/6.jpg",
                     Name = "David Lee",
                     Review = "Looks premium and feels durable.",
@@ -57,7 +57,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product3,
+                    ProductId = MemoryProductRepository.PRODUCT_SmartBluetoothSpeaker,
                     ImageUrl = "https://randomuser.me/api/portraits/men/3.jpg",
                     Name = "Alex Johnson",
                     Review = "Very convenient for my smart home.",
@@ -70,7 +70,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product4,
+                    ProductId = MemoryProductRepository.PRODUCT_SmartLuggage,
                     ImageUrl = "https://randomuser.me/api/portraits/women/4.jpg",
                     Name = "Emily Davis",
                     Review = "Perfect for frequent travelers.",
@@ -79,7 +79,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ReviewModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product4,
+                    ProductId = MemoryProductRepository.PRODUCT_SmartLuggage,
                     ImageUrl = "https://randomuser.me/api/portraits/men/7.jpg",
                     Name = "Chris Evans",
                     Review = "Love the GPS feature!",

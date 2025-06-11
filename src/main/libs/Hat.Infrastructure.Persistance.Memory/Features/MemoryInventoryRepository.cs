@@ -17,7 +17,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product1,
+                    ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
                     ProductColor = "#00C569",
                     ProductSize = "XLarge",
                     SKU = "SKU-001",
@@ -28,7 +28,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product1,
+                    ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
                     ProductColor = "#A52A2A",
                     ProductSize = "Med",
                     SKU = "SKU-002",
@@ -40,7 +40,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product2,
+                    ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
                     ProductColor = "#A52A2A",
                     ProductSize = "One Size",
                     SKU = "SKU-003",
@@ -51,7 +51,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product3,
+                    ProductId = MemoryProductRepository.PRODUCT_SmartBluetoothSpeaker,
                     ProductColor = "#FF5733",
                     ProductSize = "Medium",
                     SKU = "SKU-004",
@@ -62,7 +62,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new InventoryModel
                 {
                     Id = Guid.NewGuid(),
-                    ProductId = MemoryProductRepository.Product4,
+                    ProductId = MemoryProductRepository.PRODUCT_SmartLuggage,
                     ProductColor = "#0000FF",
                     ProductSize = "Large",
                     SKU = "SKU-005",

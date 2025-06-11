@@ -8,10 +8,10 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 {
     public class MemoryProductRepository :  IProductRepository
     {
-        public static Guid Product1 => PRODUCTS[0].Id;
-        public static Guid Product2 => PRODUCTS[1].Id;
-        public static Guid Product3 => PRODUCTS[2].Id;
-        public static Guid Product4 => PRODUCTS[3].Id;
+        public static Guid PRODUCT_BeoPlaySpeaker => PRODUCTS[0].Id;
+        public static Guid PRODUCT_LeatherWristwatch => PRODUCTS[1].Id;
+        public static Guid PRODUCT_SmartBluetoothSpeaker => PRODUCTS[2].Id;
+        public static Guid PRODUCT_SmartLuggage => PRODUCTS[3].Id;
 
         private static readonly Lazy<List<ProductModel>> _products = new(() =>
         {

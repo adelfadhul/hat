@@ -2,7 +2,7 @@
 
 namespace Hat.Domain.Commands
 {
-    public class CreateProductOptionSelectionCommand : IRequest<Guid>
+    public class AddProductOptionSelectionCommand : IRequest<Guid>
     {
         public Guid ProductOptionId { get; set; }
         public string Name { get; set; }
