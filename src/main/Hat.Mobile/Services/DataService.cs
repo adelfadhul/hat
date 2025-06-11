@@ -211,9 +211,9 @@ namespace Hat.Mobile.Services
             }
         }
 
-        public async Task CreateVat(VatModel vat)
+        public async Task CreateVat(TaxModel vat)
         {
-            var response = await _httpClient.PostAsJsonAsync("/api/vats", vat);
+            var response = await _httpClient.PostAsJsonAsync("/api/taxes", vat);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error creating product: {response.ReasonPhrase}");
@@ -253,26 +253,26 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task<List<VatModel>> GetUserVats()
+        internal async Task<List<TaxModel>> GetUserVats()
         {
             AddUserHeader();
-            var response = await _httpClient.GetAsync("/api/vats/user");
+            var response = await _httpClient.GetAsync("/api/taxes/user");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching VATs: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<List<VatModel>>();
+            var data = await response.Content.ReadFromJsonAsync<List<TaxModel>>();
             return data;
         }
 
-        internal async Task<VatModel?> GetVat(Guid vatId)
+        internal async Task<TaxModel?> GetVat(Guid taxId)
         {
-            var response = await _httpClient.GetAsync($"/api/vats/{vatId}");
+            var response = await _httpClient.GetAsync($"/api/taxes/{taxId}");
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error fetching VAT by id: {response.ReasonPhrase}");
             }
-            var data = await response.Content.ReadFromJsonAsync<VatModel>();
+            var data = await response.Content.ReadFromJsonAsync<TaxModel>();
             return data;
         }
 

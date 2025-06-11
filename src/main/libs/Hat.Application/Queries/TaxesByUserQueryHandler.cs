@@ -4,14 +4,14 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class VatsByUserQueryHandler : IRequestHandler<VatsByUserQuery,List<VatModel>>
+    public class TaxesByUserQueryHandler : IRequestHandler<VatsByUserQuery,List<TaxModel>>
     {
-        private readonly IVatRepository _vatRepository;
-        public VatsByUserQueryHandler(IVatRepository vatRepository)
+        private readonly ITaxRepository _vatRepository;
+        public TaxesByUserQueryHandler(ITaxRepository vatRepository)
         {
             _vatRepository = vatRepository ?? throw new ArgumentNullException(nameof(vatRepository), "VatRepository must implement IVatRepository");
         }
-        public async Task<List<VatModel>> Handle(VatsByUserQuery request, CancellationToken cancellationToken)
+        public async Task<List<TaxModel>> Handle(VatsByUserQuery request, CancellationToken cancellationToken)
         {
             return await _vatRepository.GetVatsByUser(request.UserId);
         }

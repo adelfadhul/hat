@@ -3,10 +3,10 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class VatsByUserQuery : IRequest<List<VatModel>>
+    public class TaxesByUserQuery : IRequest<List<TaxModel>>
     {
         public Guid UserId { get; set; }
-        public VatsByUserQuery(Guid userId)
+        public TaxesByUserQuery(Guid userId)
         {
             UserId = userId;
         }

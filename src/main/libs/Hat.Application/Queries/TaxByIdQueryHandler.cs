@@ -6,7 +6,7 @@ using MediatR;
 namespace Hat.Application.Queries
 {
 
-    public class VatsByUserQuery : IRequest<List<VatModel>>
+    public class VatsByUserQuery : IRequest<List<TaxModel>>
     {
         public VatsByUserQuery(Guid userId)
         {
@@ -14,14 +14,14 @@ namespace Hat.Application.Queries
         }
         public Guid UserId { get; init; }
     }
-    public class VatByIdQueryHandler : IRequestHandler<VatByIdQuery, VatModel?>
+    public class TaxByIdQueryHandler : IRequestHandler<TaxByIdQuery, TaxModel?>
     {
-        private readonly IVatRepository _vatRepository;
-        public VatByIdQueryHandler(IVatRepository cardRepository)
+        private readonly ITaxRepository _vatRepository;
+        public TaxByIdQueryHandler(ITaxRepository cardRepository)
         {
             _vatRepository = cardRepository;
         }
-        public async Task<VatModel?> Handle(VatByIdQuery request, CancellationToken cancellationToken)
+        public async Task<TaxModel?> Handle(TaxByIdQuery request, CancellationToken cancellationToken)
         {
             var vat = await _vatRepository.GetVat(request.Id);
             return await Task.FromResult(vat) ?? throw new KeyNotFoundException($"Vat with id {request.Id} not found.");

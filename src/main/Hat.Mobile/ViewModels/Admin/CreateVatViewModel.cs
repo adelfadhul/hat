@@ -27,7 +27,7 @@ public class CreateVatViewModel : BaseViewModel
     {
 
        
-        var vat = new VatModel
+        var vat = new TaxModel
         {
             Code = Code,
             Rate = Rate,

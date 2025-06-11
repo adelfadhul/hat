@@ -57,9 +57,9 @@ namespace Hat.Mobile.ViewModels
         public List<CategoryModel> Categories { get => _Categories; set => SetProperty(ref _Categories, value); }
         public CategoryModel SelectedCategory { get; set; }
 
-        private List<VatModel> _Vats;
-        public List<VatModel> Vats { get => _Vats; set => SetProperty(ref _Vats, value); }
-        public VatModel SelectedVat { get; set; }
+        private List<TaxModel> _Vats;
+        public List<TaxModel> Vats { get => _Vats; set => SetProperty(ref _Vats, value); }
+        public TaxModel SelectedVat { get; set; }
         private async Task PopulateDataAsync()
         {
            

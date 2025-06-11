@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class VatsQuery : IRequest<List<VatModel>>
+    public class TaxesQuery : IRequest<List<TaxModel>>
     {
         
     }

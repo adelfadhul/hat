@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Hat.Domain.Queries
 {
-    public class VatByIdQuery : IRequest<VatModel?>
+    public class TaxByIdQuery : IRequest<TaxModel?>
     {
-        public VatByIdQuery(Guid id)
+        public TaxByIdQuery(Guid id)
         {
             Id = id;
         }

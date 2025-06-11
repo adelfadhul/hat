@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hat.Backend.Controllers
 {
     [ApiController]
-    [Route("api/vats")]
-    public class VatController : HatController
+    [Route("api/taxes")]
+    public class TaxController : HatController
     {
-        public VatController(IMediator mediator, ILogger<VatController> logger, IUserContext userContext) : base(mediator, logger, userContext)
+        public TaxController(IMediator mediator, ILogger<TaxController> logger, IUserContext userContext) : base(mediator, logger, userContext)
         {
         }
         [HttpGet("")]
         public async Task<IActionResult> GetVats()
         {
             _logger.LogInformation("GetVat");
-            var vat = await _mediator.Send(new VatsQuery());
+            var vat = await _mediator.Send(new TaxesQuery());
             return Ok(vat);
         }
 
@@ -26,7 +26,7 @@ namespace Hat.Backend.Controllers
         {
             _logger.LogInformation("GetVatByUser");
             var userId = _userContext.GetUserId();
-            var vat = await _mediator.Send(new VatsByUserQuery(userId));
+            var vat = await _mediator.Send(new TaxesByUserQuery(userId));
             CheckUser(vat.FirstOrDefault(), userId);
             return Ok(vat);
         }
@@ -35,13 +35,13 @@ namespace Hat.Backend.Controllers
         public async Task<IActionResult> GetVatById([FromQuery] Guid id)
         {
             _logger.LogInformation("GetVatById: {VatId}", id);
-            var vat = await _mediator.Send(new VatByIdQuery(id));
+            var vat = await _mediator.Send(new TaxByIdQuery(id));
             
             return Ok(vat);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateVat([FromBody] CreateVatCommand  command)
+        public async Task<IActionResult> CreateVat([FromBody] CreateTaxCommand  command)
         {
             _logger.LogInformation("CreateVat: {command}", command.Name);
             var result = await _mediator.Send(command);

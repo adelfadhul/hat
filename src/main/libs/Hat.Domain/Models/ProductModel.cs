@@ -24,7 +24,7 @@ namespace Hat.Domain.Models
 
        
         public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
-        public VatModel Vat { get; set; } = new VatModel();
+        public TaxModel Vat { get; set; } = new TaxModel();
         #endregion
 
         #region rich

@@ -9,10 +9,10 @@ namespace Hat.Application.Queries
     {
         private readonly IProductRepository _productRepository;
         private readonly IReviewRepository _reviewRepository;
-        private readonly IVatRepository _vatRepository;
+        private readonly ITaxRepository _vatRepository;
         private readonly IInventoryRepository _inventoryRepository;
 
-        public ProductByIdQueryHandler(IProductRepository productRepository, IReviewRepository reviewRepository, IVatRepository vatRepository, IInventoryRepository inventoryRepository)
+        public ProductByIdQueryHandler(IProductRepository productRepository, IReviewRepository reviewRepository, ITaxRepository vatRepository, IInventoryRepository inventoryRepository)
         {
             _productRepository = productRepository;
             _reviewRepository = reviewRepository;
