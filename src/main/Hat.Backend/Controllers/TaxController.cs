@@ -14,27 +14,27 @@ namespace Hat.Backend.Controllers
         {
         }
         [HttpGet("")]
-        public async Task<IActionResult> GetVats()
+        public async Task<IActionResult> GetTaxes()
         {
-            _logger.LogInformation("GetVat");
+            _logger.LogInformation("GetTaxes");
             var vat = await _mediator.Send(new TaxesQuery());
             return Ok(vat);
         }
 
         [HttpGet("user")]
-        public async Task<IActionResult> GetUserVats()
+        public async Task<IActionResult> GetUserTaxes()
         {
-            _logger.LogInformation("GetVatByUser");
+            _logger.LogInformation("GetTaxByUser");
             var userId = _userContext.GetUserId();
-            var vat = await _mediator.Send(new TaxesByUserQuery(userId));
-            CheckUser(vat.FirstOrDefault(), userId);
-            return Ok(vat);
+            var taxes = await _mediator.Send(new TaxesByUserQuery(userId));
+            CheckUser(taxes.FirstOrDefault(), userId);
+            return Ok(taxes);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVatById([FromQuery] Guid id)
+        public async Task<IActionResult> GetTaxById([FromQuery] Guid id)
         {
-            _logger.LogInformation("GetVatById: {VatId}", id);
+            _logger.LogInformation("GetTaxById: {TaxId}", id);
             var vat = await _mediator.Send(new TaxByIdQuery(id));
             
             return Ok(vat);
@@ -43,11 +43,11 @@ namespace Hat.Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVat([FromBody] CreateTaxCommand  command)
         {
-            _logger.LogInformation("CreateVat: {command}", command.Name);
+            _logger.LogInformation("CreateTax: {command}", command.Name);
             var result = await _mediator.Send(command);
 
             // assuming result is the new product ID
-            return CreatedAtAction(nameof(GetVatById), new { id = result }, new { id = result });
+            return CreatedAtAction(nameof(GetTaxById), new { id = result }, new { id = result });
         }
     }
 }

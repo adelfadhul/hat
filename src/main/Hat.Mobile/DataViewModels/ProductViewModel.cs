@@ -20,7 +20,7 @@ namespace Hat.DataViewModels
             Details = domainModel.Details; Qty = domainModel.Qty;
             IsAvailable = domainModel.IsAvailable;
             Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(domainModel.Reviews));
-            VatRate = domainModel.VatRate;
+            TaxRate = domainModel.VatRate;
             ProductColors = domainModel.ProductColors?.Select(x=>Color.FromArgb(x)).ToList();
             ProductSizes = domainModel.ProductSizes;
 
@@ -40,7 +40,7 @@ namespace Hat.DataViewModels
 
        
      
-        public double VatRate { get; private set; }
+        public double TaxRate { get; private set; }
 
         private List<string> _sizes = new();
         public List<string> ProductSizes

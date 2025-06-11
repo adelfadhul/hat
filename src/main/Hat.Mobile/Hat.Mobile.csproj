@@ -67,8 +67,8 @@
 	  <Compile Update="Views\Admin\CreateInventoryView.xaml.cs">
 	    <DependentUpon>CreateInventoryView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Admin\CreateVatView.xaml.cs">
-	    <DependentUpon>CreateVatView.xaml</DependentUpon>
+	  <Compile Update="Views\Admin\CreateTaxView.xaml.cs">
+	    <DependentUpon>CreateTaxView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Admin\CreateProductView.xaml.cs">
 	    <DependentUpon>CreateProductView.xaml</DependentUpon>
@@ -82,8 +82,8 @@
 	  <Compile Update="Views\Shop\BrandDetailView.xaml.cs">
 	    <DependentUpon>BrandDetailView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Account\CardInfoManagerView.xaml.cs">
-	    <DependentUpon>CardInfoManagerView.xaml</DependentUpon>
+	  <Compile Update="Views\Account\CardManagerView.xaml.cs">
+	    <DependentUpon>CardManagerView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Cart\ConfirmAddressView.xaml.cs">
 	    <DependentUpon>ConfirmAddressView.xaml</DependentUpon>
@@ -130,7 +130,7 @@
 	  <MauiXaml Update="Views\Admin\CreateInventoryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Admin\CreateVatView.xaml">
+	  <MauiXaml Update="Views\Admin\CreateTaxView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Admin\CreateProductView.xaml">
@@ -160,7 +160,7 @@
 	  <MauiXaml Update="Views\Shop\ScanCameraView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Account\CardInfoManagerView.xaml">
+	  <MauiXaml Update="Views\Account\CardManagerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Cart\CartManagerView.xaml">

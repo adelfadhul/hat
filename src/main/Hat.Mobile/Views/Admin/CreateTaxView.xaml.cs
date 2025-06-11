@@ -2,9 +2,9 @@ using Hat.Mobile.ViewModels;
 
 namespace Hat.Mobile.Views;
 
-public partial class CreateVatView : ContentPage
+public partial class CreateTaxView : ContentPage
 {
-	public CreateVatView(CreateVatViewModel vm)
+	public CreateTaxView(CreateVatViewModel vm)
 	{
 		InitializeComponent();
         BindingContext = vm;

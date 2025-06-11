@@ -136,7 +136,7 @@ public class NavigationService
     }
     internal async Task NavigateToCreateVat()
     {
-        await Shell.Current.GoToAsync($"{nameof(CreateVatView)}");
+        await Shell.Current.GoToAsync($"{nameof(CreateTaxView)}");
     }
     internal async Task NavigateToCreateInventory()
     {

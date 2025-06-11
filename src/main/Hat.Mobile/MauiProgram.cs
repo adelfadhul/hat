@@ -123,7 +123,7 @@ public static class MauiProgram
         builder.Services.AddTransient<WishListView>();
         builder.Services.AddTransient<CreateCardView>();
         builder.Services.AddTransient<CreateProductView>();
-        builder.Services.AddTransient<CreateVatView>();
+        builder.Services.AddTransient<CreateTaxView>();
         builder.Services.AddTransient<CreateInventoryView>();
 
         var url = getBaseUrl();
