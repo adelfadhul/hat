@@ -48,13 +48,15 @@
                         
                         <!--Available or not-->
                         <Label
-     FontAttributes="Bold"
-     FontSize="10" Padding="3" Margin="0,0,15,0"
-     HorizontalOptions="StartAndExpand"
-     Text="{Binding ProductDetail.AvailableText}"
-     TextColor="White" 
-     BackgroundColor="{Binding ProductDetail.AvailableColor}"
-     VerticalTextAlignment="Center" />
+                            FontAttributes="Bold"
+                            FontSize="10" Padding="3" Margin="0,0,15,0"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding ProductDetail.AvailableText}"
+                            TextColor="White" 
+                            BackgroundColor="{Binding ProductDetail.AvailableColor}"
+                            VerticalTextAlignment="Center" />
+
+                       
 
                         <!--Size-->
                         <Label Style="{StaticResource LBL}">Size</Label>
@@ -116,13 +118,75 @@
 
                         <!--Vat-->
                         <Label Style="{StaticResource LBL}">VAT</Label>
-
                         <Label
                                 FontSize="14"
                                 HorizontalOptions="StartAndExpand"
                                 Text="{Binding ProductDetail.VatRate}"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center" />
+
+                        <!--Options Grid-->
+                        <Label Style="{StaticResource LBL}">Options</Label>
+                        <CollectionView ItemsSource="{Binding ProductDetail.Options}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Stroke="{StaticResource Primary}"
+                                        StrokeThickness="1"
+                                        Margin="0,4"
+                                        Padding="8"
+                                        StrokeShape="RoundRectangle 8">
+                                        <Grid ColumnDefinitions="*,2*">
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding Name}"
+                                                   VerticalOptions="Center"
+                                                   FontSize="16"/>
+                                            <!-- ValueType-dependent input -->
+                                            <ContentView Grid.Column="1" VerticalOptions="Center">
+                                                <ContentView.Resources>
+                                                    <DataTemplate x:Key="TextTemplate">
+                                                        <Entry
+                                                            Text="{Binding Value, Mode=TwoWay}"
+                                                            FontSize="16"
+                                                            Placeholder="Enter value"/>
+                                                    </DataTemplate>
+                                                    <DataTemplate x:Key="NumberTemplate">
+                                                        <Entry
+                                                            Text="{Binding Value, Mode=TwoWay, StringFormat='{}{0:N0}'}"
+                                                            Keyboard="Numeric"
+                                                            FontSize="16"
+                                                            Placeholder="Enter number"/>
+                                                    </DataTemplate>
+                                                    <DataTemplate x:Key="SelectionTemplate">
+                                                        <Picker ItemsSource="{Binding Selections}"
+                                                                ItemDisplayBinding="{Binding Value}"
+                                                                Title="Select option" 
+                                                                HorizontalOptions="Start"/>
+                                                    </DataTemplate>
+                                                </ContentView.Resources>
+                                                <ContentView.Triggers>
+                                                    <DataTrigger TargetType="ContentView"
+                                                                 Binding="{Binding ValueType}"
+                                                                 Value="Text">
+                                                        <Setter Property="ContentView.Content" Value="{StaticResource TextTemplate}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="ContentView"
+                                                                 Binding="{Binding ValueType}"
+                                                                 Value="Number">
+                                                        <Setter Property="ContentView.Content" Value="{StaticResource NumberTemplate}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="ContentView"
+                                                                 Binding="{Binding ValueType}"
+                                                                 Value="Selection">
+                                                        <Setter Property="ContentView.Content" Value="{StaticResource BoolTemplate}" />
+                                                    </DataTrigger>
+                                                </ContentView.Triggers>
+                                            </ContentView>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
                         <!--Reviews-->
                         <Label Style="{StaticResource LBL}">Reviews</Label>
