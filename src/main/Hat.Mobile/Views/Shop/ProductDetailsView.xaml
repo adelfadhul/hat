@@ -19,6 +19,17 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="*,Auto">
+        
+        <!--Loading-->
+        <ActivityIndicator
+            HeightRequest="45"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsLoaded, Converter={StaticResource InverseBoolConverter}}"
+            VerticalOptions="Center"
+            WidthRequest="45"
+            Color="{StaticResource Primary}" />
+
+        <!--Details-->
         <Grid IsVisible="{Binding IsLoaded}">
             <ScrollView>
                 <StackLayout IsClippedToBounds="True">
@@ -236,14 +247,9 @@
 
             </StackLayout>
         </Grid>
-        <ActivityIndicator
-            HeightRequest="45"
-            HorizontalOptions="Center"
-            IsRunning="{Binding IsLoaded, Converter={StaticResource InverseBoolConverter}}"
-            VerticalOptions="Center"
-            WidthRequest="45"
-            Color="{StaticResource Primary}" />
 
+
+        <!--Action Bar-->
         <Grid
             Grid.Row="1"
             Margin="0,8,8,16"

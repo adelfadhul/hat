@@ -10,20 +10,20 @@ namespace Hat.DataViewModels
         public ProductViewModel()
         {
         }
-        public ProductViewModel(ProductModel domainModel)
+        public ProductViewModel(ProductModel data)
         {
-            Id = domainModel.Id;
-            Name = domainModel.Name;
-            ImageUrl = domainModel.ImageUrl;
-            BrandName = domainModel.BrandName;
-            Price = domainModel.Price;
-            Details = domainModel.Details; Qty = domainModel.Qty;
-            IsAvailable = domainModel.IsAvailable;
-            Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(domainModel.Reviews));
-            TaxRate = domainModel.VatRate;
-            ProductColors = domainModel.ProductColors?.Select(x=>Color.FromArgb(x)).ToList();
-            ProductSizes = domainModel.ProductSizes;
-
+            Id = data.Id;
+            Name = data.Name;
+            ImageUrl = data.ImageUrl;
+            BrandName = data.BrandName;
+            Price = data.Price;
+            Details = data.Details; Qty = data.Qty;
+            IsAvailable = data.IsAvailable;
+            Reviews = new ReadOnlyObservableCollection<ReviewModel>(new ObservableCollection<ReviewModel>(data.Reviews));
+            TaxRate = data.VatRate;
+            ProductColors = data.ProductColors?.Select(x => Color.FromArgb(x)).ToList();
+            ProductSizes = data.ProductSizes;
+            //Options = data.Options.Select;
 
         }
 
@@ -36,10 +36,10 @@ namespace Hat.DataViewModels
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
 
-       
+        public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
 
-       
-     
+
+
         public double TaxRate { get; private set; }
 
         private List<string> _sizes = new();

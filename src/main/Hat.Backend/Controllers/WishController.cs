@@ -1,4 +1,3 @@
-using Hat.Application.Queries;
 using Hat.Domain.Commands;
 using Hat.Domain.Identity;
 using Hat.Domain.Queries;
@@ -23,23 +22,23 @@ namespace Hat.Backend.Controllers
             CheckUser(list.FirstOrDefault(), userId);
             return Ok(list);
         }
-        [HttpGet("user/products/{ProductId}")]
-        public async Task<IActionResult> GetWishByUserAndProduct([FromRoute] Guid UserId, [FromRoute] Guid ProductId)
+        [HttpGet("user/product/{ProductId}")]
+        public async Task<IActionResult> GetWishByUserAndProduct([FromRoute] Guid ProductId)
         {
             var userId = _userContext.GetUserId();
-            var wish = await _mediator.Send(new WishByUserAndProductQuery(UserId, ProductId));
+            var wish = await _mediator.Send(new WishByUserAndProductQuery(userId, ProductId));
             if (wish == null)
             {
                 return NotFound();
             }
 
-            _logger.LogInformation("GetWishByUserAndProduct: UserId={UserId}, ProductId={ProductId}", UserId, ProductId);
+            _logger.LogInformation("GetWishByUserAndProduct: UserId={UserId}, ProductId={ProductId}", userId, ProductId);
             CheckUser(wish, userId);
             return Ok(wish);
         }
 
-        [HttpDelete("")]
-        public async Task<IActionResult> DeleteWish([FromQuery] Guid WishId)
+        [HttpDelete("{WishId}")]
+        public async Task<IActionResult> DeleteWish([FromRoute] Guid WishId)
         {
             _logger.LogInformation("DeleteWish By User");
 
@@ -62,13 +61,21 @@ namespace Hat.Backend.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost("user")]
         public async Task<IActionResult> CreateWish([FromBody] CreateWishCommand command)
         {
             _logger.LogInformation("CreateWish: {command}", command);
-            var result = await _mediator.Send(command);
+
+            var userid =  _userContext.GetUserId();
+            if (userid == Guid.Empty)
+            {
+              
+                return BadRequest("UserId cannot be empty");
+            }
+            command.UserId = userid;
+            var wishId = await _mediator.Send(command);
             // assuming result is the new wish ID
-            return CreatedAtAction(nameof(GetWishes), new { UserId = command.UserId }, new { id = result });
+            return CreatedAtAction(nameof(GetWishes),  wishId );
         }
     }
 }

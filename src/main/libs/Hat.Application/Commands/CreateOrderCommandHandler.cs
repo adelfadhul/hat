@@ -10,6 +10,7 @@ namespace Hat.Application.Commands
     {
         private readonly ICartRepository _cartRepository;
         private readonly IOrderRepository _orderRepository;
+        
         public CreateOrderCommandHandler(ICartRepository cartRepository, IOrderRepository orderRepository)
         {
             _cartRepository = cartRepository ?? throw new ArgumentException("CartRepository must implement ICartRepository");
@@ -28,19 +29,26 @@ namespace Hat.Application.Commands
                 BillingAddress = request.Cart.Address,
                 Currency = "BHD",
                 OrderDate = DateTime.UtcNow,
-                Status =OrderStatus.Draft
+                Status = OrderStatus.Draft
             };
-
-            order.OrderItems = cart.CartItems.Select(item => new OrderItemModel
+            var orderId = await _orderRepository.CreateOrder(order);
+            order.OrderItems = cart.CartItems.Select(item =>
             {
-                ProductId = item.ProductId,
-                Name = item.ProductName,
-                Price = item.Price,
-                Quantity = item.Quantity,
-                Size = item.Size
+              
+                return new OrderItemModel
+                {
+                    ProductId = item.ProductId,
+                    Name = item.ProductName,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    Size = item.Size,
+                    OrderId = orderId,
+                    ImageUrl = item.ProductImageUrl,
+                    Options = item.Options,
+                };
             }).ToList();
 
-            await _orderRepository.CreateOrder(order);
+
             // Here you would typically create an order from the cart and save it to the database
             // For simplicity, we are just deleting the cart after creating the order
             await _cartRepository.DeleteCart(cart.Id);

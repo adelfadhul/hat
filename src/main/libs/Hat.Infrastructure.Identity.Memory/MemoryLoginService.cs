@@ -34,9 +34,9 @@ oid: Guid.Parse("11111111-1111-1111-1111-111111111111"),
         });
 
         public static List<ICurrentUser> USERS => _users.Value;
-        public static Guid UserId1 => USERS[0]?.Oid() ?? Guid.Empty;
-        public static Guid UserId2 => USERS[1]?.Oid() ?? Guid.Empty;
-        public static Guid UserId3 => USERS[2]?.Oid() ?? Guid.Empty;
+        public static Guid USER_Alice => USERS[0]?.Oid() ?? Guid.Empty;
+        public static Guid USER_Bob => USERS[1]?.Oid() ?? Guid.Empty;
+        public static Guid USER_Lina => USERS[2]?.Oid() ?? Guid.Empty;
 
         public static ICurrentUser CurrentUser;
         public MemoryLoginService()
@@ -51,7 +51,6 @@ oid: Guid.Parse("11111111-1111-1111-1111-111111111111"),
             var user = USERS.FirstOrDefault(u =>
                 string.Equals(u.Email(), email, StringComparison.OrdinalIgnoreCase));
             CurrentUser = user;
-            var test = CurrentUser?.Oid().ToString();
            
             return user;
         }

@@ -1,5 +1,4 @@
 ﻿using Hat.Domain.Enums;
-using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
 using Hat.Infrastructure.Identity.Memory;
@@ -25,7 +24,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                 Id=Guid.NewGuid(),
-                 UserId= MemoryLoginService.UserId1,
+                 UserId= MemoryLoginService.USER_Alice,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$4500",
@@ -40,7 +39,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryLoginService.UserId2,
+                 UserId= MemoryLoginService.USER_Bob,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$500",
@@ -55,7 +54,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryLoginService.UserId3,
+                 UserId= MemoryLoginService.USER_Lina,
                 OrderDate= new DateTime(2022,9,1,0,0,0),
                 Name = "OD - 424923192 - N",
                 Price = "$700",
@@ -70,7 +69,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryLoginService.UserId1,
+                 UserId= MemoryLoginService.USER_Alice,
                 OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
                 Name = "OD - 424923192 - N",
                 Price = "$1500",
@@ -88,7 +87,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             new OrderModel
             {
                  Id=Guid.NewGuid(),
-                 UserId= MemoryLoginService.UserId2,
+                 UserId= MemoryLoginService.USER_Bob,
                  OrderDate = new DateTime(2023, 5, 2, 0, 0, 0),
                 Name = "OD - 424923192 - N",
                 Price = "$2700",
@@ -116,9 +115,29 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
             return Task.FromResult(ORDERS.FirstOrDefault(o => o.Id == orderId) ?? throw new KeyNotFoundException($"Order with ID {orderId} not found."));
         }
 
-        public Task CreateOrder(OrderModel order)
+        public Task<Guid> CreateOrder(OrderModel order)
         {
-            throw new NotImplementedException();
+            ORDERS.Add(order);
+            order.Id = Guid.NewGuid();
+            order.OrderDate = DateTime.UtcNow;
+            order.Status = OrderStatus.Draft; // Default status when creating an order
+            order.OrderNumber = $"OD-{order.Id:N}"; // Generate a unique order number
+            order.CustomerId = order.UserId.ToString(); // Assuming UserId is a Guid, convert to string
+            order.Currency = "BHD"; // Default currency, can be changed as needed
+            order.PaymentStatus = "Pending"; // Default payment status
+            order.PaymentGateway = "FakePayment"; // Default payment gateway, can be changed as needed
+            order.PaymentGatewayTransactionId = Guid.NewGuid().ToString(); // Generate a fake transaction ID
+            order.TotalAmount = 0; // Initialize total amount, should be calculated based on order items
+            order.ShippingMethod = "Standard"; // Default shipping method
+            order.ShippingCost = "0"; // Default shipping cost, can be changed as needed
+            order.TaxAmount = "0"; // Default tax amount, can be changed as needed
+            order.DiscountAmount = "0"; // Default discount amount, can be changed as needed
+            order.PaymentReference = Guid.NewGuid().ToString(); // Generate a fake payment reference
+            order.Notes = string.Empty; // Initialize notes, can be added later
+            order.CouponCode = string.Empty; // Initialize coupon code, can be added later
+            order.ImageUrls = string.Empty; // Initialize image URLs, can be added later
+            order.CustomerName = "Default Customer"; // Default customer name, can be changed as needed
+            return Task.FromResult(order.Id);
         }
 
         public Task UpdateOrderStatus(Guid OrderId, OrderStatus order)

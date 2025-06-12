@@ -13,9 +13,9 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             var vats = new List<TaxModel>
             {
-                new TaxModel { Id = Guid.NewGuid(), UserId= MemoryLoginService.UserId1, Name = "Standard VAT", Rate = 0.2 },
-                new TaxModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.UserId2, Name = "Reduced VAT", Rate = 0.05 },
-                new TaxModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.UserId3, Name = "Zero VAT", Rate = 0.00 }
+                new TaxModel { Id = Guid.NewGuid(), UserId= MemoryLoginService.USER_Alice, Name = "Standard VAT", Rate = 0.2 },
+                new TaxModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.USER_Bob, Name = "Reduced VAT", Rate = 0.05 },
+                new TaxModel { Id = Guid.NewGuid(),UserId= MemoryLoginService.USER_Lina, Name = "Zero VAT", Rate = 0.00 }
             };
             return vats;
         });

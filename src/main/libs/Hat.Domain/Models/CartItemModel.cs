@@ -22,6 +22,9 @@
         public decimal Price { get; set; }
         public decimal Vat { get; set; } = 0m; // 20% VAT by default
         public string Size { get; set; }
+
+        public Dictionary<string, string> Options { get; set; }
+       
         #endregion
 
         #region rich

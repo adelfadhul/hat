@@ -28,6 +28,8 @@ namespace Hat.Infrastructure.Registeration
                     services.AddScoped<IInventoryRepository, MemoryInventoryRepository>();
                     services.AddScoped<IWishRepository, MemoryWishRepository>();
                     services.AddScoped<ICartRepository, MemoryCartRepository>();
+                    services.AddScoped<IProductOptionRepository, MemoryProductOptionRepository>();
+                    services.AddScoped<IProductOptionSelectionRepository, MemoryProductOptionSelectionRepository>();
                     break;
                 case RepositoryType.SqlServer:
                     services.AddScoped<IProductRepository, SqlServerProductRepository>();

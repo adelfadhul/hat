@@ -9,7 +9,7 @@ namespace Hat.Domain.Commands
             UserId = userId;
             ProductId = productId;
         }
-        public Guid UserId { get; init; }
-        public Guid ProductId { get; init; }
+        public Guid UserId { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

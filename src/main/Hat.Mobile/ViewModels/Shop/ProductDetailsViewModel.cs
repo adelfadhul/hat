@@ -1,6 +1,7 @@
 ﻿using Hat.DataViewModels;
 using Hat.Helpers;
 using Hat.Mobile.Services;
+using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {
@@ -108,13 +109,13 @@ namespace Hat.Mobile.ViewModels
         {
            
             BackCommand = new Command<object>(GoBack);
-            FavCommand = new Command<Color>(FavItem);
+            FavCommand = new Command<Color>(async (x) => await FavItem(x));
             AddToCartCommand = new Command<object>(async (obj) => await AddToCart());
-            _ = InitializeAsync();
+            _ = Initialize();
     
         }
 
-        private async Task InitializeAsync()
+        private async Task Initialize()
         {
             await PopulateData(productId);
         }
@@ -137,15 +138,29 @@ namespace Hat.Mobile.ViewModels
            await _navigationService.GoBack();
         }
 
-        private void FavItem(Color obj)
+        private async Task FavItem(Color obj)
         {
-            if (!IsFavorite)
+            var wish = await _dataService.GetUserWishByProduct(Guid.Parse(productId));
+            if (wish is null)
             {
-                _ = _dataService.CreateWish(Guid.Parse(productId));
+                try
+                {
+                    _ = _dataService.CreateWish(Guid.Parse(productId));
+                    // Optionally notify success
+                }
+                catch (Exception ex)
+                {
+                    // Notify the UI of the error, e.g.:
+                    await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                    // Or set an error property for binding
+                    // ErrorMessage = ex.Message;
+                }
+              
             }
             else
             {
-                _ = _dataService.DeleteWish(Guid.Parse(productId));
+                 
+                _ = _dataService.DeleteWish(wish.Id);
             }
            
             IsFavorite = true ? !IsFavorite : IsFavorite;

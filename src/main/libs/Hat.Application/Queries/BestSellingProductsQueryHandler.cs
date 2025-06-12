@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Hat.Application.Queries
 {
-    public class BestSellingProductsQueryHandler : IRequestHandler<BestSellingProductsQuery, List<ProductModel>>
+    internal class BestSellingProductsQueryHandler : IRequestHandler<BestSellingProductsQuery, List<ProductModel>>
     {
         private readonly IProductRepository _productRepository;
 

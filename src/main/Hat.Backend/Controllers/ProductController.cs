@@ -63,7 +63,7 @@ namespace Hat.Backend.Controllers
                 return NotFound();
             }
             // Check if the current user has access to the product
-           
+
             return Ok(product);
         }
         [HttpGet("category/{categoryId}")]
@@ -74,6 +74,30 @@ namespace Hat.Backend.Controllers
          
             return Ok(products);
         }
-       
+
+        //[HttpGet("options/{productId}")]
+        //public async Task<IActionResult> GetProductOptionsByProduct(Guid productId)
+        //{
+        //    _logger.LogInformation("GetProductOptionsByProduct: {ProductId}", productId);
+        //    var options = await _mediator.Send(new ProductOptionsByProductQuery(productId));
+        //    if (options == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(options);
+        //}
+
+        //[HttpGet("options/{optionId}")]
+        //public async Task<IActionResult> GetProductOptionById(Guid optionId)
+        //{
+        //    _logger.LogInformation("GetProductOptionById: {OptionId}", optionId);
+        //    var option = await _mediator.Send(new ProductOptionByIdQuery(optionId));
+        //    if (option == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(option);
+        //}
+
     }
 }

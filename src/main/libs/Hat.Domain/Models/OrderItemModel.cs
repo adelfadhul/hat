@@ -2,6 +2,7 @@
 {
     public class OrderItemModel
     {
+        #region data
         public Guid Id { get; set; }
         public Guid OrderId { get; set; } // Assuming this is a reference to the order
         public Guid ProductId { get; set; } // Assuming this is a reference to a product
@@ -11,5 +12,9 @@
 
         public string Size { get; set; } // Assuming size is a string, could be an enum or other type based on your requirements
         public string ImageUrl { get; set; } // Assuming a single image URL for simplicity
+
+        public Dictionary<string, string> Options { get; set; }
+
+        #endregion
     }
 }

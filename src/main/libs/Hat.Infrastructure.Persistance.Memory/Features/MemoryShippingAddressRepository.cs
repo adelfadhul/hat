@@ -15,7 +15,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId1,
+                    UserId = MemoryLoginService.USER_Alice,
                     IsPrimary = true,
                     Name = "Home Address",
                     Address = "21, Alex Davidson Avenue, Opposite Omegatron, Vicent Smith Quarters, Victoria Island, Lagos, Nigeria",
@@ -23,7 +23,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId1,
+                    UserId = MemoryLoginService.USER_Alice,
                     IsPrimary = false,
                     Name = "Work Address",
                     Address = "15, Adeola Odeku Street, Victoria Island, Lagos, Nigeria",
@@ -31,7 +31,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId1,
+                    UserId = MemoryLoginService.USER_Alice,
                     IsPrimary = false,
                     Name = "Parents' House",
                     Address = "5, Olumegbon Road, Ikoyi, Lagos, Nigeria",
@@ -41,7 +41,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId2,
+                    UserId = MemoryLoginService.USER_Bob,
                     IsPrimary = false,
                     Name = "Work Address",
                     Address = "9, Martins Crescent, Bank of Nigeria, Abuja, Nigeria",
@@ -49,7 +49,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId2,
+                    UserId = MemoryLoginService.USER_Bob,
                     IsPrimary = true,
                     Name = "Home Address",
                     Address = "12, Aminu Kano Crescent, Wuse 2, Abuja, Nigeria",
@@ -57,7 +57,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId2,
+                    UserId = MemoryLoginService.USER_Bob,
                     IsPrimary = false,
                     Name = "Friend's Place",
                     Address = "33, Gana Street, Maitama, Abuja, Nigeria",
@@ -67,7 +67,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId3,
+                    UserId = MemoryLoginService.USER_Lina,
                     IsPrimary = true,
                     Name = "Home Address",
                     Address = "44, Opebi Road, Ikeja, Lagos, Nigeria",
@@ -75,7 +75,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId3,
+                    UserId = MemoryLoginService.USER_Lina,
                     IsPrimary = false,
                     Name = "Work Address",
                     Address = "18, Allen Avenue, Ikeja, Lagos, Nigeria",
@@ -83,7 +83,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ShippingAddressModel
                 {
                     Id = Guid.NewGuid(),
-                    UserId = MemoryLoginService.UserId3,
+                    UserId = MemoryLoginService.USER_Lina,
                     IsPrimary = false,
                     Name = "Sibling's House",
                     Address = "7, Isaac John Street, GRA, Ikeja, Lagos, Nigeria",

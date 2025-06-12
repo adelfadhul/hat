@@ -20,14 +20,18 @@ namespace Hat.Domain.Models
         public string BrandName { get; set; }
         public decimal Price { get; set; }
         public string Details { get; set; }
-      
 
-       
-        public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
-        public TaxModel Vat { get; set; } = new TaxModel();
+
+
+
         #endregion
 
         #region rich
+        public List<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
+        public TaxModel Vat { get; set; } = new TaxModel();
+
+        public List<ProductOptionModel> Options { get; set; } = new List<ProductOptionModel>();
+      
         public List<string> ProductSizes { get;  set; }//sourced from inventory
         public List<string> ProductColors { get;  set; }//sourced from inventory
 

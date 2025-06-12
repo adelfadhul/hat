@@ -15,18 +15,22 @@ namespace Hat.Infrastructure.Identity.Memory
         public Guid GetUserId()
         {
             var httpContext = _httpContextAccessor.HttpContext;
-
-            if (!httpContext.Request.Headers.TryGetValue("hat-user", out var userIdHeader))
+            if (httpContext != null && httpContext.Request.Headers.TryGetValue("hat-user", out var userIdHeader))
             {
-                // throw new UnauthorizedAccessException("Missing user ID header.");
+                if (userIdHeader.Count > 1)
+                {
+                    throw new UnauthorizedAccessException("Multiple user ID headers are not allowed.");
+                }
+
+                var userIdValue = userIdHeader.FirstOrDefault();
+                if (!Guid.TryParse(userIdValue, out var userId))
+                {
+                    throw new UnauthorizedAccessException("Invalid user ID format.");
+                }
+
+                return userId;
             }
-
-            if (!Guid.TryParse(userIdHeader, out var userId)) {
-                //       throw new UnauthorizedAccessException("Invalid user ID format.");     
-            }
-
-
-            return userId;
+            throw new UnauthorizedAccessException("Missing user ID header.");
         }
     }
 }

@@ -1,6 +1,7 @@
 using Hat.Domain.Commands;
 using Hat.Domain.Identity;
 using Hat.Domain.Models;
+using Hat.Mobile.ViewModels;
 using System.Net;
 using System.Net.Http.Json;
 
@@ -11,6 +12,7 @@ namespace Hat.Mobile.Services
         private readonly HttpClient _httpClient;
         private ICurrentUser _currentUser;
         private readonly ILoginService _loginService;
+       
         public DataService(IHttpClientFactory httpClientFactory, ILoginService loginService)
         {
             _httpClient = httpClientFactory.CreateClient("Default");
@@ -179,8 +181,8 @@ namespace Hat.Mobile.Services
                 throw new HttpRequestException($"Error adding shopping cart item: {response.ReasonPhrase}");
             }
         }
-       
-        
+
+
         internal async Task<List<CartItemModel>> GetShoppingCartItems()
         {
             var userid = _currentUser.Oid();
@@ -276,18 +278,18 @@ namespace Hat.Mobile.Services
             return data;
         }
 
-        internal async Task CreateWish(Guid productId)
+        internal async Task<Guid> CreateWish(Guid productId)
         {
-            var wish = new WishModel
-            {
-                UserId = _currentUser.Oid(),
-                ProductId = productId
-            };
-            var response = await _httpClient.PostAsJsonAsync("/api/wishes/product", wish);
+            AddUserHeader();
+            var userid = _loginService.GetCurrentUser().Oid();
+            var command = new CreateWishCommand(userid, productId);
+            var response = await _httpClient.PostAsJsonAsync("/api/wishes/user", command);
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"Error creating product: {response.ReasonPhrase}");
+                throw new HttpRequestException($"Error creating wish: {response.ReasonPhrase}");
             }
+            var wishId = await response.Content.ReadAsStringAsync();
+            return Guid.Parse(wishId);
         }
         internal async Task DeleteWish(Guid wishId)
         {
@@ -298,6 +300,22 @@ namespace Hat.Mobile.Services
             }
         }
 
+        internal async Task<WishModel?> GetUserWishByProduct(Guid productId)
+        {
+            AddUserHeader();
+            var userid = _loginService.GetCurrentUser().Oid();
+            var response = await _httpClient.GetAsync($"/api/wishes/user/product/{productId}");
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Error fetching wish by user and product: {response.ReasonPhrase}");
+            }
+            var data = await response.Content.ReadFromJsonAsync<WishModel>();
+            return data;
+        }
         internal async Task<List<WishModel>> GetWishesByUser()
         {
             AddUserHeader();
@@ -311,23 +329,28 @@ namespace Hat.Mobile.Services
 
         }
 
+        // Pseudocode:
+        // 1. The IsFav method throws an exception if an unexpected HTTP status code is returned or if an error occurs.
+        // 2. However, if the calling code (or a global handler) catches this exception, the app will not "break" (crash).
+        // 3. In .NET MAUI, unhandled exceptions may be caught by the framework or by your own try/catch blocks in the UI layer.
+        // 4. To make the app "break" in Visual Studio, ensure you have "Break on all exceptions" enabled, or do not catch the exception in the calling code.
+
         internal async Task<bool> IsFav(Guid productId)
         {
-            var response = await _httpClient.GetAsync($"/api/wishes/{_currentUser.Oid()}/products/{productId}");
-            // return false if not found
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            AddUserHeader();
+            var response = await _httpClient.GetAsync($"/api/wishes/user/product/{productId}");
+            if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return false;
             }
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                return true; // Wish exists
+                return true;
             }
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Error checking if product is fav: {response.ReasonPhrase}");
             }
-
             return false;
         }
 
@@ -356,6 +379,11 @@ namespace Hat.Mobile.Services
         private void AddUserHeader()
         {
             var userId = _loginService.GetCurrentUser().Oid().ToString();
+            // Remove existing "hat-user" header if present to prevent duplicates
+            if (_httpClient.DefaultRequestHeaders.Contains("hat-user"))
+            {
+                _httpClient.DefaultRequestHeaders.Remove("hat-user");
+            }
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("hat-user", userId);
         }
         internal async Task<CartModel?> GetUserCart()
@@ -376,10 +404,8 @@ namespace Hat.Mobile.Services
 
         internal ICurrentUser Login(string email, string password)
         {
-             _currentUser = _loginService.Login(email, password);
-            var userId = _currentUser.Oid().ToString();
-            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("hat-user", userId);
-
+            _currentUser = _loginService.Login(email, password);
+            AddUserHeader();
             return _currentUser;
         }
     }

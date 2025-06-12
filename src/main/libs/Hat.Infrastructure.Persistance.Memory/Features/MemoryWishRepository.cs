@@ -1,6 +1,7 @@
 ﻿using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
+using Hat.Infrastructure.Identity.Memory;
 
 namespace Hat.Infrastructure.Persistance.Memory.Features
 {
@@ -14,7 +15,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
            
             return new List<WishModel>
             {
-                new WishModel { Id = Guid.NewGuid(), ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker }
+                new WishModel { Id = Guid.NewGuid(), ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker, UserId=MemoryLoginService.USER_Alice }
             };
         });
         public static List<WishModel> Wishes => _wishes.Value;
@@ -22,13 +23,17 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
         {
             wish.Id = Guid.NewGuid();
             Wishes.Add(wish);
+            if(wish.UserId == Guid.Empty)
+            {
+                throw new ArgumentException("UserId cannot be empty", nameof(wish.UserId));
+            }
             return Task.FromResult(wish.Id);
         }
 
-        public Task DeleteWish(Guid productId)
+        public Task DeleteWish(Guid wishId)
         {
            
-            var wishToDelete = Wishes.FirstOrDefault(w => w.ProductId == productId);
+            var wishToDelete = Wishes.FirstOrDefault(w => w.Id == wishId);
             if (wishToDelete != null)
             {
                 Wishes.Remove(wishToDelete);

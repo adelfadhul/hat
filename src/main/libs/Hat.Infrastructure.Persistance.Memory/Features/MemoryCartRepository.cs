@@ -39,6 +39,16 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                  .ForEach(c => c.CartItems.Add(item));
             return Task.CompletedTask;
         }
+        public Task AddItem(List<CartItemModel> items)
+        {
+            foreach (var item in items)
+            {
+                CARTS.Where(c => c.Id == item.CartId)
+                     .ToList()
+                     .ForEach(c => c.CartItems.Add(item));
+            }
+            return Task.CompletedTask;
+        }
 
 
 
