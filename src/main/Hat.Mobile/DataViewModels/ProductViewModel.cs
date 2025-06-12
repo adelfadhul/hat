@@ -25,7 +25,7 @@ namespace Hat.DataViewModels
             ProductColors = data.ProductColors?.Select(x => Color.FromArgb(x)).ToList();
             ProductSizes = data.ProductSizes;
             //Options = data.Options.Select;
-            Options = data.Options.Select(x => new ProductOptionViewModel(x)).ToList();
+            options = data.Options.Select(x => new ProductOptionViewModel(x)).ToList();
             Id = data.Id;
             // Set default values for selected size and color
 

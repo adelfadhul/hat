@@ -1,7 +1,6 @@
 ﻿using Hat.DataViewModels;
 using Hat.Helpers;
 using Hat.Mobile.Services;
-using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Hat.Mobile.ViewModels
 {

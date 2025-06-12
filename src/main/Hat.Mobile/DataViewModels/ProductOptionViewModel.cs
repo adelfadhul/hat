@@ -15,7 +15,7 @@ namespace Hat.DataViewModels
             {
                 if (x is not null)
                 {
-                    Selections.Add(new ProductOptionSelectionViewModel(x));
+                    Selections.Add(x.Value);
                 }
             });
         }
@@ -24,8 +24,8 @@ namespace Hat.DataViewModels
         public ProductOptionValueType ValueType { get; set; }
 
 
-        private List<ProductOptionSelectionViewModel> selections;
-        public List<ProductOptionSelectionViewModel> Selections 
+        private List<string> selections= new();
+        public List<string> Selections 
         { 
             get=>selections;
             set

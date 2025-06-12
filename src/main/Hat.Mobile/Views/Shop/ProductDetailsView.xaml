@@ -59,7 +59,7 @@
                        
 
                         <!--Size-->
-                        <Label Style="{StaticResource LBL}">Size</Label>
+                        <Label Style="{StaticResource LBL}">Options</Label>
                         <ScrollView  HorizontalOptions="Center">
 
                             <CollectionView 
@@ -128,14 +128,17 @@
                         <!--Options Grid-->
                         <Label Style="{StaticResource LBL}">Options</Label>
                         <CollectionView ItemsSource="{Binding ProductDetail.Options}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Border
                                         Stroke="{StaticResource Primary}"
-                                        StrokeThickness="1"
-                                        Margin="0,4"
+                                        StrokeThickness="0,0,0,1"
+                                        Margin="4,4,4,4"
                                         Padding="8"
-                                        StrokeShape="RoundRectangle 8">
+                                        StrokeShape="RoundRectangle 0,0,0,0">
                                         <Grid ColumnDefinitions="*,2*">
                                             <Label Grid.Column="0"
                                                    Text="{Binding Name}"
@@ -143,44 +146,50 @@
                                                    FontSize="16"/>
                                             <!-- ValueType-dependent input -->
                                             <ContentView Grid.Column="1" VerticalOptions="Center">
-                                                <ContentView.Resources>
-                                                    <DataTemplate x:Key="TextTemplate">
-                                                        <Entry
-                                                            Text="{Binding Value, Mode=TwoWay}"
-                                                            FontSize="16"
-                                                            Placeholder="Enter value"/>
-                                                    </DataTemplate>
-                                                    <DataTemplate x:Key="NumberTemplate">
-                                                        <Entry
-                                                            Text="{Binding Value, Mode=TwoWay, StringFormat='{}{0:N0}'}"
-                                                            Keyboard="Numeric"
-                                                            FontSize="16"
-                                                            Placeholder="Enter number"/>
-                                                    </DataTemplate>
-                                                    <DataTemplate x:Key="SelectionTemplate">
-                                                        <Picker ItemsSource="{Binding Selections}"
-                                                                ItemDisplayBinding="{Binding Value}"
-                                                                Title="Select option" 
-                                                                HorizontalOptions="Start"/>
-                                                    </DataTemplate>
-                                                </ContentView.Resources>
-                                                <ContentView.Triggers>
-                                                    <DataTrigger TargetType="ContentView"
-                                                                 Binding="{Binding ValueType}"
-                                                                 Value="Text">
-                                                        <Setter Property="ContentView.Content" Value="{StaticResource TextTemplate}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger TargetType="ContentView"
-                                                                 Binding="{Binding ValueType}"
-                                                                 Value="Number">
-                                                        <Setter Property="ContentView.Content" Value="{StaticResource NumberTemplate}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger TargetType="ContentView"
-                                                                 Binding="{Binding ValueType}"
-                                                                 Value="Selection">
-                                                        <Setter Property="ContentView.Content" Value="{StaticResource BoolTemplate}" />
-                                                    </DataTrigger>
-                                                </ContentView.Triggers>
+                                                <ContentView.Style>
+                                                    <Style TargetType="ContentView">
+                                                        <Style.Triggers>
+                                                            <DataTrigger TargetType="ContentView"
+                                                                         Binding="{Binding ValueType}"
+                                                                         Value="Text">
+                                                                <Setter Property="ContentView.Content">
+                                                                    <Setter.Value>
+                                                                        <Entry
+                                                                            Text="{Binding Value, Mode=TwoWay}"
+                                                                            FontSize="16"
+                                                                            Placeholder="Enter value"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="ContentView"
+                                                                         Binding="{Binding ValueType}"
+                                                                         Value="Number">
+                                                                <Setter Property="ContentView.Content">
+                                                                    <Setter.Value>
+                                                                        <Entry
+                                                                            Text="{Binding Value, Mode=TwoWay, StringFormat='{}{0:N0}'}"
+                                                                            Keyboard="Numeric"
+                                                                            FontSize="16"
+                                                                            Placeholder="Enter number"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="ContentView"
+                                                                         Binding="{Binding ValueType}"
+                                                                         Value="Selection">
+                                                                <Setter Property="ContentView.Content">
+                                                                    <Setter.Value>
+                                                                        <Picker ItemsSource="{Binding Selections}"
+                                                                                SelectedItem="{Binding Value, Mode=TwoWay}"
+                                                                                Title="Select option"
+                                                                                ItemDisplayBinding="{Binding}"
+                                                                                HorizontalOptions="Start"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ContentView.Style>
                                             </ContentView>
                                         </Grid>
                                     </Border>
