@@ -82,7 +82,7 @@ namespace Hat.DataViewModels
                     }
 
                     OnPropertyChanged(nameof(Selections));
-                    UpdatePriceFromSelection();
+                    UpdatePriceFromSelection(); // Ensure Price is updated whenever Selections changes
                 }
             }
         }

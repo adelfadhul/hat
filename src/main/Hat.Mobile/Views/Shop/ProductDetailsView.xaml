@@ -28,6 +28,8 @@
             WidthRequest="45"
             Color="{StaticResource Primary}" />
 
+     
+        
         <!--Details-->
         <Grid IsVisible="{Binding IsLoaded}">
             <ScrollView>
@@ -36,11 +38,70 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image
+                    <Grid>
+                         <Image
                         Grid.Row="0"
                         Aspect="AspectFill"
                         HeightRequest="200"
                         Source="{Binding Product.ImageUrl}" />
+                        <!--Picture-->
+                        <Grid
+       Margin="15"
+       HeightRequest="42"
+       ColumnDefinitions="Auto,*,Auto"
+       VerticalOptions="Start"
+       RowSpacing="0"
+       Grid.Row="0"
+       Grid.ColumnSpan="2"
+       ZIndex="1">
+                            <Border
+           Grid.Column="0"
+           Padding="0"
+           Background="transparent"
+           HeightRequest="40"
+           StrokeShape="RoundRectangle 20,20,20,20"
+           StrokeThickness="0"
+           WidthRequest="40">
+                                <Label
+               FontFamily="MaterialIcon"
+               FontSize="26"
+               HorizontalOptions="Center"
+               TextColor="Black"
+               VerticalOptions="Center">
+                                    <Label.Text>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <On Platform="Android" Value="&#xf04d;" />
+                                            <On Platform="iOS" Value="&#xf141;" />
+                                            <On Platform="Default" Value="&#xf04d;" />
+                                        </OnPlatform>
+                                    </Label.Text>
+                                </Label>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                            <Border
+           Grid.Column="2"
+           Padding="0"
+           Background="white"
+           HeightRequest="40"
+           StrokeShape="RoundRectangle 20,20,20,20"
+           StrokeThickness="1"
+           WidthRequest="40">
+                                <Label
+               FontFamily="MaterialIcon"
+               FontSize="26"
+               HorizontalOptions="Center"
+               Text="&#xf4d2;"
+               TextColor="{Binding FavStatusColor}"
+               VerticalOptions="Center" />
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding FavCommand}" CommandParameter="{Binding FavStatusColor}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                  
                     <Grid Grid.Row="1" Margin="16" RowSpacing="8">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -275,60 +336,7 @@
                 </Grid>
             </ScrollView>
 
-            <Grid
-                Margin="15"
-                HeightRequest="42"
-                HorizontalOptions="FillAndExpand"
-                ColumnDefinitions="Auto,*,Auto"
-                VerticalOptions="StartAndExpand">
-                <Border
-                    Grid.Column="0"
-                    Padding="0"
-                    Background="transparent"
-                    HeightRequest="40"
-                    HorizontalOptions="StartAndExpand"
-                    StrokeShape="RoundRectangle 20,20,20,20"
-                    StrokeThickness="0"
-                    WidthRequest="40">
-                    <Label
-                        FontFamily="MaterialIcon"
-                        FontSize="26"
-                        HorizontalOptions="Center"
-                        TextColor="Black"
-                        VerticalOptions="Center">
-                        <Label.Text>
-                            <OnPlatform x:TypeArguments="x:String">
-                                <On Platform="Android" Value="&#xf04d;" />
-                                <On Platform="iOS" Value="&#xf141;" />
-                                <On Platform="Default" Value="&#xf04d;" />
-                            </OnPlatform>
-                        </Label.Text>
-                    </Label>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BackCommand}" />
-                    </Border.GestureRecognizers>
-                </Border>
-                <Border
-                    Grid.Column="2"
-                    Padding="0"
-                    Background="white"
-                    HeightRequest="40"
-                    HorizontalOptions="EndAndExpand"
-                    StrokeShape="RoundRectangle 20,20,20,20"
-                    StrokeThickness="1"
-                    WidthRequest="40">
-                    <Label
-                        FontFamily="MaterialIcon"
-                        FontSize="26"
-                        HorizontalOptions="Center"
-                        Text="&#xf4d2;"
-                        TextColor="{Binding FavStatusColor}"
-                        VerticalOptions="Center" />
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding FavCommand}" CommandParameter="{Binding FavStatusColor}" />
-                    </Border.GestureRecognizers>
-                </Border>
-            </Grid>
+           
         </Grid>
 
 

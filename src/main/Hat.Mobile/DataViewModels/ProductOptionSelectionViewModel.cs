@@ -8,7 +8,7 @@ namespace Hat.DataViewModels
         public ProductOptionSelectionViewModel(ProductOptionSelectionModel data)
         {
             Id = data.Id;
-            Value = data.Value;
+            Value = $"{data.Value} ({data.Price})";
             Price= isSelected ? data.Price : null; // Set price only if selected
         }
         public Guid Id { get; set; }
