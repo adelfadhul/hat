@@ -65,12 +65,12 @@ namespace Hat.Mobile.ViewModels
                     UpdateCanAddToCart();
             }
         }
-        private double qty => ProductDetail?.Qty ?? 1;
-        private ProductViewModel _ProductDetail = new();
-        public ProductViewModel ProductDetail
+        private double qty => Product?.Qty ?? 1;
+        private ProductViewModel _Product = new();
+        public ProductViewModel Product
         {
-            get => _ProductDetail;
-            set => SetProperty(ref _ProductDetail, value);
+            get => _Product;
+            set => SetProperty(ref _Product, value);
         }
 
         private bool _IsLoaded;
@@ -126,7 +126,7 @@ namespace Hat.Mobile.ViewModels
                 return;
             }
             var storedProduct = await _dataService.GetProductByIdWithDetails(Guid.Parse(productId));
-            ProductDetail = new ProductViewModel(storedProduct);
+            Product = new ProductViewModel(storedProduct);
 
             IsFavorite = await _dataService.IsFav(Guid.Parse(productId));
 

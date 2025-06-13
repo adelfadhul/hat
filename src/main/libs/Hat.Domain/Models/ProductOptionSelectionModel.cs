@@ -8,6 +8,7 @@
         public Guid ProductOptionId { get; set; }
         public string Value { get; set; }     // e.g., "Too Hot", "Cold", "Mild"
 
+        public decimal ? Price { get; set; }
         #endregion
     }
 }

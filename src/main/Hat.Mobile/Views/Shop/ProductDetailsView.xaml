@@ -13,7 +13,6 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="Black"/>
-                <!--<Setter Property="Margin" Value="10 0 0 0"/>-->
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
@@ -32,102 +31,121 @@
         <!--Details-->
         <Grid IsVisible="{Binding IsLoaded}">
             <ScrollView>
-                <StackLayout IsClippedToBounds="True">
+                <Grid IsClippedToBounds="True" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Image
+                        Grid.Row="0"
                         Aspect="AspectFill"
                         HeightRequest="200"
-                        Source="{Binding ProductDetail.ImageUrl}" />
-                    <StackLayout Margin="16">
+                        Source="{Binding Product.ImageUrl}" />
+                    <Grid Grid.Row="1" Margin="16" RowSpacing="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
                         <Label
+                            Grid.Row="0"
                             FontAttributes="Bold"
                             FontSize="26"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding ProductDetail.Name}"
+                            Text="{Binding Product.Name}"
                             TextColor="Black"
                             VerticalTextAlignment="Center" />
-                        
+
                         <!--Available or not-->
                         <Label
+                            Grid.Row="1"
                             FontAttributes="Bold"
                             FontSize="10" Padding="3" Margin="0,0,15,0"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding ProductDetail.AvailableText}"
+                            Text="{Binding Product.AvailableText}"
                             TextColor="White" 
-                            BackgroundColor="{Binding ProductDetail.AvailableColor}"
+                            BackgroundColor="{Binding Product.AvailableColor}"
                             VerticalTextAlignment="Center" />
 
-                       
-
                         <!--Size-->
-                        <Label Style="{StaticResource LBL}">Options</Label>
-                        <ScrollView  HorizontalOptions="Center">
-
+                        <Label Grid.Row="2" Style="{StaticResource LBL}">Options</Label>
+                        <ScrollView Grid.Row="3" HorizontalOptions="Center">
                             <CollectionView 
-                                        ItemsSource="{Binding ProductDetail.ProductSizes}"
-                                        ItemsLayout="HorizontalList"
-                                        SelectionMode="Single"
-                                        SelectedItem="{Binding SelectedSize}">
+                                ItemsSource="{Binding Product.ProductSizes}"
+                                ItemsLayout="HorizontalList"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedSize}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                       
-                                            <Label Text="{Binding}" Margin="0,10,0,10" HorizontalOptions="Center"/>
-                                       
+                                        <Label Text="{Binding}" Margin="0,10,0,10" HorizontalOptions="Center"/>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </ScrollView>
 
-
-
                         <!--Color-->
-                        <Label Style="{StaticResource LBL}">Color</Label>
-                        <ScrollView>
-                            <CollectionView  ItemsSource="{Binding ProductDetail.ProductColors}"
- ItemsLayout="HorizontalList"
- SelectionMode="Single"
- SelectedItem="{Binding SelectedColor}">
+                        <Label Grid.Row="4" Style="{StaticResource LBL}">Color</Label>
+                        <ScrollView Grid.Row="5">
+                            <CollectionView  ItemsSource="{Binding Product.ProductColors}"
+                                ItemsLayout="HorizontalList"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedColor}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Border>
                                             <VerticalStackLayout>
-
                                                 <Border
-          BackgroundColor="{Binding}" 
-          HeightRequest="26"
-          HorizontalOptions="Start"
-          StrokeShape="RoundRectangle 8"
-          StrokeThickness="1"
-          WidthRequest="26" />
-
-
+                                                    BackgroundColor="{Binding}" 
+                                                    HeightRequest="26"
+                                                    HorizontalOptions="Start"
+                                                    StrokeShape="RoundRectangle 8"
+                                                    StrokeThickness="1"
+                                                    WidthRequest="26" />
                                             </VerticalStackLayout>
                                         </Border>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </ScrollView>
-                        <!--Details-->
-                        <Label Style="{StaticResource LBL}">Details</Label>
 
+                        <!--Details-->
+                        <Label Grid.Row="6" Style="{StaticResource LBL}">Details</Label>
                         <Label
-                                FontSize="14"
-                                HorizontalOptions="StartAndExpand"
-                                Text="{Binding ProductDetail.Details}"
-                                TextColor="Black"
-                                VerticalTextAlignment="Center" />
+                            Grid.Row="7"
+                            FontSize="14"
+                            Text="{Binding Product.Details}"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
 
                         <!--Vat-->
-                        <Label Style="{StaticResource LBL}">VAT</Label>
+                        <Label Grid.Row="8" Style="{StaticResource LBL}">VAT</Label>
                         <Label
-                                FontSize="14"
-                                HorizontalOptions="StartAndExpand"
-                                Text="{Binding ProductDetail.VatRate}"
-                                TextColor="Black"
-                                VerticalTextAlignment="Center" />
+                            Grid.Row="9"
+                            FontSize="14"
+                            Text="{Binding Product.VatRate}"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
 
                         <!--Options Grid-->
-                        <Label Style="{StaticResource LBL}">Options</Label>
-                        <CollectionView ItemsSource="{Binding ProductDetail.Options}">
+                        <Label Grid.Row="10" Style="{StaticResource LBL}">Options</Label>
+                        <Border Grid.Row="11"  Stroke="{StaticResource Primary}"
+  StrokeThickness="1"
+  Margin="1,1,1,1"
+  Padding="4"
+  StrokeShape="RoundRectangle 0,0,0,0">
+                            <CollectionView  ItemsSource="{Binding Product.Options}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
@@ -135,9 +153,9 @@
                                 <DataTemplate>
                                     <Border
                                         Stroke="{StaticResource Primary}"
-                                        StrokeThickness="0,0,0,1"
-                                        Margin="4,4,4,4"
-                                        Padding="8"
+                                        StrokeThickness="0"
+                                        Margin="1,1,1,1"
+                                        Padding="4"
                                         StrokeShape="RoundRectangle 0,0,0,0">
                                         <Grid ColumnDefinitions="*,2*">
                                             <Label Grid.Column="0"
@@ -180,9 +198,9 @@
                                                                 <Setter Property="ContentView.Content">
                                                                     <Setter.Value>
                                                                         <Picker ItemsSource="{Binding Selections}"
-                                                                                SelectedItem="{Binding Value, Mode=TwoWay}"
+                                                                                SelectedItem="{Binding SelectedSelection, Mode=TwoWay}"
                                                                                 Title="Select option"
-                                                                                ItemDisplayBinding="{Binding}"
+                                                                                ItemDisplayBinding="{Binding Value}"
                                                                                 HorizontalOptions="Start"/>
                                                                     </Setter.Value>
                                                                 </Setter>
@@ -196,21 +214,22 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-
+                        </Border>
                         <!--Reviews-->
-                        <Label Style="{StaticResource LBL}">Reviews</Label>
+                        <Label Grid.Row="12" Style="{StaticResource LBL}">Reviews</Label>
                         <Label
-                                Margin="0,5,0,0"
-                                FontAttributes="Bold"
-                                FontSize="14"
-                                HorizontalOptions="StartAndExpand"
-                                Text="Write your Review"
-                                TextColor="{StaticResource Primary}"
-                                VerticalTextAlignment="Center" />
+                            Grid.Row="13"
+                            Margin="0,5,0,0"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Write your Review"
+                            TextColor="{StaticResource Primary}"
+                            VerticalTextAlignment="Center" />
                         <CollectionView
-                                Margin="0,16"
-                     ItemSizingStrategy="MeasureAllItems"
-                     ItemsSource="{Binding ProductDetail.Reviews}">
+                            Grid.Row="14"
+                            Margin="0,16"
+                            ItemSizingStrategy="MeasureAllItems"
+                            ItemsSource="{Binding Product.Reviews}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
@@ -218,57 +237,52 @@
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="Auto,*">
                                         <Border
-                                     Grid.Column="0"
-                                     Padding="0"
-                                     HeightRequest="46"
-                                     StrokeShape="RoundRectangle 23"
-                                     StrokeThickness="0"
-                                     WidthRequest="46">
+                                            Grid.Column="0"
+                                            Padding="0"
+                                            HeightRequest="46"
+                                            StrokeShape="RoundRectangle 23"
+                                            StrokeThickness="0"
+                                            WidthRequest="46">
                                             <Image
-                                         Aspect="AspectFill"
-                                         HeightRequest="46"
-                                         Source="{Binding ImageUrl}"
-                                         WidthRequest="46" />
+                                                Aspect="AspectFill"
+                                                HeightRequest="46"
+                                                Source="{Binding ImageUrl}"
+                                                WidthRequest="46" />
                                         </Border>
-
                                         <Grid
-                                     Grid.Column="1"
-                                     Margin="8,0"
-                                     RowDefinitions="Auto,2,Auto">
+                                            Grid.Column="1"
+                                            Margin="8,0"
+                                            RowDefinitions="Auto,2,Auto">
                                             <Label
-                                         Grid.Row="0"
-                                         FontAttributes="Bold"
-                                         FontSize="14"
-                                         Text="{Binding Name}"
-                                         TextColor="Black" />
-
+                                                Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                FontSize="14"
+                                                Text="{Binding Name}"
+                                                TextColor="Black" />
                                             <Label
-                                         Grid.Row="2"
-                                         FontSize="14"
-                                         LineBreakMode="WordWrap"
-                                         Text="{Binding Review}"
-                                         TextColor="Black"
-                                         VerticalTextAlignment="Center" />
+                                                Grid.Row="2"
+                                                FontSize="14"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding Review}"
+                                                TextColor="Black"
+                                                VerticalTextAlignment="Center" />
                                         </Grid>
                                     </Grid>
-
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-
-
-
-                    </StackLayout>
-                </StackLayout>
+                    </Grid>
+                </Grid>
             </ScrollView>
 
-            <StackLayout
+            <Grid
                 Margin="15"
                 HeightRequest="42"
                 HorizontalOptions="FillAndExpand"
-                Orientation="Horizontal"
+                ColumnDefinitions="Auto,*,Auto"
                 VerticalOptions="StartAndExpand">
                 <Border
+                    Grid.Column="0"
                     Padding="0"
                     Background="transparent"
                     HeightRequest="40"
@@ -276,7 +290,6 @@
                     StrokeShape="RoundRectangle 20,20,20,20"
                     StrokeThickness="0"
                     WidthRequest="40">
-
                     <Label
                         FontFamily="MaterialIcon"
                         FontSize="26"
@@ -295,9 +308,8 @@
                         <TapGestureRecognizer Command="{Binding BackCommand}" />
                     </Border.GestureRecognizers>
                 </Border>
-
-
                 <Border
+                    Grid.Column="2"
                     Padding="0"
                     Background="white"
                     HeightRequest="40"
@@ -305,7 +317,6 @@
                     StrokeShape="RoundRectangle 20,20,20,20"
                     StrokeThickness="1"
                     WidthRequest="40">
-
                     <Label
                         FontFamily="MaterialIcon"
                         FontSize="26"
@@ -317,8 +328,7 @@
                         <TapGestureRecognizer Command="{Binding FavCommand}" CommandParameter="{Binding FavStatusColor}" />
                     </Border.GestureRecognizers>
                 </Border>
-
-            </StackLayout>
+            </Grid>
         </Grid>
 
 
@@ -328,18 +338,18 @@
             Margin="0,8,8,16"
             ColumnDefinitions="32,Auto,*,Auto,16"
             IsVisible="{Binding IsLoaded}">
-            <StackLayout Grid.Column="1">
+            <Grid Grid.Column="1" RowDefinitions="Auto,Auto">
                 <Label
+                    Grid.Row="0"
                     FontSize="12"
-                    HorizontalOptions="StartAndExpand"
                     Text="PRICE"
                     TextColor="{StaticResource SecondaryTextColor}" />
                 <Label
+                    Grid.Row="1"
                     FontSize="18"
-                    HorizontalOptions="StartAndExpand"
-                    Text="{Binding ProductDetail.Price, StringFormat='${0:F2}'}"
+                    Text="{Binding Product.Price, StringFormat='${0:F2}'}"
                     TextColor="{StaticResource Primary}" />
-            </StackLayout>
+            </Grid>
 
             <Button
                 IsEnabled="{Binding CanAddToCart}"

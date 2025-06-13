@@ -36,7 +36,21 @@ namespace Hat.DataViewModels
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string BrandName { get; set; }
-        public decimal Price { get; set; }
+
+        private decimal price;
+        public decimal Price
+        {
+            get => price;
+            set
+            {
+                if (price != value)
+                {
+                    price = value;
+                    OnPropertyChanged(nameof(Price));
+                }
+            }
+        }
+       
         public string Details { get; set; }
         public double Qty { get; set; } = 1;
 
@@ -48,9 +62,57 @@ namespace Hat.DataViewModels
             {
                 if (options != value)
                 {
+                    // Unsubscribe from previous option events
+                    if (options != null)
+                    {
+                        foreach (var opt in options)
+                        {
+                            opt.PropertyChanged -= Option_PropertyChanged;
+                        }
+                    }
+
                     options = value;
+
+                    // Subscribe to new option events
+                    if (options != null)
+                    {
+                        foreach (var opt in options)
+                        {
+                            opt.PropertyChanged += Option_PropertyChanged;
+                        }
+                    }
+
                     OnPropertyChanged(nameof(Options));
+                    UpdatePriceFromOptions();
                 }
+            }
+        }
+
+        private void Option_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ProductOptionViewModel.Price))
+            {
+                UpdatePriceFromOptions();
+            }
+        }
+
+        private void UpdatePriceFromOptions()
+        {
+            decimal basePrice = price;
+            if (options != null)
+            {
+                foreach (var opt in options)
+                {
+                    if (opt.Price.HasValue)
+                    {
+                        basePrice += opt.Price.Value;
+                    }
+                }
+            }
+            // Only update if changed to avoid recursion
+            if (Price != basePrice)
+            {
+                Price = basePrice;
             }
         }
 

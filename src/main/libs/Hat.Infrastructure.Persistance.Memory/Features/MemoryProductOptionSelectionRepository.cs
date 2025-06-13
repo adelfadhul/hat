@@ -13,37 +13,43 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_BeoPlaySpeaker_SpeakerPower.Id,
-                    Value = "Loud"
+                    Value = "Loud",
+                    Price = 1
                 },
                 new ProductOptionSelectionModel
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_BeoPlaySpeaker_SpeakerPower.Id,
-                    Value = "Quite"
+                    Value = "Quite",
+                    Price = 0.5m
                 },
                 new ProductOptionSelectionModel
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_BeoPlaySpeaker_SpeakerPower.Id,
-                    Value = "Mutable"
+                    Value = "Mutable",
+                    Price = 0.1m
                 },
                 new ProductOptionSelectionModel
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_SmartBluetoothSpeaker_CaseType.Id,
-                    Value = "Alumimum"
+                    Value = "Alumimum",
+                    Price = 1
                 },
                 new ProductOptionSelectionModel
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_SmartBluetoothSpeaker_CaseType.Id,
-                    Value = "Iron"
+                    Value = "Iron",
+                    Price = 0.5m
                 },
                 new ProductOptionSelectionModel
                 {
                     Id = Guid.NewGuid(),
                     ProductOptionId = MemoryProductOptionRepository.OPTION_SmartBluetoothSpeaker_CaseType.Id,
-                    Value = "Plastic"
+                    Value = "Plastic",
+                    Price = 10m
                 }
             };
             return selections;

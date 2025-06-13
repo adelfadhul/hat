@@ -14,55 +14,68 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
 
         private static readonly Lazy<List<ProductOptionModel>> _productOptions = new(() =>
         {
+            var LabelOptionId = Guid.NewGuid();
+            var SpeakerPowerOptionId = Guid.NewGuid();
+            var HeadphoneOptionId = Guid.NewGuid();
+            var HeadphoneMaterialOptionId = Guid.NewGuid();
+            var CaseTypeId = Guid.NewGuid();
+
             var productOptions = new List<ProductOptionModel>
             {
                 new ProductOptionModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = LabelOptionId,
                     Name = "Label",
                     ValueType = ProductOptionValueType.Text,
                     ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
-                    Selections = new List<ProductOptionSelectionModel>()
+                    Selections = new List<ProductOptionSelectionModel>(),
+                    Price=null,
                 },
                 new ProductOptionModel
                 {
-    Id = Guid.NewGuid(),
+    Id = SpeakerPowerOptionId,
     Name = "Speaker Power",
     ValueType = ProductOptionValueType.Selection,
     ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
-    Selections = new List<ProductOptionSelectionModel>
-    {
-        new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = Guid.Empty, Value = "High" },
-        new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = Guid.Empty, Value = "Low" }
-    }
+    //Selections = new List<ProductOptionSelectionModel>
+    //{
+    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = SpeakerPowerOptionId, Value = "High", Price=10 },
+    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = SpeakerPowerOptionId, Value = "Low", Price=5 }
+    //}
 },
                 new ProductOptionModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = HeadphoneOptionId,
                     Name = "Headphone Size",
                     ValueType = ProductOptionValueType.Number,
                     ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
-                    Selections = new List<ProductOptionSelectionModel>()
+                    Price=null,
+                    //Selections = new List<ProductOptionSelectionModel>(){ 
+                    //new ProductOptionSelectionModel{Id=Guid.NewGuid(), ProductOptionId=HeadphoneOptionId, Value="M", Price=15},
+                    //new ProductOptionSelectionModel{Id=Guid.NewGuid(), ProductOptionId=HeadphoneOptionId, Value="S", Price=5},
+                    //}
                 },
                 new ProductOptionModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = HeadphoneMaterialOptionId,
                     Name = "Headphone Material",
                     ValueType = ProductOptionValueType.Text,
+                    Price = 25,
                     ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
                     Selections = null
                 },
                 new ProductOptionModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = CaseTypeId,
                     Name = "Case Type",
                     ValueType = ProductOptionValueType.Selection,
+                    Price = 30,
                     ProductId = MemoryProductRepository.PRODUCT_SmartBluetoothSpeaker,
-                    Selections = new List<ProductOptionSelectionModel>
-                    {
-                        new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = Guid.Empty, Value = "Leather" },
-                        new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = Guid.Empty, Value = "Fabric" }
-                    }
+                    //Selections = new List<ProductOptionSelectionModel>
+                    //{
+                    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = CaseTypeId, Value = "Leather",Price=1 },
+                    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId =CaseTypeId, Value = "Fabric" , Price = 5}
+                    //}
                 }
             };
 

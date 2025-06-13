@@ -12,23 +12,32 @@
 
   <ItemGroup>
     <Folder Include="Features\Card\Commands\" />
+    <Folder Include="Features\Card\Store\" />
     <Folder Include="Features\Card\Queries\" />
     <Folder Include="Features\Cart\Commands\" />
     <Folder Include="Features\Cart\Queries\" />
+    <Folder Include="Features\Cart\Store\" />
     <Folder Include="Features\Delivery\Commands\" />
     <Folder Include="Features\Delivery\Queries\" />
+    <Folder Include="Features\Delivery\Store\" />
     <Folder Include="Features\Inventory\Commands\" />
     <Folder Include="Features\Inventory\Queries\" />
+    <Folder Include="Features\Inventory\Store\" />
     <Folder Include="Features\Product\Commands\" />
     <Folder Include="Features\Product\Queries\" />
+    <Folder Include="Features\Product\Store\" />
     <Folder Include="Features\Review\Commands\" />
     <Folder Include="Features\Review\Queries\" />
+    <Folder Include="Features\Review\Store\" />
     <Folder Include="Features\ShippingAddress\Commands\" />
     <Folder Include="Features\ShippingAddress\Queries\" />
-    <Folder Include="Features\Vat\Commands\" />
-    <Folder Include="Features\Vat\Queries\" />
+    <Folder Include="Features\ShippingAddress\Store\" />
+    <Folder Include="Features\Tax\Commands\" />
+    <Folder Include="Features\Tax\Queries\" />
+    <Folder Include="Features\Tax\Store\" />
     <Folder Include="Features\Wish\Commands\" />
     <Folder Include="Features\Wish\Queries\" />
+    <Folder Include="Features\Wish\Store\" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace Hat.Domain.Models
         public string Name { get; set; }
         public ProductOptionValueType ValueType { get; set; }
 
-
+        public decimal ? Price { get; set; }
 
         #endregion
 
