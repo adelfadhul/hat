@@ -50,6 +50,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="DataViewModels\ProductOptionSelectionViewModel.cs" />
+	  <Compile Remove="DataViewModels\ProductOptionViewModel.cs" />
+	  <Compile Remove="DataViewModels\ProductViewModel.cs" />
 	  <Compile Remove="Helpers\CreditCardTypeRegexHelper.cs" />
 	  <Compile Remove="INavigationService.cs" />
 	  <Compile Remove="Model\ImageList.cs" />

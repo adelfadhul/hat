@@ -16,13 +16,19 @@ namespace Hat.Domain.Features.Product.Models
         public ICollection<ProductCategoryModel> Categories { get;  set; } = new List<ProductCategoryModel>();
         #endregion
 
-        protected ProductModel(string name, string? description, ICollection<ProductCategoryModel>? categories)
+        protected ProductModel(string name, string? description)
         {
           
             Name = name;
             Description = description;
-            Categories = categories ?? new List<ProductCategoryModel>();
 
         }
+        protected ProductModel(string name, string? description, ICollection<ProductCategoryModel> categories)
+            : this(name, description)
+        {
+            Categories = categories ?? new List<ProductCategoryModel>();
+        }
+
+
     }
 }

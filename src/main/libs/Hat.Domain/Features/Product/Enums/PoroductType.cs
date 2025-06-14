@@ -9,4 +9,7 @@
         Grouped, // a collection of related products sold together
         Extended, // a product with additional features or options
     }
+
+
+
 }
