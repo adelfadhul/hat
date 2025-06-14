@@ -1,4 +1,5 @@
-﻿using Hat.Model;
+﻿using Hat.Domain.Enums;
+using Hat.Model;
 
 namespace Hat.Domain.Models
 {
@@ -21,7 +22,7 @@ namespace Hat.Domain.Models
         public decimal Price { get; set; }
         public string Details { get; set; }
 
-
+        public ProductType ProductType { get; set; }
 
 
         #endregion

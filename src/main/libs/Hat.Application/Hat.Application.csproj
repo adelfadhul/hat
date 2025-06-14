@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Queries\ProductByCategoryHandler.cs" />
+    <Compile Remove="Queries\ProductByIdQueryHandler.cs" />
+    <Compile Remove="Queries\ProductOptionByIdQueryHandler.cs" />
+    <Compile Remove="Queries\ProductOptionsByProductQueryHandler.cs" />
+    <Compile Remove="Queries\ProductOptionsByUserQueryHandler.cs" />
+    <Compile Remove="Queries\ProductsQueryHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 

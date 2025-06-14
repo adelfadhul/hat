@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ProductModel.cs" />
+    <Compile Remove="Models\ProductOptionModel.cs" />
+    <Compile Remove="Models\ProductOptionSelectionModel.cs" />
+    <Compile Remove="Queries\ProductOptionByIdQuery.cs" />
+    <Compile Remove="Queries\ProductOptionsByProductQuery.cs" />
+    <Compile Remove="Queries\ProductOptionSelectionQuery.cs" />
+    <Compile Remove="Queries\ProductOptionsQuery.cs" />
+    <Compile Remove="Queries\ProductsByCategoryQuery.cs" />
+    <Compile Remove="Queries\ProductsQuery.cs" />
+    <Compile Remove="Store\ProductOptionRepository.cs" />
+    <Compile Remove="Store\ProductOptionSelectionRepository.cs" />
+    <Compile Remove="Store\ProductRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
   </ItemGroup>
 
@@ -23,9 +38,9 @@
     <Folder Include="Features\Inventory\Commands\" />
     <Folder Include="Features\Inventory\Queries\" />
     <Folder Include="Features\Inventory\Store\" />
-    <Folder Include="Features\Product\Commands\" />
-    <Folder Include="Features\Product\Queries\" />
-    <Folder Include="Features\Product\Store\" />
+    <Folder Include="Features\Product\Types\Virtual\Commands\" />
+    <Folder Include="Features\Product\Types\Virtual\Queries\" />
+    <Folder Include="Features\Product\Types\Virtual\Store\" />
     <Folder Include="Features\Review\Commands\" />
     <Folder Include="Features\Review\Queries\" />
     <Folder Include="Features\Review\Store\" />

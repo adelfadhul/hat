@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Hat.Infrastructure.Identity.Memory\Hat.Infrastructure.Identity.Memory.csproj" />
     <ProjectReference Include="..\Hat.Infrastructure.Payment.Fake\Hat.Infrastructure.Payment.Fake.csproj" />
-    <ProjectReference Include="..\Hat.Infrastructure.Persistance.Memory\Hat.Infrastructure.Persistance.Memory.csproj" />
     <ProjectReference Include="..\Hat.Infrastructure.Persistance.SqlServer\Hat.Infrastructure.Persistance.SqlServer.csproj" />
   </ItemGroup>
 

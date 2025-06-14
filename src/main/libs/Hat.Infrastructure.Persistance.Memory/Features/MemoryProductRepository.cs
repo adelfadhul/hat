@@ -1,4 +1,5 @@
-﻿using Hat.Domain.Identity;
+﻿using Hat.Domain.Features.Product.Enums;
+using Hat.Domain.Identity;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
 using Hat.Infrastructure.Identity.Memory;
@@ -20,6 +21,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    ProductType = ProductType.Variable,
                     UserId= MemoryLoginService.USER_Alice,
                     VatId = MemoryVatRepository.VATS_ZeroVAT,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
@@ -33,6 +35,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    ProductType = ProductType.Variable,
                      UserId= MemoryLoginService.USER_Bob,
                     CategoryId= MemoryCategoryRepository.CATEGORY_FashionId,
                     VatId = MemoryVatRepository.VATS_ReducedVAT,
@@ -46,6 +49,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    ProductType = ProductType.Variable,
                      UserId= MemoryLoginService.USER_Lina,
                     CategoryId= MemoryCategoryRepository.CATEGORY_ElectronicId,
                     VatId = MemoryVatRepository.VAT_StandardVAT,
@@ -60,6 +64,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                 new ProductModel
                 {
                     Id = Guid.NewGuid(),
+                    ProductType = ProductType.Variable,
                      UserId= MemoryLoginService.USER_Alice,
                     CategoryId= MemoryCategoryRepository.CATEGORY_HomeId,
                     VatId = MemoryVatRepository.VAT_StandardVAT,

@@ -30,6 +30,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
                     Selections = new List<ProductOptionSelectionModel>(),
                     Price=null,
+                    
                 },
                 new ProductOptionModel
                 {
@@ -37,11 +38,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
     Name = "Speaker Power",
     ValueType = ProductOptionValueType.Selection,
     ProductId = MemoryProductRepository.PRODUCT_BeoPlaySpeaker,
-    //Selections = new List<ProductOptionSelectionModel>
-    //{
-    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = SpeakerPowerOptionId, Value = "High", Price=10 },
-    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = SpeakerPowerOptionId, Value = "Low", Price=5 }
-    //}
+   
 },
                 new ProductOptionModel
                 {
@@ -50,10 +47,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     ValueType = ProductOptionValueType.Number,
                     ProductId = MemoryProductRepository.PRODUCT_LeatherWristwatch,
                     Price=null,
-                    //Selections = new List<ProductOptionSelectionModel>(){ 
-                    //new ProductOptionSelectionModel{Id=Guid.NewGuid(), ProductOptionId=HeadphoneOptionId, Value="M", Price=15},
-                    //new ProductOptionSelectionModel{Id=Guid.NewGuid(), ProductOptionId=HeadphoneOptionId, Value="S", Price=5},
-                    //}
+                   
                 },
                 new ProductOptionModel
                 {
@@ -71,11 +65,7 @@ namespace Hat.Infrastructure.Persistance.Memory.Features
                     ValueType = ProductOptionValueType.Selection,
                     Price = 30,
                     ProductId = MemoryProductRepository.PRODUCT_SmartBluetoothSpeaker,
-                    //Selections = new List<ProductOptionSelectionModel>
-                    //{
-                    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId = CaseTypeId, Value = "Leather",Price=1 },
-                    //    new ProductOptionSelectionModel { Id = Guid.NewGuid(), ProductOptionId =CaseTypeId, Value = "Fabric" , Price = 5}
-                    //}
+                   
                 }
             };
 

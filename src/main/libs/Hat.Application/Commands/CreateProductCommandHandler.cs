@@ -1,4 +1,5 @@
 ﻿using Hat.Domain.Commands;
+using Hat.Domain.Features.Product.Enums;
 using Hat.Domain.Models;
 using Hat.Domain.Store;
 using MediatR;
@@ -14,6 +15,11 @@ namespace Hat.Application.Commands
         }
         public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            switch (request.ProductType)
+            {
+                case ProductType.Variable:
+                    break;
+            }
             return await _productRepository.Create(new ProductModel
             {
                 BrandName = request.BrandName,
